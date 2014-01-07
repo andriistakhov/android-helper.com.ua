@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Красочный переход между Activity - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Задача Красочный переход между Activity. Краткое описание Многие из вас видели как красиво в некоторых приложениях идут переходы между Activity. Если &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//splitacivity">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Красочный переход между Activity</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-28T08:57:24+03:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>Задача</h3>
+
+<p>Красочный переход между Activity.</p>
+
+<h3>Краткое описание</h3>
+
+<p>Многие из вас видели как красиво в некоторых приложениях идут переходы между Activity. Если взять простые примеры от Google, то вы увидите только плавное смещение с лева на право. А у нас с вами задача сделать так, что бы из первого Activity появлялось второе.</p>
+
+<h3>Видео урок</h3>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Bfh0cJBOASQ "></iframe></div>
+
+
+<h3>Коды</h3>
+
+<p><strong>Activity1.java</strong></p>
+
+<pre><code>    SplitAnimation.startActivity(Activity1.this, new Intent(Activity1.this, Activity2.class));
+</code></pre>
+
+<p><strong>Activity2.java</strong></p>
+
+<pre><code>    @Override
+
+protected void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+
+
+    // Preparing the 2 images to be split
+
+    SplitAnimation.prepareAnimation(this);
+
+
+
+    setContentView(R.layout.act_two);
+
+
+
+    // Animating the items to be open, revealing the new activity
+
+    SplitAnimation.animate(this, 1000);
+
+}
+
+
+
+@Override
+
+protected void onStop() {
+
+    // If we're currently running the entrance animation - cancel it
+
+    SplitAnimation.cancel();
+
+
+
+    super.onStop();    //To change body of overridden methods use File | Settings | File Templates.
+
+}
+</code></pre>
+
+<p><strong>SplitAnimation.java</strong></p>
+
+<pre><code>    public static void startActivity(Activity currActivity, Intent intent) {
+
+    // Подготовка acticity
+
+    prepare(currActivity);
+
+
+
+    currActivity.startActivity(intent);
+
+    // Чистка анимаций текущей activity
+
+    currActivity.overridePendingTransition(0, 0);
+
+}
+
+
+
+private static void prepare(Activity currActivity) {
+
+
+
+    // Получаем content activity и делаем из него bitmap
+
+    View root = currActivity.getWindow().getDecorView().findViewById(android.R.id.content);
+
+    root.setDrawingCacheEnabled(true);
+
+    Bitmap bmp = root.getDrawingCache();
+
+
+
+    // Указываем в какой части экрана будет делится activity
+
+    splitYCoord = bmp.getHeight() / 2;
+
+
+
+    // Разделяем экран
+
+    mBmp1 = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), splitYCoord);
+
+    mBmp2 = Bitmap.createBitmap(bmp, 0, splitYCoord, bmp.getWidth(), bmp.getHeight() - splitYCoord);
+
+
+
+    // Указываем координаты положения частей activity
+
+    mLoc1 = new int[]{0, root.getTop()};
+
+    mLoc2 = new int[]{0, root.getTop() + splitYCoord};
+
+}
+
+
+
+public static void prepareAnimation(final Activity destActivity) {
+
+    mTopImage = createImageView(destActivity, mBmp1, mLoc1);
+
+    mBottomImage = createImageView(destActivity, mBmp2, mLoc2);
+
+}
+
+
+
+private static ImageView createImageView(Activity destActivity, Bitmap bmp, int loc[]) {
+
+    ImageView imageView = new ImageView(destActivity);
+
+    imageView.setImageBitmap(bmp);
+
+
+
+    WindowManager.LayoutParams windowParams = new WindowManager.LayoutParams();
+
+    windowParams.gravity = Gravity.TOP;
+
+    windowParams.x = loc[0];
+
+    windowParams.y = loc[1];
+
+    windowParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+    windowParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+    windowParams.flags =
+
+            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+
+    ;
+
+    windowParams.format = PixelFormat.TRANSLUCENT;
+
+    windowParams.windowAnimations = 0;
+
+    destActivity.getWindowManager().addView(imageView, windowParams);
+
+
+
+    return imageView;
+
+}
+
+
+
+public static void animate(final Activity destActivity, final int duration) {
+
+    animate(destActivity, duration, new DecelerateInterpolator());
+
+}
+
+
+
+public static void animate(final Activity destActivity, final int duration, final TimeInterpolator interpolator) {
+
+
+
+    // Post this on the UI thread's message queue. It's needed for the items to be already measured
+
+    new Handler().post(new Runnable() {
+
+
+
+        @Override
+
+        public void run() {
+
+            mSetAnim = new AnimatorSet();
+
+            mTopImage.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
+            mBottomImage.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
+            mSetAnim.addListener(new Animator.AnimatorListener() {
+
+                @Override
+
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+
+
+                @Override
+
+                public void onAnimationEnd(Animator animation) {
+
+                    clean(destActivity);
+
+                }
+
+
+
+                @Override
+
+                public void onAnimationCancel(Animator animation) {
+
+                    clean(destActivity);
+
+                }
+
+
+
+                @Override
+
+                public void onAnimationRepeat(Animator animation) {
+
+
+
+                }
+
+            });
+
+
+
+            // Animating the 2 parts away from each other
+
+            Animator anim1 = ObjectAnimator.ofFloat(mTopImage, "translationY", mTopImage.getHeight() * -1);
+
+            Animator anim2 = ObjectAnimator.ofFloat(mBottomImage, "translationY", mBottomImage.getHeight());
+
+
+
+            if (interpolator != null) {
+
+                anim1.setInterpolator(interpolator);
+
+                anim2.setInterpolator(interpolator);
+
+            }
+
+
+
+            mSetAnim.setDuration(duration);
+
+            mSetAnim.playTogether(anim1, anim2);
+
+            mSetAnim.start();
+
+        }
+
+    });
+
+}
+</code></pre>
+
+<h3>Скачать коды</h3>
+
+<p>Скачать коды программы вы можете на нашей <a href="http://android-helper.com.ua/codes/">странице</a></p>
+
+<h3>Скачать приложение</h3>
+
+<p>Также мы выложили на <a href="https://play.google.com/store/apps/details?id=com.android_helper.SplitActivityAnimation">Play Market</a> наше приложение. Установив его, вы сможете посмотреть как оно работает. (Не забудьте поставить +1 и написать позитивный комментарий :) ).</p>
+
+<p><a href="https://play.google.com/store/apps/details?id=com.android_helper.SplitActivityAnimation"><img src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" alt="Android app on Google Play" /></a></p>
+
+<h3>Оценка статьи</h3>
+
+<p>Надеюсь, что вам понравилась статья. Жду ваши комментарии и несколько лайков.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-28T08:57:24+03:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//splitacivity/" data-via="" data-counturl="http://android-helper.com.ua//splitacivity/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/overview1/" title="Previous Post: Обзор программ">&laquo; Обзор программ</a>
+      
+      
+        <a class="basic-alignment right" href="/notification-above-actionbar/" title="Next Post: Notification поверх ActionBar">Notification поверх ActionBar &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

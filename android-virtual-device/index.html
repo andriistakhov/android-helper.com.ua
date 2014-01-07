@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Быстрая альтернатива Android Virtual Device - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Очень познавательная статья. Читать всем разработчикам! Перед любым начинающим Android-разработчиком рано или поздно встает вопрос о том, где и как &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//android-virtual-device">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Быстрая альтернатива Android Virtual Device</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-01T10:25:16+02:00" pubdate data-updated="true">Feb 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Очень познавательная статья.</p>
+
+<p>Читать всем разработчикам!</p>
+
+<p>Перед любым начинающим Android-разработчиком рано или поздно встает вопрос о том, где и как удобнее запускать и отлаживать свои программы.</p>
+
+<p>Самый верный способ — через Android Debug Bridge на реальном Android-устройстве. Но если, по каким то причинам, этот способ не подходит, то остается два варианта — воспользоваться штатным эмулятором Android Virtual Device (AVD) из Android SDK, или установить Android на виртуальную машину.  Про второй вариант я и хочу рассказать в этой статье. Android на виртуальной машине серьезно превосходит AVD по быстродействию и времени загрузки, но есть и недостатки — сложнее эмулировать телефонию (возможно, при помощи дополнительных программ), пока не разобрался как смонтировать SD-карту.</p>
+
+<p><strong>Итак! Нам понадобится</strong>:</p>
+
+<ol>
+<li><p>Готовая к работе среда разработки и Android SDK Tools &ndash; см. StartAndroid.ru урок 2.<br/>
+<a href="http://startandroid.ru/uroki/vse-uroki-spiskom/9-urok-2-ustanovka-i-nastrojka-sredy-razrabotki.html">http://startandroid.ru/uroki/vse-uroki-spiskom/9-urok-2-ustanovka-i-nastrojka-sredy-razrabotki.html</a></p></li>
+<li><p>VirtualBox последней версии.<br/>
+<a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a>.</p></li>
+<li><p>Образ Android. Выбираем любую версию с сайта проекта Android-x86.<br/>
+<a href="http://code.google.com/p/android-x86/">http://code.google.com/p/android-x86/</a></p></li>
+</ol>
+
+
+<h3>Шаг 1 — устанавливаем Virtual Box.</h3>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_050.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_060.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_070.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_080.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_090.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_100.png" alt="" /></p>
+
+<h3>Шаг 2 — Создаем виртуальную машину с Android.</h3>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_110.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_120.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_130.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_140.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_150.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_160.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_170.png" alt="" /></p>
+
+<h3>Шаг 3 — настройка виртуальной машины и её запуск.</h3>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_180.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_190.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_200.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_210.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_220.png" alt="" /></p>
+
+<p>Система не может найти диск для загрузки и останавливается. Монтируем скачанный образ Android.</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_230.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_240.png" alt="" /></p>
+
+<p>Выбрать можно любой, но я советую работать с версией для EEEPC, например<br/>
+<a href="http://code.google.com/p/android-x86/downloads/detail?name=android-x86-3.2-RC2-eeepc.iso&amp;can=4&amp;q=">android-x86-3.2-RC2-eeepc.iso</a>. В других может возникнуть проблема — из под Android не будет виден виртуальный сетевой адаптер.</p>
+
+<p>Перегружаем машину.</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_250.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_260.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_270.png" alt="" /></p>
+
+<p>Нажимаем ENTER и ждет загрузки Android.</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_280.png" alt="" /></p>
+
+<p>Закрываем обучающие подсказки. И выключаем функцию интеграции мыши, которая некорректно работает с нашей ОС, скрывая курсор.</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_290.png" alt="" /></p>
+
+<h3>Шаг 4 — настройка сети в виртуальном Android.</h3>
+
+<p>Щелкаем внутри окна и оказываемся в пространстве виртуальной машины. <br/>
+(чтобы вернуть курсор нужно нажать <strong>правый CTRL</strong>)</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_300.png" alt="" /></p>
+
+<p>Нажимаем <strong>Alt+F1</strong> и оказываемся в консоли.</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_310.png" alt="" /></p>
+
+<p>Присваиваем адрес сетевому адаптеру командой <strong>ifconfig</strong>:<br/>
+<strong>ifconfig eth0 192.168.56.2 netmask 255.255.255.0</strong></p>
+
+<p>Проверяем или переходим к следующему шагу. Основной комп пингуется по адресу 192.168.56.1 (&ldquo;VirtualBox Host-Only Ethernet Adapter&rdquo; в диспетчере устройств).<br/>
+Команда <strong>ping</strong>:<br/>
+<strong>ping 192.168.56.1</strong><br/>
+<strong>Ctrl+C</strong></p>
+
+<p>Если все сработало нормально то увидим:</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_320.png" alt="" /></p>
+
+<h3>Шаг 5 — подсоединяем Android Debug Bridge (ADB) к виртуальной ОС.</h3>
+
+<p>Нажимаем <strong>Alt+F7</strong>, чтобы вернуться к графическому интерфейсу. Нажимаем <strong>правый CTRL</strong> и возвращаемся к реальной ОС. Не закрываем виртуальную машину.</p>
+
+<p>Создаем на рабочем столе ярлык на <strong>adb.exe</strong></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_330.png" alt="" /></p>
+
+<p>Нужный нам файл находится в папке Android SDK &ldquo;platform-tools&rdquo;.</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_340.png" alt="" /></p>
+
+<p>Дописываем команду текстом &ldquo;<strong>connect 192.168.56.2</strong>&rdquo;:</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_360.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_370.png" alt="" /></p>
+
+<p>Запускаем ярлык.</p>
+
+<p>Теперь ADB соединен с виртуальным Android, а он, в свою очередь, доступен для запуска и отладки программ из Eclipse. Цель достигнута. :)</p>
+
+<p>Пересоединять ADB придется в том случае, когда вы закрыли или перезагрузили виртуальную машину.</p>
+
+<p><strong>Так-же в случае, если вы перезагрузили виртуальный Android, придется возвращаться к шагу 4, так как настройки сетевого адаптера будут сброшены</strong>. Поэтому я рекомендую не выключать виртуальную машину, а погружать её в сон, но ярлычек потом запустить все равно придется.</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_380.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_390.png" alt="" /></p>
+
+<p>Заходим в Eclipse и проверяем как работает</p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_400.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_410.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_420.png" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/articles/A0002/A0002_430.png" alt="" /></p>
+
+<p>Благодарности:</p>
+
+<p><strong>renton</strong> с habrahabr.ru — его идея.<br/>
+<a href="http://habrahabr.ru/post/119599/">http://habrahabr.ru/post/119599/</a></p>
+
+<p> Источник <a href="http://startandroid.ru/ru/articles/listofarticles/206-bystraja-alternativa-android-virtual-device.html">startandroid.ru</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-01T10:25:16+02:00" pubdate data-updated="true">Feb 1<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/pamiatka-razrabotchiku/'>Памятка разработчику</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//android-virtual-device/" data-via="" data-counturl="http://android-helper.com.ua//android-virtual-device/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/cytus/" title="Previous Post: Cytus">&laquo; Cytus</a>
+      
+      
+        <a class="basic-alignment right" href="/andrii_removskiy/" title="Next Post: Видео интервью с Андреем Ремовским">Видео интервью с Андреем Ремовским &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

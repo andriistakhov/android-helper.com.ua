@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PagerTabStrip - замена Tabs или новые возможности Android - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Всем привет. Как много мы с вами видим разного рода красивых дизайнов, где с помощью пальца, можно менять не только экран но и Tabs. Более подробно &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//pagertabstrip">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PagerTabStrip - замена Tabs или новые возможности Android</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-19T00:23:51+02:00" pubdate data-updated="true">Nov 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Всем привет.</p>
+
+<p>Как много мы с вами видим разного рода красивых дизайнов, где с помощью пальца, можно менять не только экран но и Tabs.</p>
+
+<p>Более подробно мы с вами остановимся на реализации данной задачи.</p>
+
+<p>Как вы поняли из названия статьи, мы будем использовать <strong>PagerTabStrip</strong></p>
+
+<p>Решил долго ничего не придумывать и записал видео как это сделать:</p>
+
+<p>Теперь сам код:</p>
+
+<p><strong>activity_main.xml</strong></p>
+
+<pre><code>&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="fill_parent"
+
+    android:orientation="vertical" &gt;
+
+
+
+    &lt;android.support.v4.view.ViewPager
+
+        android:id="@+id/viewpager"
+
+        android:layout_width="fill_parent"
+
+        android:layout_height="fill_parent" &gt;
+
+
+
+        &lt;android.support.v4.view.PagerTabStrip
+
+            android:id="@+id/pagerTabStrip"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="top"
+
+            android:background="#a22c2e" /&gt;
+
+    &lt;/android.support.v4.view.ViewPager&gt;
+
+
+
+&lt;/RelativeLayout&gt;
+</code></pre>
+
+<p><strong>fragment_default.xml</strong></p>
+
+<pre><code>&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent" &gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/text"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:layout_gravity="center"
+
+    android:text="Test" /&gt;
+
+
+
+&lt;/FrameLayout&gt;
+</code></pre>
+
+<p><strong>MainActivity</strong></p>
+
+<pre><code>public class MainActivity extends FragmentActivity {
+
+
+
+    private ViewPager mViewPager;
+
+
+
+    @Override
+
+    public void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+
+
+
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
+
+        // pagerTabStrip.setTextColor(color.white);
+
+        // pagerTabStrip.setTabIndicatorColor(color.holo_red_dark);
+
+
+
+        TitleAdapter titleAdapter = new TitleAdapter(getSupportFragmentManager());
+
+        mViewPager.setAdapter(titleAdapter);
+
+        mViewPager.setCurrentItem(0);
+
+    }
+
+
+
+    @Override
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+
+        return true;
+
+    }
+
+}
+</code></pre>
+
+<p><strong>TitleAdapter</strong></p>
+
+<pre><code>public class TitleAdapter extends FragmentPagerAdapter {
+
+private final String titles[] = new String[] { "View1", "View2", "View3" };
+
+private final Fragment frags[] = new Fragment[titles.length];
+
+
+
+public TitleAdapter(FragmentManager fm) {
+
+    super(fm);
+
+    frags[0] = new FragmentView1();
+
+    frags[1] = new FragmentView2();
+
+    frags[2] = new FragmentView3();
+
+}
+
+
+
+@Override
+
+public CharSequence getPageTitle(int position) {
+
+    Log.v("TitleAdapter - getPageTitle=", titles[position]);
+
+    return titles[position];
+
+}
+
+
+
+@Override
+
+public Fragment getItem(int position) {
+
+    Log.v("TitleAdapter - getItem=", String.valueOf(position));
+
+    return frags[position];
+
+}
+
+
+
+@Override
+
+public int getCount() {
+
+    return frags.length;
+
+}
+
+}
+</code></pre>
+
+<p><strong>FragmentView1</strong></p>
+
+<pre><code>public class FragmentView1 extends Fragment {
+
+@Override
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    View myView = inflater.inflate(R.layout.fragment_default, container, false);
+
+    TextView text = (TextView) myView.findViewById(R.id.text);
+
+    text.setText("Fragment View 1\n - Пример для android-helper.com.ua");
+
+    return myView;
+
+}
+</code></pre>
+
+<p>}</p>
+
+<p><strong>FragmentView2</strong></p>
+
+<pre><code>public class FragmentView2 extends Fragment {
+
+@Override
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    View myView = inflater.inflate(R.layout.fragment_default, container, false);
+
+    TextView text = (TextView) myView.findViewById(R.id.text);
+
+    text.setText("Fragment View 2\n - Пример для android-helper.com.ua");
+
+    return myView;
+
+}
+
+
+
+}
+</code></pre>
+
+<p><strong>FragmentView3</strong></p>
+
+<pre><code>public class FragmentView2 extends Fragment {
+
+@Override
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    View myView = inflater.inflate(R.layout.fragment_default, container, false);
+
+    TextView text = (TextView) myView.findViewById(R.id.text);
+
+    text.setText("Fragment View 3\n - Пример для android-helper.com.ua");
+
+    return myView;
+
+}
+
+
+
+}
+</code></pre>
+
+<p>Полный проект вы можете скачать на <a href="http://android-helper.com.ua/codes/">странице с кодами</a>.</p>
+
+<p>Надеюсь вам понравилась статья.</p>
+
+<p>Пишите ваши комментарии и подписывайтесь на обновления.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-19T00:23:51+02:00" pubdate data-updated="true">Nov 19<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//pagertabstrip/" data-via="" data-counturl="http://android-helper.com.ua//pagertabstrip/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/google-ingless/" title="Previous Post: Google запустила глобальную мобильную онлайн игру Ingress">&laquo; Google запустила глобальную мобильную онлайн игру Ingress</a>
+      
+      
+        <a class="basic-alignment right" href="/actionbar3/" title="Next Post: ActionBar. Динамическое размещение элементов">ActionBar. Динамическое размещение элементов &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Что такое Android | Android helper]]></title>
+  <link href="http://android-helper.com.ua//blog/categories/chto-takoie-android/atom.xml" rel="self"/>
+  <link href="http://android-helper.com.ua//"/>
+  <updated>2014-01-07T20:39:07+02:00</updated>
+  <id>http://android-helper.com.ua//</id>
+  <author>
+    <name><![CDATA[Andrii Stakhov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Custom Font - свои шрифты в Android]]></title>
+    <link href="http://android-helper.com.ua//custom-font/"/>
+    <updated>2013-11-21T14:47:23+02:00</updated>
+    <id>http://android-helper.com.ua//custom-font</id>
+    <content type="html"><![CDATA[<p>Друзья всем привет.</p>
+
+<p>Я очень рад, что некоторые из ребят в коучинге пишут замечательные топики!</p>
+
+<p>Вот с какой проблемой мы столкнулись в коучинге и как ее решали!</p>
+
+<p>В процессе коучинга, создавая своё первое приложение &ndash; калькулятор, научился использовать кастомные шрифты. Спешу безвозмездно поделиться своим опытом!</p>
+
+<p><strong>Какие шрифты подходят?</strong></p>
+
+<p>Можно использовать шрифты TrueType (TTF)</p>
+
+<p><strong>Куда положить шрифт?</strong></p>
+
+<p>В корневой директории (на одном уровне с директориями java и res и файлом AndroidManifest.xml) создать папку assets, а внутри неё можно создать отдельную папку для шрифтов fonts
+В эту папку бросить свой файл со шрифтом Custom.ttf</p>
+
+<p><strong>Как Android узнает, где находятся кастомные шрифты?</strong></p>
+
+<p>В файле <strong>&lt;project_name>.iml</strong> в разделе configuration необходимо добавить строчку</p>
+
+<pre><code>&lt;configuration&gt;
+...
+&lt;option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/ main/assets" /&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>а в файле <strong>res/values/strings.xml</strong> &ndash; строчку</p>
+
+<pre><code>&lt;string name="digit_keyboard_font"&gt;fonts/Custom.ttf&lt;/string&gt;
+</code></pre>
+
+<p><strong>Как назначить шрифт своим View-элементам?</strong></p>
+
+<p>Теперь в коде, в методе onCreate можно использовать свой шрифт. Обратите внимание на код, в котором скрывается первая секретная фишка!</p>
+
+<pre><code>Typeface keys = Typeface.createFromAsset(getAssets(),   getString(R.string.digit_keyboard_font));
+TextView key = (TextView)findViewById(R.id.button_about_ok);
+key.setTypeface(keys);
+</code></pre>
+
+<p>Как видите, таким способом можно применить шрифт к надписям на кнопках и других <strong>View</strong>, которые можно явно привести типу <strong>TextView</strong>.</p>
+
+<p>Ещё одна супер-полезная и очень секретная фишка
+Допустим, требуется применить шрифт к группе элементов, которые располагаются в layout-файле внутри корневого элемента типа <strong>ViewGroup</strong> с присвоенным ему уникальным <strong>id</strong></p>
+
+<pre><code>&lt;LinearLayout
+android:id="@+id/digit_keyboard_layout"
+android:layout_width="wrap_content"
+android:layout_height="match_parent"
+android:layout_gravity="center_horizontal"
+android:orientation="vertical"&gt;
+
+&lt;TableLayout
+    android:id="@+id/table1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"&gt;
+
+    &lt;TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"&gt;
+
+        &lt;Button
+            android:id="@+id/button_one"
+            style="@style/calc_button_style"
+            android:layout_width="@dimen/button_width"
+            android:text="@string/one"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:layout_weight="1"/&gt;
+
+        &lt;Button
+            android:id="@+id/button_two"
+            style="@style/calc_button_style"
+            android:layout_width="@dimen/button_width"
+            android:text="@string/two"
+            android:layout_weight="1"/&gt;
+
+        &lt;Button
+            android:id="@+id/button_three"
+            android:text="@string/three"
+            style="@style/calc_button_style"
+            android:layout_width="@dimen/button_width"
+            android:layout_weight="1"
+            /&gt;
+    &lt;/TableRow&gt;
+&lt;/TableLayout&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Используйте в коде приложения вот такой метод</p>
+
+<pre><code>// Sets the font on all TextViews in the ViewGroup.
+public void setFont(ViewGroup group, Typeface font) {
+    int count = group.getChildCount();
+    View v;
+    for(int i = 0; i &lt; count; i++) {
+        v = group.getChildAt(i);
+        if(v instanceof TextView) {
+            ((TextView)v).setTypeface(font);
+        } else if(v instanceof ViewGroup) {
+            setFont((ViewGroup) v, font);
+        }
+    }
+}
+</code></pre>
+
+<p>Метод рекурсивно вызывает сам себя пока не доберётся до нужного элемента в любой сложной xml-структуре <strong>layout</strong>.</p>
+
+<p>Вызывая этот метод устанавливаем шрифт группе элементов.</p>
+
+<pre><code>Typeface keys = Typeface.createFromAsset(getAssets(),   getString(R.string.digit_keyboard_font));
+ViewGroup keyboardArea = (ViewGroup)findViewById(R.id.digit_keyboard_layout);
+setFont(keyboardArea, keys);
+</code></pre>
+
+<p>У кого есть какие то наработки или идеи, пишите в комментариях. Мы обязательно добавим статью на блог!</p>
+
+<p>Жду ваших комментариев!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[BitByte — для тех, кого волнует профессиональное развитие в IT-сфере]]></title>
+    <link href="http://android-helper.com.ua//bitbyte/"/>
+    <updated>2013-04-04T07:12:44+03:00</updated>
+    <id>http://android-helper.com.ua//bitbyte</id>
+    <content type="html"><![CDATA[<p>20 апреля в Санкт-Петербурге <a href="http://spb.itmozg.ru/">ITmozg</a> снова соберет на одной площадке новичков и профессионалов IT-рынка на ежегодном Фестивале профессионального развития — <a href="http://bitbyte.itmozg.ru/">BitByte</a>. </p>
+
+<p><img src="http://www.droidnews.ru/wp-content/uploads/2013/03/bitbyte_logo_2013-600x242.jpg" alt="Bitbyte" /></p>
+
+<p> <br/>
+В программе:<br/>
+— Две параллельные секции докладов, посвященные техническим и карьерным вопросам;<br/>
+— Выставка, где можно напрямую пообщаться с представителями IT-компаний, узнать о возможностях трудоустройства;<br/>
+— Много активностей: головоломки и тесты, розыгрыши и подарки, сюрпризы и еще много-много интересного :)</p>
+
+<p>Среди компаний-участников: Google, Oracle, EMC, Яндекс.Деньги, Sperasoft, Mail. ru Group, T-Systems, Электрон и многие другие.</p>
+
+<p>Участие бесплатное! Вход только по регистрации <a href="http://bitbyte.itmozg.ru/register#form">http://bitbyte.itmozg.ru/register#form</a> </p>
+
+<p>Все подробности на сайте мероприятия: <a href="http://bitbyte.itmozg.ru/">http://bitbyte.itmozg.ru</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Несколько слухов об Android Key Lime Pie]]></title>
+    <link href="http://android-helper.com.ua//android-key-lime-pie/"/>
+    <updated>2013-04-04T07:02:27+03:00</updated>
+    <id>http://android-helper.com.ua//android-key-lime-pie</id>
+    <content type="html"><![CDATA[<p>Ну что, кто может сказать, когда мы уже, наконец, увидим следующую версию Android? Наверное, большинство из читателей скажет, что подобное событие произойдёт на мероприятии Google I/O. Во всяком случае об этом твердит большинство источников, и именно на это намекает прошлый опыт. Так что терпеливо ждём 15 мая.</p>
+
+<p><img src="http://www.droidnews.ru/wp-content/uploads/2013/04/Android-5.0-Key-Lime-Pie-Rumors1-600x347.jpg" alt="Эволюция Android" /></p>
+
+<p>Однако, пока мы застыли в ожидании, давайте посмотрим, какие интересные слухи и догадки блуждают по Сети касаемо Android 5.0 Key Lime Pie.</p>
+
+<p>Первое, о чем можно встретить упоминание — свежее ядро Linux версии 3.8. Любители перепрошиваться знают, насколько важно в системе грамотно собранное ядро. Ведь от него во многом зависит скорость работы мультитаскинга, оно может сильно влиять на расход заряда батареи, ядро же определит, сколько оперативной свободной памяти будет выделено пользователю. Так что у многих сейчас есть надежды, что оптимизация ядра поможет улучшить ситуацию вокруг некоторых давних проблем нашей любимой ОС.</p>
+
+<p>Второй интересный слух про Kie Lime Pie гласит, что эта версия Android будет работать исключительно на четырёхъядерных устройствах. Однако, лично мне кажется, что такое развитие событий очень маловероятно. Вряд ли в Google решатся так сразу оставить огромное количество чуть менее современных устройств без обновления системы.</p>
+
+<p>Куда более вероятным кажется, что в Key Lime Pie появится унифицированная Google-платформа для общения Google Babel, которая объединит в себе Google Talk, Google Plus, Google Voice.</p>
+
+<p>Наверняка же к Android 5.0 обновится клавиатура, которая порадует нас более обширными словарями и улучшенными алгоритмами предугадывания вводимого текста.</p>
+
+<p>Интересным остаётся вопрос, на каком именно устройстве нам продемонстрируют Key Lime Pie. Будет ли это Nexus 5 или же ожидаемый многими Motorola X Phone. Что вы думаете по этому поводу?</p>
+
+<p>А вам какие из этих слухов кажутся максимально достоверными? Или какие наоборот — откровенной чепухой? Чего бы хотелось, чтобы подтвердилось?</p>
+
+<p> </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Доктор Веб: обзор Android-угроз в 2012 году]]></title>
+    <link href="http://android-helper.com.ua//doctor-web/"/>
+    <updated>2013-01-30T23:00:56+02:00</updated>
+    <id>http://android-helper.com.ua//doctor-web</id>
+    <content type="html"><![CDATA[<p>Компания «Доктор Веб» сделала обзор Android-угроз в 2012 году. С угрозами со стороны вредоносных программ ОС Android столкнулась практически с момента своего появления на рынке. И хотя многие пользователи поначалу восприняли этот факт скептически, постепенно их сомнения сменились обеспокоенностью за безопасность используемых мобильных устройств, так как число вредоносных приложений продолжало неуклонно расти. Прошедший 2012 год в этом плане не стал исключением.</p>
+
+<p>Троянцы семейства <a href="http://www.ferra.ru/ru/soft/news/2011/08/30/Android-SmsSend/">Android.SmsSend</a>, появившиеся еще в 2010 году и быстро ставшие настоящей головной болю пользователей мобильных Android-устройств, по-прежнему являются наиболее распространенной и массовой угрозой для этой мобильной платформы. Эти вредоносные программы предназначены для отправки дорогостоящих SMS-сообщений и подписки абонентов на различные контент-услуги, что может повлечь за собой серьезные финансовые потери (при этом жертва даже не будет знать, что деньги списаны с ее счета). Чаще всего они распространяются под видом популярных игр и приложений, а также их обновлений, однако могут встречаться и другиAе каналы распространения.</p>
+
+<p>Учитывая возможности мобильных Android-устройств, а также принимая во внимание продолжающийся рост числа их пользователей, неудивительно, что проблема сохранности конфиденциальной информации становится все более ощутимой. Рискам в этой сфере подвержены все: как простые пользователи, так и представители коммерческого и государственного секторов. Ценные сведения, интересующие злоумышленников, могут быть самыми разнообразными.</p>
+
+<p>Сами по себе вредоносные программы, шпионящие за пользователями и крадущие их конфиденциальную информацию, не уникальны и известны достаточно давно. Однако в 2012 году обозначилась четкая тенденция к появлению довольно специфической группы троянцев-шпионов, направленных против жителей Японии. Все они распространялись при помощи спам-писем, в которых пользователям предлагалось установить то или иное «полезное» приложение, начиная от эротической игры и заканчивая оптимизатором расхода аккумулятора.</p>
+
+<p>Узконаправленные, точечные или таргетированные атаки несут в себе серьезную угрозу, поскольку они, в отличие от большинства обычных атак, направлены не на максимально возможное число пользователей, а на их ограниченный круг, что снижает вероятность оперативного и эффективного обнаружения используемых при преступлении вредоносных программ.</p>
+
+<p><img src="http://www.ferra.ru/images/344/344982.jpg" alt="Android-угрозы" />
+<a href="http://news.ferra.ru/photo/techlife/news/Dr-Web-Android-2012/1872/344982">Android-угрозы</a></p>
+
+<p>Применение подобных вредоносных программ никогда не было массовым явлением, в том числе и для устройств под управлением <a href="http://www.ferra.ru/ru/techlife/news/2013/01/28/Trend-Micro-Android-1000000/">Android</a>. В 2012 году мы стали свидетелями появления лишь нескольких новых представителей этого класса троянцев, направленных на мобильную операционную систему от Google. Ими стали <a href="http://www.ferra.ru/ru/soft/news/2012/06/21/drweb-Android-SpyEye/">Android.SpyEye.2.origin</a>, Android.Panda.2.origin, Android.SmsSpy.6.origin и Android.FakeSber.1.origin.</p>
+
+<p>Потенциальную угрозу сохранности персональной информации продолжают нести и различные виды коммерческого программного обеспечения для мониторинга и шпионажа. В 2012 году было обнаружено значительное число не только новых модификаций уже известных программ, но и новые представители этого класса приложений.</p>
+
+<p>На фоне общей массы вредоносных Android-приложений, направленных на получение той или иной материальной выгоды, <a href="http://www.ferra.ru/ru/soft/news/2012/03/02/Android-Moghava/">Android.Moghava</a>, обнаруженный весной 2012 года, держится особняком, будучи троянцем-вандалом. Он распространялся в модифицированной злоумышленниками версии приложения — сборника рецептов иранской кухни. Через определенные промежутки времени троянец выполнял на мобильном устройстве поиск JPEG-изображений в каталоге /DCIM/Camera/ и накладывал на них еще одно изображение. В результате этого фотографии пользователя безвозвратно портились.</p>
+
+<p>По состоянию на конец 2012 года вирусные базы Dr.Web содержали почти 1300 записей для Android-угроз. С ростом популярности мобильных устройств под управлением ОС Android соответственно увеличивается число и разнообразие вредоносных приложений, представляющих опасность для пользователей этой платформы. Описанные выше типы угроз в 2012 году стали наиболее заметными, а также продемонстрировали потенциальный вектор развития вредоносных Android-программ в ближайшем будущем. Одновременно с этим могут появляться и вредоносные приложения, которые сочетают свойства самых разнообразных угроз или же являются «нестандартными» по сравнению с общей массой, что во многом повторяет ситуацию с Windows. Учитывая, что в ближайшие несколько лет мобильная платформа Android будет оставаться среди лидеров рынка, стоит ожидать дальнейшего роста числа созданных для нее вредоносных программ.</p>
+
+<p>Источник <a href="http://www.pcnews.ru/news/android-2012-smssend-2010-sms-google-spyeye-origin-panda-smsspy-fakesber-moghava-jpeg-dcim-camera-dr-web-1300-425558.html">pcnews.ru</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android заняла 70 процентов рынка смартфонов в 2012 году]]></title>
+    <link href="http://android-helper.com.ua//android-70/"/>
+    <updated>2013-01-30T22:56:40+02:00</updated>
+    <id>http://android-helper.com.ua//android-70</id>
+    <content type="html"><![CDATA[<p>По последним данным агентства Strategy Analytics за 2012 год в мире было продано около 700 миллионов смартфонов, при этом 684 процента от этого количества составляли устройства на базе платформы <a href="http://androidnews.com.ua/">Android</a>, iOS получила 194 процента, а 122 процентов пришлось на другие программные платформы. Что касается производителей смартфонов, то лидирующие позиции в 2012 году остались за Apple и Samsung, как по уровню прибыли, так и по объемам продаж. По мнению аналитиков, именно эти две компании сегодня можно считать главными противоборствующими сторонами в мобильной индустрии, а противостояние Apple и <a href="http://androidnews.com.ua/other-news/2740-google-rabotaet-nad-android-ochkami.html">Google</a> начало отходить на второй план. Также в Strategy Analytics обращают внимание на замедление темпов развития рынка смартфонов. К примеру, в 2011 году рост поставок смартфонов в мире составил 64 процента, а в прошлом только 43.</p>
+]]></content>
+  </entry>
+  
+</feed>

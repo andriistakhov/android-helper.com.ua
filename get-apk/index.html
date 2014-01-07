@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Как вытащить Apk файл приложения прямо из Google Play Store - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Еще одна полезная статья для владык android устройств. Многие пользователи Android знают, что с помощью приложения Titanium Backup можно вытащить &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//get-apk">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Как вытащить Apk файл приложения прямо из Google Play Store</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T16:36:03+02:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Еще одна полезная статья для владык android устройств.</p>
+
+<p>Многие пользователи Android знают, что с помощью приложения Titanium Backup можно вытащить приложение из устройства в виде apk файла. Сегодня мы рассмотрим способ, с помощью которого можно вытащить apk файл приложения прямо из Google Play Store.</p>
+
+<p><img src="http://lifehacker.ru/wp-content/uploads/2012/05/04.png" alt="" /></p>
+
+<p>Плюсом данного способа является отсутствие необходимости предварительной установки приложения на устройство. К сожалению, работает этот способ только для бесплатных приложений. Итак, что нам понадобится:</p>
+
+<h2>1. Google Chrome</h2>
+
+<p>Создаём на рабочем столе второй ярлык для Google Chrome.</p>
+
+<p><img src="http://lifehacker.ru/wp-content/uploads/2012/05/a.png" alt="" /></p>
+
+<p>Делаем по ярлыку правый клик, выбираем «Свойства». В поле «Объект» дописываем через пробел следующие команды:</p>
+
+<pre><code>--ignore-certificate-errors
+--allow-running-insecure-content
+</code></pre>
+
+<p>Получится примерно так:</p>
+
+<pre><code>...\chrome.exe" --ignore-certificate-errors --allow-running-insecure-content
+</code></pre>
+
+<p>Нажимаем «Применить» и «ОК».</p>
+
+<p><img src="http://lifehacker.ru/wp-content/uploads/2012/05/b.png" alt="" /></p>
+
+<p>После данной операции нужно перезапустить браузер, закрыв при этом все запущенные экземпляры приложения.</p>
+
+<h2>2. Имя аккаунта Google и ID устройства</h2>
+
+<p>По факту мы собираемся имитировать загрузку приложения на устройство, поэтому необходимо знать имя своего аккаунта, то есть имя вашего почтового ящика Google, а также идентификационный номер вашего Android устройства.</p>
+
+<p>С ящиком всё понятно, а чтобы узнать ID устройства, откройте звонилку на своём смартфоне и наберите <em>#</em>#8255#<em>#</em></p>
+
+<p>На появившемся экране необходимо найти строчку «Device ID:»</p>
+
+<p>Идентификационным номером является комбинация букв и цифр, следующая после «android-». К примеру, если в строке вы видите «Device ID: android-1122aa33bb445577», то идентификатором является комбинация «1122aa33bb445577». Запишите эту комбинацию.</p>
+
+<p>Если по каким-то причинам у вас не получилось узнать ваш Device ID указанным выше способом, вы можете просто скачать приложение <a href="https://play.google.com/store/apps/details?id=com.redphx.deviceid">Device ID</a> в Google Play Store.</p>
+
+<h2>3. APK Downloader</h2>
+
+<p>Скачиваем расширение для браузера под названием APK Downloader (<a href="http://codekiem.com/apk-downloader/crx/1.2.1.crx">прямая ссылка на загрузку расширения</a>).</p>
+
+<p>В появившемся окне вводим адрес нашего Google аккаунта, то есть адрес почты. Пароль (ага, страшно), а также Device ID. После этого нажимаем «Login».</p>
+
+<p><img src="http://lifehacker.ru/wp-content/uploads/2012/05/c.png" alt="" /></p>
+
+<p>В следующем окне выбираем свою страну и оператора сотовой связи, после чего нажимаем «Save Settings». Далее должно появиться окно с сообщением о успешной активации расширения.</p>
+
+<p><img src="http://lifehacker.ru/wp-content/uploads/2012/05/d.png" alt="" /></p>
+
+<h2>4. Google Play Store</h2>
+
+<p>Теперь заходим на наш любимый <a href="https://play.google.com/">Google Play Store</a> и выбираем любое бесплатное приложение. В правой части адресной строки браузера появится характерного вида зелёная голова со стрелочкой.</p>
+
+<p><img src="http://lifehacker.ru/wp-content/uploads/2012/05/e.png" alt="" /></p>
+
+<p>Нажимаем на эту иконку, и приложение успешно загружается на компьютер в виде apk файла. По сути, теперь мы умеем создавать standalone дистрибутивы бесплатных приложений.</p>
+
+<p><img src="http://lifehacker.ru/wp-content/uploads/2012/05/f.png" alt="" /></p>
+
+<p><strong>Убедиться в абсолютной порядочности разработчика расширения APK Downloader не представляется возможным, поэтому вводите данные своего аккаунта на собственный страх и риск. Кроме того, подобные действия в принципе нарушают правила использования Google Play Store.</strong></p>
+
+<p>Статья из сайта <a href="http://lifehacker.ru/2012/05/30/kak-vytashhit-apk-fajjl-iz-google-play-store/">lifehacker.ru</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T16:36:03+02:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ighry-dlia-android/'>Игры для android</a>, <a class='category' href='/blog/categories/pamiatka-razrabotchiku/'>Памятка разработчику</a>, <a class='category' href='/blog/categories/proghrammy-dlia-android/'>Программы для android</a>, <a class='category' href='/blog/categories/chto-takoie-android/'>Что такое android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//get-apk/" data-via="" data-counturl="http://android-helper.com.ua//get-apk/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/install-apk/" title="Previous Post: Как установить несовместимое приложение на Android">&laquo; Как установить несовместимое приложение на Android</a>
+      
+      
+        <a class="basic-alignment right" href="/liveinternet-webomer/" title="Next Post: LiveInternet - Webomer">LiveInternet - Webomer &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

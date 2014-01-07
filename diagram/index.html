@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>AChartEngine - диаграммы в Android - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Сегодня нашел интересую статью, как можно строить диаграммы в Android. Оригинал статьи вы можете найти тут. Я же в свою очередь продублирую ее у себя &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//diagram">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">AChartEngine - диаграммы в Android</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-19T11:44:44+03:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Сегодня нашел интересую статью, как можно строить диаграммы в Android.</p>
+
+<p>Оригинал статьи вы можете найти <a href="http://www.mobilab.ru/androiddev/achartengineforandroid.html">тут</a>.</p>
+
+<p>Я же в свою очередь продублирую ее у себя на блоге, так как считаю, что она заслуживает внимания.</p>
+
+<p>При разработке бизнес приложений программисты часто сталкиваются с необходимостью строить большое количество различных диаграмм и графиков. Конечно, все можно делать с нуля, вручную отрисовывая все необходимое, но зачем так мучатся, если есть неплохое бесплатное решение? Сегодня я хочу рассказать Вам об open source библиотеке AChartEngine, позволяющей создавать красивые графики и диаграммы для ваших отчетов. Приятно, что библиотека распространяется под весьма мягкой лицензией Apache Version 2, так что Вы вполне можете использовать <strong>AChartEngine </strong>в своих коммерческих проектах.   </p>
+
+<p><a href="http://www.achartengine.org/index.html">На сайте разработчика</a> помимо самой библиотеки можно найти подробную документацию, офермленную в стиле Javadoc pages, примеры использования библиотеки, а также ее исходный код. В разделе Demo приводится несколько диаграмм и графиков, построенных средствами AChartEngine.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/AChartEngine.jpg" alt="" /></p>
+
+<p>Для построения диаграммы нужно выполнить несколько довольно простых шагов</p>
+
+<ol>
+<li><p> Перед использованием библиотеки вам нужно подключить ее к своему проекту в Eclipse. Для этого создайте где-нибудь папку для библиотеки и поместите туда jar файл. Теперь добавьте этот jar в свой project build path. После этого добавьте строку <activity android:name="org.achartengine.GraphicalActivity"/> в файл манифеста вашего проекта.</p></li>
+<li><p> Создайте и инициализируйте три массива. В первом будут содержаться цвета, во втором &ndash; подписи, в третьем &ndash; значения. </p></li>
+<li><p> Создайте объект CategorySeries и загрузите в него массивы строк с подписями и значения. При построении диаграмм будут использоваться именно эти данные.</p></li>
+<li><p> Создайте объект DefaultRenderer. CategorySeries и DefaultRenderer определены в библиотеке AChartEngine.</p></li>
+<li><p> Для каждого цвета в диаграмме создайте SimpleSeriesRenderer и установите его в этот цвет. Затем каждый SimpleSeriesRenderer добавьте в DefaultRenderer. Таким образом, имеем один Render на каждый Series. К слову, Render может включать другой Render, таким образом можно создавать подкатегории.</p></li>
+<li><p> Создайте объект PieChartIntent и передайте ему CategorySeries и DefaultRenderer.</p></li>
+<li><p> С помощью PieChartIntent можно показать диаграмму, как отдельную деятельность.</p></li>
+</ol>
+
+
+<p>Ниже приводится исходный код, в котором реализованы все описанные выше шаги.</p>
+
+<pre><code>package com.example.bars;
+
+
+
+import org.achartengine.ChartFactory;
+
+import org.achartengine.chart.PieChart;
+
+import org.achartengine.model.CategorySeries;
+
+import org.achartengine.renderer.DefaultRenderer;
+
+import org.achartengine.renderer.SimpleSeriesRenderer;
+
+import android.content.Context;
+
+import android.content.Intent;
+
+import android.graphics.Color;
+
+import android.app.Activity;
+
+import android.os.Bundle;
+
+
+
+public class MainActivity extends Activity {
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+   super.onCreate(savedInstanceState);
+
+      Intent intent = buildIntent();
+
+    startActivity(intent);          // шаг 7
+
+}
+
+
+
+public Intent buildIntent() {
+
+    int[] values = new int[] { 5, 15, 25, 50, 75 };        // шаг 2
+
+    String[] bars = new String[] {"Francesca's",  "King of Clubs", 
+
+                             "Zen Lounge", "Tied House", "Molly Magees"};
+
+    int[] colors = new int[] { Color.BLUE, Color.GREEN, Color.MAGENTA, 
+
+                               Color.YELLOW, Color.CYAN };
+
+
+
+    CategorySeries series = new CategorySeries("Pie Chart");  // шаг 3
+
+    DefaultRenderer dr = new DefaultRenderer();   // шаг 4
+
+
+
+    for (int v=0; v&lt;5; v++){    // шаг 5
+
+        series.add(bars[v], values[v]);
+
+        SimpleSeriesRenderer r = new SimpleSeriesRenderer();
+
+        r.setColor(colors[v]);
+
+        dr.addSeriesRenderer(r);
+
+    }
+
+    dr.setZoomButtonsVisible(true);
+
+    dr.setZoomEnabled(true);
+
+    dr.setChartTitleTextSize(20);
+
+    return ChartFactory.getPieChartIntent(    // шаг 6
+
+                          this, series, dr, "Pie of bars");
+
+}
+
+
+
+}
+</code></pre>
+
+<p>Мы построили диаграмму PieChartIntent, однако подобным образом можно построить и другие виды графиков. Мне библиотека показалась довольно удобной и понятной. Ее можно использовать, если необходимо быстро разработать какое-нибудь бизнес-приложение со строгим дизайном.</p>
+
+<p>Если вам понравилось, пишите комментарии и подписывайтесь на наши обновления.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-19T11:44:44+03:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//diagram/" data-via="" data-counturl="http://android-helper.com.ua//diagram/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/autocompletetextview-edittext/" title="Previous Post: AutoCompleteTextView - авто заполнение в edittext">&laquo; AutoCompleteTextView - авто заполнение в edittext</a>
+      
+      
+        <a class="basic-alignment right" href="/actionbar/" title="Next Post: ActionBar в Android">ActionBar в Android &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

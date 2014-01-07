@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>AutoCompleteTextView - авто заполнение в Edittext - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Добрый день друзья. Сегодня я вам расскажу о таком android элементе как AutoCompleteTextView. Для чего же нужен этот элемент. А нужен он для того что &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//autocompletetextview-edittext">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">AutoCompleteTextView - авто заполнение в Edittext</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-17T18:05:34+03:00" pubdate data-updated="true">Sep 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Сегодня я вам расскажу о таком android элементе как AutoCompleteTextView.</p>
+
+<p>Для чего же нужен этот элемент. А нужен он для того что бы во время ввода выдавался соответствующий список возможных вариантов.</p>
+
+<p>Давайте теперь рассмотрим как с этим работать.</p>
+
+<p>К примеру нам нужно автозаполнение для списка месяцев года.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/ExAutoCompleteTextView.png" alt="" /></p>
+
+<p>Для этого подготовим нужный нам массив строк (/res/values/myvalues.xml):</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;resources&gt;
+
+&lt;array name="month"&gt;
+
+   &lt;item&gt;January&lt;/item&gt;
+
+   &lt;item&gt;February&lt;/item&gt;
+
+   &lt;item&gt;March&lt;/item&gt;
+
+   &lt;item&gt;April&lt;/item&gt;
+
+   &lt;item&gt;May&lt;/item&gt;
+
+   &lt;item&gt;June&lt;/item&gt;
+
+   &lt;item&gt;July&lt;/item&gt;
+
+   &lt;item&gt;August&lt;/item&gt;
+
+   &lt;item&gt;September&lt;/item&gt;
+
+   &lt;item&gt;October&lt;/item&gt;
+
+   &lt;item&gt;November&lt;/item&gt;
+
+   &lt;item&gt;December&lt;/item&gt;
+
+&lt;/array&gt;
+
+&lt;/resources&gt;
+</code></pre>
+
+<p>В главной активити напишем следуюющее:</p>
+
+<pre><code>import android.app.Activity;
+
+import android.os.Bundle;
+
+import android.text.Editable;
+
+import android.text.TextWatcher;
+
+import android.widget.ArrayAdapter;
+
+import android.widget.AutoCompleteTextView;
+
+
+
+public class ExAutoCompleteTextView extends Activity implements TextWatcher {
+
+
+
+AutoCompleteTextView autoCompleteTextView;
+
+
+
+/** Called when the activity is first created. */
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+   super.onCreate(savedInstanceState);
+
+   setContentView(R.layout.main); 
+
+   autoCompleteTextView = (AutoCompleteTextView)findViewById(R.id.input);
+
+   String[] month = getResources().getStringArray(R.array.month);
+
+   autoCompleteTextView.addTextChangedListener(this); 
+
+   autoCompleteTextView.setAdapter(new ArrayAdapter&lt;String&gt;(this, android.R.layout.simple_dropdown_item_1line, month)); 
+
+}
+
+
+
+    @Override
+
+    public void afterTextChanged(Editable arg0) {
+
+// TODO Auto-generated method stub
+
+
+
+    }
+
+
+
+    @Override
+
+    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+
+// TODO Auto-generated method stub
+
+
+
+    }
+
+
+
+    @Override
+
+    public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+
+// TODO Auto-generated method stub
+
+
+
+    }
+
+}
+</code></pre>
+
+<p>Ну и сама раскладка main.xml:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:orientation="vertical"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"
+
+&gt;
+
+&lt;TextView
+
+android:layout_width="fill_parent"
+
+android:layout_height="wrap_content"
+
+android:text="@string/hello"
+
+/&gt;
+
+&lt;AutoCompleteTextView
+
+android:id="@+id/input"
+
+android:layout_width="fill_parent"
+
+android:layout_height="wrap_content"
+
+android:completionThreshold="1"
+
+/&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Вот и все.</p>
+
+<p>Жду ваших комментариев и прошу подписаться на моем блоге.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-17T18:05:34+03:00" pubdate data-updated="true">Sep 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//autocompletetextview-edittext/" data-via="" data-counturl="http://android-helper.com.ua//autocompletetextview-edittext/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-html/" title="Previous Post: Android HTML - отображение в TextView">&laquo; Android HTML - отображение в TextView</a>
+      
+      
+        <a class="basic-alignment right" href="/diagram/" title="Next Post: AChartEngine - диаграммы в Android">AChartEngine - диаграммы в Android &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

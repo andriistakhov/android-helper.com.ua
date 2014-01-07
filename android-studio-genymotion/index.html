@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Android Studio и альтернативный емулятор - Genymotion - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="В этой статье я расскажу как как установить среду разработки Android используя Android Studio и Genymotion. При переходе от Eclispe/ADT к Android &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//android-studio-genymotion">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Android Studio и альтернативный емулятор - Genymotion</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-05T12:49:21+03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>В этой статье я расскажу как как установить среду разработки Android используя Android Studio и Genymotion. При переходе от Eclispe/ADT к Android Studio я исследовал альтернативные конфигурации для улучшения сборочной среды. Нашел неплохой эмулятор Genymotion. Интересный, довольно быстрый и очень простой.</p>
+
+<p><strong>Что нам нужно?</strong></p>
+
+<ul>
+<li><p><a href="http://android-helper.com.ua/android-studio/">Android Studio</a></p></li>
+<li><p><a href="https://www.virtualbox.org/wiki/Downloads">Oracle VM VirtualBox</a></p></li>
+<li><p><a href="http://www.genymotion.com/">Genymotion Android emulator</a></p></li>
+<li><p><a href="http://www.genymotion.com/">Genymotion Android studio plugin</a></p></li>
+</ul>
+
+
+<p><strong>Установка Oracle VM VirtualBox</strong> Если вы используете Windows в загруженном вами пакете будет все необходимое, в противном случае вам нужно будет скачать и установить ее самостоятельно. Процесс простой и прямолинейный но эти действия необходимо выполнить иначе Android Emulator не запуститься.</p>
+
+<p><strong>Установка Genymotion Android device emulator</strong> Первое что нужно это сделать создать аккаунт, чтобы иметь возможность скачать эмулятор. Вы можете выбирать среди платформ, в моем случае это Mac OS X. Когда вы его скачали и установили у вас должно получиться что-то такое:</p>
+
+<p><img src="https://lh4.googleusercontent.com/-XTLtY_Lu-uo/UdZ1ohxTDpI/AAAAAAAAIxU/UHNpDYatWSE/w878-h549-no/emulator1.png" alt="Genymotion Android device emulator" /></p>
+
+<p>Genymotion Android device emulator</p>
+
+<p>У вас может быть доступно множество эмуляторов. Вы выбираете и грузите его с сети. Как результат у вас готовый эмулятор.</p>
+
+<p><img src="https://lh3.googleusercontent.com/-bSICk3KwvT0/UdZ1oresDZI/AAAAAAAAIxE/VXQYFWzmdBs/w878-h549-no/emulator2.png" alt="Genymotion Android device emulator" /></p>
+
+<p>Genymotion Android device emulator</p>
+
+<p><strong>Установка Android Studio Plugin</strong> Чтобы интегрировать средство разработки с эмулятором вам необходимо установить плагин для Android Studio. Зайдите в Preferences там Plugin, выбираем нужный нам. Добавляем плагин который мы уже скачали и видим:</p>
+
+<p><img src="https://lh3.googleusercontent.com/-7ESa9bvI8oY/UdZ1ouyWdyI/AAAAAAAAIxQ/cod9TPdH1Qc/w878-h549-no/emulator3.png" alt="Genymotion Android Studio Plugin" /></p>
+
+<p>Genymotion Android Studio Plugin</p>
+
+<p><strong>Результат</strong></p>
+
+<p>Теперь вы можете запустить Android проект и вы увидите:</p>
+
+<p><img src="https://lh4.googleusercontent.com/-pu_27RpWvZI/UdZ1pYXK1xI/AAAAAAAAIxM/qk4W1XYDUw4/w878-h549-no/emulator4_1.png" alt="Genymotion Android Studio Plugin" /></p>
+
+<p>Genymotion Android Studio Plugin</p>
+
+<p>Эмулятор полностью интегрирован в вашу среду разработки . Первый раз когда вы запустите эмулятор вы можете увидеть диалог который спросит путь к Android SDK:</p>
+
+<p><img src="https://lh3.googleusercontent.com/-kJdXolrj9RQ/UdZ1pOHCHFI/AAAAAAAAIxI/L8cSs1wTSNk/w878-h549-no/emulator4.png" alt="Genymotion Android Studio Plugin" /></p>
+
+<p>Genymotion Android Studio Plugin</p>
+
+<p>Как-только все настроено можно запускать свой проект. <img src="https://lh4.googleusercontent.com/-vvfjkEI4RRw/UdZ1ph1p7II/AAAAAAAAIxc/n31dDQvUqj4/w878-h549-no/emulator5.png" alt="Genymotion Android Studio Plugin" /></p>
+
+<p><strong>Видео</strong></p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/63T-8YRlFmE "></iframe></div>
+
+
+<p>Надеюсь статья была для вас полезной. Если да нажимайте рассказать друзьям :)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-05T12:49:21+03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/pamiatka-razrabotchiku/'>Памятка разработчику</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//android-studio-genymotion/" data-via="" data-counturl="http://android-helper.com.ua//android-studio-genymotion/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/premiumaccaount/" title="Previous Post: Общий аккаунт - список программ">&laquo; Общий аккаунт - список программ</a>
+      
+      
+        <a class="basic-alignment right" href="/genymotion-review/" title="Next Post: Genymotion - обзор возможностей">Genymotion - обзор возможностей &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

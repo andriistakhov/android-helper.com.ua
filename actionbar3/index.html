@@ -1,0 +1,729 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ActionBar. Динамическое размещение элементов - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Всем привет. Пока я готовлюсь к вебинару. Времени на написание статей не хватает. Именно это меня провоцирует брать готовый материал из чужих сайтов &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//actionbar3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ActionBar. Динамическое размещение элементов</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-21T16:19:52+02:00" pubdate data-updated="true">Nov 21<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Всем привет.</p>
+
+<p>Пока я готовлюсь к вебинару. Времени на написание статей не хватает.</p>
+
+<p>Именно это меня провоцирует брать готовый материал из чужих сайтов.</p>
+
+<p>Сегодня речь пойдет о динамическом размещении элементов на action bar.</p>
+
+<p>В этом уроке:</p>
+
+<ul>
+<li>программно размещаем элементы в ActionBar</li>
+<li>используем элементы из фрагментов</li>
+</ul>
+
+
+<p>Недавно на форуме был вопрос о том, как во время работы программы менять содержимое ActionBar. Тема действительно интересная, и незаслуженно мною пропущенная. В этом уроке будем с ней разбираться.</p>
+
+<p>Опробуем три способа работы с элементами:</p>
+
+<p>1) Добавление/удаление MenuItem в объект Menu</p>
+
+<p>2) Показ/скрытие группы в Menu</p>
+
+<p>3) Элементы, относящиеся к фрагментам</p>
+
+<p>С первыми двумя пунктами все понятно, эти механизмы мы рассматривали еще в Уроке 14.</p>
+
+<p>Более интересен третий пункт. Фрагмент может реализовать в себе метод<a href="http://developer.android.com/reference/android/app/Fragment.html#onCreateOptionsMenu(android.view.Menu,%20android.view.MenuInflater">onCreateOptionsMenu</a>) и, тем самым, создать свои элементы для ActionBar. Как только фрагмент будет добавлен на экран, эти элементы добавятся в ActionBar. А когда фрагмент с экрана уберут, элементы исчезнут.</p>
+
+<p>Создадим приложение, которое реализует три этих варианта.</p>
+
+<p>Добавим строки в <strong>strings.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;resources&gt;
+
+
+
+&lt;string name="add_del"&gt;Добавить/удалить&lt;/string&gt;
+
+&lt;string name="visible"&gt;Показать/скрыть&lt;/string&gt;
+
+&lt;string name="fragment"&gt;Фрагмент&lt;/string&gt;
+
+&lt;string name="frag1_text"&gt;Fragment 1&lt;/string&gt;
+
+&lt;string name="frag2_text"&gt;Fragment 2&lt;/string&gt;
+
+&lt;string name="menu_item1"&gt;Item 1&lt;/string&gt;
+
+&lt;string name="menu_item2"&gt;Item 2&lt;/string&gt;
+
+&lt;string name="menu_item31"&gt;Item 31&lt;/string&gt;
+
+&lt;string name="menu_item32"&gt;Item 32&lt;/string&gt;
+
+
+
+&lt;/resources&gt;
+</code></pre>
+
+<p>Создадим два фрагмента. Начнем с layout-файлов.</p>
+
+<p><strong>fragment1.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:background="#77ff0000"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;TextView
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="@string/frag1_text" &gt;
+
+&lt;/TextView&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p><strong>fragment2.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:background="#7700ff00"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;TextView
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="@string/frag2_text" &gt;
+
+&lt;/TextView&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Файлы с пунктами меню (они же &ndash; элементы ActionBar):</p>
+
+<p><strong>res/menu/fragment1.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android" &gt;
+
+
+
+&lt;item
+
+    android:id="@+id/frag1_item"
+
+    android:icon="@android:drawable/ic_dialog_info"
+
+    android:showAsAction="ifRoom|withText"
+
+    android:title="@string/menu_item31"&gt;
+
+&lt;/item&gt;
+
+
+
+&lt;/menu&gt;
+</code></pre>
+
+<p><strong>res/menu/fragment2.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android" &gt;
+
+
+
+&lt;item
+
+    android:id="@+id/frag2_item"
+
+    android:icon="@android:drawable/ic_dialog_email"
+
+    android:showAsAction="ifRoom|withText"
+
+    android:title="@string/menu_item32"&gt;
+
+&lt;/item&gt;
+
+
+
+&lt;/menu&gt;
+</code></pre>
+
+<p>По одному элементу для каждого фрагмента. Эти элементы будут появляться в ActionBar при выводе фрагмента на экран.</p>
+
+<p>Классы.</p>
+
+<p><strong>Fragment1.java</strong>:</p>
+
+<pre><code>public class Fragment1 extends Fragment {
+
+    public void onCreate(Bundle savedInstanceState) {
+
+    setHasOptionsMenu(true);
+
+    super.onCreate(savedInstanceState);
+
+    }
+
+
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    return inflater.inflate(R.layout.fragment1, null);
+
+}
+
+
+
+public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+    inflater.inflate(R.menu.fragment1, menu);
+
+    super.onCreateOptionsMenu(menu, inflater);
+
+}
+
+
+
+}
+</code></pre>
+
+<p><strong>Fragment2.java</strong>:</p>
+
+<pre><code>public class Fragment2 extends Fragment {
+
+public void onCreate(Bundle savedInstanceState) {
+
+    setHasOptionsMenu(true);
+
+    super.onCreate(savedInstanceState);
+
+}
+
+
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    return inflater.inflate(R.layout.fragment2, null);
+
+}
+
+
+
+public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+    inflater.inflate(R.menu.fragment2, menu);
+
+    super.onCreateOptionsMenu(menu, inflater);
+
+}
+
+}
+</code></pre>
+
+<p>В <strong>onCreate </strong>с помощью <a href="http://developer.android.com/reference/android/app/Fragment.html#setHasOptionsMenu(boolean">setHasOptionsMenu</a>) включаем режим вывода элементов фрагмента в ActionBar.</p>
+
+<p>В <strong>onCreateView </strong>создаем View, в <strong>onCreateOptionsMenu </strong>– меню. Все как обычно.</p>
+
+<p>Фрагменты готовы.</p>
+
+<p>Теперь займемся Activity. Перепишем <strong>res/layout/main.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:tools="http://schemas.android.com/tools"
+
+android:id="@+id/LinearLayout1"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;CheckBox
+
+    android:id="@+id/chbAddDel"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:onClick="onClick"
+
+    android:text="@string/add_del" &gt;
+
+&lt;/CheckBox&gt;
+
+
+
+&lt;CheckBox
+
+    android:id="@+id/chbVisible"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:onClick="onClick"
+
+    android:text="@string/visible" &gt;
+
+&lt;/CheckBox&gt;
+
+
+
+&lt;Button
+
+    android:id="@+id/btnFrag"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:onClick="onClick"
+
+    android:text="@string/fragment" &gt;
+
+&lt;/Button&gt;
+
+
+
+&lt;FrameLayout
+
+    android:id="@+id/cont"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent" &gt;
+
+&lt;/FrameLayout&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Два чекбокса и кнопка. Чекбоксы отвечают за работу с элементами с помощью первого и второго способов. Кнопка будет показывать поочередно два фрагмента в контейнере cont.</p>
+
+<p><strong>res/menu/main.xml</strong>:</p>
+
+<pre><code>&lt;menu xmlns:android="http://schemas.android.com/apk/res/android" &gt;
+
+
+
+&lt;group android:id="@+id/groupVsbl" &gt;
+
+    &lt;item
+
+        android:id="@+id/item2"
+
+        android:icon="@android:drawable/ic_menu_call"
+
+        android:showAsAction="always|withText"
+
+        android:title="@string/menu_item2"&gt;
+
+    &lt;/item&gt;
+
+&lt;/group&gt;
+
+
+
+&lt;/menu&gt;
+</code></pre>
+
+<p>Создаем группу, а в ней элемент. Эту группу будем скрывать и показывать.</p>
+
+<p><strong>MainActivity.java</strong>:</p>
+
+<pre><code>public class MainActivity extends FragmentActivity {
+
+
+
+final int MENU_ID = 1;
+
+
+
+CheckBox chbAddDel;
+
+CheckBox chbVisible;
+
+
+
+Fragment frag1;
+
+Fragment frag2;
+
+Fragment frag;
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+
+
+    chbAddDel = (CheckBox) findViewById(R.id.chbAddDel);
+
+    chbVisible = (CheckBox) findViewById(R.id.chbVisible);
+
+
+
+    frag = frag1 = new Fragment1();
+
+    frag2 = new Fragment2();
+
+
+
+}
+
+
+
+@Override
+
+public boolean onCreateOptionsMenu(Menu menu) {
+
+    getMenuInflater().inflate(R.menu.activity_main, menu);
+
+    menu.setGroupVisible(R.id.groupVsbl, chbVisible.isChecked());
+
+    if (chbAddDel.isChecked()) {
+
+        menu.add(0, MENU_ID, 0, R.string.menu_item1).setIcon(android.R.drawable.ic_delete)
+
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+    } else {
+
+        menu.removeItem(MENU_ID);
+
+    }
+
+    return true;
+
+}
+
+
+
+public void onClick(View view) {
+
+    switch (view.getId()) {
+
+        case R.id.chbAddDel:
+
+        case R.id.chbVisible:
+
+            invalidateOptionsMenu();
+
+            break;
+
+        case R.id.btnFrag:
+
+            frag = (frag == frag1) ? frag2 : frag1;
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.cont, frag).commit();
+
+            break;
+
+        default:
+
+            break;
+
+    }
+
+
+
+}
+
+}
+</code></pre>
+
+<p>В <strong>onCreateOptionsMenu </strong>настраиваем видимость группы groupVsbl в зависимости от значения чекбокса chbVisible.</p>
+
+<p>В зависимости от значения чекбокса chbAddDel создаем или удаляем элемент.</p>
+
+<p>В <strong>onСlick </strong>для чекбоксов вызываем метод <a href="http://developer.android.com/reference/android/app/Activity.html#invalidateOptionsMenu(">invalidateOptionsMenu</a>) - перерисовка меню/ActionBar. А по нажатию на кнопку поочередно выводим на экран Fragment1 или Fragment2.</p>
+
+<p>Все сохраняем и запускаем приложение.</p>
+
+<p><img src="http://startandroid.ru/images/stories/lessons/L0112/L0112_010.JPG" alt="" /></p>
+
+<p>Жмем галку <strong>Добавить/удалить</strong>. Появляется элемент. Мы добавили MenuItem в Menu.</p>
+
+<p><img src="http://startandroid.ru/images/stories/lessons/L0112/L0112_020.JPG" alt="" /></p>
+
+<p>Жмем галку <strong>Показать/скрыть</strong>. Появляется элемент. Мы показали группу меню, в которой один пункт.</p>
+
+<p><img src="http://startandroid.ru/images/stories/lessons/L0112/L0112_030.JPG" alt="" /></p>
+
+<p>Соответственно, убирая галки &ndash; убираете элементы.</p>
+
+<p>Понажимаем кнопку <strong>Фрагмент</strong>. Появляется элемент то одного, то другого фрагмента.</p>
+
+<p><img src="http://startandroid.ru/images/stories/lessons/L0112/L0112_040.JPG" alt="" /></p>
+
+<p><img src="http://startandroid.ru/images/stories/lessons/L0112/L0112_050.JPG" alt="" /></p>
+
+<p>Еще, как вариант, можно играться с видимостью не всей группы, а конкретного элемента &ndash; метод <a href="http://developer.android.com/reference/android/view/MenuItem.html#setVisible(boolean">setVisible</a>).</p>
+
+<p>Если в ActionBar нажать на overflow-кнопку, будет вызван метод onPrepareOptionsMenu для Activity и для фрагмента, который сейчас отображен. </p>
+
+<p>Надеюсь статья вам поможет.</p>
+
+<p>Полный проект вы можете скачать на <a href="http://android-helper.com.ua/codes/">странице с кодами</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-21T16:19:52+02:00" pubdate data-updated="true">Nov 21<span>st</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//actionbar3/" data-via="" data-counturl="http://android-helper.com.ua//actionbar3/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/pagertabstrip/" title="Previous Post: PagerTabStrip - замена Tabs или новые возможности android">&laquo; PagerTabStrip - замена Tabs или новые возможности android</a>
+      
+      
+        <a class="basic-alignment right" href="/webview-html/" title="Next Post: WebView - html страницы в android">WebView - html страницы в android &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

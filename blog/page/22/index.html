@@ -1,0 +1,1923 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Добрый день друзья. В предыдущих статьях я писал о использовании Swipe и своих Tabs Тогда у меня возник вопрос, как же их можно объединить.  1. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//blog/page/22">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/swipe-tabs/">Swipe + Tabs - прокрутка экранов и свои Tabs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-17T07:30:02+03:00" pubdate data-updated="true">Jul 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>В предыдущих статьях я писал о использовании <a href="http://android-helper.com.ua/%D1%81%D0%BB%D0%B0%D0%B9%D0%B4%D0%B8%D0%BD%D0%B3-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%BE%D0%B2-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-viewpager/">Swipe</a> и своих <a href="http://android-helper.com.ua/%D0%BA%D0%B0%D0%BA-%D1%81%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C-%D1%81%D0%B2%D0%BE%D0%B8-tabs-%D0%B2-android/">Tabs</a></p>
+
+<p>Тогда у меня возник вопрос, как же их можно объединить. </p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-17-084758.png" alt="" /></p>
+
+<h3>1. Подготовка проекта</h3>
+
+<p>Перед тем как приступить к реализации этой задачи, нам нужно подключить библиотеку обратной совместимости.</p>
+
+<p>Как это сделать, вы можете прочесть <a href="http://android-helper.com.ua/%D1%81%D0%BB%D0%B0%D0%B9%D0%B4%D0%B8%D0%BD%D0%B3-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%BE%D0%B2-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-viewpager/">тут</a> (предварительная настройка).</p>
+
+<h3>2. Подготовка ресурсов</h3>
+
+<p>Откройте файл main.xml и пропишите туда следующий код:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:id="@android:id/tabhost"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent" &gt;
+
+
+
+    &lt;LinearLayout
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:orientation="vertical" &gt;
+
+
+
+    &lt;FrameLayout
+
+        android:id="@android:id/tabcontent"
+
+        android:layout_width="0dp"
+
+        android:layout_height="0dp"
+
+        android:layout_weight="0" /&gt;
+
+
+
+    &lt;android.support.v4.view.ViewPager
+
+        android:id="@+id/pager"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="0dp"
+
+        android:layout_weight="1" /&gt;
+
+
+
+    &lt;TabWidget
+
+        android:id="@android:id/tabs"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:layout_weight="0"
+
+        android:orientation="horizontal" /&gt;
+
+&lt;/LinearLayout&gt;
+
+
+
+&lt;/TabHost&gt;
+</code></pre>
+
+<h3>3. Подготовка Activity</h3>
+
+<p>Для реализации данного примера мы будем наследоваться не от Activity, а от <strong>FragmentActivity</strong> (о фрагментах мы поговорим в следующей статье):</p>
+
+<pre><code>public class MainActivity extends FragmentActivity 
+</code></pre>
+
+<p>В метод onCreate пишем следующее:</p>
+
+<pre><code>private TabHost mTabHost;
+
+private ViewPager mViewPager;
+
+private TabsAdapter mTabsAdapter;
+
+
+
+@Override
+
+public void onCreate(final Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+    mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+
+    mTabHost.setup();
+
+
+
+    mViewPager = (ViewPager) findViewById(R.id.pager);
+
+
+
+    mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
+
+
+
+    mTabsAdapter.addTab(mTabHost.newTabSpec("simple").setIndicator("Android"), AndroidFragment.class, null);
+
+    mTabsAdapter.addTab(mTabHost.newTabSpec("contacts").setIndicator("IOs"), IOsFragment.class, null);
+
+    mTabsAdapter.addTab(mTabHost.newTabSpec("custom").setIndicator("Windows"), WindowsFragment.class, null);
+
+    mTabsAdapter.addTab(mTabHost.newTabSpec("throttle").setIndicator("DOS"), DOSFragment.class, null);
+
+
+
+    if (savedInstanceState != null) {
+
+        mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
+
+    }
+
+}
+</code></pre>
+
+<h3>4. Реализация Adapter</h3>
+
+<p>Вот тут начинается самое интересное.</p>
+
+<p>Создаем adapter который у нас будет унаследован от <strong>FragmentPagerAdapter</strong>, а также для обработки нажатий на Tabs мы подпишемся на обработчик событий <strong>TabHost.OnTabChangeListener</strong> и для скролинга страниц также подписываемся на <strong>ViewPager.OnPageChangeListener</strong></p>
+
+<p>Полный код вы можете увидеть ниже:</p>
+
+<pre><code>public static class TabsAdapter extends FragmentPagerAdapter implements TabHost.OnTabChangeListener,
+
+        ViewPager.OnPageChangeListener {
+
+    private final Context mContext;
+
+    private final TabHost mTabHost;
+
+    private final ViewPager mViewPager;
+
+    private final ArrayList&lt;TabInfo&gt; mTabs = new ArrayList&lt;TabInfo&gt;();
+
+
+
+    static final class TabInfo {
+
+        private final String tag;
+
+        private final Class&lt;?&gt; clss;
+
+        private final Bundle args;
+
+
+
+        TabInfo(final String _tag, final Class&lt;?&gt; _class, final Bundle _args) {
+
+            tag = _tag;
+
+            clss = _class;
+
+            args = _args;
+
+        }
+
+    }
+
+
+
+    static class DummyTabFactory implements TabHost.TabContentFactory {
+
+        private final Context mContext;
+
+
+
+        public DummyTabFactory(final Context context) {
+
+            mContext = context;
+
+        }
+
+
+
+        @Override
+
+        public View createTabContent(final String tag) {
+
+            View v = new View(mContext);
+
+            v.setMinimumWidth(0);
+
+            v.setMinimumHeight(0);
+
+            return v;
+
+        }
+
+    }
+
+
+
+    public TabsAdapter(final FragmentActivity activity, final TabHost tabHost, final ViewPager pager) {
+
+        super(activity.getSupportFragmentManager());
+
+        mContext = activity;
+
+        mTabHost = tabHost;
+
+        mViewPager = pager;
+
+        mTabHost.setOnTabChangedListener(this);
+
+        mViewPager.setAdapter(this);
+
+        mViewPager.setOnPageChangeListener(this);
+
+    }
+
+
+
+    public void addTab(final TabHost.TabSpec tabSpec, final Class&lt;?&gt; clss, final Bundle args) {
+
+        tabSpec.setContent(new DummyTabFactory(mContext));
+
+        String tag = tabSpec.getTag();
+
+
+
+        TabInfo info = new TabInfo(tag, clss, args);
+
+        mTabs.add(info);
+
+        mTabHost.addTab(tabSpec);
+
+        notifyDataSetChanged();
+
+    }
+
+
+
+    @Override
+
+    public int getCount() {
+
+        return mTabs.size();
+
+    }
+
+
+
+    @Override
+
+    public Fragment getItem(final int position) {
+
+        TabInfo info = mTabs.get(position);
+
+        return Fragment.instantiate(mContext, info.clss.getName(), info.args);
+
+    }
+
+
+
+    @Override
+
+    public void onTabChanged(final String tabId) {
+
+        int position = mTabHost.getCurrentTab();
+
+        mViewPager.setCurrentItem(position);
+
+    }
+
+
+
+    @Override
+
+    public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
+
+    }
+
+
+
+    @Override
+
+    public void onPageSelected(final int position) {
+
+        // Unfortunately when TabHost changes the current tab, it kindly
+
+        // also takes care of putting focus on it when not in touch mode.
+
+        // The jerk.
+
+        // This hack tries to prevent this from pulling focus out of our
+
+        // ViewPager.
+
+        TabWidget widget = mTabHost.getTabWidget();
+
+        int oldFocusability = widget.getDescendantFocusability();
+
+        widget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
+        mTabHost.setCurrentTab(position);
+
+        widget.setDescendantFocusability(oldFocusability);
+
+    }
+
+
+
+    @Override
+
+    public void onPageScrollStateChanged(final int state) {
+
+    }
+
+}
+</code></pre>
+
+<h3>5. Финальная стадия</h3>
+
+<p>Из пункта 2 видно что у нас есть 4 новых фрагмента. Так давайте их создадим.</p>
+
+<p><strong>AndroidFragment</strong>:</p>
+
+<pre><code>import android.os.Bundle;
+
+import android.support.v4.app.Fragment;
+
+import android.view.LayoutInflater;
+
+import android.view.View;
+
+import android.view.ViewGroup;
+
+
+
+public class AndroidFragment extends Fragment {
+
+
+
+@Override
+
+public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+
+    View view = inflater.inflate(R.layout.android_fragment, container, false);
+
+    return view;
+
+}
+
+
+
+}
+</code></pre>
+
+<p><strong>IOsFragment</strong>:</p>
+
+<pre><code>public class IOsFragment extends Fragment {
+
+
+
+@Override
+
+public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+
+    View view = inflater.inflate(R.layout.ios_fragment, container, false);
+
+    return view;
+
+}
+
+
+
+}
+</code></pre>
+
+<p><strong>WindowsFragment:</strong></p>
+
+<pre><code>public class WindowsFragment extends Fragment {
+
+
+
+@Override
+
+public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+
+    View view = inflater.inflate(R.layout.windows_fragment, container, false);
+
+    return view;
+
+}
+
+
+
+}
+</code></pre>
+
+<p><strong>DOSFragment:</strong></p>
+
+<pre><code>public class DOSFragment extends Fragment {
+
+
+
+@Override
+
+public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+
+    View view = inflater.inflate(R.layout.dos_fragment, container, false);
+
+    return view;
+
+}
+
+
+
+}
+</code></pre>
+
+<p>Теперь нам нужно создать еще 4 xml файла которые мы используем в фрагментах</p>
+
+<p><strong>android_fragment.xml</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/textView1"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="Android" /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p><strong>dos_fragment.xml</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/textView1"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="DOS" /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p><strong>ios_fragment.xml</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/textView1"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="IOs" /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p><strong>windows_fragment.xml</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/textView1"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="Windows" /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Ну вот и все. </p>
+
+<p>Коды можно скачать <a href="http://android-helper.com.ua/forms/">тут</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/custom-tabs/">Как сделать свои Tabs в Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-15T09:10:33+03:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Сегодня я бы хотел поделится с вами информацией о создании и использовании своих Tabs.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/custom_tabs_view.png" alt="" /></p>
+
+<h3>1. Создадим layout</h3>
+
+<p>Самое первое что нужно сделать, это открыть main.xml и добавить туда TabHost и TabWidget</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:id="@android:id/tabhost" android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"&gt;
+
+&lt;LinearLayout android:orientation="vertical"
+
+    android:layout_width="fill_parent" android:layout_height="fill_parent"&gt;
+
+    &lt;TabWidget android:id="@android:id/tabs"
+
+        android:layout_width="fill_parent" android:layout_height="wrap_content" /&gt;
+
+    &lt;FrameLayout android:id="@android:id/tabcontent"
+
+        android:layout_width="fill_parent" android:layout_height="fill_parent"&gt;
+
+    &lt;/FrameLayout&gt;
+
+&lt;/LinearLayout&gt;
+
+&lt;/TabHost&gt;
+</code></pre>
+
+<h3>2. Пишем код в Activity</h3>
+
+<p>У нас есть main.xml , теперь нам нужно добавить код для привязки нашего activity с нашим файлом</p>
+
+<pre><code>setContentView(R.layout.main);
+
+mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+</code></pre>
+
+<p>Ну вот после этого мы можем добавлять tabs на наше activty</p>
+
+<pre><code>@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+super.onCreate(savedInstanceState);
+
+setContentView(R.layout.main);
+
+mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+
+setupTab(new TextView(this), "Tab 1");
+
+setupTab(new TextView(this), "Tab 2");
+
+setupTab(new TextView(this), "Tab 3");
+
+}
+
+private void setupTab(final View view, final String tag) {
+
+View tabview = createTabView(mTabHost.getContext(), tag);
+
+    TabSpec setContent = mTabHost.newTabSpec(tag).setIndicator(tabview).setContent(new TabContentFactory() {
+
+    public View createTabContent(String tag) {return view;}
+
+});
+
+mTabHost.addTab(setContent);
+
+}
+
+
+
+private static View createTabView(final Context context, final String text) {
+
+View view = LayoutInflater.from(context).inflate(R.layout.tabs_bg, null);
+
+TextView tv = (TextView) view.findViewById(R.id.tabsText);
+
+tv.setText(text);
+
+return view;
+
+}
+</code></pre>
+
+<h3>3. Создаем свой tabs layout</h3>
+
+<p>Создадим новый xml файл и назовем его tabs_bg.xml. Этот файл как раз и будет служить заполнением нашего tab.</p>
+
+<p>На него можно добавлять любые элементы.</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:id="@+id/tabsLayout" android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"
+
+android:padding="10dip" android:gravity="center" android:orientation="vertical"&gt;
+
+
+
+&lt;TextView android:id="@+id/tabsText" android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content" android:text="Title"
+
+    android:textSize="15dip" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>4. Меняем вид и поведение</h3>
+
+<p>Создадим еще несколько файлов tab_text_selector.xml и tab_bg_selector.xml (их нужно создать в папке layout), а также tab_bg_selected.xml и tab_bg_unselected.xml (эти 2 файла создаем в папке drawable). Эти файлы служат для того что при изменении статуса tab с активного на неактивный соответственно меняется его внешний вид.</p>
+
+<p><strong>tab_bg_selected.xml:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;shape xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:shape="rectangle"&gt;
+
+&lt;gradient android:startColor="#A8A8A8" android:centerColor="#7F7F7F"
+
+    android:endColor="#696969" android:angle="-90" /&gt;
+
+&lt;/shape&gt;
+</code></pre>
+
+<p><strong>tab_bg_unselected.xml:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;shape xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:shape="rectangle"&gt;
+
+&lt;gradient android:startColor="#5C5C5C" android:centerColor="#424242"
+
+    android:endColor="#222222" android:angle="-90" /&gt;
+
+&lt;/shape&gt;
+</code></pre>
+
+<p> <strong>tab_text_selector.xml:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+
+&lt;item android:state_selected="true" android:color="@android:color/white" /&gt;
+
+&lt;item android:state_focused="true" android:color="@android:color/white" /&gt;
+
+&lt;item android:state_pressed="true" android:color="@android:color/white" /&gt;
+
+&lt;item android:color="#f8f8f8" /&gt;
+
+&lt;/selector&gt;
+</code></pre>
+
+<p><strong>tab_bg_selector.xml:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+
+&lt;!--  Active tab --&gt;
+
+&lt;item android:state_selected="true" android:state_focused="false"
+
+    android:state_pressed="false" android:drawable="@drawable/tab_bg_selected" /&gt;
+
+&lt;!--  Inactive tab --&gt;
+
+&lt;item android:state_selected="false" android:state_focused="false"
+
+    android:state_pressed="false" android:drawable="@drawable/tab_bg_unselected" /&gt;
+
+&lt;!--  Pressed tab --&gt;
+
+&lt;item android:state_pressed="true" android:drawable="@android:color/transparent" /&gt;
+
+&lt;!--  Selected tab (using d-pad) --&gt;
+
+&lt;item android:state_focused="true" android:state_selected="true"
+
+    android:state_pressed="false" android:drawable="@android:color/transparent" /&gt;
+
+&lt;/selector&gt;
+</code></pre>
+
+<p>И теперь поменяем внешний вид нашего tabs_bg.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:id="@+id/tabsLayout" android:layout_width="fill_parent"
+
+android:layout_height="fill_parent" android:background="@drawable/tab_bg_selector"
+
+android:padding="10dip" android:gravity="center" android:orientation="vertical"&gt;
+
+
+
+&lt;TextView android:id="@+id/tabsText" android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content" android:text="Title"
+
+    android:textSize="15dip" android:textColor="@drawable/tab_text_selector" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>5. Заключительная стадия </h3>
+
+<p>В заключительной стадии нам нужно добавить разделитель между tabs.</p>
+
+<p>Этот код нужно добавить пере вызовом функции setupTab.</p>
+
+<pre><code>mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
+</code></pre>
+
+<p>Ну вот и все.</p>
+
+<p>В следующей статье я продолжу тему своих tabs. И с нее вы сможете узнать как скомпоновать tabs и swipe экранов.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/viewpager/">Слайдинг экранов с помощью ViewPager</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-01T10:48:06+03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Всем привет.</p>
+
+<p>Я долго думал как же мне поскорее помочь вам разобраться в android. И решил, что я буду собирать очень интересные статьи на своем сайте.</p>
+
+<p>Сегодня речь пойдет о горизонтальной прокрутке экранов. (статья из <a href="http://habrahabr.ru/post/131889/">Хабрахабр</a>)</p>
+
+<h5>Вступление</h5>
+
+<p>Горизонтальная прокрутка экранов — удобная и модная вещь. На Хабре уже был <a href="http://habrahabr.ru/blogs/android_development/118482/">топик </a>, посвященный данной теме. Однако использование ViewFlipper не позволяет с легкостью добиться эффекта привязки, когда экраны двигаются вместе с пальцем. Также нужен механизм автоматической доводки экранов в ту или иную сторону. Примера, где это было бы хорошо разъяснено и реализовано, так и не нашел. В комментариях <a href="http://habrahabr.ru/blogs/android_development/118482/#comment_3863174">предлагали</a> посмотреть исходники гугловского кода, где это реализовано. Однако удобнее было бы воспользоваться готовым решением. Такой механизм реализован в Android <a href="http://developer.android.com/sdk/compatibility-library.html">Support Package </a>. Использовать эту библиотеку можно для версий Android 1.6 и старше. Конкретно нам понадобятся классы ViewPager и PagerAdapter.</p>
+
+<h5>Предварительная настройка</h5>
+
+<p>Чтобы подключить библиотеку к проекту, выполняем следующие действия.<br/>
+Идем в директорию, куда установлен Android SDK, запускаем SDK Manager и в списке доступных к установке компонентов выбираем Android Support package. Устанавливаем его. Все что нужно будет находиться в следующей директории: &lt;директория с sdk>/extras/android/support/. В папке v4 будет лежать .jar файл, который и нужно подключить к проекту. Если вы работаете в Eclipse, то в Package Explorer щелкаем правым кликом по проекту, выбираем Build Path &ndash;> Add External Archives. В появившемся диалоговом окне переходим к скачанному .jar файлу, выбираем его и щелкаем OK. Всё, библиотека подключена к проекту и готова к использованию.<br/>
+Хочется заметить, что могут возникнуть проблемы, если вы используете старую версию SDK Manager. У меня указанный Support Package не появлялся в списке доступных загрузок. После обновления SDK проблема решилась.</p>
+
+<h5>Разработка</h5>
+
+<p>Выполнив инструкции, приведенные по указанной выше ссылке, и установив библиотеку, можно приступать к реализации поставленной задачи.<br/>
+ViewPager по принципу работы похож на ListView. Данные для отображения он берет из PagerAdapter. Нам потребуется унаследовать свой класс от PagerAdapter и реализовать в нем некоторые методы. Добавление и удаление экранов реализуется с помощью методов instantiateItem() и destroyItem() соответственно. View для отображения можно создавать прямо в адаптере. Такой подход хорош тем, что ViewPager можно настраивать так, чтобы в адаптере не хранились все экраны сразу. По умолчанию адаптер хранит текущий экран, и по одному слева и справа от него. Это может сэкономить память, если содержание экранов слишком сложное. Однако в данном примере создадим все экраны в activity приложения, добавим их в список, и передадим затем этот список адаптеру. Адаптер же не будет сам создавать view, а будет брать их их списка.<br/>
+Код адаптера получился следующим. </p>
+
+<pre><code>public class SamplePagerAdapter extends PagerAdapter{
+
+
+
+List&lt;View&gt; pages = null;
+
+
+
+public SamplePagerAdapter(List&lt;View&gt; pages){
+
+    this.pages = pages;
+
+}
+
+
+
+@Override
+
+public Object instantiateItem(View collection, int position){
+
+    View v = pages.get(position);
+
+    ((ViewPager) collection).addView(v, 0);
+
+    return v;
+
+}
+
+
+
+@Override
+
+public void destroyItem(View collection, int position, Object view){
+
+    ((ViewPager) collection).removeView((View) view);
+
+}
+
+
+
+@Override
+
+public int getCount(){
+
+    return pages.size();
+
+}
+
+
+
+@Override
+
+public boolean isViewFromObject(View view, Object object){
+
+    return view.equals(object);
+
+}
+
+
+
+@Override
+
+public void finishUpdate(View arg0){
+
+}
+
+
+
+@Override
+
+public void restoreState(Parcelable arg0, ClassLoader arg1){
+
+}
+
+
+
+@Override
+
+public Parcelable saveState(){
+
+    return null;
+
+}
+
+
+
+@Override
+
+public void startUpdate(View arg0){
+
+}
+
+}
+</code></pre>
+
+<p>В адаптере нам потребовалось определить свою реализацию для методов instantiateItem(), destroyItem(), getCount() и isViewFromObject(). Для остальных методов тела можно оставить пустыми.</p>
+
+<p>Создадим файл разметки page.xml и опишем в нем содержимое экрана следующим образом:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"
+
+android:padding="10dip"
+
+android:background="#ddd"&gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/text_view"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="fill_parent"
+
+    android:layout_centerInParent="true"
+
+    android:gravity="center"
+
+    android:background="#888"
+
+    android:textColor="#fff"
+
+    android:textSize="30dip"/&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre>
+
+<p>В activity приложения, как было указано выше, создадим несколько View, которые и будут нашими экранами, добавим их в список и передадим список адаптеру. Затем создадим ViewPager и установим для него полученный адаптер.</p>
+
+<p>Код activity:</p>
+
+<pre><code>public class ViewPagerSampleActivity extends Activity {
+
+/** Called when the activity is first created. */
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+
+
+    LayoutInflater inflater = LayoutInflater.from(this);
+
+    List&lt;View&gt; pages = new ArrayList&lt;View&gt;();
+
+
+
+    View page = inflater.inflate(R.layout.page, null);
+
+    TextView textView = (TextView) page.findViewById(R.id.text_view);
+
+    textView.setText("Страница 1");
+
+    pages.add(page);
+
+
+
+    page = inflater.inflate(R.layout.page, null);
+
+    textView = (TextView) page.findViewById(R.id.text_view);
+
+    textView.setText("Страница 2");
+
+    pages.add(page);
+
+
+
+    page = inflater.inflate(R.layout.page, null);
+
+    textView = (TextView) page.findViewById(R.id.text_view);
+
+    textView.setText("Страница 3");
+
+    pages.add(page);
+
+
+
+    SamplePagerAdapter pagerAdapter = new SamplePagerAdapter(pages);
+
+    ViewPager viewPager = new ViewPager(this);
+
+    viewPager.setAdapter(pagerAdapter);
+
+    viewPager.setCurrentItem(1);     
+
+
+
+    setContentView(viewPager);
+
+}
+
+}
+</code></pre>
+
+<p>Как видно из кода, мы создали три экрана. Для каждого из них мы указали какой он по счету. Установив адаптер для ViewPager, укажем что сейчас будет показываться экран с индексом 1, т.е. на котором написано «Страница 2». <br/>
+Скриншот приложения, во время прокручивания экрана:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/06/Image.png" alt="" /></p>
+
+<h5>Заключение</h5>
+
+<p>Как видно из примера, использовать ViewPager и PagerAdapter достаточно легко. При слайдинге экранов, изображения привязывается к положению пальца. Работает автоматическая доводка в какую либо из сторон. Нажатия на дочерние элементы (различные кнопки, элементы списка, если таковой присутствует) обрабатываются корректно.</p>
+
+<p>И в заключение, ссылка на <a href="http://android-developers.blogspot.com/2011/08/horizontal-view-swiping-with-viewpager.html">статью </a>, в которой рассказывается о ViewPager.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/scrollview/">ScrollView и много разных елементов</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-29T10:55:09+03:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Сегодня мы продолжим цикл изучения ScrollView.</p>
+
+<p>Из прошлых уроков вы узнали, что в ScrollView можно  добавить текст.</p>
+
+<p>Сегодня же мы добавим кнопки :).</p>
+
+<p>main.xml:</p>
+
+<p>[sourcecode language=&ldquo;xml&rdquo;]</p>
+
+<p>&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;utf-8&rdquo;?></p>
+
+<p>&lt;LinearLayout xmlns:android=&ldquo;<a href="http://schemas.android.com/apk/res/android">http://schemas.android.com/apk/res/android</a>&rdquo;</p>
+
+<pre><code>android:id="@+id/LinearLayout01"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent" &gt;
+
+
+
+&lt;ScrollView
+
+    android:id="@+id/ScrollView01"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="110px" &gt;
+
+
+
+    &lt;LinearLayout
+
+        android:id="@+id/LinearLayout02"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="30px"
+
+        android:orientation="vertical" &gt;
+
+
+
+        &lt;Button
+
+            android:id="@+id/Button01"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="1" /&gt;
+
+
+
+        &lt;Button
+
+            android:id="@+id/Button02"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="2" /&gt;
+
+
+
+        &lt;Button
+
+            android:id="@+id/Button03"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="3" /&gt;
+
+    &lt;/LinearLayout&gt;
+
+&lt;/ScrollView&gt;
+</code></pre>
+
+<p></LinearLayout></p>
+
+<p>[/sourcecode]</p>
+
+<p>Результат:</p>
+
+<p> <a href="http://android-helper.com.ua/wp-content/uploads/2012/05/device-2012-05-29-105334.png"><img src="http://android-helper.com.ua/wp-content/uploads/2012/05/device-2012-05-29-105334.png" alt="" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/listview/">ListView пример</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-23T19:17:51+03:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Сегодня мы поговорим о ListView.</p>
+
+<p>Этот елемент служит для того что бы показывать разного рода елементы в списке с возможностью прокрутки.</p>
+
+<p>Меньше слов, больше кода.</p>
+
+<p>main.xml:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/LinearLayout01"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="fill_parent" &gt;
+
+
+
+&lt;ListView
+
+    android:id="@+id/ListView01"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content" /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Java код:</p>
+
+<pre><code>package com.in.androidhelper;
+
+
+
+import android.app.Activity;
+
+import android.os.Bundle;
+
+import android.widget.ArrayAdapter;
+
+import android.widget.ListView;
+
+
+
+public class Example1Activity extends Activity {
+
+    private ListView lv1;
+
+    private final String lv_arr[] = { "Android", "iPhone", "BlackBerry", "Android Helper :)" };
+
+
+
+    @Override
+
+    public void onCreate(Bundle icicle) {
+
+        super.onCreate(icicle);
+
+        setContentView(R.layout.main);
+
+        lv1 = (ListView) findViewById(R.id.ListView01);
+
+        // С использованием setAdpater mетода в listview вы добавляете строки в
+
+        // список
+
+        lv1.setAdapter(new ArrayAdapter&lt;String&gt;(this, android.R.layout.simple_list_item_1, lv_arr));
+
+    }
+
+}
+</code></pre>
+
+<p>Скриншоты:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/05/device-2012-05-23-191439.png" alt="" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/scrollview-textview/">ScrollView двигаем TextView</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-23T18:26:18+03:00" pubdate data-updated="true">May 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Сегодня мы поговорим о таком android елементе как ScrollView.</p>
+
+<p>И не только поговорим, я вам покажу как можно большой текст двигать в маленьком окне.</p>
+
+<p>Откроем файл main.xml</p>
+
+<p>И заменим:</p>
+
+<pre><code>&lt;TextView
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="wrap_content"
+
+    android:text="Привет Android" /&gt;
+</code></pre>
+
+<p>на:</p>
+
+<pre><code>&lt;ScrollView
+
+    android:id="@+id/ScrollView01"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="70px" &gt;
+
+
+
+    &lt;TextView
+
+        android:id="@+id/TEXT_VIEW"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Второе задание мы с вами успешно прошли.
+
+Если у вас есть вопросы вы всегда можете задать их на сайте либо в соц. сетях.
+
+Подписывайтесь на рассылку и получайте только самое свежее.
+
+Планируется проведение тренинга по Android. Если вы хотите повысить свои знания тогда вам к нам  .
+
+Все вопросы задавайте в соц. сетях."
+
+        android:textSize="17sp" /&gt;
+
+&lt;/ScrollView&gt;
+</code></pre>
+
+<p>И вот что у нас получилось:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/05/device-2012-05-23-182038.png" alt="" />
+<img src="http://android-helper.com.ua/wp-content/uploads/2012/05/device-2012-05-23-182049.png" alt="" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/first-project/">Создание первого проекта - Привет Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-18T00:08:54+03:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день уважаемые читатели.</p>
+
+<p>Сегодня мы с вами напишем первое приложение для Android.</p>
+
+<ol>
+<li>Первое что нужно сделать, это выкачать последний Android SDK.</li>
+</ol>
+
+
+<p>У себя я использую версию 2.2 и 4.0.3. (Скачать вы их можете с SDK Android Manager)</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/05/AndroidSDK.jpg" alt="" /></p>
+
+<ol>
+<li>Указать в Eclipse где у вас android sdk</li>
+</ol>
+
+
+<p>Window &ndash; Preference</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/05/android1.jpg" alt="" /></p>
+
+<p> </p>
+
+<p>После того как все это сделано, мы можем приступить к созданию своего первого приложения.</p>
+
+<p>New &ndash; Android Project.</p>
+
+<p>Дальше все по скринам.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/05/android2.jpg" alt="" /></p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/05/android3.jpg" alt="" /></p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/05/android4.jpg" alt="" /></p>
+
+<p>После нажатия на Finish, у вас должно получиться следующее дерево вашего проекта:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/05/android5.jpg" alt="" /></p>
+
+<p>Открыв файл Example1Activity.java вы увидите следующий код.</p>
+
+<pre><code>package com.in.androidhelper;
+
+
+
+import android.app.Activity;
+
+import android.os.Bundle;
+
+
+
+public class Example1Activity extends Activity {
+
+/** Called when the activity is first created. */
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.main);&lt;/p&gt;
+
+}
+
+}
+</code></pre>
+
+<p>Но у нас с вами задача написать &ldquo;Привет Android&rdquo;.<br/>
+Для этого откройте файл main.xml<br/>
+И измените текст текстового поля.<br/>
+Должно получиться так:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="fill_parent"
+
+    android:orientation="vertical" &gt;
+
+
+
+    &lt;TextView
+
+        android:layout_width="fill_parent"
+
+        android:layout_height="wrap_content"
+
+        android:text="Привет Android" /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Первое задание мы с вами успешно прошли.</p>
+
+<p>Если у вас есть вопросы вы всегда можете задать их на сайте либо в соц. сетях.</p>
+
+<p>Подписывайтесь на рассылку и получайте только самое свежее.</p>
+
+<p>Планируется проведение тренинга по Android. Если вы хотите повысить свои знания тогда вам к нам :).</p>
+
+<p>Все вопросы задавайте в соц. сетях.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/install/">Программирование для начинающих - Начало</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-15T14:38:03+03:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Сегодня у нас стартует рубрика программирования для начинающих.</p>
+
+<p>Освоив эту рубрику, вы станете не только понимать Android, но и быть неким гуру в разработке.</p>
+
+<p> </p>
+
+<p>Перед началом программирования, нужно подготовить ваш компьютер.</p>
+
+<ol>
+<li><p> Устанавливаем <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk-6u32-downloads-1594644.html">Java</a></p></li>
+<li><p> Установим <a href="http://developer.android.com/sdk/index.html">Android SDK</a></p></li>
+<li><p> Скачаем <a href="http://eclipse.org/downloads/">Eclipse</a> (рекомендую Classic)</p></li>
+<li><p> Установим <a href="http://developer.android.com/sdk/eclipse-adt.html#downloading">Android плагин для Eclipse (ADT)</a></p></li>
+<li><p> Подключим ваше устройство, <a href="http://developer.android.com/sdk/win-usb.html">устанавливаем драйвера</a>. Если драйверов нету, тогда добавляйте его как ADT Interface (Android устройство)</p></li>
+<li><p> Научимся пользоваться эмулятором</p></li>
+</ol>
+
+
+<p> </p>
+
+<p>Если есть вопросы, задавайте их в соц. сетях или в Twitter.</p>
+
+<p> </p>
+
+<p>После завершения этих задач, можно будет приступить к написанию вашей первой программы.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/evernote/">Evernote – все записи в одном месте.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-10T11:03:44+03:00" pubdate data-updated="true">May 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Каждый из нас имеет множество записей у себя.</p>
+
+<p>Кто то пишет в блокнот, кто то в телефон, многие на руке :lol: .</p>
+
+<p>Сегодня я расскажу вам о программе которую давно использую сам.</p>
+
+<p><a href="https://play.google.com/store/apps/details?id=com.evernote">Evernote</a> – это не просто программа, это мобильное приложение популярного сервиса.</p>
+
+<p>Что умеет делать эта программа:</p>
+
+<ul>
+<li><p>Синхронизировать ваши записи (компьютер, телефон, интернет)</p></li>
+<li><p>Сохранять фото</p></li>
+<li><p>Записывать аудио</p></li>
+<li><p>Совместное редактирование записей</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/go-book/">GO Book – читаем книги вместе</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-10T11:00:25+03:00" pubdate data-updated="true">May 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Читать я не очень люблю.</p>
+
+<p>Но иногда просто от того, что нечем заняться я ищу книгу и начинаю читать.</p>
+
+<p>В основном я читаю книги бизнес направления и программирования.</p>
+
+<p>На Play Google есть очень много программ подобного рода. Но я остановился на программе <a href="https://play.google.com/store/apps/details?id=com.jb.gobook">GoBook</a> не случайно.</p>
+
+<p>Данная программа поддерживает все форматы для чтения. Что очень удобно.</p>
+
+<p>Также, в этой программе есть много стилей для чтения. И каждый пользователь подберет для себя нужный.</p>
+
+<p>Удачи вам и много прекрасного чтения!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/23/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/21/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

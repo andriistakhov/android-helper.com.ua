@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Знакомьтесь — Google Play Services - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Всем привет. Сегодня набрел на Google Play Service. И мне стало интересно, что это такое. И как его можно применить в разработке. Нашел очень хорошую &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//google-play-services">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Знакомьтесь — Google Play Services</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-07T22:53:51+02:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Всем привет.</p>
+
+<p>Сегодня набрел на Google Play Service. И мне стало интересно, что это такое.</p>
+
+<p>И как его можно применить в разработке.</p>
+
+<p>Нашел очень хорошую статью на <a href="http://habrahabr.ru/post/153341/">Хабре</a>.</p>
+
+<p>На Google I/O 2012 было объявлено о скором появлении на свет некоей «платформы Google Play Services». Платформы для разработчиков, которые жаждут интегрировать сервисы Google в свои приложения.</p>
+
+<p>26 сентября в <a href="https://plus.google.com/+AndroidDevelopers/posts/J1A5hc1ZnS1">блоге на G+</a> было объявлено о запуске Google Play Services v.1.0</p>
+
+<h4>Что это?</h4>
+
+<p>Сервисы Google Play (Google Play Services) — это платформа, предназначенная для интеграции продуктов Google, таких как Google+, в ваши Android-приложения. Платформа Google Play Services состоит из системного сервиса, работающего на устройстве, и тонкого клиента. Тонким клиентом выступает ваше приложение с подключенной клиентской библиотекой. Можно изобразить это так:<br/>
+<img src="http://habrastorage.org/storage2/725/647/caf/725647caf708eb37b4480dddfa7b5c7e.png" alt="" /><br/>
+Google Play Services распространяется в виде обычного приложения через Google Play Store и поэтому независима от вашего оператора связи или производителя устройства. Новые девайсы имеют подержку Google Play Services «с завода». Устройства на платформе Android 2.2 (Froyo) или выше, имеющие доступ к Google Play Store получат обновления в течение ближайших нескольких дней. Это позволит вам использовать новейшие API на подавляющем большинстве устройств в экосистеме Android. Устройства с Android ниже версии 2.2 или не подключенные к Google Play Store не поддерживаются.</p>
+
+<p>Платформа Google Play services содержит бо́льшую часть логики взаимодействия с продуктами Google. Доступ к использованию возможностей платформы предоставляется через простую процедуру аутентификации, которая проста как для разработчика так и для пользователя. Для разработчика процедура заключается в вызове пары методов клиентской библиотеки, а остальную работу за него выполнят компоненты Google Play services. Для пользователя приложения процедура аутентификации — это несколько кликов.</p>
+
+<h4>Компоненты Google Play services</h4>
+
+<p>Google Play services 1.0 включает в себя следующие компоненты и API:</p>
+
+<ul>
+<li><p>OAuth 2.0 аутентификация в сервисах Google</p></li>
+<li><p>Google+ sign-in — аутентификация с помощью аккаунта G+</p></li>
+<li><p>Гугло-кнопка +1 в вашем приложении</p></li>
+</ul>
+
+
+<p>Не густо, конечно, но обещают развивать и дополнять платформу новыми сервисами и API</p>
+
+<p>Подробности по установке, использованию и вообще есть <a href="https://developers.google.com/android/google-play-services/">здесь</a>.</p>
+
+<p>Сейчас думаю как же его можно использовать в своих программах.</p>
+
+<p>Жду предложений в комментариях.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-07T22:53:51+02:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>, <a class='category' href='/blog/categories/proghrammy-dlia-android/'>Программы для android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//google-play-services/" data-via="" data-counturl="http://android-helper.com.ua//google-play-services/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/phonegap1/" title="Previous Post: PhoneGap: пишем для Android на Html и JavaScript">&laquo; PhoneGap: пишем для Android на Html и JavaScript</a>
+      
+      
+        <a class="basic-alignment right" href="/anybalance/" title="Next Post: AnyBalance - все балансы под контролем">AnyBalance - все балансы под контролем &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

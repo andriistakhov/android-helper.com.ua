@@ -1,0 +1,2960 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Всем привет. С вами снова я. И сегодня мы поговорим, как показывать HTML код в TextView. Если все готовы. Тогда приступим. Вам необходимо вызвать &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//blog/page/20">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-html/">Android HTML - отображение в TextView</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-15T23:04:12+03:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Всем привет.</p>
+
+<p>С вами снова я. И сегодня мы поговорим, как показывать HTML код в TextView.</p>
+
+<p>Если все готовы. Тогда приступим.</p>
+
+<p>Вам необходимо вызвать функцию:</p>
+
+<pre><code>TextView txtView = new TextView(this);
+
+Spanned s = Html.fromHtml("Android - это супер &lt;font color=\"red\"&gt;android-helper.com.ua&lt;/font&gt;");
+
+txtView.setText(s);
+</code></pre>
+
+<p>Вот полный код:</p>
+
+<pre><code>public class TestActivity extends Activity {
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    TextView txtView = new TextView(this);
+
+    Spanned s = Html.fromHtml("Android - это супер &lt;font color=\"red\"&gt;android-helper.com.ua&lt;/font&gt;");
+
+    txtView.setText(s);
+
+
+
+    setContentView(txtView);
+
+}
+
+}
+</code></pre>
+
+<p>Все готово. Теперь можете наслаждаться.</p>
+
+<p>Но нужно помнить, что так можно отформатировать не все HTML теги.</p>
+
+<p>Вот список тегов, которые поддерживает класс <strong>Html</strong>.</p>
+
+<ul>
+<li><p>a href=&ldquo;&hellip;&rdquo;,</p></li>
+<li><p>b,</p></li>
+<li><p>big,</p></li>
+<li><p>blockquote,</p></li>
+<li><p>br,</p></li>
+<li><p>cite,</p></li>
+<li><p>dfn,</p></li>
+<li><p>div align=&ldquo;&hellip;&rdquo;,</p></li>
+<li><p>em,</p></li>
+<li><p>font size=&ldquo;&hellip;&rdquo; color=&ldquo;&hellip;&rdquo; face=&ldquo;&hellip;&rdquo;,</p></li>
+<li><p>h1-h6,</p></li>
+<li><p>i,</p></li>
+<li><p>img src=&ldquo;&hellip;&rdquo;,</p></li>
+<li><p>p,</p></li>
+<li><p>small,</p></li>
+<li><p>strike,</p></li>
+<li><p>strong,</p></li>
+<li><p>sub,</p></li>
+<li><p>sup,</p></li>
+<li><p>tt,</p></li>
+<li><p>u</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/holo-style/">Добавляем к Android-приложению стили Android 4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-14T14:42:43+03:00" pubdate data-updated="true">Sep 14<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Недавно столкнулся с задачей &ndash; сделать приложение для android 4 с его интерфейсом.</p>
+
+<p>Все было супер, пока я не запустил на android 2.3. И там увидел, что таких стилей нету.</p>
+
+<p>Покопав просторы интернета. Я нашел такую <a href="http://findevelop.blogspot.com/2012/06/android-android-4.html#more">статью</a></p>
+
+<p>Но так как я на своем блоге собираю всю полезную информацию. Я ее продублирую у себя на блоге.</p>
+
+<p>Прошу к прочтению:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/holo.jpg" alt="" /></p>
+
+<p>Ничто так не портит настроение программиста, как необходимость заниматься вместо программирования чем-то другим. Например, дизайном. Но приложение без дизайна в наше время  обречено на забвение избалованных пользователей. Как же быть? А давайте нашим формам и кнопочкам &ldquo;выдадим&rdquo; стандартный стиль Android Ice Cream Sandwich. Пусть наши пользователи, которые пока ещё не обновились до последней версии Android наслаждаются стильным дизайном и проникаются к нашему приложению тёплыми чувствами. В этом добром деле нам поможет библиотека <a href="https://github.com/ChristopheVersieux/HoloEverywhere">HoloEverywhere</a>. Использовать всю библиотеку мы не будем, нам хватит и одной темы, например моей любимой HoloEverywhereDark. А прикрутим к проекту мы её ручками, попутно изучив механизм &ldquo;стилизации&rdquo; Android-приложений. </p>
+
+<p><strong>Стили &ndash; это просто</strong></p>
+
+<p>В res/values/ нашего проекта создаём файл styles.xml, где мы будем описывать стили для всех контролов в нашей теме. Описывать &ndash; это громко сказано: мы просто скопируем аналогичный файл из библиотеки HoloEverywhere, удалив лишние стили. Картинки для HoloEverywhereDark копируем в свои каталоги drawable-mdpi, drawable-hdpi и drawable-xhdpi. Название всех нужных файлов заканчивается на &ldquo;dark&rdquo;. <br/>
+Кроме картинок нам понадобятся xml-файлы описания ресурсов, напрмер цветов. Их складываем в каталог drawable. Больше нам из библиотеки HoloEverywhere ничего не понадобится.<br/>
+Посмотрим подробнее в наш styles.xml. Например:</p>
+
+<pre><code>&lt;style name="ButtonHoloDark" parent="android:style/Widget.Button"&gt;
+
+&lt;item name="android:background"&gt;@drawable/btn_default_holo_dark&lt;/item&gt;
+
+&lt;item name="android:textColor"&gt;#ffffff&lt;/item&gt;
+
+&lt;/style&gt;
+</code></pre>
+
+<p>В этом фрагменте мы видим описание стиля кнопки с именем ButtonHoloDark. Тег style имеет обязательный атрибут name и необязательный parent. Именно parent позволяет нам реализовать иерархию стилей элементов интерфейса Android-приложений. В данном случае мы наследуем стиль стандартной кнопки и переопределяем в нашем новом стиле два item-а: цвет фона и цвет текста. Цвет можно задавать как комбинацией rgb (как в html), так и ссылкой на xml-ресурс. В данном случае для фона кнопки это файл btn_default_holo_dark.xml в каталоге drawable. Посмотрим в него и поймём почему используется xml-ресурс вместо обычного описания цвета:</p>
+
+<pre><code>&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+
+&lt;item android:drawable="@drawable/btn_default_normal_holo_dark" android:state_enabled="true" android:state_window_focused="false"/&gt;
+
+&lt;item android:drawable="@drawable/btn_default_disabled_holo_dark" android:state_enabled="false" android:state_window_focused="false"/&gt;
+
+&lt;item android:drawable="@drawable/btn_default_pressed_holo_dark" android:state_pressed="true"/&gt;
+
+&lt;item android:drawable="@drawable/btn_default_focused_holo_dark" android:state_enabled="true" android:state_focused="true"/&gt;
+
+&lt;item android:drawable="@drawable/btn_default_normal_holo_dark" android:state_enabled="true"/&gt;
+
+&lt;item android:drawable="@drawable/btn_default_disabled_focused_holo_dark" android:state_focused="true"/&gt;
+
+&lt;item android:drawable="@drawable/btn_default_disabled_holo_dark"/&gt;
+
+&lt;/selector&gt;
+</code></pre>
+
+<p>Тут описано несколько цветов, которые назначаются фону кнопки в зависимости от её состояния. Эти цвета уже не xml-ресурсы а обычные изображения (некоторые в формате nine-patch, оптимизированном для &ldquo;растягивания&rdquo;).<br/>
+И так мы дошли до подножия &ldquo;пирамиды стилей&rdquo;. А что же наверху?<br/>
+Мы, безусловно можем назначить готовый стиль кнопке в нашем xml-layout или в коде. Но зачем этот утомительный процесс? Назначить стиль всем элементам интерфейса в приложении можно одной инструкцией в AndroidManifest.xml:</p>
+
+<pre><code>android:theme="@style/Theme.HoloEverywhereDark"
+</code></pre>
+
+<p>в теге application.<br/>
+Так мы устанавливаем &ldquo;тему&rdquo;, которая описывается в том же styles.xml.<br/>
+Отличие от обычного описания стиля только в том, что стиль кнопки определяет в item-ах её свойства, а item-ами темы является сама кнопка и другие элементы интерфейса. Например:</p>
+
+<pre><code>&lt;style name="Theme.HoloEverywhereDark" parent="android:Theme.NoTitleBar"&gt;
+
+   ...
+
+   &lt;item name="android:buttonStyle"&gt;@style/ButtonHoloDark&lt;/item&gt;
+
+   ...
+
+&lt;/style&gt;
+</code></pre>
+
+<p>Вот тут мы и связываем тему с стилем отдельного элемента, который мы видели вначале. Как видите, использовать стили в приложении для Android ничуть не сложнее, чем в web-страницах. </p>
+
+<p>Надеюсь вам понравилась статья.</p>
+
+<p>Если это так, тогда ваши комментарии будут кстати. :)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/multilanguage/">Мультиязычное приложение на Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T12:12:10+03:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Очень много программистов сейчас сталкиваются с много язычными приложениями.</p>
+
+<p>Я решил поделится опытом работы с такими приложениями.</p>
+
+<p>Есть 2 подхода разработки таких приложений.</p>
+
+<ol>
+<li><p> Язык приложения зависит от языка системы</p></li>
+<li><p> Возможность менять язык в самом приложении</p></li>
+</ol>
+
+
+<p>Ну что приступим.</p>
+
+<h3>Язык приложения зависит от языка системы</h3>
+
+<p>В android для реализации данного подхода, используется следующая структура вложения папок.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/m1.png" alt="" /></p>
+
+<p>Тут все просто, создаем папку с расширением ru (Для России), fr &ndash; Франции и так далее.</p>
+
+<p>Больше информации вы можете получить <a href="http://developer.android.com/intl/ru/training/basics/supporting-devices/languages.html">тут</a>.</p>
+
+<p>strings.xml &ndash; с папки values</p>
+
+<pre><code>&lt;resources&gt;
+
+
+
+&lt;string name="app_name"&gt;multilanguage&lt;/string&gt;
+
+&lt;string name="hello_world"&gt;Hello world!&lt;/string&gt;
+
+&lt;string name="menu_settings"&gt;Settings&lt;/string&gt;
+
+&lt;string name="title_activity_main"&gt;MainActivity&lt;/string&gt;
+
+
+
+&lt;/resources&gt;
+</code></pre>
+
+<p>strings.xml &ndash; с папки values-ru</p>
+
+<pre><code>&lt;resources&gt;
+
+
+
+&lt;string name="app_name"&gt;multilanguage&lt;/string&gt;
+
+&lt;string name="hello_world"&gt;Привет Мир!&lt;/string&gt;
+
+&lt;string name="menu_settings"&gt;Настройки&lt;/string&gt;
+
+&lt;string name="title_activity_main"&gt;Главное активити&lt;/string&gt;
+
+
+
+&lt;/resources&gt;
+</code></pre>
+
+<h3>Возможность менять язык в самом приложении</h3>
+
+<p>Вот тут более интересней тема.</p>
+
+<p>Для того что бы приложение на лету поменяло язык нужно сделать следующее.</p>
+
+<p>Создаем файл который наследуется от Application.</p>
+
+<pre><code>package com.example.multilanguage;
+
+
+
+import java.util.Locale;
+
+
+
+import android.app.Application;
+
+import android.content.res.Configuration;
+
+
+
+public class MyApp extends Application {
+
+
+
+private Locale locale = null;
+
+
+
+@Override
+
+public void onConfigurationChanged(Configuration newConfig) {
+
+    super.onConfigurationChanged(newConfig);
+
+    if (locale != null) {
+
+        newConfig.locale = locale;
+
+        Locale.setDefault(locale);
+
+        getBaseContext().getResources().updateConfiguration(newConfig,
+
+                getBaseContext().getResources().getDisplayMetrics());
+
+    }
+
+}
+
+
+
+@Override
+
+public void onCreate() {
+
+    super.onCreate();
+
+
+
+    Configuration config = getBaseContext().getResources().getConfiguration();
+
+
+
+    String lang = "ru";
+
+    if (!"".equals(lang) &amp;&amp; !config.locale.getLanguage().equals(lang)) {
+
+        locale = new Locale(lang);
+
+        Locale.setDefault(locale);
+
+        config.locale = locale;
+
+        getBaseContext().getResources().updateConfiguration(config,
+
+                getBaseContext().getResources().getDisplayMetrics());
+
+    }
+
+}
+
+
+
+}
+</code></pre>
+
+<p>Вот и все.</p>
+
+<p>Теперь если вам нужно изменить язык при нажатии на кнопку вызываете просто:</p>
+
+<pre><code>Configuration config = getBaseContext().getResources().getConfiguration();
+
+
+
+    String lang = "ru";
+
+    if (!"".equals(lang) &amp;&amp; !config.locale.getLanguage().equals(lang)) {
+
+        locale = new Locale(lang);
+
+        Locale.setDefault(locale);
+
+        config.locale = locale;
+
+        getBaseContext().getResources().updateConfiguration(config,
+
+                getBaseContext().getResources().getDisplayMetrics());
+
+    }
+</code></pre>
+
+<p>Если вам понравилась статья пишите комментарии и рассказывайте друзьям.</p>
+
+<p>Коды вы можете скачать <a href="http://android-helper.com.ua/forms">тут</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/alarm/">Программируем буильник или использование AlarmManager в Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-10T17:34:19+03:00" pubdate data-updated="true">Sep 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>При разработке приложения порой бывает необходимо выполнять какие-то действия в будущем. Например, вы хотите создать будильник или периодически отправлять данные на свой сайт в строго определенное время. Для решения подобных задач в Android используется класс<strong>AlarmManager</strong>, который позволяет выполнять код в требуемый момент времени, даже если ваше приложение не запущено. То-есть AlarmManager &ndash; аналог corn в Linux или планировщика задач Windows. Вы говорите, что такой-то кусок кода должен выполниться тогда-то и AlarmManager обеспечивает запуск кода. В англоязычный литературе таймер, который выполняет код в требуемый момент времени обозначается термином<strong>alarm</strong>. Давайте в рамках данной статьи называть этот таймер<strong>будильником</strong>, чтобы отделить это понятие от таймера.</p>
+
+<h2>Несколько слов о классе AlarmManager</h2>
+
+<p>Фактически класс AlarmManager обеспечивает доступ к сервису планировки задач Android. Для получения объекта этого класса нужно вызвать метод <strong>Context.getSystemService(Context.ALARM_SERVICE)</strong>. <strong>AlarmManager</strong> регистрирует в системе интент и когда наступает обозначенное время, AlarmManager запускает этот интент. Если момент вызова приложение закрыто, то оно будет вновь запущено. AlarmManager нужно использовать только в случае, если код должен быть выполнен даже при закрытом приложении, во всех других случаях рекомендуется использовать класс <strong>Handler</strong>.</p>
+
+<p>Класс AlarmManager довольно прост. В нашем распоряжении шесть методов:</p>
+
+<ul>
+<li><p><strong>void cancel(PendingIntent operation)</strong> - отменяет установленный таймер для переданного в качестве параметра интента.</p></li>
+<li><p><strong>void set (int type, long triggerAtMillis, PendingIntent operation)</strong> - устанавливает будильник, который сработает один раз.</p></li>
+<li><p><strong>void setInexactRepeating (int type, long triggerAtMillis, long intervalMillis, PendingIntent operation)</strong> - установка будильника с неточным повторением.</p></li>
+<li><p><strong>setRepeating(int type, long triggerAtMillis, long intervalMillis, PendingIntent operation)</strong>&ndash; установка будильника с точным повторением.</p></li>
+<li><p><strong>setTime(long millis)</strong> - установка системного времени.</p></li>
+<li><p><strong>setTimeZone(String timeZone)</strong> - установка временной зоны, выбранной по-умолчанию.</p></li>
+</ul>
+
+
+<p>Здесь <strong>PendingIntent</strong>&ndash; класс, который представляет интент и связанное с его выполнением действие. Передавая PendingIntent другому приложению Вы тем самым даете ему право запускать кусок кода из своей программы.</p>
+
+<p>В качестве типа будильника (параметр <strong>type</strong>) может быть передано одно из значений ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC и RTC_WAKEUP. ELAPSED_REALTIME и ELAPSED_REALTIME_WAKEUP &ndash; время задается с момента загрузки устройства, а RTC и RTC_WAKEUP &ndash; системное время в UTC. Для ELAPSED_REALTIME и RTC если устройство находится в спящем режиме в момент срабатывания будильника, то связанный с ним интент будет вызван позже, когда пользователь выведет устройство из спящего режима. Для ELAPSED_REALTIME_WAKEUP и RTC_WAKEUP если устройство находится в спящем режиме, оно немедленно пробуждается и вызывается интент.</p>
+
+<h2>Программируем приложение-будильник для Android</h2>
+
+<p>Давайте в качестве примера разработаем приложение &ndash; будильник. При запуске программы пользователю будет показано окно с тремя кнопками. С их помощью пользователь сможет: установить будильник, который срабатывает один раз; будильник, который будет срабатывать периодически; а также удалить ранее установленные будильники. </p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/device-2012-09-10-172549.png" alt="" /></p>
+
+<p>Создадим новый проект в макет шаблона добавим три кнопки</p>
+
+<pre><code>&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:tools="http://schemas.android.com/tools"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;Button
+
+    android:id="@+id/btStart"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+
+    android:onClick="startRepeatingTimer"
+
+    android:padding="@dimen/padding_medium"
+
+    android:text="Start"
+
+    tools:context=".WidgetAlarmManagerActivity" /&gt;
+
+
+
+&lt;Button
+
+    android:id="@+id/btCancel"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+
+    android:onClick="cancelRepeatingTimer"
+
+    android:padding="@dimen/padding_medium"
+
+    android:text="Cancel"
+
+    tools:context=".WidgetAlarmManagerActivity" /&gt;
+
+
+
+&lt;Button
+
+    android:id="@+id/btOneTime"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+
+    android:onClick="onetimeTimer"
+
+    android:padding="@dimen/padding_medium"
+
+    android:text="One Time"
+
+    tools:context=".WidgetAlarmManagerActivity" /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Кнопка <strong>btStart</strong> устанавливает повторяющийся будильник, кнопка <strong>btCancel</strong>&ndash; отменяет его. Кнопка <strong>btOneTime</strong>&ndash; создает не повторяющийся будильник. Прямо в шаблоне мы указали методы, которые будут вызываться при нажатии на кнопки: startRepeatingTimer, cancelRepeatingTimer и onetimeTimer соответственно. Код этих методов будут приведен в классе Activity.<br/>
+ <br/>
+Для работы с <strong>AlarmManager</strong> напишем отдельный класс. В качестве базового класса используем BroadcastReciever. Наш класс будет управлять зарегистрированным с помощью AlarmManager интентом. Мы переопределим метод <strong>onReceive()</strong>, который будет вызываться после получения интента. Внутри метод onReceive() мы должны попытаться получить связанные с интентом параметры. В своей программе мы будем использовать один параметр ONE_TIME, который позволяет определить, относится ли интент к однократно срабатывающему будильнику или нет. После того, как значение ONE_TIME получено, пользователю показывается соответствующее сообщение. <br/>
+ <br/>
+Также в этом классе определим методы setAlarm(), cancelAlarm() и onetimeTimer(). Конечно эти методы можно было определить и в другом месте, мы включили их в данный класс из соображения простоты примера.</p>
+
+<ul>
+<li><p>Метод setAlarm() устанавливает повторяющийся будильник с помощью метода setRepeating(). Этому методу требуется четыре параметра: тип будильника, время запуска (устанавливаем текущий момент), интервал в миллисекундах, интент, который будет вызываться при срабатывании будильника.</p></li>
+<li><p>Метод cancelAlarm() отменяет зарегистрированный ранее будильник с помощью вызова метода cancel(), которому перезается в качестве параметра интент. При совпадении этого параметра с зарегистрированным ранее интентом, произойдет удаление будильника.</p></li>
+<li><p>Метод onetimeTimer() создает будильник, который срабатывает один раз. Делается с помощью метода set(), которому передается три параметра: тип будильника, время запуска, вызываемый интент.</p>
+
+<pre><code>package com.example.alarm;
+
+import java.text.Format;
+
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
+import android.app.AlarmManager;
+
+import android.app.PendingIntent;
+
+import android.content.BroadcastReceiver;
+
+import android.content.Context;
+
+import android.content.Intent;
+
+import android.os.Bundle;
+
+import android.os.PowerManager;
+
+import android.widget.Toast;
+
+public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
+
+
+
+final public static String ONE_TIME = "onetime";
+
+
+
+@Override
+
+public void onReceive(Context context, Intent intent) {
+
+PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+
+PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
+
+// Осуществляем блокировку
+
+wl.acquire();
+
+
+
+// Здесь можно делать обработку.
+
+Bundle extras = intent.getExtras();
+
+StringBuilder msgStr = new StringBuilder();
+
+
+
+if (extras != null &amp;&amp; extras.getBoolean(ONE_TIME, Boolean.FALSE)) {
+
+    // проверяем параметр ONE_TIME, если это одиночный будильник,
+
+    // выводим соответствующее сообщение.
+
+    msgStr.append("Одноразовый будильник: ");
+
+}
+
+Format formatter = new SimpleDateFormat("hh:mm:ss a");
+
+msgStr.append(formatter.format(new Date()));
+
+
+
+Toast.makeText(context, msgStr, Toast.LENGTH_LONG).show();
+
+
+
+// Разблокируем поток.
+
+wl.release();
+
+}
+
+
+
+public void SetAlarm(Context context) {
+
+AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+
+intent.putExtra(ONE_TIME, Boolean.FALSE); // Задаем параметр интента
+
+PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+// Устанавливаем интервал срабатывания в 5 секунд.
+
+am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 5, pi);
+
+}
+
+
+
+public void CancelAlarm(Context context) {
+
+Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+
+PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+alarmManager.cancel(sender); // Отменяем будильник, связанный с интентом данного класса
+
+}
+
+
+
+public void setOnetimeTimer(Context context) {
+
+AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+
+intent.putExtra(ONE_TIME, Boolean.TRUE); // Задаем параметр интента
+
+PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pi);
+
+}
+
+}
+</code></pre></li>
+</ul>
+
+
+<p>Ниже приводится файл манифеста. Обратите внимание, для корректной работы программе необходимо дать разрешение<strong>WAKE_LOCK</strong>, поскольку мы используем блокировку потока в методе onReceive(). Также тут мы регистрируем AlarmManagerBroadcastReceiver, как получатель широковещательных сообщений</p>
+
+<pre><code>&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+package="com.example.alarm"
+
+android:versionCode="1"
+
+android:versionName="1.0" &gt;
+
+
+
+&lt;uses-sdk
+
+    android:minSdkVersion="8"
+
+    android:targetSdkVersion="15" /&gt;
+
+
+
+&lt;uses-permission android:name="android.permission.WAKE_LOCK" /&gt;
+
+
+
+&lt;application
+
+    android:icon="@drawable/ic_launcher"
+
+    android:label="@string/app_name"
+
+    android:theme="@style/AppTheme" &gt;
+
+    &lt;activity
+
+        android:name=".MainActivity"
+
+        android:label="@string/title_activity_main" &gt;
+
+        &lt;intent-filter&gt;
+
+            &lt;action android:name="android.intent.action.MAIN" /&gt;
+
+
+
+            &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+
+        &lt;/intent-filter&gt;
+
+    &lt;/activity&gt;
+
+
+
+    &lt;receiver android:name="AlarmManagerBroadcastReceiver" &gt;
+
+    &lt;/receiver&gt;
+
+&lt;/application&gt;
+
+
+
+&lt;/manifest&gt;
+</code></pre>
+
+<p>Теперь давайте напишем класс, в котором реализуем обработчики кнопок. Здесь мы создадим экземпляр описанного выше класса AlarmManagerBroadcastReciever и будем вызывать методы setAlarm(), cancelAlarm() и setOnetime(). </p>
+
+<pre><code>package com.example.alarm;
+
+
+
+import android.app.Activity;
+
+import android.content.Context;
+
+import android.os.Bundle;
+
+import android.view.Menu;
+
+import android.view.View;
+
+import android.widget.Toast;
+
+
+
+public class MainActivity extends Activity {
+
+
+
+private AlarmManagerBroadcastReceiver alarm;
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+    alarm = new AlarmManagerBroadcastReceiver();
+
+}
+
+
+
+@Override
+
+protected void onStart() {
+
+    super.onStart();
+
+}
+
+
+
+public void startRepeatingTimer(View view) {
+
+    Context context = this.getApplicationContext();
+
+    if (alarm != null) {
+
+        alarm.SetAlarm(context);
+
+    } else {
+
+        Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+
+    }
+
+}
+
+
+
+public void cancelRepeatingTimer(View view) {
+
+    Context context = this.getApplicationContext();
+
+    if (alarm != null) {
+
+        alarm.CancelAlarm(context);
+
+    } else {
+
+        Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+
+    }
+
+}
+
+
+
+public void onetimeTimer(View view) {
+
+    Context context = this.getApplicationContext();
+
+    if (alarm != null) {
+
+        alarm.setOnetimeTimer(context);
+
+    } else {
+
+        Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+
+    }
+
+}
+
+
+
+@Override
+
+public boolean onCreateOptionsMenu(Menu menu) {
+
+    getMenuInflater().inflate(R.menu.activity_main, menu);
+
+    return true;
+
+}
+
+
+
+}
+</code></pre>
+
+<p>При надатии на кнопки будут установлен будильник.</p>
+
+<p>Комментируем и подписываемся на обновления.</p>
+
+<p>Коды вы можете скачать <a href="http://android-helper.com.ua/forms">тут</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/service-intentservice-foreground/">Service. IntentService. Foreground. Автозагрузка сервиса</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-08T14:54:12+03:00" pubdate data-updated="true">Sep 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день.</p>
+
+<p>Сегодня речь пойдет о Service, IntentService и Foreground.</p>
+
+<p>Попробуем сегодня разобрать, что это такое и как оно работает.</p>
+
+<p>Я решил не выдумывать велосипед, и взял уже готовую <a href="http://startandroid.ru/uroki/vse-uroki-spiskom/165-urok-100-service-intentservice-foreground-avtozagruzka-servisa.html">статью</a>.</p>
+
+<p>Прошу к прочтению.</p>
+
+<p>В этом уроке:</p>
+
+<ul>
+<li>изучаем IntentService</li>
+<li>включаем режим Foreground для сервиса</li>
+<li>помещаем сервис в автозагрузку</li>
+</ul>
+
+
+<p>Строили мы, строили, и, наконец, построили. Урок номер 100, с чем всех нас и поздравляю )</p>
+
+<p>В этом уроке рассмотрим еще несколько полезных вещей про сервисы. Выносить каждую из них в отдельный урок я не стал, вполне можно в одном все рассмотреть. Проекты здесь тоже создавать не будем, чтобы урок не получился слишком громоздким. Я просто приведу некоторые куски кода и скрины для наглядности своих рассуждений. А если у вас будет желание, вы по этим наработкам сами можете создать проекты-примеры.</p>
+
+<p> <strong>IntentService</strong></p>
+
+<p> Это подкласс обычного Service. Он используется, если вам в сервисе надо выполнять какие-то тяжелые задачи, и вы не хотите сами возиться с асинхронностью. Принцип работы этого вида сервиса прост. Он создает новый поток для своей работы. Затем берет все Intent пришедшие ему в onStartCommand и отправляет их на обработку в этот поток. Как именно обрабатываются Intent – зависит от нас, т.к. мы сами кодим это в методе onHandleIntent.</p>
+
+<p>Т.е. приложение сыпет в сервис вызовами startService, в которых передает Intent-ы. <a href="http://developer.android.com/reference/android/app/IntentService.html">IntentService </a>принимает эти вызовы в onStartCommand, берет Intent-ы и отправляет их в очередь на обработку. И далее они поочередно обрабатываются в отдельном процессе методом <a href="http://developer.android.com/reference/android/app/IntentService.html#onHandleIntent(android.content.Intent">onHandleIntent</a>). Когда последний Intent из очереди обработан, процесс сам завершает свою работу.</p>
+
+<p>Пример</p>
+
+<p>В приложении делаем три вызова:</p>
+
+<pre><code>Intent intent = new Intent(this, MyService.class);
+startService(intent.putExtra("time", 3).putExtra("label", "Call 1"));
+startService(intent.putExtra("time", 1).putExtra("label", "Call 2"));
+startService(intent.putExtra("time", 4).putExtra("label", "Call 3"));
+</code></pre>
+
+<p>Где <strong>time </strong>– это время паузы, которую будем делать в сервисе, а <strong>label </strong>– просто метка, чтобы отличать вызовы.</p>
+
+<p>Код сервиса:</p>
+
+<pre><code>package com.example.service;
+
+import java.util.concurrent.TimeUnit;
+
+import android.app.IntentService;
+import android.content.Intent;
+import android.util.Log;
+
+public class MyService extends IntentService {
+
+final String LOG_TAG = "myLogs";
+
+public MyService() {
+    super("myname");
+}
+
+@Override
+public void onCreate() {
+    super.onCreate();
+    Log.d(LOG_TAG, "onCreate");
+}
+
+@Override
+protected void onHandleIntent(final Intent intent) {
+    int tm = intent.getIntExtra("time", 0);
+    String label = intent.getStringExtra("label");
+    Log.d(LOG_TAG, "onHandleIntent start " + label);
+    try {
+        TimeUnit.SECONDS.sleep(tm);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    Log.d(LOG_TAG, "onHandleIntent end " + label);
+}
+
+@Override
+public void onDestroy() {
+    super.onDestroy();
+    Log.d(LOG_TAG, "onDestroy");
+}
+
+}
+</code></pre>
+
+<p>Здесь необходим конструктор, в котором вызываем конструктор супер-класса и указываем какое-нить имя. Оно будет использовано для наименования потока.</p>
+
+<p>В методе onHandleIntent кодим обработку Intent-ов. Достаем из них time и label, запускаем паузу на time секунд и выводим в лог label в начале и в конце.</p>
+
+<p>В итоге, при запуске в логах видим:</p>
+
+<pre><code>11:07:37.880: D/myLogs(4137): onCreate  
+11:07:37.880: D/myLogs(4137): onHandleIntent start Call 1  
+11:07:40.880: D/myLogs(4137): onHandleIntent end Call 1  
+11:07:40.880: D/myLogs(4137): onHandleIntent start Call 2  
+11:07:41.880: D/myLogs(4137): onHandleIntent end Call 2  
+11:07:41.880: D/myLogs(4137): onHandleIntent start Call 3  
+11:07:45.890: D/myLogs(4137): onHandleIntent end Call 3  
+11:07:45.890: D/myLogs(4137): onDestroy_
+</code></pre>
+
+<p>Сервис создался, вызовы выполнились по очереди и сервис завершил работу. От нас понадобилось только накодить обработку.</p>
+
+<h3><strong>Foreground</strong></h3>
+
+<p>Вы можете сказать системе, что ваш сервис очень важен для пользователя и его нельзя грохать при нехватке памяти. Это актуально, например, для музыкального плеера. В статус-бар при этом будет помещено уведомление.</p>
+
+<p>Делается это методом <a href="http://developer.android.com/reference/android/app/Service.html#startForeground(int,%20android.app.Notification">startForeground(int id, Notification notification)</a>).</p>
+
+<p>На вход он принимает те же параметры, что и NotificationManager.notify – ID и Notification.</p>
+
+<p>Т.е. вы создаете уведомление, назначаете ему ID и передаете это в startForeground. Сервис переходит в режим <a href="http://lurkmore.to/IDDQD">IDDQD</a> :), а в статус-баре появилось уведомление.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0100_010.jpg" alt="" /></p>
+
+<p>Оно появилось в разделе для постоянных уведомлений (Ongoing). </p>
+
+<p>Метод <a href="http://developer.android.com/reference/android/app/Service.html#stopForeground(boolean">stopForeground (boolean removeNotification)</a>)  - возвращает сервису способность быть убитым системой в случае острой нехватки памяти. А на вход он принимает boolean-значение – удалять уведомление из статус-бара или нет.</p>
+
+<p>Уведомление также пропадет, когда сервис будет остановлен.</p>
+
+<p>Эти методы работают, начиная с Android 2.0.  Пример реализации для более ранних версий есть в <a href="http://developer.android.com/reference/android/app/Service.html#startForeground(int,%20android.app.Notification">хелпе</a>).</p>
+
+<p>Напомню, что уведомления мы научились создавать на прошлом уроке.</p>
+
+<h3><strong>Автозагрузка</strong></h3>
+
+<p>Сервисы для получения погоды или почты имеет смысл помещать в автозагрузку. Для этого нам надо создать <a href="http://developer.android.com/reference/android/content/BroadcastReceiver.html">BroadcastReceiver</a>, настроить его IntentFilter на Action =<strong>android.intent.action.BOOT_COMPLETED</strong>, и добавить права <strong>android.permission.RECEIVE_BOOT_COMPLETED</strong>. Этот BroadcastReceiver будет вызван системой при старте системы и в нем мы кодим запуск сервиса.</p>
+
+<p>Допустим, есть проект с сервисом MyService.</p>
+
+<p>Создаем в проекте класс <strong>MyBroadReceiv</strong></p>
+
+<pre><code>package com.example.service;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+public class MyBroadReceiv extends BroadcastReceiver {
+
+final String LOG_TAG = "myLogs";
+
+@Override
+public void onReceive(final Context context, final Intent intent) {
+    Log.d(LOG_TAG, "onReceive " + intent.getAction());
+    context.startService(new Intent(context, MyService.class));
+}
+}
+</code></pre>
+
+<p>В манифесте добавляем его как <strong>Receiver </strong>и настраиваем фильтр</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0100_020.jpg" alt="" /></p>
+
+<p> </p>
+
+<p>Добавляем права на получение сообщения о загрузке</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0100_030.jpg" alt="" /></p>
+
+<p>Инсталлим проект на AVD. Закрываем AVD. Запускаем через меню в Eclipse: Window > AVD Manager. Находим там наш эмулятор и запускаем вручную.</p>
+
+<p>Когда он запустился, смотрим логи</p>
+
+<pre><code>_onReceive android.intent.action.BOOT_COMPLETED  
+MyService onCreate  
+MyService onStartCommand_
+</code></pre>
+
+<p>Сработал BroadcastReceiver и запустил сервис.</p>
+
+<p>Если после запуска AVD логи не отображаются, то откройте DDMS и во вкладке Devices явно выберите ваш AVD.</p>
+
+<p>Надеюсь вам понравилась статья.</p>
+
+<p>Ожидаю ваших комментариев.</p>
+
+<p>Коды вы можете скачать <a href="http://android-helper.com.ua/forms">тут</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/fragments-2/">Fragments. Динамическая работа</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-07T17:44:02+03:00" pubdate data-updated="true">Sep 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Продолжая собирать у себя на сайте различного рода ценную информацию.</p>
+
+<p>Я решил продолжить описание работы с fragments.</p>
+
+<p>И как всегда на помощь мне пришла статья одного известного сайта.</p>
+
+<p>Оригинал статьи <a href="http://startandroid.ru/uroki/vse-uroki-spiskom/175-urok-105-android-3-fragments-dinamicheskaja-rabota.html">тут</a>.</p>
+
+<p>Прошу к прочтению.</p>
+
+<p>В этом уроке:</p>
+
+<ul>
+<li>динамически работаем с фрагментами</li>
+</ul>
+
+
+<p>Размещать статические фрагменты мы уже умеем. Но, ясно дело, что гораздо интереснее работать с ними динамически. Система позволяет нам добавлять, удалять и заменять фрагменты друг другом. При этом мы можем сохранять все эти манипуляции в BackStack и кнопкой Назад отменять. В общем, все удобно и красиво.</p>
+
+<p>Создадим простое приложение с двумя  фрагментами, которое будет уметь:</p>
+
+<ul>
+<li>добавлять первый фрагмент</li>
+<li>удалять первый фрагмент</li>
+<li>заменять первый фрагмент вторым фрагментом</li>
+<li>переключать режим сохранения в BackStack операций с фрагментами</li>
+</ul>
+
+
+<p>В <strong>strings.xml</strong> добавим строки:</p>
+
+<pre><code>    &lt;string name="frag1_text"&gt;Fragment 1&lt;/string&gt;
+
+&lt;string name="frag2_text"&gt;Fragment 2&lt;/string&gt;
+
+&lt;string name="add"&gt;Add&lt;/string&gt;
+
+&lt;string name="remove"&gt;Remove&lt;/string&gt;
+
+&lt;string name="replace"&gt;Replace&lt;/string&gt;
+
+&lt;string name="stack"&gt;add to Back Stack&lt;/string&gt;
+</code></pre>
+
+<p>Создаем фрагменты. Как мы помним из прошлого урока, для этого нам нужны будут layout-файлы и классы, наследующие android.app.Fragment</p>
+
+<p> <strong>fragment1.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:background="#77ff0000"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;TextView
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="@string/frag1_text" &gt;
+
+&lt;/TextView&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p><strong>fragment2.xml:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:background="#7700ff00"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;TextView
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="@string/frag2_text" &gt;
+
+&lt;/TextView&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p><strong>Fragment1.java</strong>:</p>
+
+<pre><code>package com.example.fragmetns2;
+
+
+
+import android.os.Bundle;
+
+import android.support.v4.app.Fragment;
+
+import android.view.LayoutInflater;
+
+import android.view.View;
+
+import android.view.ViewGroup;
+
+public class Fragment1 extends Fragment {
+
+
+
+@Override
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    return inflater.inflate(R.layout.fragment1, null);
+
+}
+
+}
+</code></pre>
+
+<p><strong>Fragment2.java</strong>:</p>
+
+<pre><code>package com.example.fragmetns2;
+
+
+import android.os.Bundle;
+
+import android.support.v4.app.Fragment;
+
+import android.view.LayoutInflater;
+
+import android.view.View;
+
+import android.view.ViewGroup;
+
+
+
+public class Fragment2 extends Fragment {
+
+
+
+@Override
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    return inflater.inflate(R.layout.fragment2, null);
+
+}
+
+}
+</code></pre>
+
+<p>Все почти аналогично прошлому уроку, только убрали вызовы кучи lifecycle методов с логами.</p>
+
+<p>Рисуем основное Activity.</p>
+
+<p><strong>activity_main.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:tools="http://schemas.android.com/tools"
+
+android:id="@+id/LinearLayout1"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;LinearLayout
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical" &gt;
+
+
+
+    &lt;Button
+
+        android:id="@+id/btnAdd"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:onClick="onClick"
+
+        android:text="@string/add" &gt;
+
+    &lt;/Button&gt;
+
+
+
+    &lt;Button
+
+        android:id="@+id/btnRemove"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:onClick="onClick"
+
+        android:text="@string/remove" &gt;
+
+    &lt;/Button&gt;
+
+
+
+    &lt;Button
+
+        android:id="@+id/btnReplace"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:onClick="onClick"
+
+        android:text="@string/replace" &gt;
+
+    &lt;/Button&gt;
+
+
+
+    &lt;CheckBox
+
+        android:id="@+id/chbStack"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="@string/stack" &gt;
+
+    &lt;/CheckBox&gt;
+
+&lt;/LinearLayout&gt;
+
+
+
+&lt;FrameLayout
+
+    android:id="@+id/frgmCont"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent" &gt;
+
+&lt;/FrameLayout&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Три кнопки для добавления, удаления и замены фрагментов. Чекбокс для включения использования BackStack. И FrameLayout – это контейнер, в котором будет происходить вся работа с фрагментами. Он должен быть типа ViewGroup. А элементы Fragment, которые мы использовали на прошлом уроке для размещения фрагментов, нам не нужны для динамической работы. </p>
+
+<p> <strong>MainActivity.java</strong>:</p>
+
+<pre><code>package com.example.fragmetns2;
+
+
+
+import android.os.Bundle;
+
+import android.support.v4.app.FragmentActivity;
+
+import android.support.v4.app.FragmentTransaction;
+
+import android.view.View;
+
+import android.widget.CheckBox;
+
+
+
+public class MainActivity extends FragmentActivity {
+
+
+
+Fragment1 frag1;
+
+Fragment2 frag2;
+
+FragmentTransaction fTrans;
+
+CheckBox chbStack;
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+
+
+    frag1 = new Fragment1();
+
+    frag2 = new Fragment2();
+
+
+
+    chbStack = (CheckBox) findViewById(R.id.chbStack);
+
+}
+
+
+
+public void onClick(View v) {
+
+    fTrans = getSupportFragmentManager().beginTransaction();
+
+    switch (v.getId()) {
+
+        case R.id.btnAdd:
+
+            fTrans.add(R.id.frgmCont, frag1);
+
+            break;
+
+        case R.id.btnRemove:
+
+            fTrans.remove(frag1);
+
+            break;
+
+        case R.id.btnReplace:
+
+            fTrans.replace(R.id.frgmCont, frag2);
+
+        default:
+
+            break;
+
+    }
+
+    if (chbStack.isChecked()) {
+
+        fTrans.addToBackStack(null);
+
+    }
+
+    fTrans.commit();
+
+}
+
+}
+</code></pre>
+
+<p>В <strong>onCreate</strong> создаем пару фрагментов и находим чекбокс.</p>
+
+<p>В <strong>onClick</strong> мы получаем менеджер фрагментов с помощью метода <a href="http://developer.android.com/reference/android/app/Activity.html#getFragmentManager(">getFragmentManager</a>). Этот объект является основным для работы с фрагментами. Далее, чтобы добавить/удалить/заменить фрагмент, нам необходимо использовать транзакции. Они аналогичны транзакциям в БД, где мы открываем транзакцию, производим операции с БД, выполняем commit. Здесь мы открываем транзакцию, производим операции с фрагментами (добавляем, удаляем, заменяем), выполняем commit.</p>
+
+<p>Итак, мы получили FragmentManager и открыли транзакцию методом <a href="http://developer.android.com/reference/android/app/FragmentManager.html#beginTransaction(">beginTransaction</a>). Далее определяем, какая кнопка была нажата:</p>
+
+<p>если <strong>Add</strong>, то вызываем метод <a href="http://developer.android.com/reference/android/app/FragmentTransaction.html#add(int,%20android.app.Fragment">add</a>), в который передаем id контейнера (тот самый FrameLayout из main.xml) и объект фрагмента. В итоге, в контейнер будет помещен Fragment1</p>
+
+<p>если <strong>Remove</strong>, то вызываем метод <a href="http://developer.android.com/reference/android/app/FragmentTransaction.html#remove(android.app.Fragment">remove</a>), в который передаем объект фрагмента, который хотим убрать. В итоге, фрагмент удалится с экрана.</p>
+
+<p>если <strong>Replace</strong>, то вызываем метод <a href="http://developer.android.com/reference/android/app/FragmentTransaction.html#replace(int,%20android.app.Fragment">replace</a>), в который передаем id контейнера и объект фрагмента. В итоге, из контейнера удалится его текущий фрагмент (если он там есть) и добавится фрагмент, указанный нами.</p>
+
+<p>Далее проверяем чекбокс. Если он включен, то добавляем транзакцию в BackStack. Для этого используем метод <a href="http://developer.android.com/reference/android/app/FragmentTransaction.html#addToBackStack(java.lang.String">addToBackStack</a>). На вход можно подать строку-тэг. Я передаю null.</p>
+
+<p>Ну и вызываем <a href="http://developer.android.com/reference/android/app/FragmentTransaction.html#commit(">commit</a>), транзакция завершена.</p>
+
+<p>Давайте смотреть, что получилось. Все сохраняем, запускаем приложение.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0105_010.jpg" alt="" /></p>
+
+<p>Жмем <strong>Add</strong></p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0105_020.jpg" alt="" /></p>
+
+<p>появился первый фрагмент.</p>
+
+<p>Жмем <strong>Remove</strong></p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0105_030.jpg" alt="" /></p>
+
+<p>фрагмент удалился.</p>
+
+<p>Еще раз добавим первый фрагмент – жмем <strong>Add</strong>. И жмем <strong>Replace</strong></p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0105_040.jpg" alt="" /></p>
+
+<p>первый фрагмент заменился вторым.</p>
+
+<p>Жмем кнопку <strong>Назад</strong>. Приложение закрылось, т.к. все эти операции с фрагментами не сохранялись в BackStack. Давайте используем эту возможность.</p>
+
+<p>Снова запускаем приложение и включаем чекбокс<strong> add to Back Stack</strong></p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0105_050.jpg" alt="" /></p>
+
+<p>Выполняем те же операции: <strong>Add</strong>, <strong>Remove</strong>, <strong>Add</strong>, <strong>Replace</strong>. У нас добавится первый фрагмент, удалится первый фрагмент, добавится первый фрагмент, заменится вторым. В итоге мы снова видим второй фрагмент. Теперь жмем несколько раз кнопку <strong>Назад </strong>и наблюдаем, как выполняются операции, обратные тем, что мы делали. Когда транзакции, сохраненные в стеке закончатся, кнопка Назад закроет приложение.</p>
+
+<p>Т.е. все достаточно просто и понятно. Скажу еще про пару интересных моментов.</p>
+
+<p>Я в этом примере выполнял всего одну операцию в каждой транзакции. Но, разумеется, их может быть больше.</p>
+
+<p>Когда мы удаляем фрагмент и не добавляем транзакцию в BackStack, то фрагмент уничтожается. Если же транзакция добавляется в BackStack, то, при удалении, фрагмент не уничтожается (onDestroy не вызывается), а останавливается (onStop).</p>
+
+<p>В качестве самостоятельной работы: попробуйте немного изменить приложение и добавлять в один контейнер сразу два фрагмента. Возможно, результат вас удивит ) </p>
+
+<p>Надеюсь что вам понравилась статья.</p>
+
+<p>Жду ваших комментариев.</p>
+
+<p>Коды вы можете скачать <a href="http://android-helper.com.ua/forms">тут</a></p>
+
+<p>От себя хочу также добавить, что коды которые я предоставляю, работают до 1.6 версии.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/caltophone/">Как сделать телефонный звонок в Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T18:21:43+03:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Сегодня я покажу вам как можно звонить из своего приложения.</p>
+
+<p>Прошу к прочтению.</p>
+
+<p>Создадим activity_main.xml:</p>
+
+<pre><code>&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:tools="http://schemas.android.com/tools"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent" &gt;
+
+
+
+&lt;EditText
+
+    android:id="@+id/editText1"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:layout_alignParentLeft="true"
+
+    android:ems="10"
+
+    android:inputType="numberSigned" &gt;
+
+
+
+    &lt;requestFocus /&gt;
+
+&lt;/EditText&gt;
+
+
+
+&lt;Button
+
+    android:id="@+id/button1"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:layout_alignParentTop="true"
+
+    android:layout_toRightOf="@+id/editText1"
+
+    android:text="Звонок" /&gt;
+
+
+
+&lt;/RelativeLayout&gt;
+</code></pre>
+
+<p>Создаем MainActivity.java:</p>
+
+<pre><code>package com.example.call_to_phone;
+
+
+
+import android.app.Activity;
+
+import android.content.Intent;
+
+import android.net.Uri;
+
+import android.os.Bundle;
+
+import android.view.Menu;
+
+import android.view.View;
+
+import android.view.View.OnClickListener;
+
+import android.widget.Button;
+
+import android.widget.EditText;
+
+
+
+public class MainActivity extends Activity implements OnClickListener {
+
+
+
+private EditText callNumber;
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+    callNumber = (EditText) findViewById(R.id.editText1);
+
+    Button callButton = (Button) findViewById(R.id.button1);
+
+    callButton.setOnClickListener(this);
+
+
+
+}
+
+
+
+@Override
+
+public boolean onCreateOptionsMenu(Menu menu) {
+
+    getMenuInflater().inflate(R.menu.activity_main, menu);
+
+    return true;
+
+}
+
+
+
+@Override
+
+public void onClick(View arg0) {
+
+    if (callNumber != null) {
+
+        String number = String.format("tel:%s", callNumber.getText().toString());
+
+        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(number)));
+
+    }
+
+}
+
+}
+</code></pre>
+
+<p>Как вы видите при нажатии на кнопку мы сразу начинаем звонок.</p>
+
+<p>Для вызова нужно писать:</p>
+
+<pre><code>String number = String.format("tel:%s", callNumber.getText().toString());
+
+startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(number)));
+</code></pre>
+
+<p>Как видите все очень быстро из без проблем.</p>
+
+<p>Прошу оценить статью и дать пару комментариев.</p>
+
+<p>Коды вы можете скачать <a href="http://android-helper.com.ua/forms">тут</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/widget/">Создание Google Android виджетов</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T14:47:31+03:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Продолжим описание android программирования.</p>
+
+<p>Все вы наверное видели красивые widget у себя на рабочем столе телефона.</p>
+
+<p>Вы угадали, сегодня речь пойдет именно о них.</p>
+
+<p>Ну что поехали.</p>
+
+<p>Оригинал статьи <a href="http://www.mobilab.ru/articles/109/">тут</a>.</p>
+
+<p>С начала этого года (прим. автора с 2007 года) команда разработчиков <strong>Android</strong> упорно работала над созданием нового релиза, который получил название<strong>Android 1.5</strong>. В его состав входит <strong>AppWidget framework</strong>, предназначенный для создания виджетов, которые пользователь может размещать на своем домашнем экране. Виджеты могут импортировать и отображать в удобной для пользователя форме информацию из Ваших Android приложений. Например, можно создать виджет, который будет отображать список невыполненных дел или давать информацию об играющей в фоновом режиме музыке.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/Awidget.png" alt="" /></p>
+
+<p>Когда пользователь перетаскивает виждет на домашний экран, он фактически резервирует место, на котором будет отображаться контент из Вашего приложения. Кроме того, пользователь может взаимодействовать с Вашим приложением через виджет, например, приостанавливать проигрывание музыки. Если у Вас есть сервис, работающий в фоновом режиме, Вы можете обновлять виджет по собственному графику, или использовать стандартный механизм из <strong>AppWidget framework</strong>.</p>
+
+<p>Виджет представляет собой BroadcastReceiver скрещенный с XML описанием параметров виждета. <strong>AppWidget framework</strong>связывается с Вашим виджетом через радиовещание, когда требуется обновление. Обновления строятся и посылаются с помощью RemoteViews, включающий контент, для отображения на домашней странице.</p>
+
+<p>Вы без особого труда можете создать виджет для своего приложения. Давайте создадим виджет для Android приложения &ldquo;Слово дня&rdquo; (<a href="http://code.google.com/p/wiktionary-android/source/browse/#svn/trunk/SimpleWiktionary">исходники</a>). Я не буду рассматривать здесь это приложение, а сосредоточусь на самом виджете.</p>
+
+<p>Прежде всего нужно создать XML описание виджета, указав там область домашнего экрана, которую Вы хотели бы зарезервировать для своего виджета, начальный слой для отображения, а также частоту обновления информации. Домашний экран <strong>Android</strong> разбит на ячейки, так что указанные вами размеры округляются до размеров ячеек. Это может сбить с толку. Возможно вам поможет вот эта формула</p>
+
+<p>Минимальный размер в dip=(Число ячеек * 74dip)-2dip</p>
+
+<p>В нашем примере мы хотим создать виджет, который будет занимать 2 ячейки в ширину и 1 в высоту. Это значит, что минимальный размер должен составлять 146dip x 72dip. Мы хотим, чтобы информация обновлялась раз в день, то есть через каждые 86,400,000 миллисекунд. XML metadata имеет вид:</p>
+
+<pre><code>&lt;appwidget-provider
+
+xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:minWidth="146dip"
+
+android:minHeight="72dip"
+
+android:initialLayout="@layout/widget_message"
+
+android:updatePeriodMillis="86400000"
+
+/&gt;
+</code></pre>
+
+<p>Теперь давайте сопоставим эти XML данные и BroadcastReceiver в AndroidManifest:</p>
+
+<pre><code>&lt;!-- Broadcast Receiver that will process AppWidget updates --&gt;
+
+&lt;receiver android:name=".WordWidget" android:label="@string/widget_name"&gt;
+
+&lt;intent-filter&gt;
+
+    &lt;action android:name="android.appwidget.action.APPWIDGET_UPDATE" /&gt;
+
+&lt;/intent-filter&gt;
+
+&lt;meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_word" /&gt;
+
+&lt;/receiver&gt;
+
+
+
+&lt;!-- Service to perform web API queries --&gt;
+
+&lt;service android:name=".WordWidget$UpdateService" /&gt;
+</code></pre>
+
+<p>Давайте напишем код для BroadcastReceiver, который будет управлять <strong>AppWidget</strong> запросами. Чтобы помочь виджету управлять различными радиовещательными событиями, разработчики написали класс <strong>AppWidgetProvider</strong>. Важно отметить, что мы запустим фоновый сервис, чтобы выполнять обновления. Это связано с тем, что BroadcastReceivers &ndash; потомок Application Not Responding (ANR) таймера, который может предложить пользователю закрыть приложение, если запрос выполняется слишком долго. Выполнение веб запроса может занимать несколько секунд, поэтому мы используем именно сервисы, чтобы избежать ANR таймаутов.</p>
+
+<pre><code>/**
+
+ * Определяем простой виджет, который отображает слово дня. Для обновлений
+
+ * мы порождаем фоновой сервис {@link Service} для выполнения API запросов.
+
+ */
+
+public class WordWidget extends AppWidgetProvider {
+
+@Override
+
+public void onUpdate(Context context, AppWidgetManager appWidgetManager,
+
+    int[] appWidgetIds) {
+
+    // Чтобы предотвратить любые ANR таймацты, мы выполняем обновление в сервисе.
+
+    context.startService(new Intent(context, UpdateService.class));
+
+}
+
+
+
+public static class UpdateService extends Service {
+
+    @Override
+
+    public void onStart(Intent intent, int startId) {
+
+        // Выполняем сегодняшнее обновление виджета.
+
+        RemoteViews updateViews = buildUpdate(this);
+
+
+
+        // Помещаем обновление этого выджета на домашний экран
+
+        ComponentName thisWidget = new ComponentName(this, WordWidget.class);
+
+        AppWidgetManager manager = AppWidgetManager.getInstance(this);
+
+        manager.updateAppWidget(thisWidget, updateViews);
+
+    }
+
+
+
+    /**
+
+                 * Строим обновление виджета, чтобы показать текущее слово.
+
+                 * Заблокируем пока не получим online ответ.
+
+     */
+
+    public RemoteViews buildUpdate(Context context) {
+
+        // Берем название месяца из ресурсов
+
+        Resources res = context.getResources();
+
+        String[] monthNames = res.getStringArray(R.array.month_names);
+
+
+
+        // ищем текущий месяц и день
+
+        Time today = new Time();
+
+        today.setToNow();
+
+
+
+        // Заголовок страницы в вмде "Wiktionary:Word of the day/March 21"
+
+        String pageName = res.getString(R.string.template_wotd_title,
+
+            monthNames[today.month], today.monthDay);
+
+        RemoteViews updateViews = null;
+
+        String pageContent = "";
+
+
+
+        try {
+
+            // Пытаемся послать запрос Wiktionary API для получения слова дня
+
+            SimpleWikiHelper.prepareUserAgent(context);
+
+            pageContent = SimpleWikiHelper.getPageContent(pageName, false);
+
+        } catch (ApiException e) {
+
+            Log.e("WordWidget", "Couldn't contact API", e);
+
+        } catch (ParseException e) {
+
+            Log.e("WordWidget", "Couldn't parse API response", e);
+
+        }
+
+
+
+        // Используем регулярное выражение для парсинга слов и их описания
+
+        Pattern pattern = Pattern.compile(SimpleWikiHelper.WORD_OF_DAY_REGEX);
+
+        Matcher matcher = pattern.matcher(pageContent);
+
+        if (matcher.find()) {
+
+            // Выполняем обновление контента виджета
+
+            updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_word);
+
+
+
+            String wordTitle = matcher.group(1);
+
+            updateViews.setTextViewText(R.id.word_title, wordTitle);
+
+            updateViews.setTextViewText(R.id.word_type, matcher.group(2));
+
+            updateViews.setTextViewText(R.id.definition, matcher.group(3).trim());
+
+
+
+            // Когда пользователь кликает на виджет, запускается страница Wiktionary.
+
+            String definePage = res.getString(R.string.template_define_url,
+
+                    Uri.encode(wordTitle));
+
+            Intent defineIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(definePage));
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(context,
+
+                    0 /* no requestCode */, defineIntent, 0 /* no flags */);
+
+            updateViews.setOnClickPendingIntent(R.id.widget, pendingIntent);
+
+
+
+        } else {
+
+            // Слово дня не найдено, показываем ошибку
+
+            updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_message);
+
+            CharSequence errorMessage = context.getText(R.string.widget_error);
+
+            updateViews.setTextViewText(R.id.message, errorMessage);
+
+        }
+
+        return updateViews;
+
+    }
+
+
+
+    @Override
+
+    public IBinder onBind(Intent intent) {
+
+        // Мы не хотим привязываться к этому сервису
+
+        return null;
+
+    }
+
+}
+
+}
+</code></pre>
+
+<p>Все. Мы написали виджет для приложения Wiktionary &ldquo;Слово дня&rdquo;. Когда требуется обновление, мы с помощью online API получаем новые данные. <strong>AppWidget framework</strong> автоматически запрашивает у нас обновления, например в момент добавления виджета на экран или согласно своему расписанию &ndash; раз в день.</p>
+
+<p>Вообще виджеты стоит создавать для отображения не очень часто обновляемых данных (не чаще чем раз в час). Старайтесь обновлять информацию как можно реже и предусмотрите возможность ручного обновления.</p>
+
+<p>Созданные таким образом виджеты можно размещать на любом домашнем экране, поддерживающим <strong>AppWidget framework</strong>.</p>
+
+<p>Спасибо вам, за то что вы с нами.</p>
+
+<p>Ожидаем ваших комментариев.</p>
+
+<p>Коды вы можете скачать <a href="http://android-helper.com.ua/forms">тут</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/push-notifications/">Service. Уведомления - Notifications</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-05T16:51:28+03:00" pubdate data-updated="true">Sep 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Я продолжаю собирать информацию по android программированию у себя на сайте.</p>
+
+<p>Сегодня я нашел достойную статью. Которую следует прочесть как экспертам так и начинающим.</p>
+
+<p>Речь сегодня пойдет о Push-notification.</p>
+
+<p>Оригинал статьи <a href="http://startandroid.ru/uroki/vse-uroki-spiskom/164-urok-99-service-uvedomlenija-notifications.html">тут</a>.</p>
+
+<p>Читаем, комментируем.</p>
+
+<p>В принципе, <strong>уведомления </strong>– отдельная от <strong>сервисов </strong>тема. Но чаще всего уведомления используются именно в сервисах, поэтому я решил дать эту тему сейчас.</p>
+
+<p>В андроид (версии &lt; 3) есть строка вверху экрана. Называется она статус-бар. Туда обычно в виде иконок сваливаются различные уведомления для пользователя (новые письма, смс и прочие). Пользователь открывает статус бар – видит там чуть более подробную инфу о событии. Дальше он может либо стереть это уведомление, либо нажать на него и перейти непосредственно к событию.</p>
+
+<p>В этом уроке научимся все это проделывать. Для начала разберем уведомление на логические составляющие, чтобы проще было понять как его создавать и отправлять.</p>
+
+<p><strong>Первая часть</strong> – то, что видно в статус-баре, когда уведомление только приходит – иконка и текст. Текст потом исчезает и остается только иконка.</p>
+
+<p><strong>Вторая часть</strong> – то, что мы видим, когда открываем статус бар (тянем вниз). Там уже полноценный View с иконкой и двумя текстами, т.е. более подробная информация о событии.</p>
+
+<p><strong>Третья часть</strong> – то, что произойдет, если мы нажмем на View из второй части. Тут обычно идет вызов Activity, где мы можем просмотреть полную информацию и обработать событие.</p>
+
+<p>Кроме этого есть еще несколько возможностей, по которым совсем кратко пробежимся в конце урока.</p>
+
+<p>Создадим приложение и сервис. Сервис, как будто загружает файл и посылает уведомление, по нажатию на которое будет открываться приложение и отображать имя файла.</p>
+
+<p><strong>activity_main.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;Button
+
+    android:id="@+id/btnStart"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:onClick="onClickStart"
+
+    android:text="Start" &gt;
+
+&lt;/Button&gt;
+
+
+
+&lt;Button
+
+    android:id="@+id/btnStop"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:onClick="onClickStop"
+
+    android:text="Stop" &gt;
+
+&lt;/Button&gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/tv"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="wrap_content"
+
+    android:text="" &gt;
+
+&lt;/TextView&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Кнопки для старт/стопа сервиса и TextView для отображения результата</p>
+
+<p>Создаем сервис <strong>MyService</strong>.java и прописываем его в манифесте. В манифесте же настроим сервис так, чтобы он работал в отдельном процессе. Для этого надо в его атрибуте process написать двоеточие и какое-нить слово. В итоге у вас должен получится следующий файл манифест:</p>
+
+<pre><code>&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+package="com.example.push_notification"
+
+android:versionCode="1"
+
+android:versionName="1.0" &gt;
+
+
+
+&lt;uses-sdk
+
+    android:minSdkVersion="8"
+
+    android:targetSdkVersion="15" /&gt;
+
+
+
+&lt;application
+
+    android:icon="@drawable/ic_launcher"
+
+    android:label="@string/app_name"
+
+    android:theme="@style/AppTheme" &gt;
+
+    &lt;activity
+
+        android:name=".MainActivity"
+
+        android:label="@string/title_activity_main" &gt;
+
+        &lt;intent-filter&gt;
+
+            &lt;action android:name="android.intent.action.MAIN" /&gt;
+
+
+
+            &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+
+        &lt;/intent-filter&gt;
+
+    &lt;/activity&gt;
+
+
+
+    &lt;service
+
+        android:name="MyService"
+
+        android:process=":myservice" &gt;
+
+    &lt;/service&gt;
+
+&lt;/application&gt;
+
+
+
+&lt;/manifest&gt;
+</code></pre>
+
+<p>Система эту строку добавит к package сервиса и, тем самым, получит название нового процесса, в котором и запустит сервис</p>
+
+<p> <img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0099_020.jpg" alt="" /></p>
+
+<p><strong>MainActivity.java</strong>:</p>
+
+<pre><code>package com.example.push_notification;
+
+
+
+import android.app.Activity;
+
+import android.content.Intent;
+
+import android.os.Bundle;
+
+import android.text.TextUtils;
+
+import android.view.View;
+
+import android.widget.TextView;
+
+
+
+public class MainActivity extends Activity {
+
+
+
+public final static String FILE_NAME = "filename";
+
+
+
+/** Called when the activity is first created. */
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+
+
+    TextView tv = (TextView) findViewById(R.id.tv);
+
+
+
+    Intent intent = getIntent();
+
+
+
+    String fileName = intent.getStringExtra(FILE_NAME);
+
+    if (!TextUtils.isEmpty(fileName)) {
+
+        tv.setText(fileName);
+
+    }
+
+}
+
+
+
+public void onClickStart(View v) {
+
+    startService(new Intent(this, MyService.class));
+
+}
+
+
+
+public void onClickStop(View v) {
+
+    stopService(new Intent(this, MyService.class));
+
+}
+
+
+
+}
+</code></pre>
+
+<p>В onCreate мы вытаскиваем из intent и кладем в TextView текст. Этот текст мы будем отправлять из сервиса через уведомление.</p>
+
+<p><strong>onClickStart</strong> и <strong>onClickStop</strong> – это обработчики кнопок. Стартуют и останавливают сервис.</p>
+
+<p><strong>MyService.java</strong>:</p>
+
+<pre><code>package com.example.push_notification;
+
+
+
+import java.util.concurrent.TimeUnit;
+
+import android.app.Notification;
+
+import android.app.NotificationManager;
+
+import android.app.PendingIntent;
+
+import android.app.Service;
+
+import android.content.Intent;
+
+import android.os.IBinder;
+
+
+
+public class MyService extends Service {
+
+
+
+NotificationManager nm;
+
+
+
+@Override
+
+public void onCreate() {
+
+    super.onCreate();
+
+    nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+}
+
+
+
+@Override
+
+public int onStartCommand(Intent intent, int flags, int startId) {
+
+    try {
+
+        TimeUnit.SECONDS.sleep(5);
+
+    } catch (InterruptedException e) {
+
+        e.printStackTrace();
+
+    }
+
+    sendNotif();
+
+    return super.onStartCommand(intent, flags, startId);
+
+}
+
+
+
+void sendNotif() {
+
+    // 1-я часть
+
+    Notification notif = new Notification(R.drawable.ic_launcher, "Text in status bar", System.currentTimeMillis());
+
+
+
+    // 3-я часть
+
+    Intent intent = new Intent(this, MainActivity.class);
+
+    intent.putExtra(MainActivity.FILE_NAME, "somefile");
+
+    PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+
+
+    // 2-я часть
+
+    notif.setLatestEventInfo(this, "Notification's title", "Notification's text", pIntent);
+
+
+
+    // ставим флаг, чтобы уведомление пропало после нажатия
+
+    notif.flags |= Notification.FLAG_AUTO_CANCEL;
+
+    notif.number = 3;
+
+
+
+    // отправляем
+
+    nm.notify(1, notif);
+
+}
+
+
+
+@Override
+
+public IBinder onBind(Intent arg0) {
+
+    return null;
+
+}
+
+}
+</code></pre>
+
+<p>В <strong>onCreate </strong>получаем менеджер уведомлений – <a href="http://developer.android.com/reference/android/app/NotificationManager.html">NotificationManager</a>. Он нам понадобится, чтобы отправить уведомление.</p>
+
+<p>В <strong>onStartCommand </strong>запускаем паузу на 5 секунд (эмулируем закачку файла) и после этого отправляем уведомление. Именно из-за этой паузы мы и используем другой процесс, чтобы не тормозило основное приложение.</p>
+
+<p>В <strong>sendNotif </strong>мы создаем и отправляем уведомление. Правда, немного в иной последовательности, что я описывал выше. Сначала первая часть, потом третья, потом вторая.</p>
+
+<p>Первая часть – создаем <a href="http://developer.android.com/reference/android/app/Notification.html">Notification</a>. В конструкторе указываем иконку и текст, которые будут видны в статус-баре. Также мы здесь указываем время. Обычно это текущее время. Но можно указать и прошлое и будущее. По этому времени уведомления будут отсортированы в статус-баре и в его раскрытой части.</p>
+
+<p>Третья часть – создаем Intent, который мы бы использовали для вызова нашего Activity. Туда помещаем имя загруженного файла. Activity его достанет и поместит в TextView. Далее мы оборачиваем этот Intent в PendingIntent, с помощью метода <a href="http://developer.android.com/reference/android/app/PendingIntent.html#getActivity(android.content.Context,%20int,%20android.content.Intent,%20int">getActivity</a>). На вход ему передаем контекст и Intent. Второй параметр не используется (так написано в хелпе). А четвертый – это флаги, влияющие на поведение PendingIntent. Они не относятся к теме урока, мы их не используем.</p>
+
+<p>Теперь этот созданный PendingIntent содержит информацию о том, что надо вызывать Activity, а также объект Intent, который для этой цели надо использовать. Это будет использовано при нажатии на уведомлении.</p>
+
+<p>Вторая часть – вызываем метод <a href="http://developer.android.com/reference/android/app/Notification.html#setLatestEventInfo(android.content.Context,%20java.lang.CharSequence,%20java.lang.CharSequence,%20android.app.PendingIntent">setLatestEventInfo</a>). Передаем на вход контекст, текст-заголовок, подробный текст и PendingIntent. Теперь, когда мы откроем статус-бар, мы увидим два этих текста (заголовок и подробный). А, когда нажмем на уведомление, система использует PendingIntent для запуска Activity.</p>
+
+<p>Далее мы для созданного уведомления ставим флаг <a href="http://developer.android.com/reference/android/app/Notification.html#FLAG_AUTO_CANCEL">FLAG_AUTO_CANCEL</a>, чтобы оно исчезло из статус-бара после нажатия. По умолчанию оно не исчезает и продолжает висеть.</p>
+
+<p>Далее вызываем метод <a href="http://developer.android.com/reference/android/app/NotificationManager.html#notify(int,%20android.app.Notification">notify</a>) для менеджера уведомлений и передаем туда ID и созданное уведомление. ID используется, если мы хотим изменить или удалить уведомление.</p>
+
+<p>Все сохраним, запустим.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/device-2012-09-05-163359.png" alt="" /></p>
+
+<p>Жмем <strong>Start </strong>и сразу закрываем приложение кнопкой <strong>Назад</strong>.</p>
+
+<p>Проходит 5 сек и появляется уведомление (первая часть)</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/device-2012-09-05-163430.png" alt="" /></p>
+
+<p>Жмем на уведомление.</p>
+
+<p>Открывается наше приложение (третья часть) и в TextView появляется текст, переданный из сервиса.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/device-2012-09-05-163441.png" alt="" /></p>
+
+<p>Теперь вкратце пробежимся по остальным интересным возможностям уведомлений.</p>
+
+<h3>Обновление старого или новое уведомление</h3>
+
+<p>Если вы создадите новое уведомление и отправите его (notify) с тем же ID, что и у уже существующего уведомления, то новое заменит старое. Таким образом, вы можете уведомления обновлять.</p>
+
+<p>Если же надо показать новое уведомление, то используйте другой ID.</p>
+
+<h3>Удаление</h3>
+
+<p>Чтобы убрать уведомление из статус-бара, используется метод <a href="http://developer.android.com/reference/android/app/NotificationManager.html#cancel(int">cancel</a>) у менеджера уведомлений. На вход подается ID. Либо используйте метод <a href="http://developer.android.com/reference/android/app/NotificationManager.html#cancelAll(">cancelAll</a>), чтобы удалить все уведомления.</p>
+
+<h3>Звук</h3>
+
+<p>Если хотите, чтобы уведомление появилось со стандартным звуком, добавьте флаг <a href="http://developer.android.com/reference/android/app/Notification.html#DEFAULT_SOUND">Notification.DEFAULT_SOUND</a> в поле уведомления <a href="http://developer.android.com/reference/android/app/Notification.html#defaults">defaults</a>.</p>
+
+<p>А для использования своих звуков используется поле <a href="http://developer.android.com/reference/android/app/Notification.html#sound">sound</a>.</p>
+
+<p>Чтобы проиграть файл с <strong>SD</strong>:</p>
+
+<p><em>notif.sound = Uri.parse(&ldquo;file:///sdcard/notification/ringer.mp3&rdquo;);</em></p>
+
+<p>Чтобы использовать какую-либо из стандартных мелодий, используем <strong>Content Provider</strong>:</p>
+
+<p><em>notif.sound = Uri.withAppendedPath(Audio.Media.INTERNAL_CONTENT_URI, &ldquo;6&rdquo;);</em></p>
+
+<p>Подробнее <a href="http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Sound">здесь</a>.</p>
+
+<h3>Вибра</h3>
+
+<p>Если хотите, чтобы уведомление появилось со стандартной виброй, добавьте флаг <a href="http://developer.android.com/reference/android/app/Notification.html#DEFAULT_VIBRATE">Notification.DEFAULT_VIBRATE</a> в поле уведомления defaults.</p>
+
+<p>А для использования своей комбинации вибры используется поле <a href="http://developer.android.com/reference/android/app/Notification.html#vibrate">vibrate</a>. В это поле помещается массив long-чисел. Первое – длительность паузы (в миллисекундах) перед началом вибрирования, второе – длительность вибрирования, третье – длительность паузы, четвертое – длительность вибрирования … и т.д. Т.е. создаете свою комбинацию пауз и вибрирования. И мобила при получении уведомления вам ее провибрирует.</p>
+
+<p>Подробнее <a href="http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Vibration">здесь</a>.</p>
+
+<p>Для работы вибры необходимо прописать права <a href="http://developer.android.com/reference/android/Manifest.permission.html#VIBRATE">VIBRATE</a> в манифесте.</p>
+
+<h3>Индикатор</h3>
+
+<p>Если хотите, чтобы уведомление появилось с миганием индикатора, добавьте флаг <a href="http://developer.android.com/reference/android/app/Notification.html#DEFAULT_LIGHTS">Notification.DEFAULT_LIGHTS</a> в поле уведомления defaults.</p>
+
+<p>А для использования своей комбинации мигания индикатора используются поля</p>
+
+<p><a href="http://developer.android.com/reference/android/app/Notification.html#ledARGB">ledARGB</a> – здесь задается цвет</p>
+
+<p><a href="http://developer.android.com/reference/android/app/Notification.html#ledOnMS">ledOnMS</a> – время «горения»</p>
+
+<p><a href="http://developer.android.com/reference/android/app/Notification.html#ledOffMS">ledOffMS</a> – время «не горения»</p>
+
+<p>И в поле <a href="http://developer.android.com/reference/android/app/Notification.html#flags">flags</a> надо добавить флаг <a href="http://developer.android.com/reference/android/app/Notification.html#FLAG_SHOW_LIGHTS">Notification.FLAG_SHOW_LIGHTS</a>.</p>
+
+<p>В итоге индикатор будет мигать с заданными значениями и с заданным цветом. В хелпе написано, что не все девайсы поддерживают разные цвета. Поэтому выбранный вами цвет не гарантируется.</p>
+
+<p>Подробнее <a href="http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Lights">здесь</a>.</p>
+
+<h3>Число</h3>
+
+<p>У Notification есть поле <a href="http://developer.android.com/reference/android/app/Notification.html#number">number</a>. Вы можете поместить туда число больше нуля и оно отобразится на уведомлении.</p>
+
+<p>Например, при notif.number = 3 уведомление будет выглядеть так:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0099_070-300x210.jpg" alt="" /></p>
+
+<h3>Флаги</h3>
+
+<p>Добавляются в поле flags</p>
+
+<p><a href="http://developer.android.com/reference/android/app/Notification.html#FLAG_INSISTENT">FLAG_INSISTENT</a> – звук уведомления будет повторяться, пока не откроют статус-бар</p>
+
+<p><a href="http://developer.android.com/reference/android/app/Notification.html#FLAG_ONGOING_EVENT">FLAG_ONGOING_EVENT</a> – уведомление появляется не в обычной секции, а в ongoing (постоянные). Уведомления из этой секции не удаляются при нажатии кнопки очистки уведомлений.</p>
+
+<p><a href="http://android-helper.com.ua/wp-content/uploads/2012/09/L0099_080.jpg"><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/L0099_080-300x210.jpg" alt="" /></a></p>
+
+<p><a href="http://developer.android.com/reference/android/app/Notification.html#FLAG_NO_CLEAR">FLAG_NO_CLEAR </a>– уведомление не удалится при очистке всех уведомлений</p>
+
+<p>Не очень понимаю, в чем разница между ongoing и тем, что уведомление не удалится после нажатия на кнопку очистки всех уведомлений. Но флаги такие есть, и я о них упомянул.</p>
+
+<p>Надеюсь вам статья понравилась.</p>
+
+<p>Ожидаю ваших комментариев!</p>
+
+<p>Коды вы можете скачать <a href="http://android-helper.com.ua/forms">тут</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/screen-density/">Единицы измерения. Чем отличается Dp (Dip) от Px. Screen Density.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-04T22:51:37+03:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Сегодня один из моих товарищей, посоветовал один хороший сайт.</p>
+
+<p>Некоторые материалы, я буду брать от туда.</p>
+
+<p>Сегодня я бы хотел поделиться информацией о Screen Density и чем отличаются dp от px.</p>
+
+<p>Прошу к прочтению. Оригинал статьи <a href="http://startandroid.ru/materialy/pamjatka/40-edinitsy-izmerenija-chem-otlichaetsja-dp-dip-ot-px-screen-density.html">тут</a>.</p>
+
+<p>Для указания ширины, высоты и отступов View-элементов используются различные <a href="http://developer.android.com/guide/topics/resources/more-resources.html#Dimension">единицы измерения</a> (ЕИ):</p>
+
+<p><strong>dp</strong> или <strong>dip</strong> &ndash; Density-independent Pixels. Абстрактная ЕИ, позволяющая приложениям выглядеть одинаково на различных экранах и разрешениях.</p>
+
+<p><strong>sp</strong> &ndash; Scale-independent Pixels. То же, что и dp, только используется для размеров шрифта в View элементах</p>
+
+<p><strong>pt</strong> &ndash; 1/72 дюйма, определяется по физическому размеру экрана. Эта ЕИ <a href="http://en.wikipedia.org/wiki/Point_(typography">из типографии</a>).</p>
+
+<p><strong>px</strong> – пиксел, не рекомендуется использовать т.к. на разных экранах приложение будет выглядеть по-разному.</p>
+
+<p><strong>mm</strong> – миллиметр, определяется по физическому размеру экрана</p>
+
+<p><strong>in</strong> – дюйм, определяется по физическому размеру экрана</p>
+
+<p>Давайте разбираться, чем они отличаются друг от друга.</p>
+
+<p>in, mm и pt – неизменны относительно друг друга. Всегда <strong>1 in = 25,4 mm</strong> и <strong>1 in = 72 pt</strong>. Это классические единицы измерения. Т.е. задаете, например, кнопке ширину = 1 in и она должна отобразиться шириной в один дюйм, независимо от разрешения и диагонали экрана.</p>
+
+<p>Что такое px, думаю, тоже понятно. Если у вас есть устройство с экраном шириной 480 px и вы создали кнопку шириной 240 px, то эта кнопка займет в ширину ровно пол-экрана. Но если вы откроете ваше приложение на устройстве с экраном с меньшим разрешением, то соотношение  изменится, например:<br/>
+&ndash; если разрешение 320х240, ширина экрана = 240 px. Кнопка займет уже не пол-экрана в ширину, а весь экран<br/>
+&ndash; если же разрешение 1280х800, ширина = 800 px. Кнопка опять же будет занимать в ширину не пол-экрана, а чуть меньше трети</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_differentResolutions.jpg" alt="" /></p>
+
+<p>А ведь экран приложения – это обычно не одна кнопка, а набор из многих элементов и все они будут расползаться или сжиматься на разных разрешениях. Поэтому использовать px при разработке НЕ рекомендуется.</p>
+
+<p>Для того, чтобы избежать таких ситуаций на разных разрешениях рекомендуется использовать dp (и sp). Его можно определить, как масштабируемый px. За степень масштабируемости отвечает <strong><a href="http://developer.android.com/guide/practices/screens_support.html">Screen Density</a></strong>. Это коэффициент, который используется системой для вычисления значения dp.  На текущий момент есть 5 значений этого коэффициента:<br/>
+&ndash; low (<strong>ldpi</strong>) = 0,75<br/>
+&ndash; medium (<strong>mdpi</strong>) = 1<br/>
+&ndash; tv (<strong>tvdpi</strong>) = 1,33<br/>
+&ndash; high (<strong>hdpi</strong>) = 1,5<br/>
+&ndash; extra high (<strong>xhdpi</strong>) = 2</p>
+
+<p>Т.е. когда для экрана стоит режим <strong>mdpi</strong>, то <strong>1 dp = 1 px</strong>. Т.е. кнопка шириной 100 dp будет выглядеть также как и кнопка шириной 100 px.</p>
+
+<p>Если, например, у нас экран с низким разрешением, то используется режим <strong>ldpi</strong>. В этом случае <strong>1 dp = 0,75 px</strong>. Т.е. кнопка шириной 100 dp будет выглядеть так же как кнопка шириной 75 px.</p>
+
+<p>Если у нас экран с высоким разрешением, то используется режим <strong>hdpi </strong>или <strong>xhdpi</strong>. <strong>1 dp = 1, 5 px</strong> или <strong>2 px</strong>. И кнопка шириной 100 dp будет выглядеть так же как кнопка шириной 150 px или 200 px.</p>
+
+<p>Т.е. при различных разрешениях используются различные Density режимы, которые позволяют приложениям масштабироваться и выглядеть если не одинаково, то, по крайне мере, похоже на всех экранах.</p>
+
+<p>Рассмотрим пример. Предположим у нас есть три устройства (характеристики реальны и взяты из спецификаций):</p>
+
+<p>HTC <strong>Wildfire </strong>S: 3,2 inch, 480x320 px, 180 dpi<br/>
+HTC <strong>Desire</strong>: 3,7 inch, 800x480 px, 252 dpi<br/>
+HTC <strong>Flyer</strong>: 7 inch, 1280x800 px, 170 dpi</p>
+
+<p>Я создам такой экран:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_DesireScreen.jpg" alt="" /></p>
+
+<p>Это несколько кнопок, в которых ширина и размер шрифта определены с использованием разных единиц измерения. На каждой кнопке для наглядности я написал ее ширину (<strong>layout_width</strong>) и размер шрифта (<strong>textSize</strong>) через запятую. Обратите внимание, что ширина всех кнопок кроме последней одинакова. Так происходит потому, что 1 in = 72 pt = 25,4 mm в любом случае, а для данного экрана также 1 in = 252 px = 252 dp. Шрифты также везде одинаковы, т.к. размер шрифта по умолчанию равен 14 sp и в данном случае равен 14 px.</p>
+
+<p>xml-код:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt; 
+
+&lt;LinearLayout 
+
+xmlns:android="http://schemas.android.com/apk/res/android" 
+
+android:orientation="vertical" 
+
+android:layout_width="fill_parent" 
+
+android:layout_height="fill_parent"&gt; 
+
+&lt;Button 
+
+android:id="@+id/button1" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="1in" 
+
+android:text="1 inch, default"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button2" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="72pt" 
+
+android:text="72 pt, default"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button3" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="25.4mm" 
+
+android:text="25.4 mm, default"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button4" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="252px" 
+
+android:text="252 px, 14 px" 
+
+android:textSize="14px"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button5" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="252dp" 
+
+android:textSize="14sp" 
+
+android:text="252 dp, 14 sp"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button6" 
+
+android:layout_width="wrap_content" 
+
+android:layout_height="wrap_content" 
+
+android:text="wrap_content, default"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Посмотрим, как это будет выглядеть на экранах других устройств:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_ALLScreensMDI.jpg" alt="" /></p>
+
+<p>Для всех экранов я поставил режим <strong>mdpi</strong>. Скриншоты экранов смасштабированы к одному размеру для наглядности. Надо понимать, что на самом деле диагонали экранов существенно отличаются, а наша цель – добиться, чтобы приложение выглядело одинаково на различных устройствах.</p>
+
+<p>Мы видим, что на всех экранах 1 px остался равен 1 dp (т.к. режим mdpi). И in, pt и mm сохранили свои пропорции (1; 72; 25,4) относительно друг друга. Но обратите внимание, что 1 in уже не равен 252 px на экранах Wildfire и Flyer. Это потому, что у этих устройств другое соотношение диагонали экрана и разрешения:<br/>
+&ndash; у <strong>Wildfire </strong>экран с<strong> dpi = 180</strong>, т.е. 1 in = 180 px, поэтому первая кнопка (с шириной = 1 inch) теперь короче, чем кнопка с шириной 252 px. <br/>
+&ndash; для <strong>Flyer</strong>, соответственно,<strong> dpi = 170</strong>.</p>
+
+<p>Видно, что приложение выглядит достаточно по разному на трех экранах. Так было бы, если бы не существовало коэфициента Screen Density. Но он есть и давайте смотреть, чем он полезен. Я включу режим <strong>ldpi </strong>для <strong>Wildfire </strong>и <strong>xhdpi </strong>для <strong>Flyer</strong>. <strong>Desire </strong>оставляю в <strong>mdpi</strong>.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_ALLScreensSMHDI.jpg" alt="" /></p>
+
+<p>Ширина кнопок указанная в in, mm, pt неизменна, на эти единицы измерения режимы Density влияния не имеют. Нам интересны четвертая и пятая кнопки. Видим, что на экранах Wildfire и Flyer отличаются размеры px и dp, т.к. мы сменили mdpi на ldpi и xhdpi. Для Wildfire 1 dp стал равен 0,75 px, а для Flyer 1 dp = 2 px. Также видим, что изменился шрифт на кнопках, где размер шрифта был указан по умолчанию или в sp-единицах. Он так же, как и dp смасштабировался благодаря Density режимам. А шрифт, размер которого был указан в px (четвертая кнопка) оставался неизменным и на Wildfire выглядит крупным, а на Flyer – мелким.</p>
+
+<p>Отлично видно, что адекватнее всего перенос на другие экраны перенесли пятая и шестая кнопки. Для пятой кнопки используются dp и sp. Для шестой кнопки – ширина = wrap_content и размер шрифта по умолчанию. А кнопки с in, mm, pt и px статичны и на разных экранах выглядят по-разному. Наверняка, есть случаи, когда необходимо использовать именно эти единицы измерения. Но в основном старайтесь использовать dp (для ширины, высоты и т.д.) и sp (для размера шрифта).</p>
+
+<p>Конечно Density не дает масштабирования абсолютно пропорциального разнице в разрешениях экрана. Погрешность есть, но она невелика и является вполне приемлемой платой за способность приложения «сохранять форму» на разных устройствах.</p>
+
+<p>Кем именно устанавливаются Density режимы для различных экранов – я не знаю. Но подозреваю, что производителями устройств/экранов. Еще мне интересно, можно ли эти режимы переключать при работе устройства. Думаю, чуть позже я найду ответы на эти вопросы.</p>
+
+<p>Для создания этого материала я использовал различные конфигурации экранов, которые можно создавать самому:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_ScreenConfigs.jpg" alt="" /></p>
+
+<p>Вы наверно обратили внимание, что в папке Андроид-проекта в Eclipse есть папки <strong>drawable </strong>c суффиксами hdpi, ldpi, mdpi:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_drawable.jpg" alt="" /></p>
+
+<p>Папка drawable используется для хранения изображений, а суффиксы дают понять системе из какой именно drawable использовать картинки при текущем Density режиме. Подробнее об этом можно почитать в <a href="http://developer.android.com/guide/topics/resources/providing-resources.html">хелпе</a>. Кстати, там же вы найдете уже изученный нами <strong>–</strong><strong>land</strong>, который связан с горизонтальной ориентацией экрана. Будем по мере изучения Андроид знакомиться с остальными.</p>
+
+<p>Спасибо, что вы с нами.</p>
+
+<p>Ваши комментарии будут уместны :)</p>
+
+<p>Также не забудьте подписаться на бесплатный курс.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/21/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/19/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

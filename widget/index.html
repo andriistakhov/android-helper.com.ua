@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Создание Google Android виджетов - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Продолжим описание android программирования. Все вы наверное видели красивые widget у себя на рабочем столе телефона. Вы угадали, сегодня речь пойдет &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//widget">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Создание Google Android виджетов</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T14:47:31+03:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Продолжим описание android программирования.</p>
+
+<p>Все вы наверное видели красивые widget у себя на рабочем столе телефона.</p>
+
+<p>Вы угадали, сегодня речь пойдет именно о них.</p>
+
+<p>Ну что поехали.</p>
+
+<p>Оригинал статьи <a href="http://www.mobilab.ru/articles/109/">тут</a>.</p>
+
+<p>С начала этого года (прим. автора с 2007 года) команда разработчиков <strong>Android</strong> упорно работала над созданием нового релиза, который получил название<strong>Android 1.5</strong>. В его состав входит <strong>AppWidget framework</strong>, предназначенный для создания виджетов, которые пользователь может размещать на своем домашнем экране. Виджеты могут импортировать и отображать в удобной для пользователя форме информацию из Ваших Android приложений. Например, можно создать виджет, который будет отображать список невыполненных дел или давать информацию об играющей в фоновом режиме музыке.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/Awidget.png" alt="" /></p>
+
+<p>Когда пользователь перетаскивает виждет на домашний экран, он фактически резервирует место, на котором будет отображаться контент из Вашего приложения. Кроме того, пользователь может взаимодействовать с Вашим приложением через виджет, например, приостанавливать проигрывание музыки. Если у Вас есть сервис, работающий в фоновом режиме, Вы можете обновлять виджет по собственному графику, или использовать стандартный механизм из <strong>AppWidget framework</strong>.</p>
+
+<p>Виджет представляет собой BroadcastReceiver скрещенный с XML описанием параметров виждета. <strong>AppWidget framework</strong>связывается с Вашим виджетом через радиовещание, когда требуется обновление. Обновления строятся и посылаются с помощью RemoteViews, включающий контент, для отображения на домашней странице.</p>
+
+<p>Вы без особого труда можете создать виджет для своего приложения. Давайте создадим виджет для Android приложения &ldquo;Слово дня&rdquo; (<a href="http://code.google.com/p/wiktionary-android/source/browse/#svn/trunk/SimpleWiktionary">исходники</a>). Я не буду рассматривать здесь это приложение, а сосредоточусь на самом виджете.</p>
+
+<p>Прежде всего нужно создать XML описание виджета, указав там область домашнего экрана, которую Вы хотели бы зарезервировать для своего виджета, начальный слой для отображения, а также частоту обновления информации. Домашний экран <strong>Android</strong> разбит на ячейки, так что указанные вами размеры округляются до размеров ячеек. Это может сбить с толку. Возможно вам поможет вот эта формула</p>
+
+<p>Минимальный размер в dip=(Число ячеек * 74dip)-2dip</p>
+
+<p>В нашем примере мы хотим создать виджет, который будет занимать 2 ячейки в ширину и 1 в высоту. Это значит, что минимальный размер должен составлять 146dip x 72dip. Мы хотим, чтобы информация обновлялась раз в день, то есть через каждые 86,400,000 миллисекунд. XML metadata имеет вид:</p>
+
+<pre><code>&lt;appwidget-provider
+
+xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:minWidth="146dip"
+
+android:minHeight="72dip"
+
+android:initialLayout="@layout/widget_message"
+
+android:updatePeriodMillis="86400000"
+
+/&gt;
+</code></pre>
+
+<p>Теперь давайте сопоставим эти XML данные и BroadcastReceiver в AndroidManifest:</p>
+
+<pre><code>&lt;!-- Broadcast Receiver that will process AppWidget updates --&gt;
+
+&lt;receiver android:name=".WordWidget" android:label="@string/widget_name"&gt;
+
+&lt;intent-filter&gt;
+
+    &lt;action android:name="android.appwidget.action.APPWIDGET_UPDATE" /&gt;
+
+&lt;/intent-filter&gt;
+
+&lt;meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_word" /&gt;
+
+&lt;/receiver&gt;
+
+
+
+&lt;!-- Service to perform web API queries --&gt;
+
+&lt;service android:name=".WordWidget$UpdateService" /&gt;
+</code></pre>
+
+<p>Давайте напишем код для BroadcastReceiver, который будет управлять <strong>AppWidget</strong> запросами. Чтобы помочь виджету управлять различными радиовещательными событиями, разработчики написали класс <strong>AppWidgetProvider</strong>. Важно отметить, что мы запустим фоновый сервис, чтобы выполнять обновления. Это связано с тем, что BroadcastReceivers &ndash; потомок Application Not Responding (ANR) таймера, который может предложить пользователю закрыть приложение, если запрос выполняется слишком долго. Выполнение веб запроса может занимать несколько секунд, поэтому мы используем именно сервисы, чтобы избежать ANR таймаутов.</p>
+
+<pre><code>/**
+
+ * Определяем простой виджет, который отображает слово дня. Для обновлений
+
+ * мы порождаем фоновой сервис {@link Service} для выполнения API запросов.
+
+ */
+
+public class WordWidget extends AppWidgetProvider {
+
+@Override
+
+public void onUpdate(Context context, AppWidgetManager appWidgetManager,
+
+    int[] appWidgetIds) {
+
+    // Чтобы предотвратить любые ANR таймацты, мы выполняем обновление в сервисе.
+
+    context.startService(new Intent(context, UpdateService.class));
+
+}
+
+
+
+public static class UpdateService extends Service {
+
+    @Override
+
+    public void onStart(Intent intent, int startId) {
+
+        // Выполняем сегодняшнее обновление виджета.
+
+        RemoteViews updateViews = buildUpdate(this);
+
+
+
+        // Помещаем обновление этого выджета на домашний экран
+
+        ComponentName thisWidget = new ComponentName(this, WordWidget.class);
+
+        AppWidgetManager manager = AppWidgetManager.getInstance(this);
+
+        manager.updateAppWidget(thisWidget, updateViews);
+
+    }
+
+
+
+    /**
+
+                 * Строим обновление виджета, чтобы показать текущее слово.
+
+                 * Заблокируем пока не получим online ответ.
+
+     */
+
+    public RemoteViews buildUpdate(Context context) {
+
+        // Берем название месяца из ресурсов
+
+        Resources res = context.getResources();
+
+        String[] monthNames = res.getStringArray(R.array.month_names);
+
+
+
+        // ищем текущий месяц и день
+
+        Time today = new Time();
+
+        today.setToNow();
+
+
+
+        // Заголовок страницы в вмде "Wiktionary:Word of the day/March 21"
+
+        String pageName = res.getString(R.string.template_wotd_title,
+
+            monthNames[today.month], today.monthDay);
+
+        RemoteViews updateViews = null;
+
+        String pageContent = "";
+
+
+
+        try {
+
+            // Пытаемся послать запрос Wiktionary API для получения слова дня
+
+            SimpleWikiHelper.prepareUserAgent(context);
+
+            pageContent = SimpleWikiHelper.getPageContent(pageName, false);
+
+        } catch (ApiException e) {
+
+            Log.e("WordWidget", "Couldn't contact API", e);
+
+        } catch (ParseException e) {
+
+            Log.e("WordWidget", "Couldn't parse API response", e);
+
+        }
+
+
+
+        // Используем регулярное выражение для парсинга слов и их описания
+
+        Pattern pattern = Pattern.compile(SimpleWikiHelper.WORD_OF_DAY_REGEX);
+
+        Matcher matcher = pattern.matcher(pageContent);
+
+        if (matcher.find()) {
+
+            // Выполняем обновление контента виджета
+
+            updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_word);
+
+
+
+            String wordTitle = matcher.group(1);
+
+            updateViews.setTextViewText(R.id.word_title, wordTitle);
+
+            updateViews.setTextViewText(R.id.word_type, matcher.group(2));
+
+            updateViews.setTextViewText(R.id.definition, matcher.group(3).trim());
+
+
+
+            // Когда пользователь кликает на виджет, запускается страница Wiktionary.
+
+            String definePage = res.getString(R.string.template_define_url,
+
+                    Uri.encode(wordTitle));
+
+            Intent defineIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(definePage));
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(context,
+
+                    0 /* no requestCode */, defineIntent, 0 /* no flags */);
+
+            updateViews.setOnClickPendingIntent(R.id.widget, pendingIntent);
+
+
+
+        } else {
+
+            // Слово дня не найдено, показываем ошибку
+
+            updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_message);
+
+            CharSequence errorMessage = context.getText(R.string.widget_error);
+
+            updateViews.setTextViewText(R.id.message, errorMessage);
+
+        }
+
+        return updateViews;
+
+    }
+
+
+
+    @Override
+
+    public IBinder onBind(Intent intent) {
+
+        // Мы не хотим привязываться к этому сервису
+
+        return null;
+
+    }
+
+}
+
+}
+</code></pre>
+
+<p>Все. Мы написали виджет для приложения Wiktionary &ldquo;Слово дня&rdquo;. Когда требуется обновление, мы с помощью online API получаем новые данные. <strong>AppWidget framework</strong> автоматически запрашивает у нас обновления, например в момент добавления виджета на экран или согласно своему расписанию &ndash; раз в день.</p>
+
+<p>Вообще виджеты стоит создавать для отображения не очень часто обновляемых данных (не чаще чем раз в час). Старайтесь обновлять информацию как можно реже и предусмотрите возможность ручного обновления.</p>
+
+<p>Созданные таким образом виджеты можно размещать на любом домашнем экране, поддерживающим <strong>AppWidget framework</strong>.</p>
+
+<p>Спасибо вам, за то что вы с нами.</p>
+
+<p>Ожидаем ваших комментариев.</p>
+
+<p>Коды вы можете скачать <a href="http://android-helper.com.ua/forms">тут</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T14:47:31+03:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//widget/" data-via="" data-counturl="http://android-helper.com.ua//widget/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/push-notifications/" title="Previous Post: Service. Уведомления - notifications">&laquo; Service. Уведомления - notifications</a>
+      
+      
+        <a class="basic-alignment right" href="/caltophone/" title="Next Post: Как сделать телефонный звонок в Android">Как сделать телефонный звонок в Android &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

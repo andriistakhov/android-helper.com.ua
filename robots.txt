@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://android-helper.com.ua//sitemap.xml 

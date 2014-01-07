@@ -1,0 +1,1070 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Как работать с Mp3-файлами - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Нашел довольно интересную статью по работе с mp3 файлами на стороне android. Думаю это будет интересно как для профи так и для новичка. Прошу к &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//mp3-files">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Как работать с Mp3-файлами</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-16T12:56:15+03:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Нашел довольно интересную статью по работе с mp3 файлами на стороне android.</p>
+
+<p>Думаю это будет интересно как для профи так и для новичка.</p>
+
+<p>Прошу к прочтению.</p>
+
+<p>В данной статье описан процесс получения всей основной информации о аудиотреках в устройстве с Android, основы работы с плейлистами и проигрывания аудиофайлов.</p>
+
+<p><strong>Общие принципы работы с провайдерами данных</strong></p>
+
+<p>Источники данных ( Content Providers, Провайдеры данных ) в Android предоставляют интерфейс общего доступа к любому источнику данных путем отделения уровня доступа к данным от уровня приложения. Источники данных предлагают стандартный API, с помощью которого приложения могут обмениваться своими данными между собой, и использовать различные системные базы данных.</p>
+
+<p>Типичный запрос к провайдеру данных выглядит следующим образом. Сначала запрашивается системный объект класса ContentResolver, который позволяет подключаться к провайдерам данных. Затем необходимо настроить параметры запроса и вызвать метод ContentResolver.query, в который передаются параметры запроса и который в случае успешного выполнения возвращает объект класса Cursor, предоставляющий интерфейс для работы с данными, возвращаемые в результате запроса к базе данных.</p>
+
+<pre><code>[java]String[] projection = new String[] {
+
+People._ID,
+
+People.NAME,
+
+People.NUMBER,
+
+};
+
+
+
+Uri mContactsUri = People.CONTENT_URI;
+
+ContentResolver resolver = appContext.getContentResolver();
+
+
+
+Cursor managedCursor = resolver.query( mContactsUri,
+
+          projection,.
+
+          null, 
+
+          null,
+
+          People.NAME + " ASC"); 
+
+
+
+for( int i=0;i&amp;lt;managedCursor.getCount();i++)
+
+{
+
+      managedCursor.moveToPosition(i);
+
+      String nameOfContact =  managedCursor.getString(1);
+
+      ….    
+
+}
+
+[/java]
+</code></pre>
+
+<p>Подробнее о работе с провайдерами данных можно посмотреть на сайте разработчиков &ndash;<a href="http://developer.android.com/guide/topics/providers/content-providers.html">http://developer.android.com/guide/topics/providers/content-providers.html</a>.</p>
+
+<p><strong>Провайдер данных MediaStore.Audio</strong></p>
+
+<p>Провайдер данных MediaStore представляет собой централизованную базу данных мультимедиа, размещенных в памяти устройства или на сменном носителе ( SD карте ), включая аудио-, видеофайлы и изображения. Данные в MediaStore записываются автоматически при сканировании системой внутренней или сменной памяти, при этом рассылаются сообщения ACTION_MEDIA_SCANNER_STARTED и ACTION_MEDIA_SCANNER_FINISHED. Любая программа может уведомить сканер о наличии нового файла вызовом</p>
+
+<pre><code>[java]sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, newFilePath));[/java]
+</code></pre>
+
+<p>Примечание: чтобы запретить сканеру обрабатывать определенный каталог на диске, поместите туда пустой файл с именем .nomedia.</p>
+
+<p>При сканировании анализируются ID теги и другая информация, которая становится доступна в пользовательских приложениях. Доступ к данным аудиофайлов осуществляется через провайдер MediaStore.Audio, который также дает возможность работать с плейлистами ( списками воспроизведения ). </p>
+
+<p>В примерах этой статьи будет использоваться вызов myquery, который утилизирует получение курсора по URI провайдера данных и других параметров запроса.</p>
+
+<pre><code>[java]public static Cursor myquery(Context context, Uri uri, String[] projection,
+
+             String selection, String[] selectionArgs, String sortOrder, int limit) {
+
+             try {
+
+                   ContentResolver resolver = context.getContentResolver();
+
+                   if (resolver == null) {
+
+                        return null;
+
+                   }
+
+                    if (limit &amp;gt; 0) {
+
+                        uri = uri.buildUpon().appendQueryParameter("limit", "" + limit).build();
+
+                     }
+
+                  return resolver.query(uri, projection, selection, selectionArgs, sortOrder);
+
+                } catch (UnsupportedOperationException ex) {
+
+                            return null;
+
+                 }
+
+
+
+              }[/java]
+</code></pre>
+
+<p><strong>Простое перечисление всей музыки в телефоне</strong></p>
+
+<pre><code>[java]String[] projection = { MediaStore.Audio.Media._ID,             // 0
+
+                          MediaStore.Audio.Media.ARTIST,          // 1
+
+                          MediaStore.Audio.Media.TITLE,           // 2
+
+                          MediaStore.Audio.Media.ALBUM_ID,  // 3
+
+                          MediaStore.Audio.Media.ALBUM,           // 4
+
+                          MediaStore.Audio.Media.DATA,            // 5
+
+                          MediaStore.Audio.Media.DISPLAY_NAME,    // 6
+
+                          MediaStore.Audio.Media.DURATION,
+
+                                        MediaStore.Audio.Media.TITLE_KEY
+
+        };      // 7
+
+
+
+String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0 ";
+
+Cursor musicListSDCardCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+
+                           projection, selection , null, null,0);
+
+Cursor musicListInternalMemoryCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
+
+                           projection, selection , null, null,0);
+
+[/java]
+</code></pre>
+
+<p><strong>Списки альбомов</strong></p>
+
+<p>Получение списка альбомов:</p>
+
+<pre><code>[java]String[] projection = {
+
+             MediaStore.Audio.Albums.ALBUM,            // 0
+
+             MediaStore.Audio.Albums.NUMBER_OF_SONGS,  // 1
+
+             MediaStore.Audio.Albums.LAST_YEAR,       // 2
+
+                           MediaStore.Audio.Albums.ARTIST,           // 3
+
+                           MediaStore.Audio.Albums._ID               // 4
+
+                                        };
+
+
+
+
+
+  Cursor albumsListSDCardCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+
+                           projection, null , null, null,0);
+
+
+
+  Cursor albumsListInternalMemoryCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Albums.INTERNAL_CONTENT_URI,
+
+                           projection, null , null, null,0);
+
+[/java]
+</code></pre>
+
+<p>Получение списка дорожек, входящих в данный альбом:</p>
+
+<pre><code>[java]// String albumId содержит выбранный MediaStore.Audio.Albums._ID  
+
+
+
+String[] projection = { MediaStore.Audio.Media._ID,             // 0
+
+                          MediaStore.Audio.Media.ARTIST,          // 1
+
+                          MediaStore.Audio.Media.TITLE,           // 2
+
+                          MediaStore.Audio.Media.ALBUM_ID,  // 3
+
+                          MediaStore.Audio.Media.ALBUM,           // 4
+
+                          MediaStore.Audio.Media.DATA,            // 5
+
+                          MediaStore.Audio.Media.DISPLAY_NAME,    // 6
+
+                          MediaStore.Audio.Media.DURATION,
+
+                                        MediaStore.Audio.Media.TITLE_KEY
+
+        };      // 7
+
+
+
+       String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0 AND "+
+
+               MediaStore.Audio.Media.ALBUM_ID +"=?";
+
+       String[] args = new String[] {albumId};
+
+
+
+Cursor musicListSDCardCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+
+                           projection, selection , args, null,0);
+
+Cursor musicListInternalMemoryCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
+
+                           projection, selection , args, null,0);
+
+[/java]
+</code></pre>
+
+<p><strong>Списки исполнителей</strong></p>
+
+<p>Получение списка всех исполнителей:</p>
+
+<pre><code>[java]String[] projection = {
+
+            MediaStore.Audio.Artists.ARTIST,            // 0
+
+            MediaStore.Audio.Artists.NUMBER_OF_ALBUMS,  // 1
+
+            MediaStore.Audio.Artists.NUMBER_OF_TRACKS,
+
+                          MediaStore.Audio.Artists._ID
+
+                                        };
+
+
+
+
+
+  Cursor artistListSDCardCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+
+                           projection, null , null, null,0);
+
+
+
+  Cursor artistListInternalMemoryCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Artists.INTERNAL_CONTENT_URI,
+
+                           projection, null , null, null,0);
+
+[/java]
+</code></pre>
+
+<p>Получение списка композиций данного исполнителя:</p>
+
+<pre><code>[java]// String artistId содержит выбранный MediaStore.Audio.Artists._ID  
+
+String[] projection = {
+
+              String[] projection = { MediaStore.Audio.Media._ID,             // 0
+
+                          MediaStore.Audio.Media.ARTIST,          // 1
+
+                          MediaStore.Audio.Media.TITLE,           // 2
+
+                          MediaStore.Audio.Media.ALBUM_ID,  // 3
+
+                          MediaStore.Audio.Media.ALBUM,           // 4
+
+                          MediaStore.Audio.Media.DATA,            // 5
+
+                          MediaStore.Audio.Media.DISPLAY_NAME,    // 6
+
+                          MediaStore.Audio.Media.DURATION,
+
+                                        MediaStore.Audio.Media.TITLE_KEY
+
+        };      // 7
+
+
+
+       String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0 AND "+
+
+               MediaStore.Audio.Media.ARTIST_ID +"=?";
+
+       String[] args = new String[] {artistId};
+
+
+
+      Cursor musicListSDCardCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+
+                           projection, null , null, null,0);
+
+
+
+      Cursor musicListInternalMemoryCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Artists.INTERNAL_CONTENT_URI,
+
+                           projection, null , null, null,0);
+
+[/java]
+</code></pre>
+
+<p><strong>Списки жанров</strong></p>
+
+<p>Получение списка всех жанров:</p>
+
+<pre><code>[java]String[] projection = { MediaStore.Audio.Genres._ID,          // 0
+
+              MediaStore.Audio.Genres.NAME          // 1
+
+                                                    };
+
+    Cursor genresListSDCardCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI,
+
+                           projection, null , null, MediaStore.Audio.Genres.NAME, 0);
+
+
+
+    Cursor genresListInternalMemoryCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Genres.INTERNAL_CONTENT_URI,
+
+                           projection, null , null, MediaStore.Audio.Genres.NAME, 0);[/java]
+</code></pre>
+
+<p>Получение списка композиций выбранного жанра:</p>
+
+<pre><code>[java]// String genreId содержит выбранный MediaStore.Audio.Genres._ID
+
+ String[] projection = { MediaStore.Audio.Genres.Members._ID,             // 0
+
+                          MediaStore.Audio.Genres.Members.ARTIST,          // 1
+
+                          MediaStore.Audio.Genres.Members.TITLE,           // 2
+
+                          MediaStore.Audio.Genres.Members.ALBUM_ID,  // 3
+
+                          MediaStore.Audio.Genres.Members.ALBUM,           // 4
+
+                          MediaStore.Audio.Genres.Members.DATA,            // 5
+
+                          MediaStore.Audio.Genres.Members.DISPLAY_NAME,    // 6
+
+                          MediaStore.Audio.Genres.Members.DURATION,
+
+                                        MediaStore.Audio.Media.TITLE_KEY
+
+                   };      // 7
+
+
+
+        String selection = MediaStore.Audio.Genres.Members.IS_MUSIC + " != 0";
+
+
+
+  Cursor musicListSDCardCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Genres.Members.getContentUri("external", Long.valueOf(s)),
+
+                           projection, selection , null, null,0);
+
+
+
+  Cursor musicListInternalMemoryCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Genres.Members.getContentUri("internal", Long.valueOf(s)),
+
+                           projection, selection , null, null,0);
+
+
+
+[/java]
+</code></pre>
+
+<p><strong>Работа с плейлистами</strong></p>
+
+<p>Получение списка всех плейлистов в устройстве:</p>
+
+<pre><code>[java]String[] projection = { MediaStore.Audio.Playlists._ID,             // 0
+
+                             MediaStore.Audio.Playlists.NAME          // 1
+
+                                                    };
+
+
+
+
+
+
+
+Cursor playListSDCardCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
+
+                           projection, null , null, MediaStore.Audio.Playlists.NAME,0);
+
+
+
+Cursor playListInternalMemoryCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Playlists.INTERNAL_CONTENT_URI,
+
+                           projection, null , null, MediaStore.Audio.Playlists.NAME,0);[/java]
+</code></pre>
+
+<p>Создание нового плейлиста:</p>
+
+<pre><code>[java]ContentValues cv = new ContentValues();
+
+cv.put(MediaStore.Audio.Playlists.NAME, "Новый плейлист");
+
+Uri uri = getContentResolver().insert(MediaStore.Audio.Playlists.getContentUri("external"), cv);[/java]
+</code></pre>
+
+<p>Добавление композиции в плейлист:</p>
+
+<pre><code>[java]// long playlistId - MediaStore.Audio.Playlists._ID выбранного плейлиста
+
+// int audioId - MediaStore.Audio.Media._ID композиции
+
+        ContentResolver resolver = getContentResolver();
+
+        String[] cols = new String[] {
+
+                "count(*)"
+
+        };
+
+        Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId);
+
+        Cursor cur = resolver.query(uri, cols, null, null, null);
+
+        cur.moveToFirst();
+
+        final int base = cur.getInt(0);
+
+        cur.close();
+
+        ContentValues values = new ContentValues();
+
+        values.put(MediaStore.Audio.Playlists.Members.PLAY_ORDER, Integer.valueOf(base + 1));
+
+        values.put(MediaStore.Audio.Playlists.Members.AUDIO_ID, audioId);
+
+        resolver.insert(uri, values);[/java]
+</code></pre>
+
+<p>Перечисление всех композиций плейлиста:</p>
+
+<pre><code>[java]// String playlistId - MediaStore.Audio.Playlists._ID выбранного плейлиста
+
+
+
+String[] projection = {         MediaStore.Audio.Media._ID,             // 0
+
+                          MediaStore.Audio.Media.ARTIST,          // 1
+
+                          MediaStore.Audio.Media.TITLE,           // 2
+
+                          MediaStore.Audio.Media.ALBUM_ID,  // 3
+
+                          MediaStore.Audio.Media.ALBUM,           // 4
+
+                          MediaStore.Audio.Media.DATA,            // 5
+
+                          MediaStore.Audio.Media.DISPLAY_NAME,    // 6
+
+                          MediaStore.Audio.Media.DURATION,
+
+                                        MediaStore.Audio.Media.TITLE_KEY
+
+        };     
+
+
+
+
+
+ Cursor musicListSDCardCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Playlists.Members.getContentUri("external", Long.valueOf(playlistId)),
+
+                           projection, null , null, null,0);
+
+
+
+  Cursor musicListInternalMemoryCursor = myquery(
+
+                           this,
+
+                           MediaStore.Audio.Playlists.Members.getContentUri("internal", Long.valueOf(playlistId)),
+
+                           projection, null , null, null,0);
+
+[/java]
+</code></pre>
+
+<p><strong>Проигрывание аудиотрека</strong></p>
+
+<p>Чтобы открыть mp3 файл в одном из плееров, установленных в системе, можно использовать Intents таким образом:</p>
+
+<pre><code>[java]Intent it = new Intent(Intent.ACTION_VIEW);
+
+ Uri uri = Uri.parse( "file:///sdcard/mymusic/happysong.mp3");
+
+ it.setDataAndType(uri, "audio/mp3");
+
+ startActivity(it);[/java]
+</code></pre>
+
+<p>Для проигрывания mp3 файлов из приложения можно использовать объект класса MediaPlayer. Класс MediaPlayer из Android SDK работает на основе модели автомата состояний ( конечного автомата, state machine ) и используется для воспроизведения аудио и видео роликов. </p>
+
+<p>После создания объекта класса MediaPlayer устанавливается путь к файлу аудиоролика на диске и вызывается метод MediaPlayer.prepare(), который инициализирует MediaPlayer и приводит его в состояние готовности к воспроизведению аудиофайла. </p>
+
+<p>После успешной инициализации MediaPlayer приложение может вызывать его методы start(), stop() и pause() для управления воспроизведением. </p>
+
+<pre><code>[java]// Общий пример воспроизведения mp3 с использованием класса MediaPlayer
+
+
+
+     MediaPlayer mediaPlayer = new  MediaPlayer();
+
+
+
+
+
+    try {
+
+          mediaPlayer.setDataSource("/sdcard/mytracks/happysong.mp3");
+
+          mediaPlayer.prepare();
+
+          mediaPlayer.start();
+
+
+
+        } catch (IllegalArgumentException iae) {
+
+              // TODO Auto-generated catch block
+
+              iae.printStackTrace();
+
+
+
+        } catch (IllegalStateException ise) {
+
+             // TODO Auto-generated catch block
+
+             ise.printStackTrace();
+
+
+
+        } catch (IOException ioe) {
+
+             // TODO Auto-generated catch block
+
+             ioe.printStackTrace();
+
+        } catch (Exception e) {
+
+             // TODO Auto-generated catch block
+
+             e.printStackTrace();
+
+        }
+
+
+
+[/java]
+</code></pre>
+
+<p>Подробнее об использовании класса MediaPlayer можно посмотреть на сайте разработчиков <a href="http://developer.android.com/reference/android/media/MediaPlayer.html">http://developer.android.com/reference/android/media/MediaPlayer.html</a>.</p>
+
+<p><strong>Пример &ndash; проигрывание случайной дорожки</strong></p>
+
+<p>Программа открывает в проигрывателе случайно выбранный mp3 файл.</p>
+
+<pre><code>[java]package org.me.androidrandomplay;
+
+
+
+import android.app.Activity;
+
+import android.os.Bundle;
+
+import android.content.*;
+
+import android.database.Cursor;
+
+import android.net.Uri;
+
+import  android.provider.MediaStore;
+
+import android.widget.Toast;
+
+
+
+public class AndroidRandomPlay extends Activity {
+
+
+
+    /** Called when the activity is first created. */
+
+    @Override
+
+    public void onCreate(Bundle icicle) {
+
+        super.onCreate(icicle);
+
+
+
+
+
+        String[] projection = { 
+
+                                MediaStore.Audio.Media._ID,
+
+                                MediaStore.Audio.Media.DATA
+
+                              };  
+
+
+
+        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0 ";
+
+        Cursor musicListSDCardCursor = myquery(
+
+                                   this,
+
+                                   MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+
+                                   projection, selection , null, null,0);
+
+        Cursor musicListInternalMemoryCursor = myquery(
+
+                                   this,
+
+                                   MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
+
+                                   projection, selection , null, null,0);
+
+
+
+        java.util.Vector&amp;lt;String&amp;gt; paths = new java.util.Vector();
+
+
+
+        if( musicListSDCardCursor!= null )
+
+        {
+
+            for(int i=0;i&amp;lt;musicListSDCardCursor.getCount();i++)
+
+            {
+
+                musicListSDCardCursor.moveToPosition(i);
+
+                String p = musicListSDCardCursor.getString(1);
+
+                if(p.endsWith("mp3"))
+
+                        paths.addElement(p);
+
+
+
+            }
+
+            musicListSDCardCursor.close();
+
+        }
+
+
+
+         if( musicListInternalMemoryCursor!= null )
+
+        {
+
+            for(int i=0;i&amp;lt;musicListInternalMemoryCursor.getCount();i++)
+
+            {
+
+                musicListInternalMemoryCursor.moveToPosition(i);
+
+                String p = musicListInternalMemoryCursor.getString(1);
+
+                if(p.endsWith("mp3"))
+
+                        paths.addElement(p);
+
+
+
+            }
+
+            musicListInternalMemoryCursor.close();
+
+        }
+
+
+
+        if( paths.isEmpty() ) 
+
+        {
+
+            Toast.makeText( this, "no media found", Toast.LENGTH_LONG).show();   
+
+            return;
+
+        }
+
+
+
+        java.util.Random r = new  java.util.Random();
+
+        int pos = r.nextInt(paths.size()-1);
+
+        if( paths.size() == 1 ) pos = 0;
+
+
+
+        String url  = paths.elementAt(pos);
+
+
+
+        if( url.length() == 0 ) return;
+
+
+
+        Toast.makeText( this, url, Toast.LENGTH_LONG).show();
+
+
+
+        try{
+
+
+
+            Intent it = new Intent(Intent.ACTION_VIEW);
+
+            Uri uri = Uri.parse( "file://"+url);
+
+            it.setDataAndType(uri, "audio/mp3");
+
+            startActivity(it);
+
+
+
+        }catch (Exception e)
+
+        {
+
+            Toast.makeText( this, e.toString(), Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+
+
+    public static Cursor myquery(Context context, Uri uri, String[] projection,
+
+             String selection, String[] selectionArgs, String sortOrder, int limit) {
+
+             try {
+
+                   ContentResolver resolver = context.getContentResolver();
+
+                   if (resolver == null) {
+
+                        return null;
+
+                   }
+
+                    if (limit &amp;gt; 0) {
+
+                        uri = uri.buildUpon().appendQueryParameter("limit", "" + limit).build();
+
+                     }
+
+                  return resolver.query(uri, projection, selection, selectionArgs, sortOrder);
+
+                } catch (UnsupportedOperationException ex) {
+
+                            return null;
+
+                 }
+
+              }
+
+
+
+}[/java]
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-16T12:56:15+03:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//mp3-files/" data-via="" data-counturl="http://android-helper.com.ua//mp3-files/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/free-minutes/" title="Previous Post: Приложение для Android "Ваши бесплатные минуты"">&laquo; Приложение для Android "Ваши бесплатные минуты"</a>
+      
+      
+        <a class="basic-alignment right" href="/vlast-next/" title="Next Post: Музыка ВКонтакте - VLast NEXT">Музыка ВКонтакте - VLast NEXT &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

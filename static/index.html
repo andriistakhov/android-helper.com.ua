@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Сбор статистики в приложении на Android - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Сегодня нашел очень интересную статью. Вот ее содержание: Всегда интересно знать, как пользователи работают с вашим приложением: какие функции &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//static">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Сбор статистики в приложении на Android</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-22T07:50:57+03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Сегодня нашел очень интересную статью.</p>
+
+<p>Вот ее содержание:</p>
+
+<p>Всегда интересно знать, как пользователи работают с вашим приложением: какие функции наиболее востребованы, какие кнопки нажимаются, какие настройки меняются, какие ошибки совершаются. Неплохо так же представлять себе, что это за пользователи &ndash; какая версия прошивки у их девайсов, где они географически расположены и т.д. </p>
+
+<p>Такая информация неоценима для разработчика, ведь с ее помощью можно оптимизировать юзабилити, определиться с приоритеностью функционала, найти пути повышения продаж. Вопрос только как такую статистику собирать.</p>
+
+<p>Самый простой путь &ndash; воспользоваться готовой системой сбора аналитической информации. Таких систем сейчас более чем достаточно (<a href="http://www.foundersspace.com/tech/whats-the-best-analytics-service-for-apps/">1</a>, <a href="http://www.quora.com/What-is-the-best-Mobile-Analytics-service-for-iOS-apps-and-why">2</a>). Например:У каждой системы есть свои изюминки: real-time обновление статистики (Localitics), суперточность с отслеживанием уникальных ID каждого пользователя (Bango), наличие средств для проведения опроса пользователей (Apsalar), наличие средств для регулярной отправки уведомлений пользователям (BuzzBox) и т.д. Естественно, есть и море отличий: в интерфейсе, в средствах анализа, в наличии дополнительных API, в стоимости, в наборе поддерживаемых платформ и т.п. </p>
+
+<p>Принцип работы у всех систем примерно одинаков. Регистрируемся на сайте системы, получаем SDK и уникальный ключ. В приложение подключаем стороннюю библиотеку (единственный jar-файл из SDK). Добавляем код вызова функций, регистрирующих события в приложении. Релизим приложение. Ждем некоторое время, пока пользователи поработают в программе. Заходим на сайт системы и смотрим разнообразные аналитические отчеты. </p>
+
+<p>Вот, например, как ведется сбор данных в Apsalar:</p>
+
+<pre><code>import com.apsalar.sdk.Apsalar;
+
+
+
+public void onCreate(Bundle savedInstanceState) {
+
+...
+
+    Apsalar.startSession(this, "myapikey", "mypassword");
+
+..
+
+}
+
+
+
+/** уровень level пройден за countSeconds */
+
+public void onLevelPassed(int level, int countSeconds) {
+
+...
+
+Apsalar.event("passed", "level", level, "duration", countSeconds);
+
+...
+
+}
+</code></pre>
+
+<p>API, как видите, тривиальное, так что технически добавить код для фиксации событий в приложении совсем не сложно. Количество событий и количество атрибутов у каждого события не ограничено, поэтому детализация собираемой информации может быть весьма высокой. </p>
+
+<p>Конечно, подобные системы сбора информации &ndash; это, прежде всего, инструмент аналитика, желающего увеличить доход от продажи приложения. И накапливаемая статистика событий в приложении &ndash; всего лишь первичный материал для анализа. Тот же Apsalar позволяет, например, проводить <a href="http://apsalar.com/apscience/features/">Funnel Analysis, Engagment Analysis, Trending Analysis, Path Analysis, Event Analysis, Operational Analysis </a>.</p>
+
+<p>Взять к примеру Funnel Analysis (воронку продаж). Если в вашем приложении пользователь должен сделать несколько шагов к совершению покупки (последовательно открыть несколько страниц, нажать несколько кнопок), то Funnel Analysis позволит увидеть, сколько пользователей (и каких именно) отсеивается на каждом шаге. Любопытно, что существуют системы монетизации, активно <a href="http://moneynews.ru/AuthorsArticle/14844/">использующие </a>подобную информацию.</p>
+
+<p>Резюме. Готовых систем сбора аналитической информации для Android приложений сейчас множество, выбор широк. Многие из них бесплатные и, одновременно, обладают достойным функционалом. Подключаются подобные системы тривиально, весят &ldquo;копейки&rdquo; (10-30 kb), а пользу разработчику могут принести немалую. Единственное но: не у всех пользователей неограниченный трафик. Так что пользователи должны иметь возможность сбор статистики отключать.</p>
+
+<p><strong>Update</strong>: Полезная статья на хабре <a href="http://habrahabr.ru/blogs/android_development/122510/">Flurry Analytics. Как держать руку на пульсе приложения </a></p>
+
+<p><a href="http://apsalar.com/blog/">Блог</a>компании Apsalar. <br/>
+Еще пара сервисов: <a href="http://www.appoxee.com/">Appoxee </a>, <a href="http://www.appfigures.com/">AppFiguers </a>. По поводу Appoxee см. так же <a href="http://appsmarketing.mobi/deliver-post-app-download-engagement-appoxee-mobile/">how to create post app download engagement.</a></p>
+
+<p>Спасибо <a href="http://derevyanko.blogspot.com/2011/07/android.html">DV</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-22T07:50:57+03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/pamiatka-razrabotchiku/'>Памятка разработчику</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//static/" data-via="" data-counturl="http://android-helper.com.ua//static/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/send_get_sms/" title="Previous Post: Отправка и получение SMS">&laquo; Отправка и получение SMS</a>
+      
+      
+        <a class="basic-alignment right" href="/events/" title="Next Post: Взаимодействие с сенсорным экраном">Взаимодействие с сенсорным экраном &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

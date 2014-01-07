@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ListFragments - список - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Добрый день друзья. Я продолжаю сбор интересной информации. И сегодня я нашел статью о работе с ListFragment. Прошу к прочтению. Вернемся к &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//listfragments">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ListFragments - список</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-09T23:15:36+03:00" pubdate data-updated="true">Oct 9<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Я продолжаю сбор интересной информации.</p>
+
+<p>И сегодня я нашел статью о работе с ListFragment.</p>
+
+<p>Прошу к прочтению.</p>
+
+<p>Вернемся к фрагментам. В Android есть несколько полезных классов – наследников класса Fragment. Мы рассмотрим несколько из них. Начнем с <a href="http://developer.android.com/reference/android/app/ListFragment.html">ListFragment</a>. В принципе, это просто Fragment, в котором есть методы, упрощающие доступ к ListView и некоторым его операциям.</p>
+
+<p>Тут можно провести аналогию &ndash; для Activity есть класс наследник <a href="http://developer.android.com/reference/android/app/ListActivity.html">ListActivity</a>. Когда мы только знакомились со списками, я не стал рассматривать этот класс, чтобы не вносить путаницы в непростую тему. Но в учебниках и хелпе о нем обычно говорят. Думаю, многие уже сталкивались с ним и примерно знают, что это такое. Если да, то ListFragment будет совсем прост для понимания.</p>
+
+<p>Напишем приложение и рассмотрим основные возможности ListFragment.</p>
+
+<p>Создадим класс фрагмента, наследующий не android.app.Fragment как обычно, а android.app.ListFragment.</p>
+
+<p><strong>MainList.java</strong>:</p>
+
+<pre><code>import android.app.ListFragment;
+
+
+
+public class MainList extends ListFragment {
+
+
+
+}
+</code></pre>
+
+<p>Класс так и оставляем пока пустым. И пока что не будем создавать Layout-файл для этого фрагмента. Дело в том, что ListFragment по умолчанию уже содержит ListView и мы вполне можем обойтись им. Адаптер мы пока также никакой не создаем, посмотрим чего получится.</p>
+
+<p>Редактируем layout для MainActivity</p>
+
+<p><strong>main.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout
+
+xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:tools="http://schemas.android.com/tools"
+
+android:id="@+id/LinearLayout1"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical"&gt;
+
+&lt;fragment android:name="ru.startandroid.develop.p1091listfragment.MainList"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"&gt;
+
+&lt;/fragment&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Здесь только компонент fragment, использующий наш класс.</p>
+
+<p>Все сохраняем, запускаем приложение.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/L0109_010.jpg" alt="" /></p>
+
+<p>ListFragment показывает нам, что он ждет данных. </p>
+
+<p>Ок, давайте дадим ему данные. Перепишем <strong>MainList.java</strong>:</p>
+
+<pre><code>import android.app.ListFragment;
+
+import android.os.Bundle;
+
+import android.widget.ArrayAdapter;
+
+
+
+public class MainList extends ListFragment {
+
+
+
+String data[] = new String[] { "one", "two", "three", "four" };
+
+
+
+@Override
+
+public void onActivityCreated(Bundle savedInstanceState) {
+
+super.onActivityCreated(savedInstanceState);
+
+ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(getActivity(),
+
+    android.R.layout.simple_list_item_1, data);
+
+setListAdapter(adapter);
+
+}
+
+
+
+}
+</code></pre>
+
+<p>Мы создаем адаптер и используем метод <a href="http://developer.android.com/reference/android/app/ListFragment.html#setListAdapter(android.widget.ListAdapter">setListAdapter</a>), чтобы передать его списку. Обратите внимание &ndash; мы даже не создаем или не находим (findViewById) список (ListView), он уже есть где-то внутри фрагмента и метод setListAdapter сам знает, как до него добраться. В принципе, это и есть основная фишка ListFragment &ndash; нам не надо работать с ListView.</p>
+
+<p>Все сохраним, запустим приложение.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/L0109_0201.jpg" alt="" /></p>
+
+<p>Данные появились.</p>
+
+<p>Еще раз обращаю ваше внимание на то, что мы вообще не создавали никаких layout с ListView. ListFragment работает с каким-то своим, встроенным списком. </p>
+
+<p>Если же вас чем-то не устраивает этот дефолтный список, можно использовать свой layout-файл для фрагмента.</p>
+
+<p>В <strong>strings.xml</strong> добавим строки</p>
+
+<pre><code>&lt;string name="number_list"&gt;Список чисел&lt;/string&gt;
+
+&lt;string name="empty"&gt;Нет данных&lt;/string&gt;
+</code></pre>
+
+<p>И создадим layout файл <strong>fragment.xml</strong>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout
+
+xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"&gt;
+
+    &lt;TextView
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="@string/number_list"&gt;
+
+    &lt;/TextView&gt;
+
+&lt;ListView
+
+     android:id="@id/android:list"
+
+     android:layout_width="match_parent"
+
+     android:layout_height="match_parent"&gt;
+
+&lt;/ListView&gt;
+
+&lt;TextView
+
+     android:id="@id/android:empty"
+
+     android:layout_width="match_parent"
+
+     android:layout_height="match_parent"
+
+     android:gravity="center"
+
+     android:text="@string/empty"&gt;
+
+&lt;/TextView&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Первый TextView – просто заголовок списка. Далее идет ListView. Его ID обязательно должен быть равен <strong>@id/android:list</strong>. Чтобы ListFragment сам его нашел и мог с ним работать. Второй TextView – будет показан, если нет данных для списка. Его ID обязательно должен быть равен <strong>@id/android:empty</strong>.</p>
+
+<p>Допишем в <strong>MainList.java</strong> метод создания View.</p>
+
+<pre><code>@Override
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+
+  Bundle savedInstanceState) {
+
+return inflater.inflate(R.layout.fragment, null);
+
+ }
+</code></pre>
+
+<p>Фрагмент будет отображать компоненты из layout-файла, который мы только что создавали.</p>
+
+<p>Все сохраняем и запускаем.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/L0109_030.jpg" alt="" /></p>
+
+<p>Видим заголовок и данные. Наш layout был использован.</p>
+
+<p>Если не дать списку данные, то приложение будет выглядеть так</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/L0109_040.jpg" alt="" /></p>
+
+<p>Отобразился наш второй TextView с ID = @id/android:empty. Причем, это вовсе не обязательно должен быть TextView. Главное тут именно этот ID. Компонент с этим ID будет показан вместо ListView, если нет данных.</p>
+
+<p>Чтобы включать одиночный и множественный выбор, необходимо провести все те же действия, которые мы рассматривали в Уроке 43: передать в адаптер соответствующий layout-файл и включить соответствующий режим выбора для списка. В этом же 43-м Уроке можно посмотреть, как определять, какие пункты списка выбраны. Чтобы в ListFragment получить доступ к списку – используйте метод <a href="http://developer.android.com/reference/android/app/ListFragment.html#getListView(">getListView</a>).</p>
+
+<p>Результаты включения режима выбора будут такие:</p>
+
+<p>одиночный выбор</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/L0109_050.jpg" alt="" /></p>
+
+<p>множественный выбор</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/L0109_060.jpg" alt="" /></p>
+
+<p>Еще, как вариант, можно в адаптер передавать layout-файл <strong>android.R.layout.simple_list_item_activated_1</strong>.</p>
+
+<p>В этом случае результаты будут такие:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/L0109_070.jpg" alt="" /></p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/L0109_080.jpg" alt="" /></p>
+
+<p>Это хорошо подходит для случая, когда у вас на экране слева фрагмент-список, а справа фрагмент-содержимое и вы всегда видите какой именно пункт из списка сейчас просматриваете.</p>
+
+<p>Чуть не забыл про самое главное )  Ловить нажатия можно в методе <a href="http://developer.android.com/reference/android/app/ListFragment.html#onListItemClick(android.widget.ListView,%20android.view.View,%20int,%20long">onListItemClick</a>). </p>
+
+<p>Если добавим в MainList.java его реализацию:</p>
+
+<pre><code>public void onListItemClick(ListView l, View v, int position, long id) {
+
+super.onListItemClick(l, v, position, id);
+
+Toast.makeText(getActivity(), "position = " + position, Toast.LENGTH_SHORT).show();
+
+ }
+</code></pre>
+
+<p>то при нажатии на пункт списка, увидим результат:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/L0109_090.jpg" alt="" /></p>
+
+<p>Статья взята из сайта <a href="http://startandroid.ru/uroki/vse-uroki-spiskom/179-urok-109-android-3-fragments-listfragment-spisok.html">startandroid.ru</a></p>
+
+<p>Если вам понравилась статья, пишите ваши комментарии.</p>
+
+<p>Если у вас есть интересные примеры решения, пишите мне и я буду их публиковать на блоге.</p>
+
+<p>Полный проект вы можете скачать на <a href="http://android-helper.com.ua/codes/">странице с кодами</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-09T23:15:36+03:00" pubdate data-updated="true">Oct 9<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//listfragments/" data-via="" data-counturl="http://android-helper.com.ua//listfragments/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/templates-mobile/" title="Previous Post: Шаблоны для проектирования программ">&laquo; Шаблоны для проектирования программ</a>
+      
+      
+        <a class="basic-alignment right" href="/sqlite_1/" title="Next Post: Работа с базой данных в Android (SQLite)">Работа с базой данных в Android (SQLite) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

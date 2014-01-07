@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Activity Lifecycle. В каких состояниях может быть Activity - Android helper</title>
+  <meta name="author" content="Andrii Stakhov">
+
+  
+  <meta name="description" content="Многие меня спрашивают. Что когда нужно вызывать в Activity. И когда вызываются разные методы. И мне попалась интересная статья. Лично для себя я &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-helper.com.ua//activity-lifecycle">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Android helper</a></h1>
+  
+    <h2>Освоим android вместе?.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-helper.com.ua/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Activity Lifecycle. В каких состояниях может быть Activity</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-11T12:41:17+03:00" pubdate data-updated="true">Oct 11<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Многие меня спрашивают.</p>
+
+<p>Что когда нужно вызывать в Activity. И когда вызываются разные методы.</p>
+
+<p>И мне попалась интересная статья.</p>
+
+<p>Лично для себя я читал официальную статью. Аналогов на русской тогда не было.</p>
+
+<p>И так прошу к прочтению.</p>
+
+<h3>Теория</h3>
+
+<p>При работе приложения, мы <strong>создаем</strong> новые <strong>Activity</strong> и <strong>закрываем</strong> старые, <strong>сворачиваем</strong> приложение, снова <strong>открываем</strong> и т.д. Activity умеет обрабатывать все эти движения. Это необходимо, например, для освобождения ресурсов или сохранения данных. В <a href="http://developer.android.com/guide/topics/fundamentals/activities.html#Lifecycle">хелпе</a> достаточно подробно это описано.</p>
+
+<p>Созданное при работе приложения <strong>Activity </strong>может быть в одном из <strong>трех состояний</strong>:</p>
+
+<p><strong>Resumed</strong>&ndash; Activity видно на экране, оно находится в фокусе, пользователь может с ним взаимодействовать. Это состояние также иногда называют Running.<br/>
+<strong>Paused</strong>&ndash; Activity не в фокусе, пользователь не может с ним взаимодействовать, но его видно (оно перекрыто другим Activity, которое занимает не весь экран или полупрозрачно).<br/>
+<strong>Stopped</strong>&ndash; Activity не видно (полностью перекрывается другим Activity), соответственно оно не в фокусе и пользователь не может с ним взаимодействовать.</p>
+
+<p>Когда Activity переходит из одного <strong>состояния</strong> в другое, система вызывает различные его <strong>методы</strong>, которые мы можем заполнять своим кодом. Схематично это можно изобразить так:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/20111005_L0023_L_StatesSchema.jpg" alt="" /></p>
+
+<p>Для упрощения понимания я дал краткое описание состояний в скобках под названиями. А крестом обозначил отсутствие Activity.</p>
+
+<p>Итак, мы имеем следующие методы Activity, которые вызывает система:</p>
+
+<p><strong>onCreate</strong>() – вызывается при первом создании Activity<br/>
+<strong>onStart</strong>() – вызывается перед тем, как Activity будет видно пользователю<br/>
+<strong>onResume</strong>() – вызывается перед тем как будет доступно для активности пользователя (взаимодействие)</p>
+
+<p><strong>onPause</strong>() – вызывается перед тем, как будет показано другое Activity<br/>
+<strong>onStop</strong>() – вызывается когда Activity становится не видно пользователю<br/>
+<strong>onDestroy</strong>() – вызывается перед тем, как Activity будет уничтожено</p>
+
+<p>Т.е. эти методы <strong>НЕ</strong> вызывают смену состояния. Наоборот, смена состояния Activity является триггером, который вызывает эти методы. Тем самым нас уведомляют о смене, и мы можем реагировать соответственно. Посмотрим на практике, когда и в каком порядке вызываются эти методы.</p>
+
+<h3> </h3>
+
+<h3>Практика</h3>
+
+<p>В этом уроке нам надо будет эмулировать событие смены ориентации экрана. Но эмулятор с Android 2.3 делает это криво, поэтому в проекте будем использовать версию 2.2. Для этого надо <a href="http://startandroid.ru/uroki/vse-uroki-spiskom/12-urok-3-sozdanie-avd-pervoe-prilozhenie-struktura-android-proekta.html">создать</a> новое AVD по версии 2.2 </p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/20111005_L0023_L_AVD22.jpg" alt="" /></p>
+
+<p>Создадим проект (обратите внимание, используем Android 2.2.):</p>
+
+<p><strong>Project name</strong>: P0231_OneActivityState<br/>
+<strong>Build Target</strong>: Android 2.2<br/>
+<strong>Application name</strong>: OneActivityState<br/>
+<strong>Package name</strong>: ru.startandroid.develop.p0231oneactivitystate<br/>
+<strong>Create Activity</strong>: MainActivity</p>
+
+<p>Layout не меняем, нам он сейчас не важен.</p>
+
+<pre><code>import android.app.Activity;
+
+import android.os.Bundle;
+
+import android.util.Log;
+
+
+
+public class MainActivity extends Activity {
+
+
+
+final String TAG = "States";
+
+
+
+/** Called when the activity is first created. */
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.main);
+
+    Log.d(TAG, "MainActivity: onCreate()");
+
+}
+
+
+
+@Override
+
+protected void onStart() {
+
+    super.onStart();
+
+    Log.d(TAG, "MainActivity: onStart()");
+
+}
+
+
+
+@Override
+
+protected void onResume() {
+
+    super.onResume();
+
+    Log.d(TAG, "MainActivity: onResume()");
+
+}
+
+
+
+@Override
+
+protected void onPause() {
+
+    super.onPause();
+
+    Log.d(TAG, "MainActivity: onPause()");
+
+}
+
+
+
+@Override
+
+protected void onStop() {
+
+    super.onStop();
+
+    Log.d(TAG, "MainActivity: onStop()");
+
+}
+
+
+
+@Override
+
+protected void onDestroy() {
+
+    super.onDestroy();
+
+    Log.d(TAG, "MainActivity: onDestroy()");
+
+}
+
+}
+</code></pre>
+
+<p>Добавим все остальные <strong>методы</strong> из схемы, и в каждый добавим запись в <strong>лог</strong>.</p>
+
+<p>В каментах подсказали важное замечание! При реализации этих методов обязательно вызывайте соответствующие методы супер-класса и обязательно перед вашим кодом. См. код выше. Каждый метод содержит вызов метода супер-класса и свой код расположен после этих вызовов.</p>
+
+<p>Все сохраним и запустим приложение. После того, как запустилось, смотрим лог:</p>
+
+<p><em>MainActivity: onCreate()<br/>
+MainActivity: onStart()<br/>
+MainActivity: onResume()</em></p>
+
+<p>Activity создалось, прошло два состояния (Stopped, Paused) и теперь находится в третьем состоянии &ndash; Resumed. Т.е. оно создалось (onCreate), отобразилось (onStart) и получило возможность взаимодействовать с пользователем (onResume).</p>
+
+<p>Теперь нажмем кнопку Back на эмуляторе. Activity закрылось. Смотрим лог:</p>
+
+<p><em>MainActivity: onPause()<br/>
+MainActivity: onStop()<br/>
+MainActivity: onDestroy()</em></p>
+
+<p>Activity проделывает путь, обратный созданию. Сначала теряет фокус (onPaused), затем исчезает с экрана (onStop), затем полностью уничтожается (onDestroy).</p>
+
+<h3> </h3>
+
+<h3>Смена ориентации экрана</h3>
+
+<p>Посмотрим, как ведет себя Activity, когда происходит смена ориентации экрана. Запустите снова приложение (либо найдите его в списке приложений в системе на эмуляторе, либо снова нажмите CTRL+F11 в Eclipse ). В логах снова отобразились три метода, вызванные при создании. Теперь в эмуляторе нажмите CTRL+F12, ориентация сменилась. Кажется, что ничего особенного не произошло, но смотрим логи и видим:</p>
+
+<p><em>MainActivity: onPause()<br/>
+MainActivity: onStop()<br/>
+MainActivity: onDestroy()<br/>
+MainActivity: onCreate()<br/>
+MainActivity: onStart()<br/>
+MainActivity: onResume()</em></p>
+
+<p>Activity полностью уничтожается и снова создается. При этом обычно выполняются процедуры сохранения и восстановления данных, чтобы не потерялись данные, и приложение сохранило свой вид. Про то, как это делается, мы будем говорить в последующих уроках.</p>
+
+<p>Также есть еще метод <strong>onRestart</strong>. Он вызывается перед методом <strong>onStart</strong>, если Activity не создается с нуля, а восстанавливается из состояния <strong>Stoped</strong>. Его мы рассмотрим в следующем уроке.</p>
+
+<p>Обычно в учебниках эта тема дается по-другому. Но мне это шаблонное объяснение кажется недостаточно понятным, поэтому я написал свое. Как всегда, надеюсь, что у меня получилось раскрыть тему )</p>
+
+<p>Советую вам после этого урока прочитать хелп, ссылку на который я дал в самом начале урока. Там все очень хорошо написано. И знания лучше усвоятся. Пока что, главное – это понять в какой момент, какой метод вызывается. А уже дальше мы будем разбираться, как это можно использовать и что там кодить.</p>
+
+<p>Статья взята из сайта <a href="http://startandroid.ru/">startandroid.ru</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-11T12:41:17+03:00" pubdate data-updated="true">Oct 11<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//activity-lifecycle/" data-via="" data-counturl="http://android-helper.com.ua//activity-lifecycle/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/soap-rest-android/" title="Previous Post: SOAP и REST web-сервиса в Android">&laquo; SOAP и REST web-сервиса в Android</a>
+      
+      
+        <a class="basic-alignment right" href="/games_65456/" title="Next Post: Классический Сапёр из Windows - ностальгия по прошлому">Классический Сапёр из Windows - ностальгия по прошлому &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Andrii Stakhov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
