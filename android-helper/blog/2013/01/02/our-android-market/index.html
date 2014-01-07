@@ -1,0 +1,526 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Пишем свой Android Market - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Сегодня что то мне не спится. Хочу побольше дать интересных тем. Не так много разработчиков выкладывают свои приложения на маркет. Много приложений &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2013/01/02/our-android-market">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Пишем свой Android Market</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-02T23:48:05+02:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Сегодня что то мне не спится.</p>
+
+<p>Хочу побольше дать интересных тем.</p>
+
+<p>Не так много разработчиков выкладывают свои приложения на маркет.</p>
+
+<p>Много приложений остается закрытыми в офисной рутине.</p>
+
+<p>Но вот нашел статью, как можно и в офисе организовать свой маркет. Может кому будет полезной.</p>
+
+<p>В рамках работы над большим количеством android приложений появилось желание создать свой Android Market на локальном сервере (с шахматами и поэтессами).<br/>
+Свой маркет должен решать две простые задачи:</p>
+
+<ul>
+<li><p>Распространение и обновление корпоративных приложений. У нас есть набор внутри корпоративных приложений, которые нельзя публиковать на Google Play. Сейчас пользователи оповещаются о новых версиях по емайлу, что не удобно.</p></li>
+<li><p>Бета тестирование заказных приложений на большой группе коллег, с обратной связью.</p></li>
+</ul>
+
+
+<p>И так, нам необходимо реализовать небольшое Android приложение, которое будет скачивать список доступных приложений, проверять наличие обновлений для уже установленных, устанавливать/удалять приложения.</p>
+
+<h4>Серверная часть</h4>
+
+<p>Серверной частью приложения может быть как сервис с широким функционалом (регистрация пользователей, отчеты, разграничение доступа к приложениям), так и просто xml файл:</p>
+
+<pre><code>&lt;MyMarket&gt;
+
+&lt;application name="TestApp1" 
+
+package="com.example.testapp1"
+
+versionCode="1"
+
+versionName="1.0" 
+
+url="http://mobile...../android/download/TestApp1.apk"/&gt;
+
+    .....
+
+&lt;/MyMarket&gt;
+</code></pre>
+
+<p>В моем случае серверной частью фактически выступает http шара.<br/>
+Данный xml файл в приложении трансформируется в список приложений, доступных для установки.</p>
+
+<h4>Установка</h4>
+
+<p>Пользователь выбирает нужное ему приложение и устанавливает, <br/>
+Маркет скачивает apk файл на флешку устройства и инициирует установку приложения, конечно, должна быть разрешена установка из сторонних источников.<br/>
+Установить незаметно в фоне мы не можем, поэтому после выполнения данного кода:</p>
+
+<pre><code>URL url = new URL(apkurl);
+
+        HttpURLConnection c = (HttpURLConnection) url.openConnecвленtion();
+
+        c.setRequestMethod("GET");
+
+        c.setDoOutput(true);
+
+        c.connect();
+
+
+
+        File file = this.getExternalFilesDir("download");
+
+        File outputFile = new File(file, "app.apk");
+
+        FileOutputStream fos = new FileOutputStream(outputFile);
+
+        InputStream is = c.getInputStream();
+
+
+
+        byte[] buffer = new byte[1024];
+
+        int len1 = 0;
+
+        while ((len1 = is.read(buffer)) != -1) {
+
+            fos.write(buffer, 0, len1);
+
+        }
+
+        fos.close();
+
+        is.close();
+
+
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+
+        intent.setDataAndType(Uri.fromFile(outputFile),
+
+                "application/vnd.android.package-archive");
+
+        startActivity(intent);
+</code></pre>
+
+<p>Пользователь увидит стандартное окно установки приложений:<br/>
+<img src="http://img-fotki.yandex.ru/get/4117/1154545.a5/0_7d3c3_bd08d241_L" alt="image" /></p>
+
+<h4>Обновление</h4>
+
+<p>Приложение Market может по определенному интервалу проверять наличие новых версий, делается это достаточно просто, так как доступен список всех установленных приложений:</p>
+
+<pre><code>private boolean checkNewVersion(String packageName, int versionCodeNew) {
+
+    List&lt;ApplicationInfo&gt; apps = getPackageManager()
+
+            .getInstalledApplications(0);
+
+    for (int i = 0; i &lt; apps.size(); i++) {
+
+        ApplicationInfo app = apps.get(i);
+
+        if (packageName.equals(app.packageName)) {
+
+            PackageManager manager = getPackageManager();
+
+            PackageInfo info;
+
+            try {
+
+                info = manager.getPackageInfo(app.packageName, 0);
+
+                int versionCode = info.versionCode;
+
+                if (versionCodeNew &gt; versionCode) {
+
+                    Toast.makeText(this, "New Version!", Toast.LENGTH_LONG)
+
+                            .show();
+
+                    return true;
+
+                }
+
+            } catch (NameNotFoundException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+    }
+
+    return false;
+
+}
+</code></pre>
+
+<p>В случае необходимости обновления приложения, повторяем процесс Установки, приложение будет обновлено.</p>
+
+<h4>Удаление</h4>
+
+<p>Удалить программу лучше из интерфейса нашего маркета, чтобы не заставлять пользователя выискивать тестируемое приложение среди всех его программ, для этого достаточно вызвать этот код:</p>
+
+<pre><code> Uri packageURI = Uri.parse("package:"+packageName);
+
+    Intent intent = new Intent(Intent.ACTION_DELETE, packageURI);
+
+    startActivity(intent);
+</code></pre>
+
+<p><img src="http://img-fotki.yandex.ru/get/4134/1154545.a5/0_7d3c5_830496a8_L" alt="image" /></p>
+
+<h4>Обратная связь</h4>
+
+<p>Получение сообщений об ошибках, вместе с логом ошибки, очень важно для разработчика, особенно на этапе тестирования приложения, добавим функцию автоматического сбора этой информации через Маркет.</p>
+
+<p>Для этого в каждое приложение, распространяемое через наш Маркет добавляем следующий класс</p>
+
+<pre><code>public class CustomExceptionHandler implements UncaughtExceptionHandler {
+
+private File logsFolder = null;
+
+public static final String ERROR_INTENT = "com.example.markettestapp1.SEND_ERROR";
+
+public CustomExceptionHandler(File logsFolder) {
+
+    this.logsFolder = logsFolder;
+
+}
+
+@Override
+
+public void uncaughtException(Thread thread, Throwable ex) {
+
+    final Writer result = new StringWriter();
+
+    final PrintWriter printWriter = new PrintWriter(result);
+
+    ex.printStackTrace(printWriter);
+
+    String stacktrace = result.toString();
+
+    printWriter.close();
+
+    try {
+
+        if (!logsFolder.exists()) {
+
+            logsFolder.createNewFile();
+
+        }
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(logsFolder, true));
+
+        writer.write(""+new Date()+"\n"+stacktrace);
+
+        writer.close();
+
+    } catch (IOException e) {
+
+        e.printStackTrace();
+
+    }
+
+
+
+    Intent intent = new Intent();
+
+    intent.setAction(ERROR_INTENT);
+
+    intent.putExtra("packageName", Test1Application.getApplication().getPackageName());
+
+    intent.putExtra("stacktrace", stacktrace);
+
+    Test1Application.getInstanceApplication().sendBroadcast(intent);
+
+
+
+    android.os.Process.killProcess(android.os.Process.myPid());
+
+}
+
+}
+</code></pre>
+
+<p>Как видно из кода, это хендлер, который получает ошибки (Exception), генерит строку со стеком, сохраняет ее в локальный файл и отправляет ошибку в виде броадкаст сообщения.</p>
+
+<p>А в Application классе включаем переадресацию всех сообщений об ошибках в этот хендлер</p>
+
+<pre><code>public class Test1Application extends Application {
+
+@Override
+
+public void onCreate() {
+
+    super.onCreate();
+
+    application = this;
+
+    Thread.setDefaultUncaughtExceptionHandler(new CustomExceptionHandler(new File(this.getApplicationContext().getExternalFilesDir(null),"exceptions.log")));
+
+}
+</code></pre>
+
+<p>Таким образом, если в тестируемои приложении происходит ошибка, то перед смертью пишется сообщение в лог и посылается броадкаст сообщение в маркет.,<br/>
+Перед передачей приложения заказчику, этот код удаляется (комментируется).</p>
+
+<p>В самом Маркете мы просто отлавливаем данное сообщение:</p>
+
+<pre><code>public class SendErrorReceiver  extends BroadcastReceiver {
+
+public static final String ERROR_INTENT = "com.example.markettestapp1.SEND_ERROR";
+
+@Override
+
+public void onReceive(Context context, Intent intent) {
+
+    Intent i = new Intent(context, SendErrorActivity.class);
+
+    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+    i.putExtra("stacktrace", intent.getStringExtra("stacktrace"));
+
+    i.putExtra("packageName", intent.getStringExtra("packageName"));
+
+    context.startActivity(i);
+
+}
+
+}
+</code></pre>
+
+<p>AndroidManifest.xml:</p>
+
+<pre><code>&lt;receiver android:name="com.example.markettestapp1.SendErrorReceiver" android:enabled="true" &gt;
+
+        &lt;intent-filter&gt;
+
+            &lt;action android:name="com.example.markettestapp1.SEND_ERROR" &gt;
+
+            &lt;/action&gt;
+
+        &lt;/intent-filter&gt;
+
+    &lt;/receiver&gt;
+</code></pre>
+
+<p>И дальше маркет уже может переслать это сообщение на почту разработчику, загрузить в какой нибудь веб-сервис или попросить пользователя добавить комментарий к ошибке<br/>
+<img src="http://img-fotki.yandex.ru/get/4121/1154545.a5/0_7d3c4_5b504bb_L" alt="image" /></p>
+
+<p>Я надеюсь, данный пример поможет многим начинающим разработчикам, разобраться, как написать свой универсальный велосипед для бета тестирования приложений и централизованному сбору статистики ошибок.</p>
+
+<p>ps: В статье использован исходный код и картинки взятые из прототипа приложения.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-02T23:48:05+02:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/android-helper/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2013/01/02/our-android-market/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2013/01/02/our-android-market/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2013/01/02/fragment-animation/" title="Previous Post: Анимация фрагментов в Android">&laquo; Анимация фрагментов в Android</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2013/01/03/corporation-market/" title="Next Post: Корпоративные приложения в Google Play">Корпоративные приложения в Google Play &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

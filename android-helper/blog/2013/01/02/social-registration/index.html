@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Простой способ интеграции Android-приложения с социальными сетями - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Друзья всем привет. Поздравляю всех с Новым годом. Но не стоит долго отдыхать. И новые статьи уже ждут вас. Сегодня нашел хорошую статью которая &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2013/01/02/social-registration">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Простой способ интеграции Android-приложения с социальными сетями</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-02T23:22:37+02:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Друзья всем привет.</p>
+
+<p>Поздравляю всех с Новым годом.</p>
+
+<p>Но не стоит долго отдыхать. И новые статьи уже ждут вас.</p>
+
+<p>Сегодня нашел хорошую статью которая упростит вам работу, по внедрению социальных сетей к себе в приложение.</p>
+
+<p>При разработке игрушки для Android&#8217;а у меня появилась идея добавить в нее немного социального взаимодействия для охвата большей аудитории. Сама игрушка не располагала к тому, чтобы распространятся «вирусным» способом, поэтому я решил ограничится публикацией результатов игры в социальных сетях в случае выигрыша и при условии попадания результата в локальную таблицу рекордов, и я стал искать решение этого вопроса.</p>
+
+<h5>Выбор социальной сети</h5>
+
+<p>Я себе поставил задачу публиковать сообщения не во всех социальных сетях сразу, а хотя бы в одной. Выбор встал между соц. сетями «ВКонтакте», «Facebook» и «Twitter». Так как хотелось распространять игру по всему миру, а не только на просторах СНГ, сеть «ВКонтакте» практически сразу была исключена из списка. Выбор между «Facebook» и «Twitter» был сделан просто, и может быть, не совсем объективно — «Facebook» мне не очень нравится, пользоваться я им не люблю из-за, на мой взгляд, крайне неудачного интерфейса, поэтому я решил использовать «Twitter», тем более, что в нем существует возможность интегрировать аккаунт с «Facebook» и дублировать туда сообщения.</p>
+
+<h5>Поиск способа реализации</h5>
+
+<p>Искать способ реализовать свою идею я начал с <a href="http://twitter4j.org/en/index.html">Twitter4j SDK</a>. К сожалению, кроме сухой javadoc документации, представляющей собой простое справочное руководство, и отрывочных примеров, там ничего больше не обнаружилось. Также было просмотрено немало тем на stackoverflow.com, но и там ничего подходящего не нашлось (если честно, не хотелось сильно углубляться в дебри TwitterAPI, да и к тому же мои знания Java и платформы Android оставляют желать лучше).</p>
+
+<h5>Есть идея, есть решение</h5>
+
+<p>Наконец блуждание в гугле навело меня на статью <a href="http://idev.by/android/20828/">Интеграция Android-приложения с Twitter</a>. Некоторые идеи были не совсем понятны, но код показался достаточно простым, и его автор утверждал, что его решение работает. Потратив немного времени, я адаптировал код автора для своего приложения, и стал проверять его работоспособность. Процедура авторизации проходила (хотя и показалась мне довольно непонятной для обычного, далекого от IT пользователя), но дальше дело не двигалось. Как отсылать сообщения (вернее, в какой момент), я так и не разобрался.<br/>
+Также не понравилось, что остается висеть открытый браузер, который вылезает после закрытия моего приложения. Поковырявшись денек, я оставил идею использовать TwitterAPI и стал искать более простое и приятное решение.</p>
+
+<h5>Самое простое решение</h5>
+
+<p>Самое простое решение, которое меня вполне удовлетворило, было найдено, более того, оно было в некоторых аспектах даже лучше, чем предыдущее.<br/>
+Суть идеи в том, чтобы просто отсылать данные, а куда они будут реально отправлены, решает система и пользователь. Из плюсов — то, что пользователю предоставляется возможность выбрать, куда он хочет отправить сообщение — SMS/MMS, твиттер, фейсбук, в вконтакте, или что-то еще. Я решил, что пользователь наиболее активно пользуется скорее всего только одной из социальных сетей, и ему не понадобится размещать пост в нескольких сетях, к тому же это решение в данном аспекте соответствовало первому варианту. Из минусов данного решения можно отметить то, что у пользователя должно быть установлено соответствующее клиентское приложение (для твиттера в маркете, помимо официального клиента, есть много сторонних). Существование клиента для Фейсбук я не проверял, но полагаю, что оно либо есть, либо появится в довольно ближайшем будущем. Клиент для в ВКонтакте, насколько я в курсе, уже создан (где-то тут была новость о конкурсе на его разработку), и его официальное появление тоже вопрос ближайшего будущего. Также я решил, что пользователь, который достаточно активен в соц. сети для того, чтобы опубликовать там результаты игры, уже озаботился установкой клиента для нее.<br/>
+Собственно, само решение — это пять строчек кода, и мне уже стыдно, что я томил читателя своими нудными рассуждениями, вместо того, чтобы сразу опубликовать его:</p>
+
+<pre><code>    // в коде моей Activity
+
+void shareTextInSocialMedia(String msg)
+
+{
+
+    //canShareText();
+
+    Intent share = new Intent(Intent.ACTION_SEND);
+
+    share.putExtra(Intent.EXTRA_TEXT, msg);
+
+    share.setType("text/plain");
+
+    //startActivity(Intent.createChooser(share, "Share this via"));
+
+    startActivityForResult(Intent.createChooser(share, "Share this via"), 0);
+
+}    
+</code></pre>
+
+<p>При выполнении приведенного кода возникает список приложений, способных произвести отправку (у меня это Send SMS/MMS и Post to Twitter при установленном твиттер-клиенте), пользователь выбирает нужное приложение, и продолжает работу уже в нем. <br/>
+Большой минус — мое приложение закрывается после выполнения этого кода, причем не сразу — в случае твиттер-клиента там сначала можно отредактировать сообщение, и в это время моя программа висела в фоне и играла музыку, и пропала только после нажатия кнопки «Твитнуть». Я попробовал использовать startActivityForResult вместо startActivity, но ничего не изменилось. В случае отправки SMS мое приложение тоже пропало, хотя момент я не засек так же точно. На stackoverflow.com мне сказали, что проблема в твиттер-клиенте («Ah, I see. This is a classic example of application does not respecting Android lifecycle (shame on Twitter)»). Я сначала удовлетворился тем, что от меня тут ничего не зависит, но потом проверил SMS способ, и несколько засомневался, так как он тоже не работал корректно.</p>
+
+<h5>Бонус для самых упорных</h5>
+
+<p>Меня несколько напрягало то, что в случае отсутствия приложений, способных обработать отправку сообщения, пользователю будет показано противное сообщение об этом, и я захотел проверить, нужно ли показывать кнопку «Share» в своем приложении, и StackOverflow подсказал мне решение:</p>
+
+<pre><code>    boolean canShareText( boolean allowSmsMms)
+
+{
+
+    PackageManager manager = getPackageManager();
+
+    List&amp;lt;ResolveInfo&amp;gt; list = manager.queryIntentActivities(createShareIntent(""), 0);
+
+
+
+    if (list != null &amp;amp;&amp;amp; list.size() &amp;gt; 0) 
+
+    {
+
+        if (allowSmsMms) return true;
+
+        int handlersCount = 0;
+
+        for (ResolveInfo li : list)
+
+        {
+
+            if (li!=null &amp;amp;&amp;amp; li.activityInfo!=null &amp;amp;&amp;amp; li.activityInfo.packageName!=null &amp;amp;&amp;amp; li.activityInfo.packageName=="com.android.mms") {}
+
+            else
+
+                ++handlersCount;
+
+        }
+
+        if (handlersCount&amp;gt;0) return true;
+
+    } 
+
+    return false;
+
+}
+</code></pre>
+
+<p>В данном коде перечисляются все доступные способы отправки сообщения, в том числе и с использованием СМС.<br/>
+Я решил не показывать кнопку «Share», если доступна отсылка только SMS/MMS, и добавил опциональную возможность проигнорировать это приложение. Имя пакета «com.android.mms» получил во время прогона на эмуляторе, так что возможно не везде будет срабатывать.</p>
+
+<p>Статья из сайта <a href="http://habrahabr.ru/post/164187/">habrahabr.ru</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-02T23:22:37+02:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/android-helper/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2013/01/02/social-registration/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2013/01/02/social-registration/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2012/12/30/new-year/" title="Previous Post: С Новым годом!">&laquo; С Новым годом!</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2013/01/02/fragment-animation/" title="Next Post: Анимация фрагментов в Android">Анимация фрагментов в Android &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

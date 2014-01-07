@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Custom Font - свои шрифты в Android - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Друзья всем привет. Я очень рад, что некоторые из ребят в коучинге пишут замечательные топики! Вот с какой проблемой мы столкнулись в коучинге и как &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2013/11/21/custom-font">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Custom Font - свои шрифты в Android</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-21T14:47:23+02:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Друзья всем привет.</p>
+
+<p>Я очень рад, что некоторые из ребят в коучинге пишут замечательные топики!</p>
+
+<p>Вот с какой проблемой мы столкнулись в коучинге и как ее решали!</p>
+
+<p>В процессе коучинга, создавая своё первое приложение &ndash; калькулятор, научился использовать кастомные шрифты. Спешу безвозмездно поделиться своим опытом!</p>
+
+<p><strong>Какие шрифты подходят?</strong></p>
+
+<p>Можно использовать шрифты TrueType (TTF)</p>
+
+<p><strong>Куда положить шрифт?</strong></p>
+
+<p>В корневой директории (на одном уровне с директориями java и res и файлом AndroidManifest.xml) создать папку assets, а внутри неё можно создать отдельную папку для шрифтов fonts
+В эту папку бросить свой файл со шрифтом Custom.ttf</p>
+
+<p><strong>Как Android узнает, где находятся кастомные шрифты?</strong></p>
+
+<p>В файле <strong>&lt;project_name>.iml</strong> в разделе configuration необходимо добавить строчку</p>
+
+<pre><code>&lt;configuration&gt;
+...
+&lt;option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/ main/assets" /&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>а в файле <strong>res/values/strings.xml</strong> &ndash; строчку</p>
+
+<pre><code>&lt;string name="digit_keyboard_font"&gt;fonts/Custom.ttf&lt;/string&gt;
+</code></pre>
+
+<p><strong>Как назначить шрифт своим View-элементам?</strong></p>
+
+<p>Теперь в коде, в методе onCreate можно использовать свой шрифт. Обратите внимание на код, в котором скрывается первая секретная фишка!</p>
+
+<pre><code>Typeface keys = Typeface.createFromAsset(getAssets(),   getString(R.string.digit_keyboard_font));
+TextView key = (TextView)findViewById(R.id.button_about_ok);
+key.setTypeface(keys);
+</code></pre>
+
+<p>Как видите, таким способом можно применить шрифт к надписям на кнопках и других <strong>View</strong>, которые можно явно привести типу <strong>TextView</strong>.</p>
+
+<p>Ещё одна супер-полезная и очень секретная фишка
+Допустим, требуется применить шрифт к группе элементов, которые располагаются в layout-файле внутри корневого элемента типа <strong>ViewGroup</strong> с присвоенным ему уникальным <strong>id</strong></p>
+
+<pre><code>&lt;LinearLayout
+android:id="@+id/digit_keyboard_layout"
+android:layout_width="wrap_content"
+android:layout_height="match_parent"
+android:layout_gravity="center_horizontal"
+android:orientation="vertical"&gt;
+
+&lt;TableLayout
+    android:id="@+id/table1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"&gt;
+
+    &lt;TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"&gt;
+
+        &lt;Button
+            android:id="@+id/button_one"
+            style="@style/calc_button_style"
+            android:layout_width="@dimen/button_width"
+            android:text="@string/one"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:layout_weight="1"/&gt;
+
+        &lt;Button
+            android:id="@+id/button_two"
+            style="@style/calc_button_style"
+            android:layout_width="@dimen/button_width"
+            android:text="@string/two"
+            android:layout_weight="1"/&gt;
+
+        &lt;Button
+            android:id="@+id/button_three"
+            android:text="@string/three"
+            style="@style/calc_button_style"
+            android:layout_width="@dimen/button_width"
+            android:layout_weight="1"
+            /&gt;
+    &lt;/TableRow&gt;
+&lt;/TableLayout&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Используйте в коде приложения вот такой метод</p>
+
+<pre><code>// Sets the font on all TextViews in the ViewGroup.
+public void setFont(ViewGroup group, Typeface font) {
+    int count = group.getChildCount();
+    View v;
+    for(int i = 0; i &lt; count; i++) {
+        v = group.getChildAt(i);
+        if(v instanceof TextView) {
+            ((TextView)v).setTypeface(font);
+        } else if(v instanceof ViewGroup) {
+            setFont((ViewGroup) v, font);
+        }
+    }
+}
+</code></pre>
+
+<p>Метод рекурсивно вызывает сам себя пока не доберётся до нужного элемента в любой сложной xml-структуре <strong>layout</strong>.</p>
+
+<p>Вызывая этот метод устанавливаем шрифт группе элементов.</p>
+
+<pre><code>Typeface keys = Typeface.createFromAsset(getAssets(),   getString(R.string.digit_keyboard_font));
+ViewGroup keyboardArea = (ViewGroup)findViewById(R.id.digit_keyboard_layout);
+setFont(keyboardArea, keys);
+</code></pre>
+
+<p>У кого есть какие то наработки или идеи, пишите в комментариях. Мы обязательно добавим статью на блог!</p>
+
+<p>Жду ваших комментариев!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-21T14:47:23+02:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/android-helper/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/android-helper/blog/categories/pamiatka-razrabotchiku/'>Памятка разработчику</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>, <a class='category' href='/android-helper/blog/categories/chto-takoie-android/'>Что такое android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2013/11/21/custom-font/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2013/11/21/custom-font/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2013/11/16/ganymotion-root/" title="Previous Post: Genymotion root - Как получить права рут на емуляторе">&laquo; Genymotion root - Как получить права рут на емуляторе</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2013/12/22/skype-premium/" title="Next Post: Skype - годовой преимум аккаунт бесплатно!">Skype - годовой преимум аккаунт бесплатно! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

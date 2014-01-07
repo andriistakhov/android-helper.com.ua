@@ -1,0 +1,457 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Как сделать свои Tabs в Android - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Добрый день друзья. Сегодня я бы хотел поделится с вами информацией о создании и использовании своих Tabs. 1. Создадим layout Самое первое что нужно &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2012/07/15/custom-tabs">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Как сделать свои Tabs в Android</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-15T09:10:33+03:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Сегодня я бы хотел поделится с вами информацией о создании и использовании своих Tabs.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/custom_tabs_view.png" alt="" /></p>
+
+<h3>1. Создадим layout</h3>
+
+<p>Самое первое что нужно сделать, это открыть main.xml и добавить туда TabHost и TabWidget</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:id="@android:id/tabhost" android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"&gt;
+
+&lt;LinearLayout android:orientation="vertical"
+
+    android:layout_width="fill_parent" android:layout_height="fill_parent"&gt;
+
+    &lt;TabWidget android:id="@android:id/tabs"
+
+        android:layout_width="fill_parent" android:layout_height="wrap_content" /&gt;
+
+    &lt;FrameLayout android:id="@android:id/tabcontent"
+
+        android:layout_width="fill_parent" android:layout_height="fill_parent"&gt;
+
+    &lt;/FrameLayout&gt;
+
+&lt;/LinearLayout&gt;
+
+&lt;/TabHost&gt;
+</code></pre>
+
+<h3>2. Пишем код в Activity</h3>
+
+<p>У нас есть main.xml , теперь нам нужно добавить код для привязки нашего activity с нашим файлом</p>
+
+<pre><code>setContentView(R.layout.main);
+
+mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+</code></pre>
+
+<p>Ну вот после этого мы можем добавлять tabs на наше activty</p>
+
+<pre><code>@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+super.onCreate(savedInstanceState);
+
+setContentView(R.layout.main);
+
+mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+
+setupTab(new TextView(this), "Tab 1");
+
+setupTab(new TextView(this), "Tab 2");
+
+setupTab(new TextView(this), "Tab 3");
+
+}
+
+private void setupTab(final View view, final String tag) {
+
+View tabview = createTabView(mTabHost.getContext(), tag);
+
+    TabSpec setContent = mTabHost.newTabSpec(tag).setIndicator(tabview).setContent(new TabContentFactory() {
+
+    public View createTabContent(String tag) {return view;}
+
+});
+
+mTabHost.addTab(setContent);
+
+}
+
+
+
+private static View createTabView(final Context context, final String text) {
+
+View view = LayoutInflater.from(context).inflate(R.layout.tabs_bg, null);
+
+TextView tv = (TextView) view.findViewById(R.id.tabsText);
+
+tv.setText(text);
+
+return view;
+
+}
+</code></pre>
+
+<h3>3. Создаем свой tabs layout</h3>
+
+<p>Создадим новый xml файл и назовем его tabs_bg.xml. Этот файл как раз и будет служить заполнением нашего tab.</p>
+
+<p>На него можно добавлять любые элементы.</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:id="@+id/tabsLayout" android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"
+
+android:padding="10dip" android:gravity="center" android:orientation="vertical"&gt;
+
+
+
+&lt;TextView android:id="@+id/tabsText" android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content" android:text="Title"
+
+    android:textSize="15dip" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>4. Меняем вид и поведение</h3>
+
+<p>Создадим еще несколько файлов tab_text_selector.xml и tab_bg_selector.xml (их нужно создать в папке layout), а также tab_bg_selected.xml и tab_bg_unselected.xml (эти 2 файла создаем в папке drawable). Эти файлы служат для того что при изменении статуса tab с активного на неактивный соответственно меняется его внешний вид.</p>
+
+<p><strong>tab_bg_selected.xml:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;shape xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:shape="rectangle"&gt;
+
+&lt;gradient android:startColor="#A8A8A8" android:centerColor="#7F7F7F"
+
+    android:endColor="#696969" android:angle="-90" /&gt;
+
+&lt;/shape&gt;
+</code></pre>
+
+<p><strong>tab_bg_unselected.xml:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;shape xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:shape="rectangle"&gt;
+
+&lt;gradient android:startColor="#5C5C5C" android:centerColor="#424242"
+
+    android:endColor="#222222" android:angle="-90" /&gt;
+
+&lt;/shape&gt;
+</code></pre>
+
+<p> <strong>tab_text_selector.xml:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+
+&lt;item android:state_selected="true" android:color="@android:color/white" /&gt;
+
+&lt;item android:state_focused="true" android:color="@android:color/white" /&gt;
+
+&lt;item android:state_pressed="true" android:color="@android:color/white" /&gt;
+
+&lt;item android:color="#f8f8f8" /&gt;
+
+&lt;/selector&gt;
+</code></pre>
+
+<p><strong>tab_bg_selector.xml:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+
+&lt;!--  Active tab --&gt;
+
+&lt;item android:state_selected="true" android:state_focused="false"
+
+    android:state_pressed="false" android:drawable="@drawable/tab_bg_selected" /&gt;
+
+&lt;!--  Inactive tab --&gt;
+
+&lt;item android:state_selected="false" android:state_focused="false"
+
+    android:state_pressed="false" android:drawable="@drawable/tab_bg_unselected" /&gt;
+
+&lt;!--  Pressed tab --&gt;
+
+&lt;item android:state_pressed="true" android:drawable="@android:color/transparent" /&gt;
+
+&lt;!--  Selected tab (using d-pad) --&gt;
+
+&lt;item android:state_focused="true" android:state_selected="true"
+
+    android:state_pressed="false" android:drawable="@android:color/transparent" /&gt;
+
+&lt;/selector&gt;
+</code></pre>
+
+<p>И теперь поменяем внешний вид нашего tabs_bg.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:id="@+id/tabsLayout" android:layout_width="fill_parent"
+
+android:layout_height="fill_parent" android:background="@drawable/tab_bg_selector"
+
+android:padding="10dip" android:gravity="center" android:orientation="vertical"&gt;
+
+
+
+&lt;TextView android:id="@+id/tabsText" android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content" android:text="Title"
+
+    android:textSize="15dip" android:textColor="@drawable/tab_text_selector" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<h3>5. Заключительная стадия </h3>
+
+<p>В заключительной стадии нам нужно добавить разделитель между tabs.</p>
+
+<p>Этот код нужно добавить пере вызовом функции setupTab.</p>
+
+<pre><code>mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
+</code></pre>
+
+<p>Ну вот и все.</p>
+
+<p>В следующей статье я продолжу тему своих tabs. И с нее вы сможете узнать как скомпоновать tabs и swipe экранов.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-15T09:10:33+03:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2012/07/15/custom-tabs/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2012/07/15/custom-tabs/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2012/06/01/viewpager/" title="Previous Post: Слайдинг экранов с помощью ViewPager">&laquo; Слайдинг экранов с помощью ViewPager</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2012/07/17/swipe-tabs/" title="Next Post: Swipe + Tabs - прокрутка экранов и свои tabs">Swipe + Tabs - прокрутка экранов и свои tabs &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Распознавание и генерация речи в Android - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Столкнулся с необходимостью распознавать речь на android устройстве. Долго собирал крупицы информации, пока не нашел хорошею и полною статью Прошу к &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2012/10/10/speak-android">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Распознавание и генерация речи в Android</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-10T22:52:24+03:00" pubdate data-updated="true">Oct 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Столкнулся с необходимостью распознавать речь на android устройстве.</p>
+
+<p>Долго собирал крупицы информации, пока не нашел хорошею и полною статью</p>
+
+<p>Прошу к прочтению.</p>
+
+<p>Последнее время большой интерес у пользователей вызывает возможность распознавания речи в телефонах. Огромная заслуга в популяризации этого направления принадлежит компании Aple, однако Google также располагает подобными технологиями. Собственно этой теме и будет посвящена данная статья. Мы разработаем приложение, которое будет распознавать речь пользователя и воспроизводить результат с помощью голосового движка &ldquo;Text To Speech&rdquo; (TTS). Отметим, что распознавание происходит на серверах Google, поэтому для работы приложению необходимо разрешить использовать коммуникационные возможности. Кроме того, распознавание речи не работает на эмуляторе. Тестировать программу необходимо на реальном устройстве.</p>
+
+<p>На самом деле работать с распознаванием и синтезом речи в Android очень просто. Все сложные вычисления скрыты от нас в довольно элегантную библиотеку с простым API. Вы сможете осилить этот урок, даже если имеете весьма поверхностные знания о программировании для Android.</p>
+
+<p>Давайте создадим новый проект в Eclipse. Для наших нужд понадобится версия SDK не меньше 8. Опишем в общих чертах создаваемую программу. При запуске приложения пользователю будет показана кнопка, после нажатия на которую пользователю будет предложено надиктовать фразу. Затем будет осуществлено распознавание и будет показан список возможных вариантов. Поскольку технологии распознавания речи далеки от совершенства, программа не может ручаться за точность результата, именно поэтому будет предложено несколько вариантов. После того, как пользователь выберет один из них, будет запущен генератор голоса, который воспроизведет выбранную фразу. </p>
+
+<p>Нам понадобится несколько текстовых строк, объявим их в фале &ldquo;res/values/strings.xml&rdquo;</p>
+
+<pre><code>&lt;resources&gt;
+
+&lt;string name="intro"&gt;Press the button to speak!&lt;/string&gt;
+
+&lt;string name="app_name"&gt;SpeechRepeat&lt;/string&gt;
+
+&lt;string name="speech"&gt;Speak now!&lt;/string&gt;
+
+&lt;string name="word_intro"&gt;Suggested words&amp;#8230;&lt;/string&gt;
+
+&lt;/resources&gt;
+</code></pre>
+
+<p>Откроем файл &ldquo;res/layout/main.xml&rdquo; и зададим шаблон дизайна приложения. Для этого переключимся из графического в XML редактор и изменим содержимое файла</p>
+
+<pre><code>&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"
+
+android:orientation="vertical"
+
+android:background="#ff330066"
+
+android:paddingBottom="5dp" &gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Добавим в Linear Layout элемент Text View</p>
+
+<pre><code>&lt;TextView android:layout_width="fill_parent"
+
+android:layout_height="wrap_content"
+
+android:text="@string/intro"
+
+android:padding="5dp"
+
+android:textStyle="bold"
+
+android:textSize="16dp"
+
+android:gravity="center"
+
+android:textColor="#ffffff33" /&gt;
+</code></pre>
+
+<p>обратите внимание, TextView ссылается на строку intro, которую мы задали в файле strings.xml. </p>
+
+<p>После Text View добавим кнопку</p>
+
+<pre><code>&lt;Button android:id="@+id/speech_btn"
+
+android:layout_width="match_parent"
+
+android:layout_height="wrap_content"
+
+android:text="@string/speech" /&gt;
+</code></pre>
+
+<p>Пользователь будет нажимать эту кнопку, чтобы начать говорить. Кнопка имеет параметр id, через который ее можно вызвать из Java кода. После нажатия на кнопку пользователю показывается сообщение. Нам также понадобится TextView для вывода слов с предложениями</p>
+
+<pre><code>&lt;TextView android:layout_width="fill_parent"
+
+android:layout_height="wrap_content"
+
+android:padding="5dp"
+
+android:text="@string/word_intro"
+
+android:textStyle="italic" /&gt;
+</code></pre>
+
+<p>TextView будет использовать строковый ресурс. Нам также понадобится список для вариантов слов</p>
+
+<pre><code>&lt;ListView android:id="@+id/word_list"
+
+android:layout_width="fill_parent"
+
+android:layout_height="0dip"
+
+android:layout_weight="1"
+
+android:paddingLeft="10dp"
+
+android:paddingTop="3dp"
+
+android:paddingRight="10dp"
+
+android:paddingBottom="3dp"
+
+android:layout_marginLeft="20dp"
+
+android:layout_marginRight="20dp"
+
+android:layout_marginTop="5dp"
+
+android:layout_marginBottom="5dp"
+
+android:background="@drawable/words_bg" /&gt;
+</code></pre>
+
+<p>ListView будет заполняться данными в процессе работы программы, поэтому для доступа к этому компоненту также требуется ID. Обратите также внимание на наличие ресурса drawable. Вы должны сохранить файл words_bg.xml в папке res</p>
+
+<pre><code>&lt;shape xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:dither="true"&gt;
+
+&lt;gradient
+
+android:startColor="#ff000000"
+
+android:endColor="#ff000000"
+
+android:centerColor="#00000000"
+
+android:angle="180" /&gt;
+
+&lt;corners android:radius="10dp" /&gt;
+
+&lt;stroke
+
+android:width="2dp"
+
+android:color="#66ffffff" /&gt;
+
+&lt;/shape&gt; 
+</code></pre>
+
+<p>Ничего особенного. Вы можете настроить дизайн ListView по своему усмотрению. Нам осталось задать еще один элемент пользовательского интерфейса &ndash; шаблон для элемента ListView. Создайте новый файл res/layout/word.xml со следующим содержанием</p>
+
+<pre><code>&lt;TextView xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"
+
+android:gravity="center"
+
+android:padding="5dp"
+
+android:textColor="#ffffffff"
+
+android:textSize="16dp" &gt;
+
+&lt;/TextView&gt;
+</code></pre>
+
+<p>Таким образом, каждый элемент списка представляет собой просто Text View.</p>
+
+<p>Если Вы все сделали правильно, то при запуске должно получиться следующее</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/speechsample1.jpg" alt="" /></p>
+
+<h3>Программируем распознавание речи в Android</h3>
+
+<p>После того, как шаблон будущего приложения создан, можно перейти к кодированию. Откройте java файл главной Activity и добавьте в начало файла</p>
+
+<pre><code>import java.util.ArrayList;
+
+import java.util.List;
+
+import java.util.Locale;
+
+
+
+import android.app.Activity;
+
+import android.content.Intent;
+
+import android.content.pm.PackageManager;
+
+import android.content.pm.ResolveInfo;
+
+import android.os.Bundle;
+
+import android.speech.RecognizerIntent;
+
+import android.speech.tts.TextToSpeech.OnInitListener;
+
+import android.speech.tts.TextToSpeech;
+
+import android.util.Log;
+
+import android.view.View;
+
+import android.view.View.OnClickListener;
+
+import android.widget.AdapterView;
+
+import android.widget.AdapterView.OnItemClickListener;
+
+import android.widget.ArrayAdapter;
+
+import android.widget.Button;
+
+import android.widget.ListView;
+
+import android.widget.Toast;
+
+import android.widget.TextView;
+</code></pre>
+
+<p>Изменим немного декларацию главного класса</p>
+
+<pre><code>public class SpeechRepeatActivity extends Activity implements OnClickListener, OnInitListener {
+</code></pre>
+
+<p>OnInitListener необходим для работы TTS движка. Внутри класса добавим объявления переменных перед методом onCreate</p>
+
+<pre><code>//переменная для проверки возможности
+
+//распознавания голоса в телефоне
+
+private static final int VR_REQUEST = 999;
+
+
+
+//ListView для отображения распознанных слов
+
+private ListView wordList;
+
+
+
+//Log для вывода вспомогательной информации
+
+private final String LOG_TAG = "SpeechRepeatActivity";
+
+//***здесь можно использовать собственный тег***
+
+
+
+//переменные для работы TTS 
+
+
+
+//переменная для проверки данных для TTS 
+
+private int MY_DATA_CHECK_CODE = 0;
+
+
+
+//Text To Speech интерфейс
+
+private TextToSpeech repeatTTS;
+</code></pre>
+
+<p>Внутри метода onCreate автоматически сгенерирован код, вызывающий метод родительского класса и устанавливающий главный контекст вывода.</p>
+
+<pre><code>//вызов суперкласса
+
+super.onCreate(savedInstanceState);
+
+//установка контекста вывода
+
+setContentView(R.layout.main);
+</code></pre>
+
+<p>Cоздадим переменные для работы с кнопкой и списком распознанных слов</p>
+
+<pre><code>Button speechBtn = (Button) findViewById(R.id.speech_btn);
+
+wordList = (ListView) findViewById(R.id.word_list);
+</code></pre>
+
+<p>Далее необходимо проверить поддерживается ли возможность распознавания голоса телефоном</p>
+
+<pre><code>//проверяем, поддерживается ли распознование речи
+
+PackageManager packManager = getPackageManager();
+
+List&lt;ResolveInfo&gt; intActivities = packManager.queryIntentActivities(new 
+
+    Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+
+if (intActivities.size() != 0) {
+
+// распознавание поддерживается, будем отслеживать событие щелчка по кнопке
+
+speechBtn.setOnClickListener(this);
+
+}
+
+else
+
+{
+
+// распознавание не работает. Заблокируем 
+
+// кнопку и выведем соответствующее 
+
+// предупреждение.
+
+speechBtn.setEnabled(false);
+
+Toast.makeText(this, "Oops - Speech recognition not supported!", Toast.LENGTH_LONG).show();
+
+}
+</code></pre>
+
+<p>Мы запрашиваем среду, поддерживается ли Recognizer Intent. Если поддерживается, мы говорим приложению, что нужно отслеживать щелчок пользователя по кнопке. Если интент не поддерживается, мы блокируем кнопку и выводим соответствующее сообщение пользователю.</p>
+
+<p>Напишем код, обрабатывающий нажатие на кнопку. Внутри класса после метода OnCreate добавим метод OnClick.</p>
+
+<pre><code>public void onClick(View v) {
+
+if (v.getId() == R.id.speech_btn) {
+
+    // отслеживаем результат
+
+    listenToSpeech();
+
+}
+
+}
+</code></pre>
+
+<p>Как видите, при нажатии на кнопку мы вызываем метод listenToSpeech().</p>
+
+<pre><code>private void listenToSpeech() {
+
+
+
+//запускаем интент, распознающий речь и передаем ему требуемые данные
+
+Intent listenIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
+//указываем пакет
+
+listenIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, 
+
+       getClass().getPackage().getName());
+
+//В процессе распознования выводим сообщение
+
+listenIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say a word!");
+
+//устанавливаем модель речи
+
+    listenIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, 
+
+        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+//указываем число результатов, которые могут быть получены
+
+listenIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 10);
+
+
+
+//начинаем прослушивание
+
+startActivityForResult(listenIntent, VR_REQUEST);
+
+}
+</code></pre>
+
+<p>Большая часть приведенного кода стандартна для программ, использующих распознавание голоса. Обратите внимание на параметр EXTRA_PROMPT. Он задает строку-приглашение для пользователя. Параметр EXTRA_MAX_RESULTS определяет максимальное число вариантов распознавания. В конце концов, мы вызываем startActivityForResult. Результат его работы будет передан в метод onActivityResult.</p>
+
+<p>На следующем скриншоте показан экран в момент распознавания речи.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/speechsample2.jpg" alt="" /></p>
+
+<p>Определим метод onActivityResult</p>
+
+<pre><code>@Override
+
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+//проверяем результат распознавания речи
+
+if (requestCode == VR_REQUEST &amp;&amp; resultCode == RESULT_OK)
+
+{
+
+    //Добавляем распознанные слова в список результатов
+
+    ArrayList&lt;String&gt; suggestedWords = 
+
+             data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+    //Передаем список возможных слов через ArrayAdapter компоненту ListView  
+
+    wordList.setAdapter(new ArrayAdapter&lt;String&gt; (this, R.layout.word, suggestedWords));
+
+}
+
+
+
+//tss код здесь
+
+
+
+//вызываем метод родительского класса
+
+super.onActivityResult(requestCode, resultCode, data);
+
+}
+</code></pre>
+
+<p>Обратите внимание, при проверке результата мы сравниваем переменную requestCode с константой VR_REQUEST, которую использовали ранее при вызове метода startActivityForResult. Таким образом, мы рассматриваем только результаты от нашего запроса. В метод возвращается 10 вариантов распознанных слов, которые мы записываем в список ArrayList. Этот список мы используем в ArrayAdapter компонента List View. </p>
+
+<p>Если приложение справилось с задачей и смогло что-то распознать, вы увидите похожий н показанный на левом скриншоте результат. Если приложению не удалось распознать фразу, будет показано сообщение, как на правом скриншоте</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/speechsample3.jpg" alt="" />
+<img src="http://android-helper.com.ua/wp-content/uploads/2012/10/speechsample4.jpg" alt="" /></p>
+
+<p>Вот, собственно и все. Распознавание голоса в Android &ndash; довольно простая задача. Мы вызываем интент RecognizerIntent с требуемыми нами параметрами. Результат  возвращается в onActivityResult.</p>
+
+<h3>Генерация речи в Android</h3>
+
+<p>Перейдем ко второй части нашего приложения, связанного с генерацией речи. Мы хотим, чтобы телефон проговаривал фразу из списка результатов. Мы должны определить строку, на которую щелкнул пользователь. Вернемся к методу onCreate и добавим в конец этого метода код</p>
+
+<pre><code>//засекаем щелчок пользователя по слову из списка
+
+wordList.setOnItemClickListener(new OnItemClickListener() {
+
+
+
+//метод вызывается в ответ на щелчок по слову
+
+public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id)
+
+{
+
+    //записываем в переменную TextView строки
+
+    TextView wordView = (TextView)view;
+
+    //получаем строку с текстом
+
+    String wordChosen = (String) wordView.getText();
+
+    //выводим ее в лог для отладки
+
+    Log.v(LOG_TAG, "chosen: "+wordChosen);
+
+    //выводим Toast сообщение
+
+    Toast.makeText(SpeechRepeatActivity.this, "You said: "+wordChosen, 
+
+            Toast.LENGTH_SHORT).show();
+
+}
+
+});
+</code></pre>
+
+<p>Мы используем метод setOnItemClickListener чтобы установить отслеживание щелчков для каждой строки. Внутри нового объекта OnItemClickListener мы описали метод onItemClick, который вызывается в ответ на щелчок по строке списка. Выбранная строка передается, как View в этот метод. Поскольку при проектировании шаблона приложения мы указали, что наш список состоит из TextView, мы преобразуем полученное значение в объект TextView и достаем из него строковое значение. Мы записываем это слово в лог и показываем пользователю Toast сообщение.</p>
+
+<p>Если Вас не интересует процесс генерации речи, Вы можете остановиться и протестировать приложение. </p>
+
+<p>Для генерации речи необходимо настроить движок TTS. Добавим код в конец метода onCreate</p>
+
+<pre><code>//подготовка движка TTS для проговаривания слов
+
+Intent checkTTSIntent = new Intent(); 
+
+//проверка наличия TTS 
+
+checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA); 
+
+//запуск checkTTSIntent интента
+
+startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE); 
+</code></pre>
+
+<p>Как и в случае распознавания, результат интента возвращается в метод onActivityResult. В этом методе перед строкой super.onActivityResult(requestCode, resultCode, data); добавьте</p>
+
+<pre><code>//returned from TTS data check
+
+if (requestCode == MY_DATA_CHECK_CODE)
+
+{ 
+
+//все необходимые приложения установлены, создаем TTS 
+
+if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) 
+
+    repeatTTS = new TextToSpeech(this, this); 
+
+//движок не установлен, предположим пользователю установить его
+
+else
+
+{ 
+
+    //интент, перебрасывающий пользователя на страницу TSS в Google Play
+
+    Intent installTTSIntent = new Intent(); 
+
+    installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA); 
+
+    startActivity(installTTSIntent); 
+
+} 
+
+}
+</code></pre>
+
+<p>Таким образом, мы проверяем наличие TTS движка, и если он не установлен &ndash; предлагаем пользователю установить соответствующую программу. </p>
+
+<p>Чтобы завершить настройку TTS, добавим метод onInit, который вызывается при успешной инициализации TTS.</p>
+
+<pre><code>public void onInit(int initStatus) {
+
+if (initStatus == TextToSpeech.SUCCESS)  
+
+    repeatTTS.setLanguage(Locale.UK); //Язык
+
+}
+</code></pre>
+
+<p>Здесь мы устанавливаем язык генератора речи.</p>
+
+<p>Для того, чтобы заставить движок проговорить строку, нужно вызвать метод repeatTTS.speak. Вернемся к методу onCreate. Внутри метода onItemClick после строки Toast.makeText(SpeechRepeatActivity.this, &ldquo;You said: &rdquo;+wordChosen, Toast.LENGTH_SHORT).show(); добавьте следующий код</p>
+
+<pre><code>repeatTTS.speak("You said: "+wordChosen, TextToSpeech.QUEUE_FLUSH, null);
+</code></pre>
+
+<p>Таким образом, одновременно с Toast сообщением пользователь услышит сгенерированную речь. Отметим еще раз, что эмулятор не поддерживает распознавание речи, поэтому тестировать программу необходимо на телефоне.</p>
+
+<p>Полный проект вы можете скачать на <a href="http://android-helper.com.ua/codes/">странице с кодами</a>.</p>
+
+<p>Статья взята из сайта <a href="http://www.mobilab.ru/androiddev/androidspeechrecognition.html">mobilab.ru</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-10T22:52:24+03:00" pubdate data-updated="true">Oct 10<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/android-helper/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2012/10/10/speak-android/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2012/10/10/speak-android/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2012/10/10/sqlite_1/" title="Previous Post: Работа с базой данных в Android (SQLite)">&laquo; Работа с базой данных в Android (SQLite)</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2012/10/11/soap-rest-android/" title="Next Post: SOAP и REST web-сервиса в Android">SOAP и REST web-сервиса в Android &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

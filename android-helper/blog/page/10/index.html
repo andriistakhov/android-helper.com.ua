@@ -1,0 +1,2545 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Всем привет. Прошу простить меня, что очень долго не радовал своих читателей блога, хорошими примерами. Вот недавно я лазил по просторах инета и &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/page/10">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2013/01/24/textview-html/">TextView + HTML разметка</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-24T07:42:06+02:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Всем привет.</p>
+
+<p>Прошу простить меня, что очень долго не радовал своих читателей блога, хорошими примерами.</p>
+
+<p>Вот недавно я лазил по просторах инета и нашел замечательную <a href="http://habrahabr.ru/post/166351/">статью</a>.</p>
+
+<p>О том как можно сделать разметку html в обычном TextView.</p>
+
+<p>Автор довольно хорошо высветел эту тему. Хотел переработать для вас, но все что тут написано, действительно нужно.</p>
+
+<p>Ну что ж господа. Прошу к прочтению.</p>
+
+<p>Недавно мне понадобилось сделать довольно хитроумный чат в приложении под Android. Помимо собственно информации требовалось передавать пользователям дополнительную функциональность в контексте определенного сообщения: имя автора сообщения по нажатию на него должно вставляться в текстовое поле ответа, а если это сообщение о только что созданном игровом сеансе, пользователи должны иметь возможность присоединиться к игре по клику и так далее. Одним из главных требований была возможность создавать сообщение, содержащее несколько ссылок, что и задало направление исследований.</p>
+
+<p><strong>WebView</strong>, обладая нужной функциональностью, был отвергнут по причине тяжести решения: я даже не стал создавать 100 или сколько-нибудь там экземпляров в тестовых целях, по одному на каждое сообщение, поскольку сразу было понятно, что это расточительство нормально работать не будет.</p>
+
+<p>К счастью, самый обычный <a href="http://developer.android.com/reference/android/widget/TextView.html"><strong>TextView</strong></a> обладает неожиданно потрясающей функциональностью по разметке текста и может использоваться как в качестве отдельного элемента, так и служить целой страницей, будучи несравненно легковеснее, чем <strong>WebView</strong>.</p>
+
+<p>Я реализовал весь, необходимый мне функционал и выяснил ещё несколько довольно интересных вещей, столкнувшись с некоторым количеством подводных камней (впрочем, не очень острых). Можно сказать, всё нижеописанное — руководство по созданию достаточно мощной справочной системы в своём приложении практически даром.</p>
+
+<h3>Задачи</h3>
+
+<p>В данном примере мы создадим приложение с двумя <strong>Activity</strong>, одна из которых содержит <strong>TextView</strong>, исполняющий роль браузера, из которого, в частности, можно вызвать вторую <strong>Activity</strong>, демонстрирующую работу с параметрами вызова. Мы выясним, каким образом можно создавать страницы текста с разметкой и изображениями и связывать их ссылками. </p>
+
+<p>Содержимое страниц берётся из строк в ресурсах приложения, а изображения являются drawable-ресурсами. Небольшие изменения в коде позволят использовать другие расположения.</p>
+
+<p><img src="http://habrastorage.org/storage2/a04/b2e/d4b/a04b2ed4b25633dfdc13fe3927e3c859.jpg" alt="" /></p>
+
+<h3>Создание приложения</h3>
+
+<p>Любым удобным нам способом создаём обычное приложение:</p>
+
+<p><strong>AndroidManifest.xml</strong></p>
+
+<pre><code>&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.markup.tutorial" android:versionCode="1" android:versionName="1.0"&gt;
+
+&lt;uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15" /&gt; 
+
+&lt;application android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme"&gt;
+
+&lt;activity android:name=".MainActivity" android:label="@string/title_activity_main"&gt;
+
+&lt;intent-filter&gt;
+
+    &lt;action android:name="android.intent.action.MAIN" /&gt; 
+
+    &lt;category android:name="android.intent.category.LAUNCHER" /&gt; 
+
+&lt;/intent-filter&gt;
+
+&lt;/activity&gt;
+
+&lt;activity android:name=".AnotherActivity" android:exported="false"&gt;
+
+&lt;intent-filter&gt;
+
+&lt;data android:scheme="activity-run" android:host="AnotherActivityHost" /&gt; 
+
+&lt;action android:name="android.intent.action.VIEW" /&gt; 
+
+&lt;category android:name="android.intent.category.DEFAULT" /&gt; 
+
+&lt;/intent-filter&gt;
+
+&lt;/activity&gt;
+
+&lt;/application&gt;
+
+&lt;/manifest&gt; 
+</code></pre>
+
+<p>Немного пояснений к манифесту. Если с первой <strong>Activity</strong> всё понятно, вторая (<strong>AnotherActivity</strong>) содержит некие дополнительные описатели.</p>
+
+<p><strong>android:exported=«false»</strong> необходимо для того, чтобы компилятор не выдавал предупреждения о том, что мы забыли что-то прописать в экспортируемом компоненте. На мой взгляд, чисто декоративный момент, но чем меньше жёлтых треугольничков — тем спокойнее.</p>
+
+<p>Раздел <strong>intent-filter</strong> содержит описатели того, каким образом и при каких обстоятельствах будет происходить запуск <strong>Activity</strong>.</p>
+
+<p> означает, что можно запустить <strong>Activity</strong> ссылкой вида <strong>activity-run://AnotherActivityHost?params&hellip;</strong></p>
+
+<p>Значения <strong>action</strong> и <strong>category</strong> необходимы системе для того чтобы обнаружить и запустить <strong>Activity</strong>.</p>
+
+<p><strong>MainActivity.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+import org.xml.sax.XMLReader;
+
+import android.os.Bundle;
+
+import android.app.Activity;
+
+import android.graphics.drawable.Drawable;
+
+import android.text.Editable;
+
+import android.text.Html;
+
+import android.text.Spannable;
+
+import android.text.Spanned;
+
+import android.text.method.LinkMovementMethod;
+
+import android.widget.TextView;
+
+
+
+public class MainActivity extends Activity {
+
+
+
+TextView tvContent;
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+
+
+    tvContent = (TextView)findViewById(R.id.tvContent);
+
+    tvContent.setLinksClickable(true);
+
+    tvContent.setMovementMethod(new LinkMovementMethod());
+
+
+
+    setArticle("article_main");
+
+}
+
+
+
+void setArticle(String strArticleResId) {
+
+    int articleResId = getResources().getIdentifier(strArticleResId, "string", getPackageName());
+
+    String text = getString(articleResId);
+
+    if (text == null) text = "Article not found";
+
+
+
+    Spanned spannedText = Html.fromHtml(text, htmlImageGetter, htmlTagHandler);
+
+    Spannable reversedText = revertSpanned(spannedText);
+
+
+
+    tvContent.setText(reversedText);
+
+}
+
+
+
+final Spannable revertSpanned(Spanned stext) {
+
+    Object[] spans = stext.getSpans(0, stext.length(), Object.class);
+
+    Spannable ret = Spannable.Factory.getInstance().newSpannable(stext.toString());
+
+    if (spans != null &amp;&amp; spans.length &gt; 0) {
+
+        for(int i = spans.length - 1; i &gt;= 0; --i) {
+
+            ret.setSpan(spans[i], stext.getSpanStart(spans[i]), stext.getSpanEnd(spans[i]), stext.getSpanFlags(spans[i]));
+
+        }
+
+    }
+
+
+
+    return ret;
+
+}
+
+
+
+Html.ImageGetter htmlImageGetter = new Html.ImageGetter() {
+
+    public Drawable getDrawable(String source) {
+
+        int resId = getResources().getIdentifier(source, "drawable", getPackageName());
+
+        Drawable ret = MainActivity.this.getResources().getDrawable(resId);
+
+        ret.setBounds(0, 0, ret.getIntrinsicWidth(), ret.getIntrinsicHeight());
+
+        return ret;
+
+    }
+
+};
+
+
+
+Html.TagHandler htmlTagHandler = new Html.TagHandler() {
+
+    public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
+
+        Object span = null;
+
+        if (tag.startsWith("article_")) span = new ArticleSpan(MainActivity.this, tag);
+
+        else if ("title".equalsIgnoreCase(tag)) span = new AppearanceSpan(0xffff2020, AppearanceSpan.NONE, 20, true, true, false, false);
+
+        else if (tag.startsWith("color_")) span = new ParameterizedSpan(tag.substring(6));
+
+        if (span != null) processSpan(opening, output, span);
+
+    }
+
+};
+
+
+
+void processSpan(boolean opening, Editable output, Object span) {
+
+    int len = output.length();
+
+    if (opening) {
+
+        output.setSpan(span, len, len, Spannable.SPAN_MARK_MARK);
+
+    } else {
+
+        Object[] objs = output.getSpans(0, len, span.getClass());
+
+        int where = len;
+
+        if (objs.length &gt; 0) {
+
+            for(int i = objs.length - 1; i &gt;= 0; --i) {
+
+                if (output.getSpanFlags(objs[i]) == Spannable.SPAN_MARK_MARK) {
+
+                    where = output.getSpanStart(objs[i]);
+
+                    output.removeSpan(objs[i]);
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+
+        if (where != len) {
+
+            output.setSpan(span, where, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        }
+
+    }
+
+}
+
+
+
+}   
+</code></pre>
+
+<p><strong>AnotherActivity.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.app.Activity;
+
+import android.app.AlertDialog;
+
+import android.content.DialogInterface;
+
+import android.net.Uri;
+
+import android.os.Bundle;
+
+
+
+public class AnotherActivity extends Activity {
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+
+
+    Uri uri = getIntent().getData();
+
+
+
+    String caption = uri.getQueryParameter("caption");
+
+    String text = uri.getQueryParameter("text");
+
+
+
+    new AlertDialog.Builder(this)
+
+        .setTitle(caption)
+
+        .setMessage(text)
+
+        .setPositiveButton("OK", dioclOK)
+
+        .setCancelable(false)
+
+        .create().show();
+
+}
+
+
+
+DialogInterface.OnClickListener dioclOK = new DialogInterface.OnClickListener() {
+
+
+
+    public void onClick(DialogInterface dialog, int which) {
+
+        dialog.dismiss();
+
+        finish();
+
+    }
+
+};
+
+
+
+}  
+</code></pre>
+
+<p><strong>AppearanceSpan.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.text.TextPaint;
+
+import android.text.style.CharacterStyle;
+
+
+
+public class AppearanceSpan extends CharacterStyle {
+
+
+
+public static final int NONE = -1;
+
+
+
+final int color, bgColor, textSize;
+
+final boolean boldText, italicText, strikeThruText, underlineText;
+
+
+
+public AppearanceSpan(int color, int bgColor, int textSize, boolean boldText, boolean italicText, 
+
+        boolean strikeThruText, boolean underlineText) {
+
+    this.color = color;
+
+    this.bgColor = bgColor;
+
+    this.textSize = textSize;
+
+    this.boldText = boldText;
+
+    this.italicText = italicText;
+
+    this.strikeThruText = strikeThruText;
+
+    this.underlineText = underlineText;
+
+}
+
+
+
+@Override
+
+public void updateDrawState(TextPaint tp) {
+
+    if (color != NONE) tp.setColor(color);
+
+    if (bgColor != NONE) tp.bgColor = bgColor;
+
+    tp.setFakeBoldText(boldText);
+
+    tp.setStrikeThruText(strikeThruText);
+
+    if (textSize != NONE) tp.setTextSize(textSize);
+
+    tp.setUnderlineText(underlineText);
+
+    tp.setTextSkewX(italicText ? -0.25f : 0);
+
+}
+
+
+
+} 
+</code></pre>
+
+<p><strong>ArticleSpan.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.text.style.ClickableSpan;
+
+import android.view.View;
+
+
+
+public class ArticleSpan extends ClickableSpan {
+
+
+
+final MainActivity activity;
+
+final String articleId;
+
+
+
+public ArticleSpan(MainActivity activity, String articleId) {
+
+    super();
+
+    this.activity = activity;
+
+    this.articleId = articleId;
+
+}
+
+
+
+@Override
+
+public void onClick(View arg0) {
+
+    activity.setArticle(articleId);
+
+}
+
+
+
+}
+</code></pre>
+
+<p><strong>ParameterizedSpan.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.graphics.Color;
+
+import android.text.TextPaint;
+
+import android.text.style.CharacterStyle;
+
+
+
+public class ParameterizedSpan extends CharacterStyle {
+
+
+
+int color = 0;
+
+
+
+public ParameterizedSpan(String param) {
+
+    try {
+
+        color = Color.parseColor("#" + param);
+
+    } catch(Exception ex) { }
+
+}
+
+
+
+@Override
+
+public void updateDrawState(TextPaint tp) {
+
+    tp.setColor(color);
+
+}
+
+
+
+}
+</code></pre>
+
+<h3>Подготовка ресурсов</h3>
+
+<p><strong>layout/activity_main.xml&#8221;</strong></p>
+
+<pre><code>&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:tools="http://schemas.android.com/tools"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent" &gt;
+
+
+
+&lt;ScrollView 
+
+    android:id="@+id/sv"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="fill_parent"
+
+    &gt;
+
+    &lt;TextView
+
+        android:id="@+id/tvContent"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Content" /&gt;
+
+&lt;/ScrollView&gt;
+
+&lt;/RelativeLayout&gt;  
+</code></pre>
+
+<p><strong>values/strings.xml&#8221;</strong></p>
+
+<pre><code>&lt;resources&gt;
+
+&lt;string name="app_name"&gt;MarkupTutor&lt;/string&gt;
+
+&lt;string name="hello_world"&gt;Hello world!&lt;/string&gt;
+
+&lt;string name="menu_settings"&gt;Settings&lt;/string&gt;
+
+&lt;string name="title_activity_main"&gt;MainActivity&lt;/string&gt;
+
+
+
+&lt;string name="article_main" formatted="false"&gt;&lt;![CDATA[
+
+    &lt;title&gt;Главная страница&lt;/title&gt;&lt;br/&gt;
+
+    &lt;br/&gt;
+
+    &lt;img src="res_pushkin_little"&gt; &lt;article_pushkin_stih&gt;А.С.     Пушкин "Как пить мы станем"&lt;/article_pushkin_stih&gt;&lt;br/&gt;
+
+    &lt;img src="res_activity_little"&gt; &lt;a href="activity-run://    AnotherActivityHost?caption=Another%20Activity&amp;text=Hello%20from%20markup!"&gt;Вызвать другую Activity&lt;/a&gt;&lt;br/&gt;
+
+    &lt;br/&gt;
+
+    &lt;color_ff00ff00&gt;Тест параметризированного тэга &lt;color_ffff00ff&gt;и вложенных спанов&lt;/color_ffff00ff&gt;.&lt;/color_ff00ff00&gt;&lt;br/&gt;
+
+    Тест анимированного GIF-а:&lt;br/&gt;
+
+    &lt;img src="res_alien_anim"&gt;
+
+]]&gt;&lt;/string&gt;
+
+
+
+&lt;string name="article_pushkin_stih" formatted="false"&gt;&lt;![CDATA[
+
+    &lt;br/&gt;&lt;article_main&gt;На главную&lt;/article_main&gt;&lt;br/&gt;&lt;br/&gt;
+
+    &lt;img src="res_pushkin" /&gt;&lt;br/&gt;&lt;br/&gt;
+
+    Сват Иван, как пить мы станем,&lt;br/&gt;
+
+    Непременно уж помянем&lt;br/&gt;
+
+    Трех Матрен, Луку с Петром,&lt;br/&gt;
+
+    Да Пахомовну потом.&lt;br/&gt;
+
+    Мы живали с ними дружно,&lt;br/&gt;
+
+    Уж как хочешь - будь что будь -&lt;br/&gt;
+
+    Этих надо помянуть,&lt;br/&gt;&lt;br/&gt;
+
+
+
+    Помянуть нам этих нужно.&lt;br/&gt;
+
+    Поминать, так поминать,&lt;br/&gt;
+
+    Начинать, так начинать,&lt;br/&gt;
+
+    Лить, так лить, разлив разливом.&lt;br/&gt;
+
+    Начинай-ка, сват, пора.&lt;br/&gt;
+
+    Трех Матрен, Луку, Петра&lt;br/&gt;
+
+    В первый раз помянем пивом,&lt;br/&gt;
+
+    А Пахомовну потом&lt;br/&gt;
+
+    Пирогами да вином,&lt;br/&gt;
+
+    Да еще ее помянем:&lt;br/&gt;
+
+    Сказки сказывать мы станем -&lt;br/&gt;
+
+    Мастерица ведь была&lt;br/&gt;
+
+    И откуда что брала.&lt;br/&gt;
+
+    А куды разумны шутки,&lt;br/&gt;
+
+    Приговорки, прибаутки,&lt;br/&gt;
+
+    Небылицы, былины&lt;br/&gt;
+
+    Православной старины!..&lt;br/&gt;
+
+    Слушать, так душе отрадно.&lt;br/&gt;
+
+    И не пил бы и не ел,&lt;br/&gt;
+
+    Всё бы слушал да сидел.&lt;br/&gt;
+
+    Кто придумал их так ладно?&lt;br/&gt;
+
+    Стариков когда-нибудь&lt;br/&gt;
+
+    (Жаль, теперь нам не досужно)&lt;br/&gt;
+
+    Надо будет помянуть -&lt;br/&gt;
+
+    Помянуть и этих нужно...&lt;br/&gt;
+
+    Слушай, сват, начну первой,&lt;br/&gt;
+
+    Сказка будет за тобой.&lt;br/&gt;
+
+]]&gt;&lt;/string&gt;
+
+&lt;/resources&gt;
+</code></pre>
+
+<p>Строки, содержащие разметку, должны иметь аттрибут <strong>formatted</strong> со значением <strong>false</strong>, а содержимое должно передаваться в блоке <strong>CDATA</strong>, чтобы у компилятора не было претензий к разметке и специальным символам. В данном примере признаком статьи будет префикс <strong>article_</strong> в названии строки.</p>
+
+<p>Также замечен странный глюк, проявляющийся в том, что если текст начинается с тега, то заканчивается он этим же тегом. Если у вас в начале статьи ссылка, советую ставить перед ней либо пробел, либо<code>  
+</code>.</p>
+
+<p>Изображения могут быть формата jpg, png или gif без анимации. Анимированный gif отображается статичной картинкой. Расположение стандартное для ресурсов, для дисплеев разной плотности можно подготовить свой вариант картинки. В данном примере все изображения находятся в <strong>drawable-nodpi</strong></p>
+
+<p><img src="http://habrastorage.org/storage2/a2c/313/a58/a2c313a588ebcbd9f6d257576518d942.png" alt="" /></p>
+
+<h3>Как всё работает</h3>
+
+<p>Рассмотрим некоторые части кода подробно.</p>
+
+<pre><code>public void onCreate(Bundle savedInstanceState) {
+
+super.onCreate(savedInstanceState);
+
+setContentView(R.layout.activity_main);
+
+
+
+tvContent = (TextView)findViewById(R.id.tvContent);
+
+tvContent.setLinksClickable(true);
+
+tvContent.setMovementMethod(new LinkMovementMethod());
+
+
+
+setArticle("article_main");
+
+} 
+</code></pre>
+
+<p><strong>TextView</strong> используемый нами в качестве браузера, требует особой инициализации:</p>
+
+<p><strong>tvContent.setLinksClickable(true);</strong> указывает на то, что ссылки в данном элементе реагируют на нажатие.</p>
+
+<p><strong>tvContent.setMovementMethod(new LinkMovementMethod());</strong> назначает способ навигации по элементу. Использованный нами <a href="http://developer.android.com/reference/android/text/method/LinkMovementMethod.html"><strong>LinkMovementMethod</strong></a> интересен сам по себе и, возможно, заслуживает отдельной статьи. Я лишь скажу, что при необходимости более полного контроля можно создать его наследника, переопределенные методы которого позволят отслеживать все действия со ссылками в элементе.</p>
+
+<pre><code>void setArticle(String strArticleResId) {
+
+int articleResId = getResources().getIdentifier(strArticleResId, "string", getPackageName());
+
+String text = getString(articleResId);
+
+if (text == null) text = "Article not found";
+
+
+
+Spanned spannedText = Html.fromHtml(text, htmlImageGetter, htmlTagHandler);
+
+Spannable reversedText = revertSpanned(spannedText);
+
+
+
+tvContent.setText(reversedText);
+
+} 
+</code></pre>
+
+<p>В данном методе происходит получение строки по идентификатору из строковых ресурсов, её преобразование из HTML в специальный объект <strong>Spanned</strong>, затем ещё одно преобразование в <strong>Spannable</strong> и установка в <strong>TextView</strong> в качестве содержимого. Всё это кажется довольно громоздким, но тому есть причины.</p>
+
+<p>В <strong>TextView</strong>, на мой взгляд, странный порядок обработки спанов — с конца списка. При естественном расположении спанов после преобразования строки из HTML, изменения внешнего вида вложенных спанов перекрываются свойствами спанов, их содержащих. Для нормального отображения приходится буквально выворачивать маркировку наизнанку с помощью метода <strong>revertSpanned</strong>:</p>
+
+<pre><code>final Spannable revertSpanned(Spanned stext) {
+
+Object[] spans = stext.getSpans(0, stext.length(), Object.class);
+
+Spannable ret = Spannable.Factory.getInstance().newSpannable(stext.toString());
+
+if (spans != null &amp;&amp; spans.length &gt; 0) {
+
+    for(int i = spans.length - 1; i &gt;= 0; --i) {
+
+        ret.setSpan(spans[i], stext.getSpanStart(spans[i]), stext.getSpanEnd(spans[i]), stext.getSpanFlags(spans[i]));
+
+    }
+
+}
+
+
+
+return ret;
+
+}  
+</code></pre>
+
+<p>Определение обработчика ссылок на изображения минималистично и призвано загружать только картинки из ресурсов. Поскольку мы рассматриваем вариант справочной системы, я посчитал, что этого будет достаточно. С вашего позволения, я не буду цитировать его. Если вы хотите большего, можно обратиться, например, к <a href="http://habrahabr.ru/post/155879/">данной статье</a>.</p>
+
+<p>Более интересен нам будет <strong>Html.TagHadler</strong>:</p>
+
+<pre><code>Html.TagHandler htmlTagHandler = new Html.TagHandler() {
+
+public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
+
+    Object span = null;
+
+    if (tag.startsWith("article_")) span = new ArticleSpan(MainActivity.this, tag);
+
+    else if ("title".equalsIgnoreCase(tag)) span = new AppearanceSpan(0xffff2020, AppearanceSpan.NONE, 20, true, true, false, false);
+
+    else if (tag.startsWith("color_")) span = new ParameterizedSpan(tag.substring(6));
+
+    if (span != null) processSpan(opening, output, span);
+
+}
+
+};
+</code></pre>
+
+<p>Здесь у нас происходит несколько интересных вещей.</p>
+
+<p>При преобразовании из <strong>HTML</strong> в <strong>Spanned</strong> методом <strong>Html.fromHtml</strong>, обрабатываются тэги </p>
+
+<p><code>br</code>, <code>p</code>, <code>div</code>, <code>em</code>, <code>b</code>,<code>strong</code>, <code>cite</code>, <code>dfn</code>, <code>i</code>, <code>big</code>, <code>small</code>, </p>
+
+<p><code>font</code>, <code>blockquote</code>, <code>tt</code>, <code>a</code>, <code>u</code>, <code>sup</code>, <code>sub</code>, <code>h1...h6</code> и <code>img</code>.</p>
+
+<p>В случае, если тэг не опознан, вызывается Html.TagHandler (если, конечно, он передан в вызов).</p>
+
+<p>Мы проверяем, не является ли переданный тэг «нашим» и если это так, создаём соответствующий <strong>Span</strong> — элемент разметки, а затем накладываем его на текст. Я создал несколько собственных <strong>Span</strong>-ов, они будут рассмотрены далее. Как правило, <strong>Span</strong>-ы наследуются от <a href="http://developer.android.com/reference/android/text/style/CharacterStyle.html"><strong>android.text.style.CharacterStyle</strong></a>.</p>
+
+<p>К сожалению, у меня не получилось малой кровью добиться центрования отдельных строк или абзацев, а встроенной возможности для этого не существует. Также, нельзя прочесть атрибуты тэга из <strong>xmlReader</strong>, поскольку он реализован не полностью. По этой причине пришлось изобретать свой способ передачи параметров: значение является частью тега. В нашем примере таким образом передаётся значение цвета в тэге <strong>color</strong>, преобразовываемом в <strong>ParameterizedSpan</strong>. Получается что-то вроде&#8220;</p>
+
+<p>&lt;color_ffff0000>красный. Это достаточно ограниченный и не очень удобный способ, но иногда лучше такой, чем никакого.</p>
+
+<pre><code>void processSpan(boolean opening, Editable output, Object span) {
+
+    int len = output.length();
+
+    if (opening) {
+
+        output.setSpan(span, len, len, Spannable.SPAN_MARK_MARK);
+
+    } else {
+
+        Object[] objs = output.getSpans(0, len, span.getClass());
+
+        int where = len;
+
+        if (objs.length &gt; 0) {
+
+            for(int i = objs.length - 1; i &gt;= 0; --i) {
+
+                if (output.getSpanFlags(objs[i]) == Spannable.SPAN_MARK_MARK) {
+
+                    where = output.getSpanStart(objs[i]);
+
+                    output.removeSpan(objs[i]);
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+
+        if (where != len) {
+
+            output.setSpan(span, where, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        }
+
+    }
+
+} 
+</code></pre>
+
+<p>Этот код делает следующее: В случае, если передан открывающий <strong>Span</strong>, он добавляется к концу строки в текущем её виде. В случае, если <strong>Span</strong> закрывающий, мы находим в строке его открывающий аналог, запоминаем его положение, затем удаляем и добавляем новый, но уже с информацией о начальном положении и длине. </p>
+
+<p>Мы завершили рассмотрение класса Activity, являющегося основным модулем нашего приложения. Теперь рассмотрим вспомогательные классы.</p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.text.TextPaint;
+
+import android.text.style.CharacterStyle;
+
+
+
+public class AppearanceSpan extends CharacterStyle {
+
+
+
+public static final int NONE = -1;
+
+
+
+final int color, bgColor, textSize;
+
+final boolean boldText, italicText, strikeThruText, underlineText;
+
+
+
+public AppearanceSpan(int color, int bgColor, int textSize, boolean boldText, boolean italicText, 
+
+        boolean strikeThruText, boolean underlineText) {
+
+    this.color = color;
+
+    this.bgColor = bgColor;
+
+    this.textSize = textSize;
+
+    this.boldText = boldText;
+
+    this.italicText = italicText;
+
+    this.strikeThruText = strikeThruText;
+
+    this.underlineText = underlineText;
+
+}
+
+
+
+@Override
+
+public void updateDrawState(TextPaint tp) {
+
+    if (color != NONE) tp.setColor(color);
+
+    if (bgColor != NONE) tp.bgColor = bgColor;
+
+    tp.setFakeBoldText(boldText);
+
+    tp.setStrikeThruText(strikeThruText);
+
+    if (textSize != NONE) tp.setTextSize(textSize);
+
+    tp.setUnderlineText(underlineText);
+
+    tp.setTextSkewX(italicText ? -0.25f : 0);
+
+}
+
+}
+</code></pre>
+
+<p>Это Span общего назначения и с его помощью можно задать большинство параметров стиля текста. Его можно использовать как базу для создания стилей текста из собственных тэгов.</p>
+
+<pre><code>package com.example.markup.tutorial;
+
+import android.text.style.ClickableSpan;
+
+import android.view.View;
+
+
+
+public class ArticleSpan extends ClickableSpan {
+
+
+
+final MainActivity activity;
+
+final String articleId;
+
+
+
+public ArticleSpan(MainActivity activity, String articleId) {
+
+    super();
+
+    this.activity = activity;
+
+    this.articleId = articleId;
+
+}
+
+
+
+@Override
+
+public void onClick(View arg0) {
+
+    activity.setArticle(articleId);
+
+}
+
+}
+</code></pre>
+
+<p>Этот класс описывает элемент, который по нажатию на него обеспечивает переход к статье, чей идентификатор является его параметром. Здесь я применил производное от способа, описанного мной ранее: сам тэг является собственным параметром, а его класс определяется префиксом article_. Поднимемся выше, к описанию <strong>Html.TagHandler</strong>:</p>
+
+<pre><code>if (tag.startsWith("article_")) span = new ArticleSpan(MainActivity.this, tag);
+</code></pre>
+
+<p>Обработчик тэгов, увидев тэг, начинающийся на article_, создаёт ArticleSpan, задавая ему в качестве параметра название тэга. Элемент, при нажатии на него, вызывает метод MainActivity.setArticle, после чего в TextView устанавливается новый текст.</p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+import android.graphics.Color;
+
+import android.text.TextPaint;
+
+import android.text.style.CharacterStyle;
+
+
+
+public class ParameterizedSpan extends CharacterStyle {
+
+
+
+int color = 0;
+
+
+
+public ParameterizedSpan(String param) {
+
+    try {
+
+        color = Color.parseColor("#" + param);
+
+    } catch(Exception ex) { }
+
+}
+
+
+
+@Override
+
+public void updateDrawState(TextPaint tp) {
+
+    tp.setColor(color);
+
+}
+
+}
+</code></pre>
+
+<p>Здесь реализован элемент, получающий параметр явно и отдельно от своего имени. Претензия на своего рода стандарт именования тэгов, раз уж нельзя передавать атрибуты. </p>
+
+<p>Конечно, всё описанное является вариациями одного принципа, каждый выберёт то, что ему удобнее.</p>
+
+<h3>Вызов Activity</h3>
+
+<p>Здесь всё очень просто. Вызов осуществляется посредством использования обычного тэга &#8220; с заданием схемы и хоста, которые описаны в <strong>AndroidManifest.xml</strong> для вызываемой <strong>Activity</strong>.</p>
+
+<p>В HTML мы видим следующее:</p>
+
+<pre><code>&lt;a href="activity-run://AnotherActivityHost?caption=Another%20Activity&amp;text=Hello%20from%20markup!"&gt;Вызвать другую Activity&lt;/a&gt; 
+</code></pre>
+
+<p>При нажатии на ссылку, происходит вызов AnotherActivity с передачей параметров в Intent. Эти параметры можно получить и использовать:</p>
+
+<pre><code>Uri uri = getIntent().getData();
+String caption = uri.getQueryParameter("caption");
+String text = uri.getQueryParameter("text");
+</code></pre>
+
+<h3>Использованные материалы</h3>
+
+<p>Следующие материалы очень ускорили создание данной статьи, да и, чего уж там, сделали его вообще возможным:</p>
+
+<p><a href="http://www.sherif.mobi/2011/09/html-and-activity-links-in-textview.html">www.sherif.mobi/2011/09/html-and-activity-links-in-textview.html</a><br/>
+<a href="http://stackoverflow.com/questions/3874999/alignment-in-html-fromhtml">stackoverflow.com/questions/3874999/alignment-in-html-fromhtml</a><br/>
+<a href="http://stackoverflow.com/questions/11865334/how-to-use-xmlreader-in-taghandler-handletag">stackoverflow.com/questions/11865334/how-to-use-xmlreader-in-taghandler-handletag</a><br/>
+<a href="http://stackoverflow.com/questions/4044509/android-how-to-use-the-html-taghandler">stackoverflow.com/questions/4044509/android-how-to-use-the-html-taghandler</a><br/>
+<a href="http://stackoverflow.com/questions/1792604/html-imagegetter">stackoverflow.com/questions/1792604/html-imagegetter</a></p>
+
+<p>Я очень рад, что существует на свете <a href="http://stackoverflow.com/">StackOverflow.com</a>.</p>
+
+<p>Надеюсь статья вам пригодится и вы теперь не будете плодить много елементов.</p>
+
+<p>Рабочий код на странице с <a href="http://android-helper.com.ua/codes/">кодами</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2013/01/03/corporation-market/">Корпоративные приложения в Google Play</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-03T00:02:41+02:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Продолжая тему своего маркета.</p>
+
+<p>Нашел еще одну интересную статью.</p>
+
+<p>Хорошая новость для пользователей <a href="http://www.google.com/enterprise/apps/business/#utm_medium=blog&amp;utm_source=en-na-us-entblog-playprivatechannel12042012&amp;utm_campaign=launch">Google Apps for Business</a>, <a href="http://www.google.com/enterprise/apps/education/#utm_medium=blog&amp;utm_source=en-na-us-entblog-playprivatechannel12042012&amp;utm_campaign=launch">Education</a> и <a href="http://www.google.com/enterprise/apps/government/#utm_medium=blog&amp;utm_source=en-na-us-entblog-playprivatechannel12042012&amp;utm_campaign=launch">Government</a> была опубликована в<a href="http://googleenterprise.blogspot.com/2012/12/a-new-way-to-distribute-your-internal.html">блоге Google</a>. Отныне в Google Play можно создавать корпоративные каналы обновлений и распространять через них внутренние приложения для своих работников.</p>
+
+<p><img src="http://habrastorage.org/storage2/cc9/d98/20b/cc9d9820bcd9d9662370983f3c2e6b97.png" alt="" /></p>
+
+<h5>Как это работает</h5>
+
+<p>Каждый домен Google Apps for Business теперь может иметь приватный канал в Play Store. Администраторы домена могут давать пользователем права на публикацию приложений в консоли разработчика, а также настраивать доступ к каналу в Play Store для отдельных пользователей и групп.</p>
+
+<p>Чтобы увидеть этот канал на девайсе, пользователям нужно войти в Play с помощью своего корпоративного аккаунта.</p>
+
+<h5>Как включить</h5>
+
+<p>Администраторы Google Apps могут включить канал в панели управления:</p>
+
+<ul>
+<li><p>В разделе <strong>Organizations &amp; users > Services</strong> нужно включить <strong>Google Play Developer Console</strong>.</p></li>
+<li><p>Для группы пользователей, которым следует разрешить публикацию, нужно:</p>
+
+<ul>
+<li><p>В <strong>Settings > Mobile</strong> разрешить обновлять <strong>Google Play Private Channel</strong></p></li>
+<li><p>В <strong>Organizations &amp; users > Services</strong> включить для них <strong>Google Play Developer Console</strong></p></li>
+</ul>
+</li>
+<li><p>Остальным пользователям нужно дать доступ к Google Play Private Channel</p></li>
+</ul>
+
+
+<h5>Дополнительная информация</h5>
+
+<ul>
+<li><p>Канал виден только из девайсов и пока что недоступен для веб-интерфейса</p></li>
+<li><p>Каждый девелопер должен проходить обычную регистрацию в консоли разработчика (за $25)</p></li>
+<li><p>Для приложений в приватном канале доступны рейтинги, отзывы, цены и таргетирование</p></li>
+<li><p>Организация может иметь лишь один приватный канал</p></li>
+</ul>
+
+
+<p>Официальная документация: <a href="http://support.google.com/a/bin/answer.py?hl=en&amp;answer=2494992">http://support.google.com/a/bin/answer.py?hl=en&amp;answer=2494992</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2013/01/02/our-android-market/">Пишем свой Android Market</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-02T23:48:05+02:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Сегодня что то мне не спится.</p>
+
+<p>Хочу побольше дать интересных тем.</p>
+
+<p>Не так много разработчиков выкладывают свои приложения на маркет.</p>
+
+<p>Много приложений остается закрытыми в офисной рутине.</p>
+
+<p>Но вот нашел статью, как можно и в офисе организовать свой маркет. Может кому будет полезной.</p>
+
+<p>В рамках работы над большим количеством android приложений появилось желание создать свой Android Market на локальном сервере (с шахматами и поэтессами).<br/>
+Свой маркет должен решать две простые задачи:</p>
+
+<ul>
+<li><p>Распространение и обновление корпоративных приложений. У нас есть набор внутри корпоративных приложений, которые нельзя публиковать на Google Play. Сейчас пользователи оповещаются о новых версиях по емайлу, что не удобно.</p></li>
+<li><p>Бета тестирование заказных приложений на большой группе коллег, с обратной связью.</p></li>
+</ul>
+
+
+<p>И так, нам необходимо реализовать небольшое Android приложение, которое будет скачивать список доступных приложений, проверять наличие обновлений для уже установленных, устанавливать/удалять приложения.</p>
+
+<h4>Серверная часть</h4>
+
+<p>Серверной частью приложения может быть как сервис с широким функционалом (регистрация пользователей, отчеты, разграничение доступа к приложениям), так и просто xml файл:</p>
+
+<pre><code>&lt;MyMarket&gt;
+
+&lt;application name="TestApp1" 
+
+package="com.example.testapp1"
+
+versionCode="1"
+
+versionName="1.0" 
+
+url="http://mobile...../android/download/TestApp1.apk"/&gt;
+
+    .....
+
+&lt;/MyMarket&gt;
+</code></pre>
+
+<p>В моем случае серверной частью фактически выступает http шара.<br/>
+Данный xml файл в приложении трансформируется в список приложений, доступных для установки.</p>
+
+<h4>Установка</h4>
+
+<p>Пользователь выбирает нужное ему приложение и устанавливает, <br/>
+Маркет скачивает apk файл на флешку устройства и инициирует установку приложения, конечно, должна быть разрешена установка из сторонних источников.<br/>
+Установить незаметно в фоне мы не можем, поэтому после выполнения данного кода:</p>
+
+<pre><code>URL url = new URL(apkurl);
+
+        HttpURLConnection c = (HttpURLConnection) url.openConnecвленtion();
+
+        c.setRequestMethod("GET");
+
+        c.setDoOutput(true);
+
+        c.connect();
+
+
+
+        File file = this.getExternalFilesDir("download");
+
+        File outputFile = new File(file, "app.apk");
+
+        FileOutputStream fos = new FileOutputStream(outputFile);
+
+        InputStream is = c.getInputStream();
+
+
+
+        byte[] buffer = new byte[1024];
+
+        int len1 = 0;
+
+        while ((len1 = is.read(buffer)) != -1) {
+
+            fos.write(buffer, 0, len1);
+
+        }
+
+        fos.close();
+
+        is.close();
+
+
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+
+        intent.setDataAndType(Uri.fromFile(outputFile),
+
+                "application/vnd.android.package-archive");
+
+        startActivity(intent);
+</code></pre>
+
+<p>Пользователь увидит стандартное окно установки приложений:<br/>
+<img src="http://img-fotki.yandex.ru/get/4117/1154545.a5/0_7d3c3_bd08d241_L" alt="image" /></p>
+
+<h4>Обновление</h4>
+
+<p>Приложение Market может по определенному интервалу проверять наличие новых версий, делается это достаточно просто, так как доступен список всех установленных приложений:</p>
+
+<pre><code>private boolean checkNewVersion(String packageName, int versionCodeNew) {
+
+    List&lt;ApplicationInfo&gt; apps = getPackageManager()
+
+            .getInstalledApplications(0);
+
+    for (int i = 0; i &lt; apps.size(); i++) {
+
+        ApplicationInfo app = apps.get(i);
+
+        if (packageName.equals(app.packageName)) {
+
+            PackageManager manager = getPackageManager();
+
+            PackageInfo info;
+
+            try {
+
+                info = manager.getPackageInfo(app.packageName, 0);
+
+                int versionCode = info.versionCode;
+
+                if (versionCodeNew &gt; versionCode) {
+
+                    Toast.makeText(this, "New Version!", Toast.LENGTH_LONG)
+
+                            .show();
+
+                    return true;
+
+                }
+
+            } catch (NameNotFoundException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+    }
+
+    return false;
+
+}
+</code></pre>
+
+<p>В случае необходимости обновления приложения, повторяем процесс Установки, приложение будет обновлено.</p>
+
+<h4>Удаление</h4>
+
+<p>Удалить программу лучше из интерфейса нашего маркета, чтобы не заставлять пользователя выискивать тестируемое приложение среди всех его программ, для этого достаточно вызвать этот код:</p>
+
+<pre><code> Uri packageURI = Uri.parse("package:"+packageName);
+
+    Intent intent = new Intent(Intent.ACTION_DELETE, packageURI);
+
+    startActivity(intent);
+</code></pre>
+
+<p><img src="http://img-fotki.yandex.ru/get/4134/1154545.a5/0_7d3c5_830496a8_L" alt="image" /></p>
+
+<h4>Обратная связь</h4>
+
+<p>Получение сообщений об ошибках, вместе с логом ошибки, очень важно для разработчика, особенно на этапе тестирования приложения, добавим функцию автоматического сбора этой информации через Маркет.</p>
+
+<p>Для этого в каждое приложение, распространяемое через наш Маркет добавляем следующий класс</p>
+
+<pre><code>public class CustomExceptionHandler implements UncaughtExceptionHandler {
+
+private File logsFolder = null;
+
+public static final String ERROR_INTENT = "com.example.markettestapp1.SEND_ERROR";
+
+public CustomExceptionHandler(File logsFolder) {
+
+    this.logsFolder = logsFolder;
+
+}
+
+@Override
+
+public void uncaughtException(Thread thread, Throwable ex) {
+
+    final Writer result = new StringWriter();
+
+    final PrintWriter printWriter = new PrintWriter(result);
+
+    ex.printStackTrace(printWriter);
+
+    String stacktrace = result.toString();
+
+    printWriter.close();
+
+    try {
+
+        if (!logsFolder.exists()) {
+
+            logsFolder.createNewFile();
+
+        }
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(logsFolder, true));
+
+        writer.write(""+new Date()+"\n"+stacktrace);
+
+        writer.close();
+
+    } catch (IOException e) {
+
+        e.printStackTrace();
+
+    }
+
+
+
+    Intent intent = new Intent();
+
+    intent.setAction(ERROR_INTENT);
+
+    intent.putExtra("packageName", Test1Application.getApplication().getPackageName());
+
+    intent.putExtra("stacktrace", stacktrace);
+
+    Test1Application.getInstanceApplication().sendBroadcast(intent);
+
+
+
+    android.os.Process.killProcess(android.os.Process.myPid());
+
+}
+
+}
+</code></pre>
+
+<p>Как видно из кода, это хендлер, который получает ошибки (Exception), генерит строку со стеком, сохраняет ее в локальный файл и отправляет ошибку в виде броадкаст сообщения.</p>
+
+<p>А в Application классе включаем переадресацию всех сообщений об ошибках в этот хендлер</p>
+
+<pre><code>public class Test1Application extends Application {
+
+@Override
+
+public void onCreate() {
+
+    super.onCreate();
+
+    application = this;
+
+    Thread.setDefaultUncaughtExceptionHandler(new CustomExceptionHandler(new File(this.getApplicationContext().getExternalFilesDir(null),"exceptions.log")));
+
+}
+</code></pre>
+
+<p>Таким образом, если в тестируемои приложении происходит ошибка, то перед смертью пишется сообщение в лог и посылается броадкаст сообщение в маркет.,<br/>
+Перед передачей приложения заказчику, этот код удаляется (комментируется).</p>
+
+<p>В самом Маркете мы просто отлавливаем данное сообщение:</p>
+
+<pre><code>public class SendErrorReceiver  extends BroadcastReceiver {
+
+public static final String ERROR_INTENT = "com.example.markettestapp1.SEND_ERROR";
+
+@Override
+
+public void onReceive(Context context, Intent intent) {
+
+    Intent i = new Intent(context, SendErrorActivity.class);
+
+    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+    i.putExtra("stacktrace", intent.getStringExtra("stacktrace"));
+
+    i.putExtra("packageName", intent.getStringExtra("packageName"));
+
+    context.startActivity(i);
+
+}
+
+}
+</code></pre>
+
+<p>AndroidManifest.xml:</p>
+
+<pre><code>&lt;receiver android:name="com.example.markettestapp1.SendErrorReceiver" android:enabled="true" &gt;
+
+        &lt;intent-filter&gt;
+
+            &lt;action android:name="com.example.markettestapp1.SEND_ERROR" &gt;
+
+            &lt;/action&gt;
+
+        &lt;/intent-filter&gt;
+
+    &lt;/receiver&gt;
+</code></pre>
+
+<p>И дальше маркет уже может переслать это сообщение на почту разработчику, загрузить в какой нибудь веб-сервис или попросить пользователя добавить комментарий к ошибке<br/>
+<img src="http://img-fotki.yandex.ru/get/4121/1154545.a5/0_7d3c4_5b504bb_L" alt="image" /></p>
+
+<p>Я надеюсь, данный пример поможет многим начинающим разработчикам, разобраться, как написать свой универсальный велосипед для бета тестирования приложений и централизованному сбору статистики ошибок.</p>
+
+<p>ps: В статье использован исходный код и картинки взятые из прототипа приложения.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2013/01/02/fragment-animation/">Анимация фрагментов в Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-02T23:38:26+02:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Привет друзья.</p>
+
+<p>Собирался написать статью по анимации фрагментов, но к счастью она уже написана.</p>
+
+<p>Думаю вам понравится.</p>
+
+<p>Всем доброго времени суток. Этот пост хочу посвятить теме фрагментов для Android. На Хабре есть уже переводы и некоторые статьи, которые упоминают о том, как начать работать с фрагментами под Android. Например, статья <a href="http://habrahabr.ru/post/113196/">Fragments API в Android 3.0</a>. В ней находится описание того, что такое фрагменты и в какой версии Android они доступны, поэтому те, кто ещё не добрался до неё могут при желании ознакомиться, я же не буду пересказывать этого в своём посте. Поэтому сразу перейду к делу. </p>
+
+<h4>Начало работы</h4>
+
+<p>Скажу только кратко, что фрагменты — это компоненты UI пользователя, которые могут использоваться с помощью класса Activity для отображение пользовательских данных, но их жизненный цикл от него не зависит. Функционал, которым наделены фрагменты имеет более широкий функционал для работы с ними, чем Activity, поэтому их использование для разработчиков имеет не малое значение, если они хотят, чтобы их приложение имело более современный по нынешним нормам интерфейс пользователя.</p>
+
+<p>Теперь перейдём к сути поста. Разработчиками Google фрагменты были наделены, на мой взгляд, отличной поддержкой анимации отображения самого фрагмента. Об этом и пойдёт далее речь. Я искал по Хабру посты на данную тематику, но так ничего и не нашёл, поэтому сейчас поделюсь своими знаниями. </p>
+
+<h4>Создаём проект</h4>
+
+<p>Давайте создадим небольшой проект. Я создал проект под свой Samsung Nexus S, там у меня стоит версия Android 4.1.2, собственно её я и использовал (Api Level 16). Сам проект я назвал FragmentsAnimationTest.</p>
+
+<p>Для демонстрации нам понадобится главное активити и его лейаут, пара фрагментов, каждый также со своим лейаутом и ещё пара xml-файлов для самой анимации, о которых я расскажу позже.</p>
+
+<p>Приложение будет выглядеть следующим образом: на экране будет отображаться один из фрагментов, переключение между ними будет осуществляться с помощью обычной кнопки, и, соответственно, само переключение фрагментов будет сопровождаться анимационными эффектами. </p>
+
+<p>Сначала расположим элементы главного активити в файле activity_main.xml:</p>
+
+<pre><code>&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:tools="http://schemas.android.com/tools"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+tools:context=".MainActivity" &gt;
+
+
+
+&lt;FrameLayout
+
+    android:id="@+id/fragCont"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="match_parent"
+
+    android:layout_weight="1" &gt;
+
+&lt;/FrameLayout&gt;
+
+
+
+&lt;Button
+
+    android:id="@+id/btn"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="SWITCH FRAGMENTS" 
+
+    android:layout_toRightOf="@id/fragCont"/&gt;
+
+
+
+&lt;/RelativeLayout&gt;
+</code></pre>
+
+<p>Из кода видно, что используется главный лейаут — RelativeLayout, достаточно удобный при работе с фрагментами, в него помещаются два стандартных элемента FrameLayout — собственно, он и будет являться контейнером для фрагментов и кнопка, которой будем переключать фрагменты между собой. Пока что всё должно быть предельно просто.</p>
+
+<p>Дальше займёмся нашими фрагментами. Создадим для них разметки и сами классы:<br/>
+fragment1.xml </p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" 
+
+android:background="#5A4"&gt;
+
+
+
+&lt;TextView 
+
+    android:layout_width="200dp"
+
+    android:layout_height="fill_parent"
+
+    android:text="fragment 1"/&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>fragment2.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" 
+
+android:background="#A55"&gt;
+
+
+
+&lt;TextView 
+
+    android:layout_width="200dp"
+
+    android:layout_height="fill_parent"
+
+    android:text="fragment 2"/&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Для обоих фрагментов код практически одинаков, отличаются только текстом, который будет отображаться в самом фрагменте для его идентификации и цветом фона, чтобы хорошо было видно анимацию.</p>
+
+<p>Fragment1.java</p>
+
+<pre><code>public class Fragment1 extends Fragment {
+
+
+
+@Override
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, 
+
+                            Bundle savedInstanceState) {
+
+    return inflater.inflate(R.layout.fragment_1, null);
+
+}
+
+}
+</code></pre>
+
+<p>Fragment2.java</p>
+
+<pre><code>public class Fragment2 extends Fragment{
+
+
+
+@Override
+
+public View onCreateView(LayoutInflater inflater, ViewGroup container, 
+
+                            Bundle savedInstanceState) {
+
+    return inflater.inflate(R.layout.fragment_2, null);
+
+}
+
+}
+</code></pre>
+
+<p>В классах также должно быть всё понятно, если знакомы с темой фрагментов. В них просто указывается какой именно леаут будет использоваться при отображении конкретного фрагмента и всё.</p>
+
+<p>Теперь приступим к самому вкусному. Поработаем с классом главной активити, вот её код:</p>
+
+<pre><code>public class MainActivity extends Activity {
+
+
+
+private Fragment fragment2;
+
+private Fragment fragment1;
+
+private FragmentTransaction ft;
+
+
+
+@Override
+
+protected void onCreate(Bundle savedInstanceState) {
+
+super.onCreate(savedInstanceState);
+
+setContentView(R.layout.activity_main);
+
+
+
+fragment1 = new Fragment1();
+
+fragment2 = new Fragment2();
+
+ft = getFragmentManager().beginTransaction();
+
+ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right);
+</code></pre>
+
+<p>//  ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);</p>
+
+<pre><code>ft.replace(R.id.fragCont, fragment1);
+
+ft.addToBackStack(null);
+
+
+
+ft.commit();
+
+
+
+Button btn = (Button) findViewById(R.id.btn);
+
+btn.setOnClickListener(new OnClickListener() {
+
+
+
+    @Override
+
+    public void onClick(View v) {
+
+    ft = getFragmentManager().beginTransaction();
+
+    ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right);
+</code></pre>
+
+<p>//      ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);</p>
+
+<pre><code>    if(fragment1.isVisible()){
+
+        ft.replace(R.id.fragCont, fragment2);
+
+    }else{
+
+        ft.replace(R.id.fragCont, fragment1);
+
+    }
+
+    ft.commit();
+
+    }
+
+});
+
+}
+
+}
+</code></pre>
+
+<p>Разберём что именно происходит в нашей активити. Сначала создаются оба фрагмента, которые, как уже говорилось, будут поочерёдно менять друг друга. Далее указываем строкой ft = getFragmentManager().beginTransaction() получаем FragmentTransaction, с помощью которой мы сможем взаимодействовать с нашими фрагментами, но это всё есть в статье, которую я указывал ранее. Прежде, чем перейти к разбору следующего кода, сделаю небольшое отступление. </p>
+
+<p>Существует две возможности создавать анимацию для отображения фрагментов: </p>
+
+<ul>
+<li><p>1ый способ — это подключение стандартной анимации с помощью метода setTransition(int transit). В классе FragmentTransaction есть несколько уже предописанных анимаций.</p></li>
+<li><p>2ой способ — это именно то, что нас интересует в данной теме, реализация кастомной анимации. Осуществляется с помощью метода setCustomAnimations()</p></li>
+</ul>
+
+
+<p>Теперь вернёмся к разбору нашего кода. Посмотрим на следующую строку ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right), тут происходит подключение анимации ко всем фрагментам, с которыми будет происходить работа до завершения транзакции, до строки ft.commit(). Что же именно происходит? В setCustomAnimations передаётся два параметра. Первый параметр описывает анимацию, для отображения фрагмента, который появляется, а второй — описывает анимацию для фрагмента, который сменяется, т.е. убирается с экрана устройства. Важно упомянуть, что данный метод следует вызвать до появления фрагментов, в противном случае, анимация не будет применена.</p>
+
+<p>Пара сток-комментариев — это для того, чтобы можно было попробовать поиграться с предописанной анимацией, достаточно их раскомментировать и закомментировать предыдущую строку — ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right), в обоих случаях, хотя это и необязательно.</p>
+
+<p>Давайте разберём код активити до конца и перейдём к созданию самой анимации.</p>
+
+<p>После установки анимации, происходит показ фрагмента, добавление его в стек и завершение транзакции для отображения всех изменений. Потом инициализируем нашу кнопку и прикрепляем к ней слушатель события нажатия кнопки, внутри которого находится код для смены фрагментов, по нажатию кнопки начинаем транзакцию, подключаем анимацию и меняем фрагмент на противоположный показываемому в настоящий момент. Код прост, поэтому глубокого объяснения не требует.</p>
+
+<h4>Создаём анимацию</h4>
+
+<p>Перейдём к главной части нашей темы. Научимся создавать саму анимацию. Способ создания анимации здесь немного отличается от того, как мы привыкли это делать в ранних версиях Android. Реализация проходит следующим образом. Для на чала нужно создать папку animator в папке ресурсов приложения, это будет выглядеть так — res/animator/. Сюда мы должны положить xml-файлы, которые будут описывать как именно должна проигрываться анимация. Поместим их туда:<br/>
+slide_in_left.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+</code></pre>
+
+<p>  &lt;objectAnimator xmlns:android=&ldquo;<a href="http://schemas.android.com/apk/res/android">http://schemas.android.com/apk/res/android</a>&rdquo;</p>
+
+<pre><code>android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+
+android:propertyName="y" 
+
+android:valueType="floatType"
+
+android:valueTo="0" 
+
+android:valueFrom="-1280"
+
+android:duration="1500"/&gt;
+
+&lt;/set&gt;
+</code></pre>
+
+<p>и slide_in_right.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;set xmlns:android="http://schemas.android.com/apk/res/android"
+
+ android:ordering="together"&gt;
+
+
+
+&lt;objectAnimator 
+
+  android:interpolator="@android:anim/accelerate_interpolator"
+
+  android:propertyName="alpha"
+
+  android:valueType="floatType"
+
+  android:valueTo="0"
+
+  android:duration="300"/&gt;
+
+
+
+&lt;objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+
+android:propertyName="x" 
+
+android:valueType="floatType"
+
+android:valueTo="1280" 
+
+android:valueFrom="0"
+
+android:duration="1500"/&gt;  
+
+
+
+&lt;/set&gt;
+</code></pre>
+
+<p>Теперь подробно их разберём. Элементы самих визуальных эффектов описываются в теге objectAnimator, каждый такой тег говорит об описании нового эффекта анимации. Теперь посмотрим на сами атрибуты. Первый атрибут в файле slide_in_left.xml — это interpolator, у него имеется несколько значений, о них можно более подробно узнать из документации <a href="http://developer.android.com/guide/topics/graphics/prop-animation.html#object-animator">Property Animation</a>. Interpolator отвечает за то, чтобы отобразить определённым способом в течении определённого времени наш фрагмент. Далее у нас следует атрибут propertyName, в нём указывается с какое именно свойство фрагмента мы будем изменять при анимации, в нашем примере первым идёт y, а valueType указывает какого типа у нас именяемый параметр. В книге Pro Android 4 аргументируется эта ситуация тем, что если посмотреть на метод setX() в классе View, то станет понятно, что он принимает значение типа float, с методом setY() дело обстоит также, отсюда и значение floatType. </p>
+
+<p>Далее идут не маловажные атрибуты valueFrom и valueTo, они указывают от какого до какого значания изменять значение указаннное в propertyName, в нашем первом случае это y. Если параметр valueFrom не указан, то значение берётся равное текущему. В нашем случае valueFrom равен -1280, это означает, что движение фрагмента по оси y будет начинаться со значения -1280, это значение было выбрано из-за того, что оно находится за пределами экрана устройства и перемещение будет происходить пока значение y не станет равным 0 для верхнего левого угла нашего фрагмента в течении 1500 миллисекунд. И, наконец, duration — атрибут указывает сколько именно будет длиться наш анимированный эффект в миллисекундах.</p>
+
+<p>И последний нюанс, который я хочу описать. Глядя в какой-либо из файлов описания анимации, можно заметить тэг set, в который помещены все эффекты анимации, он служит для объединения эффектов либо их разделения. В файле slide_in_right.xml используется атрибут ordering в теге set, в нашем случае он имеет значение together, что означает проигрывать эффекты одновременно, в противовес ему существует значение sequentially, которое требует последовательного отображения эффектов в анимации, что очень удобно в некоторых случаях.</p>
+
+<p>Собственно и всё. В файле slide_in_right.xml приведен пример как можно использовать другие свойства для анимирования, например alpha-канал. Надеюсь данная статья пригодится тем, кому не всё равно как будет выглядеть его приложение.</p>
+
+<p>Как вы сами понимаете, уважаемые хабраюзеры, скрины не смогут отобразить результат работы.</p>
+
+<p>Литература и источники, которые использовались при написании поста были упомянуты в ходе самой статьи.</p>
+
+<p>Статья из сайта <a href="http://habrahabr.ru/post/162389/">habrahabr.ru</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2013/01/02/social-registration/">Простой способ интеграции Android-приложения с социальными сетями</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-02T23:22:37+02:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Друзья всем привет.</p>
+
+<p>Поздравляю всех с Новым годом.</p>
+
+<p>Но не стоит долго отдыхать. И новые статьи уже ждут вас.</p>
+
+<p>Сегодня нашел хорошую статью которая упростит вам работу, по внедрению социальных сетей к себе в приложение.</p>
+
+<p>При разработке игрушки для Android&#8217;а у меня появилась идея добавить в нее немного социального взаимодействия для охвата большей аудитории. Сама игрушка не располагала к тому, чтобы распространятся «вирусным» способом, поэтому я решил ограничится публикацией результатов игры в социальных сетях в случае выигрыша и при условии попадания результата в локальную таблицу рекордов, и я стал искать решение этого вопроса.</p>
+
+<h5>Выбор социальной сети</h5>
+
+<p>Я себе поставил задачу публиковать сообщения не во всех социальных сетях сразу, а хотя бы в одной. Выбор встал между соц. сетями «ВКонтакте», «Facebook» и «Twitter». Так как хотелось распространять игру по всему миру, а не только на просторах СНГ, сеть «ВКонтакте» практически сразу была исключена из списка. Выбор между «Facebook» и «Twitter» был сделан просто, и может быть, не совсем объективно — «Facebook» мне не очень нравится, пользоваться я им не люблю из-за, на мой взгляд, крайне неудачного интерфейса, поэтому я решил использовать «Twitter», тем более, что в нем существует возможность интегрировать аккаунт с «Facebook» и дублировать туда сообщения.</p>
+
+<h5>Поиск способа реализации</h5>
+
+<p>Искать способ реализовать свою идею я начал с <a href="http://twitter4j.org/en/index.html">Twitter4j SDK</a>. К сожалению, кроме сухой javadoc документации, представляющей собой простое справочное руководство, и отрывочных примеров, там ничего больше не обнаружилось. Также было просмотрено немало тем на stackoverflow.com, но и там ничего подходящего не нашлось (если честно, не хотелось сильно углубляться в дебри TwitterAPI, да и к тому же мои знания Java и платформы Android оставляют желать лучше).</p>
+
+<h5>Есть идея, есть решение</h5>
+
+<p>Наконец блуждание в гугле навело меня на статью <a href="http://idev.by/android/20828/">Интеграция Android-приложения с Twitter</a>. Некоторые идеи были не совсем понятны, но код показался достаточно простым, и его автор утверждал, что его решение работает. Потратив немного времени, я адаптировал код автора для своего приложения, и стал проверять его работоспособность. Процедура авторизации проходила (хотя и показалась мне довольно непонятной для обычного, далекого от IT пользователя), но дальше дело не двигалось. Как отсылать сообщения (вернее, в какой момент), я так и не разобрался.<br/>
+Также не понравилось, что остается висеть открытый браузер, который вылезает после закрытия моего приложения. Поковырявшись денек, я оставил идею использовать TwitterAPI и стал искать более простое и приятное решение.</p>
+
+<h5>Самое простое решение</h5>
+
+<p>Самое простое решение, которое меня вполне удовлетворило, было найдено, более того, оно было в некоторых аспектах даже лучше, чем предыдущее.<br/>
+Суть идеи в том, чтобы просто отсылать данные, а куда они будут реально отправлены, решает система и пользователь. Из плюсов — то, что пользователю предоставляется возможность выбрать, куда он хочет отправить сообщение — SMS/MMS, твиттер, фейсбук, в вконтакте, или что-то еще. Я решил, что пользователь наиболее активно пользуется скорее всего только одной из социальных сетей, и ему не понадобится размещать пост в нескольких сетях, к тому же это решение в данном аспекте соответствовало первому варианту. Из минусов данного решения можно отметить то, что у пользователя должно быть установлено соответствующее клиентское приложение (для твиттера в маркете, помимо официального клиента, есть много сторонних). Существование клиента для Фейсбук я не проверял, но полагаю, что оно либо есть, либо появится в довольно ближайшем будущем. Клиент для в ВКонтакте, насколько я в курсе, уже создан (где-то тут была новость о конкурсе на его разработку), и его официальное появление тоже вопрос ближайшего будущего. Также я решил, что пользователь, который достаточно активен в соц. сети для того, чтобы опубликовать там результаты игры, уже озаботился установкой клиента для нее.<br/>
+Собственно, само решение — это пять строчек кода, и мне уже стыдно, что я томил читателя своими нудными рассуждениями, вместо того, чтобы сразу опубликовать его:</p>
+
+<pre><code>    // в коде моей Activity
+
+void shareTextInSocialMedia(String msg)
+
+{
+
+    //canShareText();
+
+    Intent share = new Intent(Intent.ACTION_SEND);
+
+    share.putExtra(Intent.EXTRA_TEXT, msg);
+
+    share.setType("text/plain");
+
+    //startActivity(Intent.createChooser(share, "Share this via"));
+
+    startActivityForResult(Intent.createChooser(share, "Share this via"), 0);
+
+}    
+</code></pre>
+
+<p>При выполнении приведенного кода возникает список приложений, способных произвести отправку (у меня это Send SMS/MMS и Post to Twitter при установленном твиттер-клиенте), пользователь выбирает нужное приложение, и продолжает работу уже в нем. <br/>
+Большой минус — мое приложение закрывается после выполнения этого кода, причем не сразу — в случае твиттер-клиента там сначала можно отредактировать сообщение, и в это время моя программа висела в фоне и играла музыку, и пропала только после нажатия кнопки «Твитнуть». Я попробовал использовать startActivityForResult вместо startActivity, но ничего не изменилось. В случае отправки SMS мое приложение тоже пропало, хотя момент я не засек так же точно. На stackoverflow.com мне сказали, что проблема в твиттер-клиенте («Ah, I see. This is a classic example of application does not respecting Android lifecycle (shame on Twitter)»). Я сначала удовлетворился тем, что от меня тут ничего не зависит, но потом проверил SMS способ, и несколько засомневался, так как он тоже не работал корректно.</p>
+
+<h5>Бонус для самых упорных</h5>
+
+<p>Меня несколько напрягало то, что в случае отсутствия приложений, способных обработать отправку сообщения, пользователю будет показано противное сообщение об этом, и я захотел проверить, нужно ли показывать кнопку «Share» в своем приложении, и StackOverflow подсказал мне решение:</p>
+
+<pre><code>    boolean canShareText( boolean allowSmsMms)
+
+{
+
+    PackageManager manager = getPackageManager();
+
+    List&amp;lt;ResolveInfo&amp;gt; list = manager.queryIntentActivities(createShareIntent(""), 0);
+
+
+
+    if (list != null &amp;amp;&amp;amp; list.size() &amp;gt; 0) 
+
+    {
+
+        if (allowSmsMms) return true;
+
+        int handlersCount = 0;
+
+        for (ResolveInfo li : list)
+
+        {
+
+            if (li!=null &amp;amp;&amp;amp; li.activityInfo!=null &amp;amp;&amp;amp; li.activityInfo.packageName!=null &amp;amp;&amp;amp; li.activityInfo.packageName=="com.android.mms") {}
+
+            else
+
+                ++handlersCount;
+
+        }
+
+        if (handlersCount&amp;gt;0) return true;
+
+    } 
+
+    return false;
+
+}
+</code></pre>
+
+<p>В данном коде перечисляются все доступные способы отправки сообщения, в том числе и с использованием СМС.<br/>
+Я решил не показывать кнопку «Share», если доступна отсылка только SMS/MMS, и добавил опциональную возможность проигнорировать это приложение. Имя пакета «com.android.mms» получил во время прогона на эмуляторе, так что возможно не везде будет срабатывать.</p>
+
+<p>Статья из сайта <a href="http://habrahabr.ru/post/164187/">habrahabr.ru</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2012/12/30/new-year/">С Новым годом!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-30T15:44:48+02:00" pubdate data-updated="true">Dec 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Привет друзья.</p>
+
+<p>Вот и заканчивается 2012 год.</p>
+
+<p>За этот год мы с вами очень много всего пережили:</p>
+
+<p>Стартовал блог</p>
+
+<p>Добавили больше 200 статей и видео</p>
+
+<p>Записали вебинар</p>
+
+<p>Стартовали рубрику интервью</p>
+
+<p>Пережили конец света</p>
+
+<p>Надеюсь, что 2013 год у всех вас будет более продуктивный чем 2012. Со своей стороны обещаю помощь и развитие.</p>
+
+<p>А сейчас прошу к просмотру поздравления:</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/KtKsjysq6SE "></iframe></div>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2012/12/29/artem-melnik/">Первое интервью. В гостях Артем Мельник.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-29T15:42:17+02:00" pubdate data-updated="true">Dec 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Друзья всем привет.</p>
+
+<p>Сегодня хотел бы вам представить, замечательного человека &ndash; Артема Мельника.</p>
+
+<p><a href="http://artemmelnik.ru/">Артем Мельник</a> &ndash; автор и ведущий программы <a href="http://nrsecrets.ru/">&ldquo;Секреты Новых богатых&rdquo;</a>.</p>
+
+<p>Артем создал 2 сайта на которых он показывает людям, что можно жить не только ради работы.</p>
+
+<p>Но и как перейти от работы к своему бизнесу.</p>
+
+<p>Надеюсь вам понравиться. </p>
+
+<p>Лайки в социальные сети приветствуются!  :lol:</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/83PvPWGexZs "></iframe></div>
+
+
+<p>Пишем ваши отзывы и замечания!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2012/12/21/primeval-park/">Первобытный парк - построй первый в мире парк развлечений</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-21T13:59:44+02:00" pubdate data-updated="true">Dec 21<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Всем привет.</p>
+
+<p>Очередной обзор игр.</p>
+
+<p>Игра &ldquo;Первобытный парк&rdquo; перевернет твое представление о доисторической жизни. Откликнись на зов предков и окунись в мир безумных первобытных развлечений. Преврати скучную жизнь пещерных людей в настоящий праздник!</p>
+
+<p><img src="http://s.4pda.ru/wp-content/uploads/2012/12/splash_800x480-480x288.jpg" alt="" /></p>
+
+<p><strong>Версия: </strong>1.0.47</p>
+
+<p><strong>Русский интерфейс: </strong>Да</p>
+
+<p><strong>Технические требования: </strong>Android версии 1.6 и выше</p>
+
+<p><strong>Категория:</strong> Казуальные, стратегии</p>
+
+<p>Первобытный Парк &ndash; это строительный симулятор парка развлечений. В игре вам предстоит построить первый парк аттракционов в истории человечества. В вашем распоряжении более 200 различных аттракционов, сервисов, закусочных, экзотических цветов, деревьев и прочих декораций &ndash; в общем, все, чтобы сделать ваш парк уникальным и интересным. Вам придется пробовать различные комбинации расположения аттракционов, сервисов и декораций, чтобы удовлетворить желания требовательных первобытных посетителей. Помимо этого вы сможете нанимать работников, чтобы они помогали вам собирать деньги, мусор, ремонтировали аттракционы, разнимали драки и следили за парком в ваше отсутствие.</p>
+
+<p>Особенности игры:</p>
+
+<ul>
+<li><p>Отличная мультяшная графика и занимательный геймплэй;</p></li>
+<li><p>Веселые звуки и музыка;</p></li>
+<li><p>Более 60 аттракционов;</p></li>
+<li><p>Более 100 сервисов, деревьев, цветов и декораций;</p></li>
+<li><p>5 типов работников;</p></li>
+<li><p>Сотни забавных посетителей со своими желаниями;</p></li>
+<li><p>Достижения, онлайн-рейтинг, посещение других парков.</p></li>
+</ul>
+
+
+<p><strong>От разработчиков: </strong>Что делает игру уникальной и отличной от остальных сити-билдеров, это то, что мы постарались сделать ее больше похожей на симулятор, а не на казуальную игру. Мы старались сохранить дух старого доброго Theme Park и RollerCoaster Tycoon, некогда популярных на PC. Но, в то же время, игра отвечает современным требованиям к мобильным играм. Помимо этого игра построена по принципу честного free-to-play. В игру можно спокойно играть, не вкладывая деньги, но это займет дольше времени. Практически всего в игре можно достичь бесплатно, а деньги нужны только для ускорения игрового процесса.</p>
+
+<p>Скоро на IPhone и IPad!</p>
+
+<p><strong>Стоимость:</strong> Бесплатно</p>
+
+<p><strong>Ссылка на Google Play:</strong> <img src="http://s.4pda.ru/forum/style_images/1/qr_code.gif" alt="QR" /><a href="https://play.google.com/store/apps/details?id=com.geargames.pfp">https://play.google.com/store/apps/details?id=com.geargames.pfp</a></p>
+
+<p><img src="http://s.4pda.ru/wp-content/uploads/2012/12/ycrlkibolci-480x288.jpg" alt="Офицальный скриншот &quot;Первобытный парк&quot;" /> 
+<img src="http://s.4pda.ru/wp-content/uploads/2012/12/wyyoyzke5ua-480x288.jpg" alt="Офицальный скриншот &quot;Первобытный парк&quot;" /></p>
+
+<p><img src="http://s.4pda.ru/wp-content/uploads/2012/12/jxoz92ocly0-480x288.jpg" alt="Офицальный скриншот &quot;Первобытный парк&quot;" />
+<img src="http://s.4pda.ru/wp-content/uploads/2012/12/1hot_i9poxq-480x288.jpg" alt="Офицальный скриншот &quot;Первобытный парк&quot;" /></p>
+
+<p>Статья из сайта <a href="http://4pda.ru/2012/12/20/83394/">4pda.ru</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2012/12/20/google-offers/">Получение доходов с Google Play на расчетный счет ИП (только для России)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-20T14:40:12+02:00" pubdate data-updated="true">Dec 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ребята всем привет.</p>
+
+<p>На вебинаре меня спрашивали как получать прибыль с продажи.</p>
+
+<p>К сожалению, для Украины прямого получения нету. (Как получать я узнаю.)</p>
+
+<p>Но для России есть.</p>
+
+<p>И сегодня я нашел статью, как можно получать деньги с PlayMarket.</p>
+
+<p>Прошу к прочтению.</p>
+
+<p>В октябре 2012 <a href="http://droidblog.merigotech.com/?p=70">вступили в силу новые правила получения платежей от продаж на Google Play</a> и, одновременно, <a href="http://droidblog.merigotech.com/?p=73">новая инструкция ЦБ РФ О порядке предоставления документов, связанных с проведением валютных операций</a> (Инструкция Банка России от 04.06.2012 № 138-И - <a href="http://www.cbr.ru/analytics/standart_acts/currency_regulations/138-i.pdf">PDF</a>). В результате, платежи с Google Checkout теперь можно получать напрямую на расчетный счет индивидуального предпринимателя. Это позволяет избавиться от<a href="http://aldro.ru/internet-i-biznes/29-nalogi-adsens.html">работы с AdSense</a> и связанных с ней <a href="http://forum.searchengines.ru/archive/index.php/t-646949.html">морем вопросов</a>. </p>
+
+<p>Многие разработчики уже <a href="http://habrahabr.ru/post/151831/">опробовали</a> новую схему. Попробовал и я &ndash; на днях пришел первый платеж. Хочу поделиться подробностями организации работы с банком.</p>
+
+<h2>РАСЧЕТНЫЙ СЧЕТ</h2>
+
+<p>Для получения платежей требуется долларовый расчетный счет ИП. Процесс открытия валютного счета я уже <a href="http://derevyanko.blogspot.ru/2010/09/1.html">подробно описывал</a>. При открытии счета вам откроют два счета: текущий и транзитный. </p>
+
+<p>В настройка Google Checkout в разделе Settings\Financials нужно будет указать информацию о банке</p>
+
+<p><img src="http://2.bp.blogspot.com/-1-qNj7K21xo/UK71gaD83GI/AAAAAAAAAOA/u0Bw14FL3qM/s320/checkout.jpg" alt="" /></p>
+
+<p>На примере <a href="http://www.sibenergocom.ru/contact">реквизитов Сибирского филиала Промсвязьбанка</a>:</p>
+
+<pre><code>Сибирский филиал ОАО «Промсвязьбанк» г. Новосибирск  
+
+Рс/сч (20-значное число)
+
+Кор/сч 30101810500000000816 
+
+БИК 045004816
+
+Intermediary Bank (Банк – Посредник): Deutsche Bank Trust Company Americas
+
+ New York, NY, USA
+
+ SWIFT: BKTR US 33
+
+Account with Institution (Банк Бенефициара): ОJSC "Promsvyazbank"
+
+ SIBIRSKY BRANCH,
+
+SWIFT: PRMSRUMMNSB
+</code></pre>
+
+<p>Здесь BIK = 045004816 (это БИК вашего банка). Account number = номер вашего<strong>транзитного</strong> счета. SWIFT = PRMSRUMMNSB. Bank name = ОJSC &ldquo;Promsvyazbank&rdquo;. Account holder name = ваши фамилия и имя. </p>
+
+<h2>ДОКУМЕНТЫ В БАНК</h2>
+
+<p>Получение денег на валютный расчетный счет связано с обязательной процедурой валютного контроля. Принципиально вас ожидает то же самое, что при <a href="http://derevyanko.blogspot.ru/2010/09/blog-post.html">получении денег от иностранного заказчика</a>. При поступлении платежа требуется:</p>
+
+<ol>
+<li><p> Представить в банк договор с Google</p></li>
+<li><p> Создать справку о валютной операции и перевести деньги с транзитного счета на текущий валютный или сразу же с продать валюту с транзитного валютного счета на текущий рублевый.</p></li>
+</ol>
+
+
+<p>Банк требует предоставить оригинал и перевод соглашения <a href="https://checkout.google.com/termsOfService?type=SELLER">Accept payments through Google &ndash; Terms of Service. Google Checkout &ndash; Terms of Service (https://checkout.google.com/termsOfService?type=SELLER)</a> (для просмотра требуется войти в свой аккаунт Android-разработчика). С оригиналом &ndash; проблем нет. А вот перевода на русский в сети мне найти не удалось. Пришлось переводить самому&hellip; </p>
+
+<p><a href="http://code.google.com/p/dvsrc/downloads/detail?name=20120919v1_%D0%9F%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4%20Accept%20payments%20through%20Google%20-%20Terms%20of%20Service.7z&amp;can=2&amp;q=">Выкладываю перевод</a> в свободный доступ. (Качество перевода, прямо говоря, не очень &ndash; уж слишком много там юридической терминологии&hellip; Буду признателен, если кто-нибудь укажет на официальный или более качественный перевод. Если кто-нибудь возьмется править перевод &ndash; могу предоставить доступ к оригинальному документу в google docs, &ndash; параграфы на английском и русском чередуются. Пишите мне на dvpublic0 на гмейле). </p>
+
+<p>Судя по <a href="http://habrahabr.ru/post/151831/">комментариям на Хабре</a>, в некоторых банках могут требовать и другие документы, например, скришнот Payouts. </p>
+
+<p>Если у вас есть все необходимые документы, то дальше проблем особых нет. Создаете справку о валютной операции и заявление о переводе/продаже валюты с транзитного счета. Здесь главное уложиться в 15 дней с момента поступления платежа. Штрафы за опоздание могут быть <a href="http://habrahabr.ru/blogs/Dura_Lex/114069/">ОЧЕНЬ</a> высокими. Лично мне Google перевел первый платеж чуть ли не в тот же день, как я вбил реквизиты банка в Google Checkout (а вовсе не в конце месяца). В итоге я чуть было этот платеж не пропустил.</p>
+
+<h2>ПАСПОРТ СДЕЛКИ</h2>
+
+<p>Если совокупная сумма платежей по договору превысит $50 000, то потребуется, как мне сказали в банке, &ldquo;открыть паспорт сделки или подписать новый договор&rdquo;. Сразу открывать паспорт сделки не требуется.</p>
+
+<p>Статья из сайта <a href="http://derevyanko.blogspot.com/2012/11/google-play.html">derevyanko.blogspot.com</a></p>
+
+<p>Расскажите своим друзьям.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-helper/blog/2012/12/20/end-world-2012/">Конец света 2012 - инструкция по выживанию</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-20T14:21:25+02:00" pubdate data-updated="true">Dec 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Всем привет.</p>
+
+<p>Новая подборка программ и игр.</p>
+
+<p> Памятка как выжить в экстремальных ситуациях и условиях. Что взять с собою из дома в экстренном случае? Как выжить в условиях отсутствия цивилизации? Полезная инструкция по выживанию, памятка что должно быть дома про запас, и как вести себя в случае наступления Конца Света или иных катастроф! Тревожные чемоданчики, подготовка квартиры и многое другое в одном приложении. Плюс бонус для тех, у кого все в порядке с чувством юмора.</p>
+
+<p><img src="http://s.4pda.ru/wp-content/uploads/2012/12/116-287x480.jpg" alt="" />!</p>
+
+<p><strong>Версия: </strong>1.4</p>
+
+<p><strong>Русский интерфейс: </strong>Да</p>
+
+<p><strong>Технические требования:</strong> Android 2.2 и выше</p>
+
+<p><strong>Категория:</strong> стиль жизни, образование, справочник</p>
+
+<p>По человеческой природе люди часто убегают от проблем в работу, в йогу, в другую страну. 21 декабря 2012 года возможности бежать не будет –попросту некуда. А ты готов как можно скорее завершить свои дела? Слетать в Нью-Йорк, заняться боксом,  очистить совесть перед Вечностью?</p>
+
+<p>Если амбиции и планы- личное дело каждого, то помочь морально и физически  подготовиться поможет наше Приложение. Вы сможете избавиться от  тяготящих душу метаний, морально подготовиться к Наступлению Вечности, получить «Сертификат Чистой Совести» в разделе &ldquo;Спастись&rdquo;, который поспособствует уверенной встрече Конца Света.</p>
+
+<p>Для тех кто все-таки хочет остаться на Земле и посмотреть «Что будет?»  мы подготовили целый перечень полезных советов, руководств и средств для выживания. Остаться вопреки календарю Майя, параду Планет и магическому набору цифр 21.12.2012.</p>
+
+<p>Как известно, кто владеет информацией &ndash; владеет миром. Получив сведения из нашего приложения и вооружившись «Сертификатом Чистой Совести» предлагаем Вам поэкспериментировать с подготовкой к Концу Света – возможно, вы еще многое не учли.</p>
+
+<p><strong>Стоимость:</strong> Бесплатно</p>
+
+<p><strong>Обсуждение на 4pda:</strong> <a href="http://4pda.ru/forum/index.php?showtopic=407625&amp;st=0&amp;gopid=17718903">http://4pda.ru/forum/index.php?showtopic=407625&amp;st=0&amp;gopid=17718903</a></p>
+
+<p><strong>Ссылка на Google Play:</strong> <img src="http://s.4pda.ru/forum/style_images/1/qr_code.gif" alt="QR" /><a href="https://play.google.com/store/apps/details?id=ru.chebro.doomsday">https://play.google.com/store/apps/details?id=ru.chebro.doomsday</a></p>
+
+<p><strong>Бонусы от разработчика:</strong> Присланные интересные материалы от &ldquo;выживальщиков&rdquo; будут размещены в приложении!</p>
+
+<p><img src="http://s.4pda.ru/wp-content/uploads/2012/12/24-287x480.jpg" alt="" />
+<img src="http://s.4pda.ru/wp-content/uploads/2012/12/37-287x480.jpg" alt="" /></p>
+
+<p><img src="http://s.4pda.ru/wp-content/uploads/2012/12/45-287x480.jpg" alt="" />
+<img src="http://s.4pda.ru/wp-content/uploads/2012/12/54-287x480.jpg" alt="" /></p>
+
+<p><img src="http://s.4pda.ru/wp-content/uploads/2012/12/64-287x480.jpg" alt="" /></p>
+
+<p>Статья из сайта <a href="http://4pda.ru/2012/12/12/82303/#more-82303">4pda.ru</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/android-helper/blog/page/11/">&larr; Older</a>
+    
+    <a href="/android-helper/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/android-helper/blog/page/9/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

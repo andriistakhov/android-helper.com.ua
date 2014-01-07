@@ -1,0 +1,1170 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Pull to Refresh - обновление ListView как у Twitter - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Добрый день друзья. Сегодня я бы хотел поделится с вами одной интересной темой. Если вы когда нибудь использовали приложение Twitter у себя на &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2012/07/19/pull-to-refresh">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Pull to Refresh - обновление ListView как у Twitter</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T16:33:10+03:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Сегодня я бы хотел поделится с вами одной интересной темой.</p>
+
+<p>Если вы когда нибудь использовали приложение Twitter у себя на устройстве, то видели, что если потянуть список вниз то появится что то типа этого:</p>
+
+<p><a href="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-155609.jpg"><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-155609.jpg" alt="" /></a></p>
+
+<p><a href="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-155634.jpg"><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-155634.jpg" alt="" /></a></p>
+
+<p><a href="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-155646.jpg"><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-155646.jpg" alt="" /></a></p>
+
+<p>Попробуем это написать сами.</p>
+
+<p>Должно получится что то вроде этого:</p>
+
+<p><a href="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-162848.png"><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-162848.png" alt="" /></a></p>
+
+<p><a href="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-162904.png"><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-162904.png" alt="" /></a></p>
+
+<p><a href="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-162911.png"><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-162911.png" alt="" /></a></p>
+
+<p><a href="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-162918.png"><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-2012-07-19-162918.png" alt="" /></a></p>
+
+<p>Создадим разметку нашего загрузчика:</p>
+
+<p>[xml]</p>
+
+<p>&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;utf-8&rdquo;?></p>
+
+<p>&lt;RelativeLayout xmlns:android=&ldquo;<a href="http://schemas.android.com/apk/res/android">http://schemas.android.com/apk/res/android</a>&rdquo;</p>
+
+<pre><code>android:id="@+id/pull_to_refresh_header"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"
+
+android:gravity="center"
+
+android:paddingBottom="15dip"
+
+android:paddingTop="10dip" &gt;
+
+
+
+&lt;ProgressBar
+
+    android:id="@+id/pull_to_refresh_progress"
+
+    style="?android:attr/progressBarStyleSmall"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:layout_centerVertical="true"
+
+    android:layout_marginLeft="30dip"
+
+    android:layout_marginRight="20dip"
+
+    android:layout_marginTop="10dip"
+
+    android:indeterminate="true"
+
+    android:visibility="gone" /&gt;
+
+
+
+&lt;ImageView
+
+    android:id="@+id/pull_to_refresh_image"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:layout_gravity="center"
+
+    android:layout_marginLeft="30dip"
+
+    android:layout_marginRight="20dip"
+
+    android:gravity="center"
+
+    android:src="@drawable/ic_pulltorefresh_arrow"
+
+    android:visibility="gone" /&gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/pull_to_refresh_text"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="wrap_content"
+
+    android:layout_gravity="center"
+
+    android:gravity="center"
+
+    android:paddingTop="5dip"
+
+    android:text="@string/pull_to_refresh_tap_label"
+
+    android:textAppearance="?android:attr/textAppearanceMedium"
+
+    android:textStyle="bold" /&gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/pull_to_refresh_updated_at"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="wrap_content"
+
+    android:layout_below="@+id/pull_to_refresh_text"
+
+    android:layout_gravity="center"
+
+    android:gravity="center"
+
+    android:textAppearance="?android:attr/textAppearanceSmall"
+
+    android:visibility="gone" /&gt;
+</code></pre>
+
+<p></RelativeLayout></p>
+
+<p>[/xml]</p>
+
+<p>Реализуем ListView (полный код):</p>
+
+<p>[java]</p>
+
+<p>package com.ua.androidhelper.widget;</p>
+
+<p>import android.content.Context;</p>
+
+<p>import android.util.AttributeSet;</p>
+
+<p>import android.util.Log;</p>
+
+<p>import android.view.LayoutInflater;</p>
+
+<p>import android.view.MotionEvent;</p>
+
+<p>import android.view.View;</p>
+
+<p>import android.view.ViewGroup;</p>
+
+<p>import android.view.animation.LinearInterpolator;</p>
+
+<p>import android.view.animation.RotateAnimation;</p>
+
+<p>import android.widget.AbsListView;</p>
+
+<p>import android.widget.AbsListView.OnScrollListener;</p>
+
+<p>import android.widget.ImageView;</p>
+
+<p>import android.widget.ListAdapter;</p>
+
+<p>import android.widget.ListView;</p>
+
+<p>import android.widget.ProgressBar;</p>
+
+<p>import android.widget.RelativeLayout;</p>
+
+<p>import android.widget.TextView;</p>
+
+<p>public class PullToRefreshListView extends ListView implements OnScrollListener {</p>
+
+<pre><code>private static final int TAP_TO_REFRESH = 1;
+
+private static final int PULL_TO_REFRESH = 2;
+
+private static final int RELEASE_TO_REFRESH = 3;
+
+private static final int REFRESHING = 4;
+
+
+
+private static final String TAG = "PullToRefreshListView";
+
+
+
+private OnRefreshListener mOnRefreshListener;
+
+
+
+/**
+
+ * Listener that will receive notifications every time the list scrolls.
+
+ */
+
+private OnScrollListener mOnScrollListener;
+
+private LayoutInflater mInflater;
+
+
+
+private RelativeLayout mRefreshView;
+
+private TextView mRefreshViewText;
+
+private ImageView mRefreshViewImage;
+
+private ProgressBar mRefreshViewProgress;
+
+private TextView mRefreshViewLastUpdated;
+
+
+
+private int mCurrentScrollState;
+
+private int mRefreshState;
+
+
+
+private RotateAnimation mFlipAnimation;
+
+private RotateAnimation mReverseFlipAnimation;
+
+
+
+private int mRefreshViewHeight;
+
+private int mRefreshOriginalTopPadding;
+
+private int mLastMotionY;
+
+
+
+private boolean mBounceHack;
+
+
+
+public PullToRefreshListView(Context context) {
+
+    super(context);
+
+    init(context);
+
+}
+
+
+
+public PullToRefreshListView(Context context, AttributeSet attrs) {
+
+    super(context, attrs);
+
+    init(context);
+
+}
+
+
+
+public PullToRefreshListView(Context context, AttributeSet attrs, int defStyle) {
+
+    super(context, attrs, defStyle);
+
+    init(context);
+
+}
+
+
+
+private void init(Context context) {
+
+    // Load all of the animations we need in code rather than through XML
+
+    mFlipAnimation = new RotateAnimation(0, -180, RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+
+            RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+
+    mFlipAnimation.setInterpolator(new LinearInterpolator());
+
+    mFlipAnimation.setDuration(250);
+
+    mFlipAnimation.setFillAfter(true);
+
+    mReverseFlipAnimation = new RotateAnimation(-180, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+
+            RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+
+    mReverseFlipAnimation.setInterpolator(new LinearInterpolator());
+
+    mReverseFlipAnimation.setDuration(250);
+
+    mReverseFlipAnimation.setFillAfter(true);
+
+
+
+    mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+
+    mRefreshView = (RelativeLayout) mInflater.inflate(R.layout.pull_to_refresh_header, this, false);
+
+    mRefreshViewText = (TextView) mRefreshView.findViewById(R.id.pull_to_refresh_text);
+
+    mRefreshViewImage = (ImageView) mRefreshView.findViewById(R.id.pull_to_refresh_image);
+
+    mRefreshViewProgress = (ProgressBar) mRefreshView.findViewById(R.id.pull_to_refresh_progress);
+
+    mRefreshViewLastUpdated = (TextView) mRefreshView.findViewById(R.id.pull_to_refresh_updated_at);
+
+
+
+    mRefreshViewImage.setMinimumHeight(50);
+
+    mRefreshView.setOnClickListener(new OnClickRefreshListener());
+
+    mRefreshOriginalTopPadding = mRefreshView.getPaddingTop();
+
+
+
+    mRefreshState = TAP_TO_REFRESH;
+
+
+
+    addHeaderView(mRefreshView);
+
+
+
+    super.setOnScrollListener(this);
+
+
+
+    measureView(mRefreshView);
+
+    mRefreshViewHeight = mRefreshView.getMeasuredHeight();
+
+}
+
+
+
+@Override
+
+protected void onAttachedToWindow() {
+
+    setSelection(1);
+
+}
+
+
+
+@Override
+
+public void setAdapter(ListAdapter adapter) {
+
+    super.setAdapter(adapter);
+
+
+
+    setSelection(1);
+
+}
+
+
+
+/**
+
+ * Set the listener that will receive notifications every time the list scrolls.
+
+ * 
+
+ * @param l
+
+ *            The scroll listener.
+
+ */
+
+@Override
+
+public void setOnScrollListener(AbsListView.OnScrollListener l) {
+
+    mOnScrollListener = l;
+
+}
+
+
+
+/**
+
+ * Register a callback to be invoked when this list should be refreshed.
+
+ * 
+
+ * @param onRefreshListener
+
+ *            The callback to run.
+
+ */
+
+public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
+
+    mOnRefreshListener = onRefreshListener;
+
+}
+
+
+
+/**
+
+ * Set a text to represent when the list was last updated.
+
+ * 
+
+ * @param lastUpdated
+
+ *            Last updated at.
+
+ */
+
+public void setLastUpdated(CharSequence lastUpdated) {
+
+    if (lastUpdated != null) {
+
+        mRefreshViewLastUpdated.setVisibility(View.VISIBLE);
+
+        mRefreshViewLastUpdated.setText(lastUpdated);
+
+    } else {
+
+        mRefreshViewLastUpdated.setVisibility(View.GONE);
+
+    }
+
+}
+
+
+
+@Override
+
+public boolean onTouchEvent(MotionEvent event) {
+
+    final int y = (int) event.getY();
+
+    mBounceHack = false;
+
+
+
+    switch (event.getAction()) {
+
+        case MotionEvent.ACTION_UP:
+
+            if (!isVerticalScrollBarEnabled()) {
+
+                setVerticalScrollBarEnabled(true);
+
+            }
+
+            if (getFirstVisiblePosition() == 0 &amp;&amp; mRefreshState != REFRESHING) {
+
+                if ((mRefreshView.getBottom() &gt;= mRefreshViewHeight || mRefreshView.getTop() &gt;= 0)
+
+                        &amp;&amp; mRefreshState == RELEASE_TO_REFRESH) {
+
+                    // Initiate the refresh
+
+                    mRefreshState = REFRESHING;
+
+                    prepareForRefresh();
+
+                    onRefresh();
+
+                } else if (mRefreshView.getBottom() &lt; mRefreshViewHeight || mRefreshView.getTop() &lt;= 0) {
+
+                    // Abort refresh and scroll down below the refresh view
+
+                    resetHeader();
+
+                    setSelection(1);
+
+                }
+
+            }
+
+            break;
+
+        case MotionEvent.ACTION_DOWN:
+
+            mLastMotionY = y;
+
+            break;
+
+        case MotionEvent.ACTION_MOVE:
+
+            applyHeaderPadding(event);
+
+            break;
+
+    }
+
+    return super.onTouchEvent(event);
+
+}
+
+
+
+private void applyHeaderPadding(MotionEvent ev) {
+
+    // getHistorySize has been available since API 1
+
+    int pointerCount = ev.getHistorySize();
+
+
+
+    for (int p = 0; p &lt; pointerCount; p++) {
+
+        if (mRefreshState == RELEASE_TO_REFRESH) {
+
+            if (isVerticalFadingEdgeEnabled()) {
+
+                setVerticalScrollBarEnabled(false);
+
+            }
+
+
+
+            int historicalY = (int) ev.getHistoricalY(p);
+
+
+
+            // Calculate the padding to apply, we divide by 1.7 to
+
+            // simulate a more resistant effect during pull.
+
+            int topPadding = (int) (((historicalY - mLastMotionY) - mRefreshViewHeight) / 1.7);
+
+
+
+            mRefreshView.setPadding(mRefreshView.getPaddingLeft(), topPadding, mRefreshView.getPaddingRight(),
+
+                    mRefreshView.getPaddingBottom());
+
+        }
+
+    }
+
+}
+
+
+
+/**
+
+ * Sets the header padding back to original size.
+
+ */
+
+private void resetHeaderPadding() {
+
+    mRefreshView.setPadding(mRefreshView.getPaddingLeft(), mRefreshOriginalTopPadding,
+
+            mRefreshView.getPaddingRight(), mRefreshView.getPaddingBottom());
+
+}
+
+
+
+/**
+
+ * Resets the header to the original state.
+
+ */
+
+private void resetHeader() {
+
+    if (mRefreshState != TAP_TO_REFRESH) {
+
+        mRefreshState = TAP_TO_REFRESH;
+
+
+
+        resetHeaderPadding();
+
+
+
+        // Set refresh view text to the pull label
+
+        mRefreshViewText.setText(R.string.pull_to_refresh_tap_label);
+
+        // Replace refresh drawable with arrow drawable
+
+        mRefreshViewImage.setImageResource(R.drawable.ic_pulltorefresh_arrow);
+
+        // Clear the full rotation animation
+
+        mRefreshViewImage.clearAnimation();
+
+        // Hide progress bar and arrow.
+
+        mRefreshViewImage.setVisibility(View.GONE);
+
+        mRefreshViewProgress.setVisibility(View.GONE);
+
+    }
+
+}
+
+
+
+private void measureView(View child) {
+
+    ViewGroup.LayoutParams p = child.getLayoutParams();
+
+    if (p == null) {
+
+        p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+    }
+
+
+
+    int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0 + 0, p.width);
+
+    int lpHeight = p.height;
+
+    int childHeightSpec;
+
+    if (lpHeight &gt; 0) {
+
+        childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight, MeasureSpec.EXACTLY);
+
+    } else {
+
+        childHeightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+
+    }
+
+    child.measure(childWidthSpec, childHeightSpec);
+
+}
+
+
+
+@Override
+
+public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+    // When the refresh view is completely visible, change the text to say
+
+    // "Release to refresh..." and flip the arrow drawable.
+
+    if (mCurrentScrollState == SCROLL_STATE_TOUCH_SCROLL &amp;&amp; mRefreshState != REFRESHING) {
+
+        if (firstVisibleItem == 0) {
+
+            mRefreshViewImage.setVisibility(View.VISIBLE);
+
+            if ((mRefreshView.getBottom() &gt;= mRefreshViewHeight + 20 || mRefreshView.getTop() &gt;= 0)
+
+                    &amp;&amp; mRefreshState != RELEASE_TO_REFRESH) {
+
+                mRefreshViewText.setText(R.string.pull_to_refresh_release_label);
+
+                mRefreshViewImage.clearAnimation();
+
+                mRefreshViewImage.startAnimation(mFlipAnimation);
+
+                mRefreshState = RELEASE_TO_REFRESH;
+
+            } else if (mRefreshView.getBottom() &lt; mRefreshViewHeight + 20 &amp;&amp; mRefreshState != PULL_TO_REFRESH) {
+
+                mRefreshViewText.setText(R.string.pull_to_refresh_pull_label);
+
+                if (mRefreshState != TAP_TO_REFRESH) {
+
+                    mRefreshViewImage.clearAnimation();
+
+                    mRefreshViewImage.startAnimation(mReverseFlipAnimation);
+
+                }
+
+                mRefreshState = PULL_TO_REFRESH;
+
+            }
+
+        } else {
+
+            mRefreshViewImage.setVisibility(View.GONE);
+
+            resetHeader();
+
+        }
+
+    } else if (mCurrentScrollState == SCROLL_STATE_FLING &amp;&amp; firstVisibleItem == 0 &amp;&amp; mRefreshState != REFRESHING) {
+
+        setSelection(1);
+
+        mBounceHack = true;
+
+    } else if (mBounceHack &amp;&amp; mCurrentScrollState == SCROLL_STATE_FLING) {
+
+        setSelection(1);
+
+    }
+
+
+
+    if (mOnScrollListener != null) {
+
+        mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+
+    }
+
+}
+
+
+
+@Override
+
+public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    mCurrentScrollState = scrollState;
+
+
+
+    if (mCurrentScrollState == SCROLL_STATE_IDLE) {
+
+        mBounceHack = false;
+
+    }
+
+
+
+    if (mOnScrollListener != null) {
+
+        mOnScrollListener.onScrollStateChanged(view, scrollState);
+
+    }
+
+}
+
+
+
+public void prepareForRefresh() {
+
+    resetHeaderPadding();
+
+
+
+    mRefreshViewImage.setVisibility(View.GONE);
+
+    // We need this hack, otherwise it will keep the previous drawable.
+
+    mRefreshViewImage.setImageDrawable(null);
+
+    mRefreshViewProgress.setVisibility(View.VISIBLE);
+
+
+
+    // Set refresh view text to the refreshing label
+
+    mRefreshViewText.setText(R.string.pull_to_refresh_refreshing_label);
+
+
+
+    mRefreshState = REFRESHING;
+
+}
+
+
+
+public void onRefresh() {
+
+    Log.d(TAG, "onRefresh");
+
+
+
+    if (mOnRefreshListener != null) {
+
+        mOnRefreshListener.onRefresh();
+
+    }
+
+}
+
+
+
+/**
+
+ * Resets the list to a normal state after a refresh.
+
+ * 
+
+ * @param lastUpdated
+
+ *            Last updated at.
+
+ */
+
+public void onRefreshComplete(CharSequence lastUpdated) {
+
+    setLastUpdated(lastUpdated);
+
+    onRefreshComplete();
+
+}
+
+
+
+/**
+
+ * Resets the list to a normal state after a refresh.
+
+ */
+
+public void onRefreshComplete() {
+
+    Log.d(TAG, "onRefreshComplete");
+
+
+
+    resetHeader();
+
+
+
+    // If refresh view is visible when loading completes, scroll down to
+
+    // the next item.
+
+    if (mRefreshView.getBottom() &gt; 0) {
+
+        invalidateViews();
+
+        setSelection(1);
+
+    }
+
+}
+
+
+
+/**
+
+ * Invoked when the refresh view is clicked on. This is mainly used when there's only a few items in the list and
+
+ * it's not possible to drag the list.
+
+ */
+
+private class OnClickRefreshListener implements OnClickListener {
+
+
+
+    @Override
+
+    public void onClick(View v) {
+
+        if (mRefreshState != REFRESHING) {
+
+            prepareForRefresh();
+
+            onRefresh();
+
+        } else {
+
+            onRefreshComplete();
+
+        }
+
+    }
+
+
+
+}
+
+
+
+/**
+
+ * Interface definition for a callback to be invoked when list should be refreshed.
+
+ */
+
+public interface OnRefreshListener {
+
+    /**
+
+     * Called when the list should be refreshed.
+
+     * &lt;p&gt;
+
+     * A call to {@link PullToRefreshListView #onRefreshComplete()} is expected to indicate that the refresh has
+
+     * completed.
+
+     */
+
+    public void onRefresh();
+
+}
+</code></pre>
+
+<p>}</p>
+
+<p>[/java]</p>
+
+<p>Добавим ListView на наш Activity:</p>
+
+<p>[java]</p>
+
+<p>public class MainActivity extends Activity {</p>
+
+<pre><code>private final String[] values = { "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8",
+
+        "Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8", "Test 1", "Test 2",
+
+        "Test 3", "Test 4", "Test 5", "Test 6", "Test 7", "Test 8", "Test 1", "Test 2", "Test 3", "Test 4",
+
+        "Test 5", "Test 6", "Test 7", "Test 8" };
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    // setContentView(R.layout.activity_main);
+
+
+
+    ListAdapter adapter = new ArrayAdapter&lt;String&gt;(this, R.layout.list_item, values);
+
+    PullToRefreshListView listView = new PullToRefreshListView(this);
+
+    listView.setAdapter(adapter);
+
+    setContentView(listView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+
+}
+</code></pre>
+
+<p>}</p>
+
+<p>[/java]</p>
+
+<p>Все готово.</p>
+
+<p>Коды как всегда <a href="http://android-helper.com.ua/forms">тут</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T16:33:10+03:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2012/07/19/pull-to-refresh/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2012/07/19/pull-to-refresh/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2012/07/18/fragments/" title="Previous Post: Fragments - описание">&laquo; Fragments - описание</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2012/07/23/patch_lenovo_a750/" title="Next Post: Исправление русского ввода на Lenovo A750">Исправление русского ввода на Lenovo A750 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

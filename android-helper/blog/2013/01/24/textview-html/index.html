@@ -1,0 +1,1260 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>TextView + HTML разметка - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Всем привет. Прошу простить меня, что очень долго не радовал своих читателей блога, хорошими примерами. Вот недавно я лазил по просторах инета и &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2013/01/24/textview-html">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">TextView + HTML разметка</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-24T07:42:06+02:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Всем привет.</p>
+
+<p>Прошу простить меня, что очень долго не радовал своих читателей блога, хорошими примерами.</p>
+
+<p>Вот недавно я лазил по просторах инета и нашел замечательную <a href="http://habrahabr.ru/post/166351/">статью</a>.</p>
+
+<p>О том как можно сделать разметку html в обычном TextView.</p>
+
+<p>Автор довольно хорошо высветел эту тему. Хотел переработать для вас, но все что тут написано, действительно нужно.</p>
+
+<p>Ну что ж господа. Прошу к прочтению.</p>
+
+<p>Недавно мне понадобилось сделать довольно хитроумный чат в приложении под Android. Помимо собственно информации требовалось передавать пользователям дополнительную функциональность в контексте определенного сообщения: имя автора сообщения по нажатию на него должно вставляться в текстовое поле ответа, а если это сообщение о только что созданном игровом сеансе, пользователи должны иметь возможность присоединиться к игре по клику и так далее. Одним из главных требований была возможность создавать сообщение, содержащее несколько ссылок, что и задало направление исследований.</p>
+
+<p><strong>WebView</strong>, обладая нужной функциональностью, был отвергнут по причине тяжести решения: я даже не стал создавать 100 или сколько-нибудь там экземпляров в тестовых целях, по одному на каждое сообщение, поскольку сразу было понятно, что это расточительство нормально работать не будет.</p>
+
+<p>К счастью, самый обычный <a href="http://developer.android.com/reference/android/widget/TextView.html"><strong>TextView</strong></a> обладает неожиданно потрясающей функциональностью по разметке текста и может использоваться как в качестве отдельного элемента, так и служить целой страницей, будучи несравненно легковеснее, чем <strong>WebView</strong>.</p>
+
+<p>Я реализовал весь, необходимый мне функционал и выяснил ещё несколько довольно интересных вещей, столкнувшись с некоторым количеством подводных камней (впрочем, не очень острых). Можно сказать, всё нижеописанное — руководство по созданию достаточно мощной справочной системы в своём приложении практически даром.</p>
+
+<h3>Задачи</h3>
+
+<p>В данном примере мы создадим приложение с двумя <strong>Activity</strong>, одна из которых содержит <strong>TextView</strong>, исполняющий роль браузера, из которого, в частности, можно вызвать вторую <strong>Activity</strong>, демонстрирующую работу с параметрами вызова. Мы выясним, каким образом можно создавать страницы текста с разметкой и изображениями и связывать их ссылками. </p>
+
+<p>Содержимое страниц берётся из строк в ресурсах приложения, а изображения являются drawable-ресурсами. Небольшие изменения в коде позволят использовать другие расположения.</p>
+
+<p><img src="http://habrastorage.org/storage2/a04/b2e/d4b/a04b2ed4b25633dfdc13fe3927e3c859.jpg" alt="" /></p>
+
+<h3>Создание приложения</h3>
+
+<p>Любым удобным нам способом создаём обычное приложение:</p>
+
+<p><strong>AndroidManifest.xml</strong></p>
+
+<pre><code>&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.markup.tutorial" android:versionCode="1" android:versionName="1.0"&gt;
+
+&lt;uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15" /&gt; 
+
+&lt;application android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme"&gt;
+
+&lt;activity android:name=".MainActivity" android:label="@string/title_activity_main"&gt;
+
+&lt;intent-filter&gt;
+
+    &lt;action android:name="android.intent.action.MAIN" /&gt; 
+
+    &lt;category android:name="android.intent.category.LAUNCHER" /&gt; 
+
+&lt;/intent-filter&gt;
+
+&lt;/activity&gt;
+
+&lt;activity android:name=".AnotherActivity" android:exported="false"&gt;
+
+&lt;intent-filter&gt;
+
+&lt;data android:scheme="activity-run" android:host="AnotherActivityHost" /&gt; 
+
+&lt;action android:name="android.intent.action.VIEW" /&gt; 
+
+&lt;category android:name="android.intent.category.DEFAULT" /&gt; 
+
+&lt;/intent-filter&gt;
+
+&lt;/activity&gt;
+
+&lt;/application&gt;
+
+&lt;/manifest&gt; 
+</code></pre>
+
+<p>Немного пояснений к манифесту. Если с первой <strong>Activity</strong> всё понятно, вторая (<strong>AnotherActivity</strong>) содержит некие дополнительные описатели.</p>
+
+<p><strong>android:exported=«false»</strong> необходимо для того, чтобы компилятор не выдавал предупреждения о том, что мы забыли что-то прописать в экспортируемом компоненте. На мой взгляд, чисто декоративный момент, но чем меньше жёлтых треугольничков — тем спокойнее.</p>
+
+<p>Раздел <strong>intent-filter</strong> содержит описатели того, каким образом и при каких обстоятельствах будет происходить запуск <strong>Activity</strong>.</p>
+
+<p> означает, что можно запустить <strong>Activity</strong> ссылкой вида <strong>activity-run://AnotherActivityHost?params&hellip;</strong></p>
+
+<p>Значения <strong>action</strong> и <strong>category</strong> необходимы системе для того чтобы обнаружить и запустить <strong>Activity</strong>.</p>
+
+<p><strong>MainActivity.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+import org.xml.sax.XMLReader;
+
+import android.os.Bundle;
+
+import android.app.Activity;
+
+import android.graphics.drawable.Drawable;
+
+import android.text.Editable;
+
+import android.text.Html;
+
+import android.text.Spannable;
+
+import android.text.Spanned;
+
+import android.text.method.LinkMovementMethod;
+
+import android.widget.TextView;
+
+
+
+public class MainActivity extends Activity {
+
+
+
+TextView tvContent;
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+
+
+    tvContent = (TextView)findViewById(R.id.tvContent);
+
+    tvContent.setLinksClickable(true);
+
+    tvContent.setMovementMethod(new LinkMovementMethod());
+
+
+
+    setArticle("article_main");
+
+}
+
+
+
+void setArticle(String strArticleResId) {
+
+    int articleResId = getResources().getIdentifier(strArticleResId, "string", getPackageName());
+
+    String text = getString(articleResId);
+
+    if (text == null) text = "Article not found";
+
+
+
+    Spanned spannedText = Html.fromHtml(text, htmlImageGetter, htmlTagHandler);
+
+    Spannable reversedText = revertSpanned(spannedText);
+
+
+
+    tvContent.setText(reversedText);
+
+}
+
+
+
+final Spannable revertSpanned(Spanned stext) {
+
+    Object[] spans = stext.getSpans(0, stext.length(), Object.class);
+
+    Spannable ret = Spannable.Factory.getInstance().newSpannable(stext.toString());
+
+    if (spans != null &amp;&amp; spans.length &gt; 0) {
+
+        for(int i = spans.length - 1; i &gt;= 0; --i) {
+
+            ret.setSpan(spans[i], stext.getSpanStart(spans[i]), stext.getSpanEnd(spans[i]), stext.getSpanFlags(spans[i]));
+
+        }
+
+    }
+
+
+
+    return ret;
+
+}
+
+
+
+Html.ImageGetter htmlImageGetter = new Html.ImageGetter() {
+
+    public Drawable getDrawable(String source) {
+
+        int resId = getResources().getIdentifier(source, "drawable", getPackageName());
+
+        Drawable ret = MainActivity.this.getResources().getDrawable(resId);
+
+        ret.setBounds(0, 0, ret.getIntrinsicWidth(), ret.getIntrinsicHeight());
+
+        return ret;
+
+    }
+
+};
+
+
+
+Html.TagHandler htmlTagHandler = new Html.TagHandler() {
+
+    public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
+
+        Object span = null;
+
+        if (tag.startsWith("article_")) span = new ArticleSpan(MainActivity.this, tag);
+
+        else if ("title".equalsIgnoreCase(tag)) span = new AppearanceSpan(0xffff2020, AppearanceSpan.NONE, 20, true, true, false, false);
+
+        else if (tag.startsWith("color_")) span = new ParameterizedSpan(tag.substring(6));
+
+        if (span != null) processSpan(opening, output, span);
+
+    }
+
+};
+
+
+
+void processSpan(boolean opening, Editable output, Object span) {
+
+    int len = output.length();
+
+    if (opening) {
+
+        output.setSpan(span, len, len, Spannable.SPAN_MARK_MARK);
+
+    } else {
+
+        Object[] objs = output.getSpans(0, len, span.getClass());
+
+        int where = len;
+
+        if (objs.length &gt; 0) {
+
+            for(int i = objs.length - 1; i &gt;= 0; --i) {
+
+                if (output.getSpanFlags(objs[i]) == Spannable.SPAN_MARK_MARK) {
+
+                    where = output.getSpanStart(objs[i]);
+
+                    output.removeSpan(objs[i]);
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+
+        if (where != len) {
+
+            output.setSpan(span, where, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        }
+
+    }
+
+}
+
+
+
+}   
+</code></pre>
+
+<p><strong>AnotherActivity.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.app.Activity;
+
+import android.app.AlertDialog;
+
+import android.content.DialogInterface;
+
+import android.net.Uri;
+
+import android.os.Bundle;
+
+
+
+public class AnotherActivity extends Activity {
+
+
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+
+
+    Uri uri = getIntent().getData();
+
+
+
+    String caption = uri.getQueryParameter("caption");
+
+    String text = uri.getQueryParameter("text");
+
+
+
+    new AlertDialog.Builder(this)
+
+        .setTitle(caption)
+
+        .setMessage(text)
+
+        .setPositiveButton("OK", dioclOK)
+
+        .setCancelable(false)
+
+        .create().show();
+
+}
+
+
+
+DialogInterface.OnClickListener dioclOK = new DialogInterface.OnClickListener() {
+
+
+
+    public void onClick(DialogInterface dialog, int which) {
+
+        dialog.dismiss();
+
+        finish();
+
+    }
+
+};
+
+
+
+}  
+</code></pre>
+
+<p><strong>AppearanceSpan.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.text.TextPaint;
+
+import android.text.style.CharacterStyle;
+
+
+
+public class AppearanceSpan extends CharacterStyle {
+
+
+
+public static final int NONE = -1;
+
+
+
+final int color, bgColor, textSize;
+
+final boolean boldText, italicText, strikeThruText, underlineText;
+
+
+
+public AppearanceSpan(int color, int bgColor, int textSize, boolean boldText, boolean italicText, 
+
+        boolean strikeThruText, boolean underlineText) {
+
+    this.color = color;
+
+    this.bgColor = bgColor;
+
+    this.textSize = textSize;
+
+    this.boldText = boldText;
+
+    this.italicText = italicText;
+
+    this.strikeThruText = strikeThruText;
+
+    this.underlineText = underlineText;
+
+}
+
+
+
+@Override
+
+public void updateDrawState(TextPaint tp) {
+
+    if (color != NONE) tp.setColor(color);
+
+    if (bgColor != NONE) tp.bgColor = bgColor;
+
+    tp.setFakeBoldText(boldText);
+
+    tp.setStrikeThruText(strikeThruText);
+
+    if (textSize != NONE) tp.setTextSize(textSize);
+
+    tp.setUnderlineText(underlineText);
+
+    tp.setTextSkewX(italicText ? -0.25f : 0);
+
+}
+
+
+
+} 
+</code></pre>
+
+<p><strong>ArticleSpan.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.text.style.ClickableSpan;
+
+import android.view.View;
+
+
+
+public class ArticleSpan extends ClickableSpan {
+
+
+
+final MainActivity activity;
+
+final String articleId;
+
+
+
+public ArticleSpan(MainActivity activity, String articleId) {
+
+    super();
+
+    this.activity = activity;
+
+    this.articleId = articleId;
+
+}
+
+
+
+@Override
+
+public void onClick(View arg0) {
+
+    activity.setArticle(articleId);
+
+}
+
+
+
+}
+</code></pre>
+
+<p><strong>ParameterizedSpan.java</strong></p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.graphics.Color;
+
+import android.text.TextPaint;
+
+import android.text.style.CharacterStyle;
+
+
+
+public class ParameterizedSpan extends CharacterStyle {
+
+
+
+int color = 0;
+
+
+
+public ParameterizedSpan(String param) {
+
+    try {
+
+        color = Color.parseColor("#" + param);
+
+    } catch(Exception ex) { }
+
+}
+
+
+
+@Override
+
+public void updateDrawState(TextPaint tp) {
+
+    tp.setColor(color);
+
+}
+
+
+
+}
+</code></pre>
+
+<h3>Подготовка ресурсов</h3>
+
+<p><strong>layout/activity_main.xml&#8221;</strong></p>
+
+<pre><code>&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:tools="http://schemas.android.com/tools"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent" &gt;
+
+
+
+&lt;ScrollView 
+
+    android:id="@+id/sv"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="fill_parent"
+
+    &gt;
+
+    &lt;TextView
+
+        android:id="@+id/tvContent"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Content" /&gt;
+
+&lt;/ScrollView&gt;
+
+&lt;/RelativeLayout&gt;  
+</code></pre>
+
+<p><strong>values/strings.xml&#8221;</strong></p>
+
+<pre><code>&lt;resources&gt;
+
+&lt;string name="app_name"&gt;MarkupTutor&lt;/string&gt;
+
+&lt;string name="hello_world"&gt;Hello world!&lt;/string&gt;
+
+&lt;string name="menu_settings"&gt;Settings&lt;/string&gt;
+
+&lt;string name="title_activity_main"&gt;MainActivity&lt;/string&gt;
+
+
+
+&lt;string name="article_main" formatted="false"&gt;&lt;![CDATA[
+
+    &lt;title&gt;Главная страница&lt;/title&gt;&lt;br/&gt;
+
+    &lt;br/&gt;
+
+    &lt;img src="res_pushkin_little"&gt; &lt;article_pushkin_stih&gt;А.С.     Пушкин "Как пить мы станем"&lt;/article_pushkin_stih&gt;&lt;br/&gt;
+
+    &lt;img src="res_activity_little"&gt; &lt;a href="activity-run://    AnotherActivityHost?caption=Another%20Activity&amp;text=Hello%20from%20markup!"&gt;Вызвать другую Activity&lt;/a&gt;&lt;br/&gt;
+
+    &lt;br/&gt;
+
+    &lt;color_ff00ff00&gt;Тест параметризированного тэга &lt;color_ffff00ff&gt;и вложенных спанов&lt;/color_ffff00ff&gt;.&lt;/color_ff00ff00&gt;&lt;br/&gt;
+
+    Тест анимированного GIF-а:&lt;br/&gt;
+
+    &lt;img src="res_alien_anim"&gt;
+
+]]&gt;&lt;/string&gt;
+
+
+
+&lt;string name="article_pushkin_stih" formatted="false"&gt;&lt;![CDATA[
+
+    &lt;br/&gt;&lt;article_main&gt;На главную&lt;/article_main&gt;&lt;br/&gt;&lt;br/&gt;
+
+    &lt;img src="res_pushkin" /&gt;&lt;br/&gt;&lt;br/&gt;
+
+    Сват Иван, как пить мы станем,&lt;br/&gt;
+
+    Непременно уж помянем&lt;br/&gt;
+
+    Трех Матрен, Луку с Петром,&lt;br/&gt;
+
+    Да Пахомовну потом.&lt;br/&gt;
+
+    Мы живали с ними дружно,&lt;br/&gt;
+
+    Уж как хочешь - будь что будь -&lt;br/&gt;
+
+    Этих надо помянуть,&lt;br/&gt;&lt;br/&gt;
+
+
+
+    Помянуть нам этих нужно.&lt;br/&gt;
+
+    Поминать, так поминать,&lt;br/&gt;
+
+    Начинать, так начинать,&lt;br/&gt;
+
+    Лить, так лить, разлив разливом.&lt;br/&gt;
+
+    Начинай-ка, сват, пора.&lt;br/&gt;
+
+    Трех Матрен, Луку, Петра&lt;br/&gt;
+
+    В первый раз помянем пивом,&lt;br/&gt;
+
+    А Пахомовну потом&lt;br/&gt;
+
+    Пирогами да вином,&lt;br/&gt;
+
+    Да еще ее помянем:&lt;br/&gt;
+
+    Сказки сказывать мы станем -&lt;br/&gt;
+
+    Мастерица ведь была&lt;br/&gt;
+
+    И откуда что брала.&lt;br/&gt;
+
+    А куды разумны шутки,&lt;br/&gt;
+
+    Приговорки, прибаутки,&lt;br/&gt;
+
+    Небылицы, былины&lt;br/&gt;
+
+    Православной старины!..&lt;br/&gt;
+
+    Слушать, так душе отрадно.&lt;br/&gt;
+
+    И не пил бы и не ел,&lt;br/&gt;
+
+    Всё бы слушал да сидел.&lt;br/&gt;
+
+    Кто придумал их так ладно?&lt;br/&gt;
+
+    Стариков когда-нибудь&lt;br/&gt;
+
+    (Жаль, теперь нам не досужно)&lt;br/&gt;
+
+    Надо будет помянуть -&lt;br/&gt;
+
+    Помянуть и этих нужно...&lt;br/&gt;
+
+    Слушай, сват, начну первой,&lt;br/&gt;
+
+    Сказка будет за тобой.&lt;br/&gt;
+
+]]&gt;&lt;/string&gt;
+
+&lt;/resources&gt;
+</code></pre>
+
+<p>Строки, содержащие разметку, должны иметь аттрибут <strong>formatted</strong> со значением <strong>false</strong>, а содержимое должно передаваться в блоке <strong>CDATA</strong>, чтобы у компилятора не было претензий к разметке и специальным символам. В данном примере признаком статьи будет префикс <strong>article_</strong> в названии строки.</p>
+
+<p>Также замечен странный глюк, проявляющийся в том, что если текст начинается с тега, то заканчивается он этим же тегом. Если у вас в начале статьи ссылка, советую ставить перед ней либо пробел, либо<code>  
+</code>.</p>
+
+<p>Изображения могут быть формата jpg, png или gif без анимации. Анимированный gif отображается статичной картинкой. Расположение стандартное для ресурсов, для дисплеев разной плотности можно подготовить свой вариант картинки. В данном примере все изображения находятся в <strong>drawable-nodpi</strong></p>
+
+<p><img src="http://habrastorage.org/storage2/a2c/313/a58/a2c313a588ebcbd9f6d257576518d942.png" alt="" /></p>
+
+<h3>Как всё работает</h3>
+
+<p>Рассмотрим некоторые части кода подробно.</p>
+
+<pre><code>public void onCreate(Bundle savedInstanceState) {
+
+super.onCreate(savedInstanceState);
+
+setContentView(R.layout.activity_main);
+
+
+
+tvContent = (TextView)findViewById(R.id.tvContent);
+
+tvContent.setLinksClickable(true);
+
+tvContent.setMovementMethod(new LinkMovementMethod());
+
+
+
+setArticle("article_main");
+
+} 
+</code></pre>
+
+<p><strong>TextView</strong> используемый нами в качестве браузера, требует особой инициализации:</p>
+
+<p><strong>tvContent.setLinksClickable(true);</strong> указывает на то, что ссылки в данном элементе реагируют на нажатие.</p>
+
+<p><strong>tvContent.setMovementMethod(new LinkMovementMethod());</strong> назначает способ навигации по элементу. Использованный нами <a href="http://developer.android.com/reference/android/text/method/LinkMovementMethod.html"><strong>LinkMovementMethod</strong></a> интересен сам по себе и, возможно, заслуживает отдельной статьи. Я лишь скажу, что при необходимости более полного контроля можно создать его наследника, переопределенные методы которого позволят отслеживать все действия со ссылками в элементе.</p>
+
+<pre><code>void setArticle(String strArticleResId) {
+
+int articleResId = getResources().getIdentifier(strArticleResId, "string", getPackageName());
+
+String text = getString(articleResId);
+
+if (text == null) text = "Article not found";
+
+
+
+Spanned spannedText = Html.fromHtml(text, htmlImageGetter, htmlTagHandler);
+
+Spannable reversedText = revertSpanned(spannedText);
+
+
+
+tvContent.setText(reversedText);
+
+} 
+</code></pre>
+
+<p>В данном методе происходит получение строки по идентификатору из строковых ресурсов, её преобразование из HTML в специальный объект <strong>Spanned</strong>, затем ещё одно преобразование в <strong>Spannable</strong> и установка в <strong>TextView</strong> в качестве содержимого. Всё это кажется довольно громоздким, но тому есть причины.</p>
+
+<p>В <strong>TextView</strong>, на мой взгляд, странный порядок обработки спанов — с конца списка. При естественном расположении спанов после преобразования строки из HTML, изменения внешнего вида вложенных спанов перекрываются свойствами спанов, их содержащих. Для нормального отображения приходится буквально выворачивать маркировку наизнанку с помощью метода <strong>revertSpanned</strong>:</p>
+
+<pre><code>final Spannable revertSpanned(Spanned stext) {
+
+Object[] spans = stext.getSpans(0, stext.length(), Object.class);
+
+Spannable ret = Spannable.Factory.getInstance().newSpannable(stext.toString());
+
+if (spans != null &amp;&amp; spans.length &gt; 0) {
+
+    for(int i = spans.length - 1; i &gt;= 0; --i) {
+
+        ret.setSpan(spans[i], stext.getSpanStart(spans[i]), stext.getSpanEnd(spans[i]), stext.getSpanFlags(spans[i]));
+
+    }
+
+}
+
+
+
+return ret;
+
+}  
+</code></pre>
+
+<p>Определение обработчика ссылок на изображения минималистично и призвано загружать только картинки из ресурсов. Поскольку мы рассматриваем вариант справочной системы, я посчитал, что этого будет достаточно. С вашего позволения, я не буду цитировать его. Если вы хотите большего, можно обратиться, например, к <a href="http://habrahabr.ru/post/155879/">данной статье</a>.</p>
+
+<p>Более интересен нам будет <strong>Html.TagHadler</strong>:</p>
+
+<pre><code>Html.TagHandler htmlTagHandler = new Html.TagHandler() {
+
+public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
+
+    Object span = null;
+
+    if (tag.startsWith("article_")) span = new ArticleSpan(MainActivity.this, tag);
+
+    else if ("title".equalsIgnoreCase(tag)) span = new AppearanceSpan(0xffff2020, AppearanceSpan.NONE, 20, true, true, false, false);
+
+    else if (tag.startsWith("color_")) span = new ParameterizedSpan(tag.substring(6));
+
+    if (span != null) processSpan(opening, output, span);
+
+}
+
+};
+</code></pre>
+
+<p>Здесь у нас происходит несколько интересных вещей.</p>
+
+<p>При преобразовании из <strong>HTML</strong> в <strong>Spanned</strong> методом <strong>Html.fromHtml</strong>, обрабатываются тэги </p>
+
+<p><code>br</code>, <code>p</code>, <code>div</code>, <code>em</code>, <code>b</code>,<code>strong</code>, <code>cite</code>, <code>dfn</code>, <code>i</code>, <code>big</code>, <code>small</code>, </p>
+
+<p><code>font</code>, <code>blockquote</code>, <code>tt</code>, <code>a</code>, <code>u</code>, <code>sup</code>, <code>sub</code>, <code>h1...h6</code> и <code>img</code>.</p>
+
+<p>В случае, если тэг не опознан, вызывается Html.TagHandler (если, конечно, он передан в вызов).</p>
+
+<p>Мы проверяем, не является ли переданный тэг «нашим» и если это так, создаём соответствующий <strong>Span</strong> — элемент разметки, а затем накладываем его на текст. Я создал несколько собственных <strong>Span</strong>-ов, они будут рассмотрены далее. Как правило, <strong>Span</strong>-ы наследуются от <a href="http://developer.android.com/reference/android/text/style/CharacterStyle.html"><strong>android.text.style.CharacterStyle</strong></a>.</p>
+
+<p>К сожалению, у меня не получилось малой кровью добиться центрования отдельных строк или абзацев, а встроенной возможности для этого не существует. Также, нельзя прочесть атрибуты тэга из <strong>xmlReader</strong>, поскольку он реализован не полностью. По этой причине пришлось изобретать свой способ передачи параметров: значение является частью тега. В нашем примере таким образом передаётся значение цвета в тэге <strong>color</strong>, преобразовываемом в <strong>ParameterizedSpan</strong>. Получается что-то вроде&#8220;</p>
+
+<p>&lt;color_ffff0000>красный. Это достаточно ограниченный и не очень удобный способ, но иногда лучше такой, чем никакого.</p>
+
+<pre><code>void processSpan(boolean opening, Editable output, Object span) {
+
+    int len = output.length();
+
+    if (opening) {
+
+        output.setSpan(span, len, len, Spannable.SPAN_MARK_MARK);
+
+    } else {
+
+        Object[] objs = output.getSpans(0, len, span.getClass());
+
+        int where = len;
+
+        if (objs.length &gt; 0) {
+
+            for(int i = objs.length - 1; i &gt;= 0; --i) {
+
+                if (output.getSpanFlags(objs[i]) == Spannable.SPAN_MARK_MARK) {
+
+                    where = output.getSpanStart(objs[i]);
+
+                    output.removeSpan(objs[i]);
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+
+        if (where != len) {
+
+            output.setSpan(span, where, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        }
+
+    }
+
+} 
+</code></pre>
+
+<p>Этот код делает следующее: В случае, если передан открывающий <strong>Span</strong>, он добавляется к концу строки в текущем её виде. В случае, если <strong>Span</strong> закрывающий, мы находим в строке его открывающий аналог, запоминаем его положение, затем удаляем и добавляем новый, но уже с информацией о начальном положении и длине. </p>
+
+<p>Мы завершили рассмотрение класса Activity, являющегося основным модулем нашего приложения. Теперь рассмотрим вспомогательные классы.</p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+
+import android.text.TextPaint;
+
+import android.text.style.CharacterStyle;
+
+
+
+public class AppearanceSpan extends CharacterStyle {
+
+
+
+public static final int NONE = -1;
+
+
+
+final int color, bgColor, textSize;
+
+final boolean boldText, italicText, strikeThruText, underlineText;
+
+
+
+public AppearanceSpan(int color, int bgColor, int textSize, boolean boldText, boolean italicText, 
+
+        boolean strikeThruText, boolean underlineText) {
+
+    this.color = color;
+
+    this.bgColor = bgColor;
+
+    this.textSize = textSize;
+
+    this.boldText = boldText;
+
+    this.italicText = italicText;
+
+    this.strikeThruText = strikeThruText;
+
+    this.underlineText = underlineText;
+
+}
+
+
+
+@Override
+
+public void updateDrawState(TextPaint tp) {
+
+    if (color != NONE) tp.setColor(color);
+
+    if (bgColor != NONE) tp.bgColor = bgColor;
+
+    tp.setFakeBoldText(boldText);
+
+    tp.setStrikeThruText(strikeThruText);
+
+    if (textSize != NONE) tp.setTextSize(textSize);
+
+    tp.setUnderlineText(underlineText);
+
+    tp.setTextSkewX(italicText ? -0.25f : 0);
+
+}
+
+}
+</code></pre>
+
+<p>Это Span общего назначения и с его помощью можно задать большинство параметров стиля текста. Его можно использовать как базу для создания стилей текста из собственных тэгов.</p>
+
+<pre><code>package com.example.markup.tutorial;
+
+import android.text.style.ClickableSpan;
+
+import android.view.View;
+
+
+
+public class ArticleSpan extends ClickableSpan {
+
+
+
+final MainActivity activity;
+
+final String articleId;
+
+
+
+public ArticleSpan(MainActivity activity, String articleId) {
+
+    super();
+
+    this.activity = activity;
+
+    this.articleId = articleId;
+
+}
+
+
+
+@Override
+
+public void onClick(View arg0) {
+
+    activity.setArticle(articleId);
+
+}
+
+}
+</code></pre>
+
+<p>Этот класс описывает элемент, который по нажатию на него обеспечивает переход к статье, чей идентификатор является его параметром. Здесь я применил производное от способа, описанного мной ранее: сам тэг является собственным параметром, а его класс определяется префиксом article_. Поднимемся выше, к описанию <strong>Html.TagHandler</strong>:</p>
+
+<pre><code>if (tag.startsWith("article_")) span = new ArticleSpan(MainActivity.this, tag);
+</code></pre>
+
+<p>Обработчик тэгов, увидев тэг, начинающийся на article_, создаёт ArticleSpan, задавая ему в качестве параметра название тэга. Элемент, при нажатии на него, вызывает метод MainActivity.setArticle, после чего в TextView устанавливается новый текст.</p>
+
+<pre><code>package com.example.markup.tutorial;
+
+
+import android.graphics.Color;
+
+import android.text.TextPaint;
+
+import android.text.style.CharacterStyle;
+
+
+
+public class ParameterizedSpan extends CharacterStyle {
+
+
+
+int color = 0;
+
+
+
+public ParameterizedSpan(String param) {
+
+    try {
+
+        color = Color.parseColor("#" + param);
+
+    } catch(Exception ex) { }
+
+}
+
+
+
+@Override
+
+public void updateDrawState(TextPaint tp) {
+
+    tp.setColor(color);
+
+}
+
+}
+</code></pre>
+
+<p>Здесь реализован элемент, получающий параметр явно и отдельно от своего имени. Претензия на своего рода стандарт именования тэгов, раз уж нельзя передавать атрибуты. </p>
+
+<p>Конечно, всё описанное является вариациями одного принципа, каждый выберёт то, что ему удобнее.</p>
+
+<h3>Вызов Activity</h3>
+
+<p>Здесь всё очень просто. Вызов осуществляется посредством использования обычного тэга &#8220; с заданием схемы и хоста, которые описаны в <strong>AndroidManifest.xml</strong> для вызываемой <strong>Activity</strong>.</p>
+
+<p>В HTML мы видим следующее:</p>
+
+<pre><code>&lt;a href="activity-run://AnotherActivityHost?caption=Another%20Activity&amp;text=Hello%20from%20markup!"&gt;Вызвать другую Activity&lt;/a&gt; 
+</code></pre>
+
+<p>При нажатии на ссылку, происходит вызов AnotherActivity с передачей параметров в Intent. Эти параметры можно получить и использовать:</p>
+
+<pre><code>Uri uri = getIntent().getData();
+String caption = uri.getQueryParameter("caption");
+String text = uri.getQueryParameter("text");
+</code></pre>
+
+<h3>Использованные материалы</h3>
+
+<p>Следующие материалы очень ускорили создание данной статьи, да и, чего уж там, сделали его вообще возможным:</p>
+
+<p><a href="http://www.sherif.mobi/2011/09/html-and-activity-links-in-textview.html">www.sherif.mobi/2011/09/html-and-activity-links-in-textview.html</a><br/>
+<a href="http://stackoverflow.com/questions/3874999/alignment-in-html-fromhtml">stackoverflow.com/questions/3874999/alignment-in-html-fromhtml</a><br/>
+<a href="http://stackoverflow.com/questions/11865334/how-to-use-xmlreader-in-taghandler-handletag">stackoverflow.com/questions/11865334/how-to-use-xmlreader-in-taghandler-handletag</a><br/>
+<a href="http://stackoverflow.com/questions/4044509/android-how-to-use-the-html-taghandler">stackoverflow.com/questions/4044509/android-how-to-use-the-html-taghandler</a><br/>
+<a href="http://stackoverflow.com/questions/1792604/html-imagegetter">stackoverflow.com/questions/1792604/html-imagegetter</a></p>
+
+<p>Я очень рад, что существует на свете <a href="http://stackoverflow.com/">StackOverflow.com</a>.</p>
+
+<p>Надеюсь статья вам пригодится и вы теперь не будете плодить много елементов.</p>
+
+<p>Рабочий код на странице с <a href="http://android-helper.com.ua/codes/">кодами</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-24T07:42:06+02:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/android-helper/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2013/01/24/textview-html/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2013/01/24/textview-html/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2013/01/03/corporation-market/" title="Previous Post: Корпоративные приложения в Google Play">&laquo; Корпоративные приложения в Google Play</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2013/01/24/office-document-unlocker/" title="Next Post: Office Document Unlocker">Office Document Unlocker &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

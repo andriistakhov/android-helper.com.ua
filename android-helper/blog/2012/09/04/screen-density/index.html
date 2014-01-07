@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Единицы измерения. Чем отличается Dp (Dip) от Px. Screen Density. - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Добрый день друзья. Сегодня один из моих товарищей, посоветовал один хороший сайт. Некоторые материалы, я буду брать от туда. Сегодня я бы хотел &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2012/09/04/screen-density">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Единицы измерения. Чем отличается Dp (Dip) от Px. Screen Density.</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-04T22:51:37+03:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Сегодня один из моих товарищей, посоветовал один хороший сайт.</p>
+
+<p>Некоторые материалы, я буду брать от туда.</p>
+
+<p>Сегодня я бы хотел поделиться информацией о Screen Density и чем отличаются dp от px.</p>
+
+<p>Прошу к прочтению. Оригинал статьи <a href="http://startandroid.ru/materialy/pamjatka/40-edinitsy-izmerenija-chem-otlichaetsja-dp-dip-ot-px-screen-density.html">тут</a>.</p>
+
+<p>Для указания ширины, высоты и отступов View-элементов используются различные <a href="http://developer.android.com/guide/topics/resources/more-resources.html#Dimension">единицы измерения</a> (ЕИ):</p>
+
+<p><strong>dp</strong> или <strong>dip</strong> &ndash; Density-independent Pixels. Абстрактная ЕИ, позволяющая приложениям выглядеть одинаково на различных экранах и разрешениях.</p>
+
+<p><strong>sp</strong> &ndash; Scale-independent Pixels. То же, что и dp, только используется для размеров шрифта в View элементах</p>
+
+<p><strong>pt</strong> &ndash; 1/72 дюйма, определяется по физическому размеру экрана. Эта ЕИ <a href="http://en.wikipedia.org/wiki/Point_(typography">из типографии</a>).</p>
+
+<p><strong>px</strong> – пиксел, не рекомендуется использовать т.к. на разных экранах приложение будет выглядеть по-разному.</p>
+
+<p><strong>mm</strong> – миллиметр, определяется по физическому размеру экрана</p>
+
+<p><strong>in</strong> – дюйм, определяется по физическому размеру экрана</p>
+
+<p>Давайте разбираться, чем они отличаются друг от друга.</p>
+
+<p>in, mm и pt – неизменны относительно друг друга. Всегда <strong>1 in = 25,4 mm</strong> и <strong>1 in = 72 pt</strong>. Это классические единицы измерения. Т.е. задаете, например, кнопке ширину = 1 in и она должна отобразиться шириной в один дюйм, независимо от разрешения и диагонали экрана.</p>
+
+<p>Что такое px, думаю, тоже понятно. Если у вас есть устройство с экраном шириной 480 px и вы создали кнопку шириной 240 px, то эта кнопка займет в ширину ровно пол-экрана. Но если вы откроете ваше приложение на устройстве с экраном с меньшим разрешением, то соотношение  изменится, например:<br/>
+&ndash; если разрешение 320х240, ширина экрана = 240 px. Кнопка займет уже не пол-экрана в ширину, а весь экран<br/>
+&ndash; если же разрешение 1280х800, ширина = 800 px. Кнопка опять же будет занимать в ширину не пол-экрана, а чуть меньше трети</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_differentResolutions.jpg" alt="" /></p>
+
+<p>А ведь экран приложения – это обычно не одна кнопка, а набор из многих элементов и все они будут расползаться или сжиматься на разных разрешениях. Поэтому использовать px при разработке НЕ рекомендуется.</p>
+
+<p>Для того, чтобы избежать таких ситуаций на разных разрешениях рекомендуется использовать dp (и sp). Его можно определить, как масштабируемый px. За степень масштабируемости отвечает <strong><a href="http://developer.android.com/guide/practices/screens_support.html">Screen Density</a></strong>. Это коэффициент, который используется системой для вычисления значения dp.  На текущий момент есть 5 значений этого коэффициента:<br/>
+&ndash; low (<strong>ldpi</strong>) = 0,75<br/>
+&ndash; medium (<strong>mdpi</strong>) = 1<br/>
+&ndash; tv (<strong>tvdpi</strong>) = 1,33<br/>
+&ndash; high (<strong>hdpi</strong>) = 1,5<br/>
+&ndash; extra high (<strong>xhdpi</strong>) = 2</p>
+
+<p>Т.е. когда для экрана стоит режим <strong>mdpi</strong>, то <strong>1 dp = 1 px</strong>. Т.е. кнопка шириной 100 dp будет выглядеть также как и кнопка шириной 100 px.</p>
+
+<p>Если, например, у нас экран с низким разрешением, то используется режим <strong>ldpi</strong>. В этом случае <strong>1 dp = 0,75 px</strong>. Т.е. кнопка шириной 100 dp будет выглядеть так же как кнопка шириной 75 px.</p>
+
+<p>Если у нас экран с высоким разрешением, то используется режим <strong>hdpi </strong>или <strong>xhdpi</strong>. <strong>1 dp = 1, 5 px</strong> или <strong>2 px</strong>. И кнопка шириной 100 dp будет выглядеть так же как кнопка шириной 150 px или 200 px.</p>
+
+<p>Т.е. при различных разрешениях используются различные Density режимы, которые позволяют приложениям масштабироваться и выглядеть если не одинаково, то, по крайне мере, похоже на всех экранах.</p>
+
+<p>Рассмотрим пример. Предположим у нас есть три устройства (характеристики реальны и взяты из спецификаций):</p>
+
+<p>HTC <strong>Wildfire </strong>S: 3,2 inch, 480x320 px, 180 dpi<br/>
+HTC <strong>Desire</strong>: 3,7 inch, 800x480 px, 252 dpi<br/>
+HTC <strong>Flyer</strong>: 7 inch, 1280x800 px, 170 dpi</p>
+
+<p>Я создам такой экран:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_DesireScreen.jpg" alt="" /></p>
+
+<p>Это несколько кнопок, в которых ширина и размер шрифта определены с использованием разных единиц измерения. На каждой кнопке для наглядности я написал ее ширину (<strong>layout_width</strong>) и размер шрифта (<strong>textSize</strong>) через запятую. Обратите внимание, что ширина всех кнопок кроме последней одинакова. Так происходит потому, что 1 in = 72 pt = 25,4 mm в любом случае, а для данного экрана также 1 in = 252 px = 252 dp. Шрифты также везде одинаковы, т.к. размер шрифта по умолчанию равен 14 sp и в данном случае равен 14 px.</p>
+
+<p>xml-код:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt; 
+
+&lt;LinearLayout 
+
+xmlns:android="http://schemas.android.com/apk/res/android" 
+
+android:orientation="vertical" 
+
+android:layout_width="fill_parent" 
+
+android:layout_height="fill_parent"&gt; 
+
+&lt;Button 
+
+android:id="@+id/button1" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="1in" 
+
+android:text="1 inch, default"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button2" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="72pt" 
+
+android:text="72 pt, default"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button3" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="25.4mm" 
+
+android:text="25.4 mm, default"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button4" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="252px" 
+
+android:text="252 px, 14 px" 
+
+android:textSize="14px"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button5" 
+
+android:layout_height="wrap_content" 
+
+android:layout_width="252dp" 
+
+android:textSize="14sp" 
+
+android:text="252 dp, 14 sp"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;Button 
+
+android:id="@+id/button6" 
+
+android:layout_width="wrap_content" 
+
+android:layout_height="wrap_content" 
+
+android:text="wrap_content, default"&gt; 
+
+&lt;/Button&gt; 
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>Посмотрим, как это будет выглядеть на экранах других устройств:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_ALLScreensMDI.jpg" alt="" /></p>
+
+<p>Для всех экранов я поставил режим <strong>mdpi</strong>. Скриншоты экранов смасштабированы к одному размеру для наглядности. Надо понимать, что на самом деле диагонали экранов существенно отличаются, а наша цель – добиться, чтобы приложение выглядело одинаково на различных устройствах.</p>
+
+<p>Мы видим, что на всех экранах 1 px остался равен 1 dp (т.к. режим mdpi). И in, pt и mm сохранили свои пропорции (1; 72; 25,4) относительно друг друга. Но обратите внимание, что 1 in уже не равен 252 px на экранах Wildfire и Flyer. Это потому, что у этих устройств другое соотношение диагонали экрана и разрешения:<br/>
+&ndash; у <strong>Wildfire </strong>экран с<strong> dpi = 180</strong>, т.е. 1 in = 180 px, поэтому первая кнопка (с шириной = 1 inch) теперь короче, чем кнопка с шириной 252 px. <br/>
+&ndash; для <strong>Flyer</strong>, соответственно,<strong> dpi = 170</strong>.</p>
+
+<p>Видно, что приложение выглядит достаточно по разному на трех экранах. Так было бы, если бы не существовало коэфициента Screen Density. Но он есть и давайте смотреть, чем он полезен. Я включу режим <strong>ldpi </strong>для <strong>Wildfire </strong>и <strong>xhdpi </strong>для <strong>Flyer</strong>. <strong>Desire </strong>оставляю в <strong>mdpi</strong>.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_ALLScreensSMHDI.jpg" alt="" /></p>
+
+<p>Ширина кнопок указанная в in, mm, pt неизменна, на эти единицы измерения режимы Density влияния не имеют. Нам интересны четвертая и пятая кнопки. Видим, что на экранах Wildfire и Flyer отличаются размеры px и dp, т.к. мы сменили mdpi на ldpi и xhdpi. Для Wildfire 1 dp стал равен 0,75 px, а для Flyer 1 dp = 2 px. Также видим, что изменился шрифт на кнопках, где размер шрифта был указан по умолчанию или в sp-единицах. Он так же, как и dp смасштабировался благодаря Density режимам. А шрифт, размер которого был указан в px (четвертая кнопка) оставался неизменным и на Wildfire выглядит крупным, а на Flyer – мелким.</p>
+
+<p>Отлично видно, что адекватнее всего перенос на другие экраны перенесли пятая и шестая кнопки. Для пятой кнопки используются dp и sp. Для шестой кнопки – ширина = wrap_content и размер шрифта по умолчанию. А кнопки с in, mm, pt и px статичны и на разных экранах выглядят по-разному. Наверняка, есть случаи, когда необходимо использовать именно эти единицы измерения. Но в основном старайтесь использовать dp (для ширины, высоты и т.д.) и sp (для размера шрифта).</p>
+
+<p>Конечно Density не дает масштабирования абсолютно пропорциального разнице в разрешениях экрана. Погрешность есть, но она невелика и является вполне приемлемой платой за способность приложения «сохранять форму» на разных устройствах.</p>
+
+<p>Кем именно устанавливаются Density режимы для различных экранов – я не знаю. Но подозреваю, что производителями устройств/экранов. Еще мне интересно, можно ли эти режимы переключать при работе устройства. Думаю, чуть позже я найду ответы на эти вопросы.</p>
+
+<p>Для создания этого материала я использовал различные конфигурации экранов, которые можно создавать самому:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_ScreenConfigs.jpg" alt="" /></p>
+
+<p>Вы наверно обратили внимание, что в папке Андроид-проекта в Eclipse есть папки <strong>drawable </strong>c суффиксами hdpi, ldpi, mdpi:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_drawable.jpg" alt="" /></p>
+
+<p>Папка drawable используется для хранения изображений, а суффиксы дают понять системе из какой именно drawable использовать картинки при текущем Density режиме. Подробнее об этом можно почитать в <a href="http://developer.android.com/guide/topics/resources/providing-resources.html">хелпе</a>. Кстати, там же вы найдете уже изученный нами <strong>–</strong><strong>land</strong>, который связан с горизонтальной ориентацией экрана. Будем по мере изучения Андроид знакомиться с остальными.</p>
+
+<p>Спасибо, что вы с нами.</p>
+
+<p>Ваши комментарии будут уместны :)</p>
+
+<p>Также не забудьте подписаться на бесплатный курс.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-04T22:51:37+03:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/pamiatka-razrabotchiku/'>Памятка разработчику</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2012/09/04/screen-density/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2012/09/04/screen-density/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2012/09/04/events/" title="Previous Post: Взаимодействие с сенсорным экраном">&laquo; Взаимодействие с сенсорным экраном</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2012/09/05/push-notifications/" title="Next Post: Service. Уведомления - notifications">Service. Уведомления - notifications &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

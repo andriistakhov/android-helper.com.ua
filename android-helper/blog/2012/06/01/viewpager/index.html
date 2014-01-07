@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Слайдинг экранов с помощью ViewPager - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Всем привет. Я долго думал как же мне поскорее помочь вам разобраться в android. И решил, что я буду собирать очень интересные статьи на своем сайте &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2012/06/01/viewpager">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Слайдинг экранов с помощью ViewPager</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-01T10:48:06+03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Всем привет.</p>
+
+<p>Я долго думал как же мне поскорее помочь вам разобраться в android. И решил, что я буду собирать очень интересные статьи на своем сайте.</p>
+
+<p>Сегодня речь пойдет о горизонтальной прокрутке экранов. (статья из <a href="http://habrahabr.ru/post/131889/">Хабрахабр</a>)</p>
+
+<h5>Вступление</h5>
+
+<p>Горизонтальная прокрутка экранов — удобная и модная вещь. На Хабре уже был <a href="http://habrahabr.ru/blogs/android_development/118482/">топик </a>, посвященный данной теме. Однако использование ViewFlipper не позволяет с легкостью добиться эффекта привязки, когда экраны двигаются вместе с пальцем. Также нужен механизм автоматической доводки экранов в ту или иную сторону. Примера, где это было бы хорошо разъяснено и реализовано, так и не нашел. В комментариях <a href="http://habrahabr.ru/blogs/android_development/118482/#comment_3863174">предлагали</a> посмотреть исходники гугловского кода, где это реализовано. Однако удобнее было бы воспользоваться готовым решением. Такой механизм реализован в Android <a href="http://developer.android.com/sdk/compatibility-library.html">Support Package </a>. Использовать эту библиотеку можно для версий Android 1.6 и старше. Конкретно нам понадобятся классы ViewPager и PagerAdapter.</p>
+
+<h5>Предварительная настройка</h5>
+
+<p>Чтобы подключить библиотеку к проекту, выполняем следующие действия.<br/>
+Идем в директорию, куда установлен Android SDK, запускаем SDK Manager и в списке доступных к установке компонентов выбираем Android Support package. Устанавливаем его. Все что нужно будет находиться в следующей директории: &lt;директория с sdk>/extras/android/support/. В папке v4 будет лежать .jar файл, который и нужно подключить к проекту. Если вы работаете в Eclipse, то в Package Explorer щелкаем правым кликом по проекту, выбираем Build Path &ndash;> Add External Archives. В появившемся диалоговом окне переходим к скачанному .jar файлу, выбираем его и щелкаем OK. Всё, библиотека подключена к проекту и готова к использованию.<br/>
+Хочется заметить, что могут возникнуть проблемы, если вы используете старую версию SDK Manager. У меня указанный Support Package не появлялся в списке доступных загрузок. После обновления SDK проблема решилась.</p>
+
+<h5>Разработка</h5>
+
+<p>Выполнив инструкции, приведенные по указанной выше ссылке, и установив библиотеку, можно приступать к реализации поставленной задачи.<br/>
+ViewPager по принципу работы похож на ListView. Данные для отображения он берет из PagerAdapter. Нам потребуется унаследовать свой класс от PagerAdapter и реализовать в нем некоторые методы. Добавление и удаление экранов реализуется с помощью методов instantiateItem() и destroyItem() соответственно. View для отображения можно создавать прямо в адаптере. Такой подход хорош тем, что ViewPager можно настраивать так, чтобы в адаптере не хранились все экраны сразу. По умолчанию адаптер хранит текущий экран, и по одному слева и справа от него. Это может сэкономить память, если содержание экранов слишком сложное. Однако в данном примере создадим все экраны в activity приложения, добавим их в список, и передадим затем этот список адаптеру. Адаптер же не будет сам создавать view, а будет брать их их списка.<br/>
+Код адаптера получился следующим. </p>
+
+<pre><code>public class SamplePagerAdapter extends PagerAdapter{
+
+
+
+List&lt;View&gt; pages = null;
+
+
+
+public SamplePagerAdapter(List&lt;View&gt; pages){
+
+    this.pages = pages;
+
+}
+
+
+
+@Override
+
+public Object instantiateItem(View collection, int position){
+
+    View v = pages.get(position);
+
+    ((ViewPager) collection).addView(v, 0);
+
+    return v;
+
+}
+
+
+
+@Override
+
+public void destroyItem(View collection, int position, Object view){
+
+    ((ViewPager) collection).removeView((View) view);
+
+}
+
+
+
+@Override
+
+public int getCount(){
+
+    return pages.size();
+
+}
+
+
+
+@Override
+
+public boolean isViewFromObject(View view, Object object){
+
+    return view.equals(object);
+
+}
+
+
+
+@Override
+
+public void finishUpdate(View arg0){
+
+}
+
+
+
+@Override
+
+public void restoreState(Parcelable arg0, ClassLoader arg1){
+
+}
+
+
+
+@Override
+
+public Parcelable saveState(){
+
+    return null;
+
+}
+
+
+
+@Override
+
+public void startUpdate(View arg0){
+
+}
+
+}
+</code></pre>
+
+<p>В адаптере нам потребовалось определить свою реализацию для методов instantiateItem(), destroyItem(), getCount() и isViewFromObject(). Для остальных методов тела можно оставить пустыми.</p>
+
+<p>Создадим файл разметки page.xml и опишем в нем содержимое экрана следующим образом:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="fill_parent"
+
+android:layout_height="fill_parent"
+
+android:padding="10dip"
+
+android:background="#ddd"&gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/text_view"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="fill_parent"
+
+    android:layout_centerInParent="true"
+
+    android:gravity="center"
+
+    android:background="#888"
+
+    android:textColor="#fff"
+
+    android:textSize="30dip"/&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre>
+
+<p>В activity приложения, как было указано выше, создадим несколько View, которые и будут нашими экранами, добавим их в список и передадим список адаптеру. Затем создадим ViewPager и установим для него полученный адаптер.</p>
+
+<p>Код activity:</p>
+
+<pre><code>public class ViewPagerSampleActivity extends Activity {
+
+/** Called when the activity is first created. */
+
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+
+
+    LayoutInflater inflater = LayoutInflater.from(this);
+
+    List&lt;View&gt; pages = new ArrayList&lt;View&gt;();
+
+
+
+    View page = inflater.inflate(R.layout.page, null);
+
+    TextView textView = (TextView) page.findViewById(R.id.text_view);
+
+    textView.setText("Страница 1");
+
+    pages.add(page);
+
+
+
+    page = inflater.inflate(R.layout.page, null);
+
+    textView = (TextView) page.findViewById(R.id.text_view);
+
+    textView.setText("Страница 2");
+
+    pages.add(page);
+
+
+
+    page = inflater.inflate(R.layout.page, null);
+
+    textView = (TextView) page.findViewById(R.id.text_view);
+
+    textView.setText("Страница 3");
+
+    pages.add(page);
+
+
+
+    SamplePagerAdapter pagerAdapter = new SamplePagerAdapter(pages);
+
+    ViewPager viewPager = new ViewPager(this);
+
+    viewPager.setAdapter(pagerAdapter);
+
+    viewPager.setCurrentItem(1);     
+
+
+
+    setContentView(viewPager);
+
+}
+
+}
+</code></pre>
+
+<p>Как видно из кода, мы создали три экрана. Для каждого из них мы указали какой он по счету. Установив адаптер для ViewPager, укажем что сейчас будет показываться экран с индексом 1, т.е. на котором написано «Страница 2». <br/>
+Скриншот приложения, во время прокручивания экрана:</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/06/Image.png" alt="" /></p>
+
+<h5>Заключение</h5>
+
+<p>Как видно из примера, использовать ViewPager и PagerAdapter достаточно легко. При слайдинге экранов, изображения привязывается к положению пальца. Работает автоматическая доводка в какую либо из сторон. Нажатия на дочерние элементы (различные кнопки, элементы списка, если таковой присутствует) обрабатываются корректно.</p>
+
+<p>И в заключение, ссылка на <a href="http://android-developers.blogspot.com/2011/08/horizontal-view-swiping-with-viewpager.html">статью </a>, в которой рассказывается о ViewPager.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-01T10:48:06+03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2012/06/01/viewpager/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2012/06/01/viewpager/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2012/05/29/scrollview/" title="Previous Post: ScrollView и много разных елементов">&laquo; ScrollView и много разных елементов</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2012/07/15/custom-tabs/" title="Next Post: Как сделать свои Tabs в Android">Как сделать свои Tabs в Android &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

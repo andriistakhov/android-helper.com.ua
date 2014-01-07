@@ -1,0 +1,648 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Работа с базой данных в Android (SQLite) - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Добрый день друзья. Много уже работал с базами данных. Но ни как не мог подготовить статью на эту тему. Сегодня я ее нашел хорошею статью. И покажу &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2012/10/10/sqlite_1">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Работа с базой данных в Android (SQLite)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-10T12:40:24+03:00" pubdate data-updated="true">Oct 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Добрый день друзья.</p>
+
+<p>Много уже работал с базами данных.</p>
+
+<p>Но ни как не мог подготовить статью на эту тему.</p>
+
+<p>Сегодня я ее нашел хорошею статью. И покажу ее вам.</p>
+
+<p>По умолчанию в Android используется база данных SQLite &ndash; это довольно популярная, легкая и быстрая реляционная база данных. Если для вас SQL – это пустой звук, то, скорее всего, вы мало что поймете из этой статьи. Предполагается, что читатель знаком с SQL, знает что такое запросы выборки, триггеры и представления. Если это не так &ndash; почитайте какое-нибудь введение в SQL, а потом возвращайтесь сюда.</p>
+
+<p>База данных SQLite  имеет некоторые особенности, о которых нужно помнить:</p>
+
+<ul>
+<li><p>Не поддерживается проверка типов данных. Это значит, что Вы случайно сможете записать данные не того типа, например поместить строку в колонку, предназначенную для целых чисел.</p></li>
+<li><p>Не поддерживается ссылочная целостность:  нет поддержки FOREIGN KEY и конструкций JOIN.</p></li>
+<li><p>Полная поддержка Unicode отключена по умолчанию.</p></li>
+</ul>
+
+
+<p>Давайте создадим простую базу данных, содержащую информацию о работниках. База содержит две таблицы:  Employees &ndash; для хранения данных о сотрудниках и Dept &ndash; о департаментах. И представление ViewEmps, связывающее работников с департаментами.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/10/android_db_sql.jpg" alt="" /></p>
+
+<h2>Создание SQLite базы данных в Android проекте</h2>
+
+<p>По умолчанию, Android не содержит удобных СУБД для создания и работы с базами данных (есть sqlite3.exe &ndash; консоль для работы с базой данных), поэтому давайте создадим базу и все необходимые таблицы непосредственно из кода. </p>
+
+<p>Во-первых, мы напишем класс, который будет управлять всеми операциями с базой данных: созданием базы, созданием таблиц, вставкой и удалением записей. Давайте создадим класс потомок от <strong>SQLiteOpenHelper</strong>. Нам нужно переопределить два метода:</p>
+
+<ul>
+<li><p>onCreate(SQLiteDatabase db) &ndash; вызывается при создании базы данных. Здесь мы можем создать таблицы, определить в них колонки, создать виды и триггеры.</p></li>
+<li><p>onUpgrade(SQLiteDatabse db, int oldVersion, int newVersion) &ndash; вызывается, при внесении изменений в базу, например при создании и удалении таблиц</p></li>
+</ul>
+
+
+<p>Внутри нашего класса определим переменные</p>
+
+<pre><code>public class DatabaseHelper extends SQLiteOpenHelper {
+
+
+
+static final String dbName="demoDB";
+
+static final String employeeTable="Employees";
+
+static final String colID="EmployeeID";
+
+static final String colName="EmployeeName";
+
+static final String colAge="Age";
+
+static final String colDept="Dept";
+
+
+
+static final String deptTable="Dept";
+
+static final String colDeptID="DeptID";
+
+static final String colDeptName="DeptName";
+
+
+
+static final String viewEmps="ViewEmps";
+
+
+
+// и создадим конструктор
+
+
+
+public DatabaseHelper(Context context) {
+
+super(context, dbName, null,33);
+
+    }
+
+}
+</code></pre>
+
+<p>Как видите, здесь мы просто вызываем конструктор суперкласса, который имеет четыре параметра:</p>
+
+<ul>
+<li><p><strong>Context </strong>&ndash; контекст, связанный с базой данных.</p></li>
+<li><p><strong>dataBaseName </strong>&ndash; имя базы данных.</p></li>
+<li><p><strong>CursorFactory</strong> &ndash; можно использовать класс, созданный на основе класса Cursor. Это позволяет проводить некоторые дополнительные проверки и операции с результатами запросов. Если сюда подставить ссылку на наш класс, он будет использоваться вместо стандартного курсора. Мы не будем работать с  <strong>CursorFactory</strong>, поэтому передадим значение null.</p></li>
+<li><p><strong>Version</strong>&ndash; версия базы данных. Смысл этого параметра будет раскрыт ниже</p></li>
+</ul>
+
+
+<h2>Создание базы данных</h2>
+
+<p>Давайте переопределим метод <strong>onCreate</strong></p>
+
+<pre><code>public void onCreate(SQLiteDatabase db) {
+
+// TODO Auto-generated method stub
+
+
+
+db.execSQL("CREATE TABLE "+deptTable+" ("+
+
+    colDeptID+ " INTEGER PRIMARY KEY , "+
+
+    colDeptName+ " TEXT)");
+
+
+
+db.execSQL("CREATE TABLE "+employeeTable+
+
+    " ("+colID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
+
+    colName+" TEXT, "+colAge+" Integer, "+colDept+
+
+    " INTEGER NOT NULL ,FOREIGN KEY ("+colDept+")
+
+    REFERENCES "+deptTable+" ("+colDeptID+"));");
+
+
+
+ db.execSQL("CREATE TRIGGER fk_empdept_deptid " +
+
+" BEFORE INSERT "+
+
+" ON "+employeeTable+
+
+
+
+" FOR EACH ROW BEGIN"+
+
+" SELECT CASE WHEN ((SELECT "+colDeptID+" FROM "+
+
+deptTable+" WHERE "+colDeptID+"=new."+colDept+" ) IS NULL)"+
+
+" THEN RAISE (ABORT,'Foreign Key Violation') END;"+
+
+"  END;");
+
+
+
+db.execSQL("CREATE VIEW "+viewEmps+
+
+" AS SELECT "+employeeTable+"."+colID+" AS _id,"+
+
+" "+employeeTable+"."+colName+","+
+
+" "+employeeTable+"."+colAge+","+
+
+" "+deptTable+"."+colDeptName+""+
+
+" FROM "+employeeTable+" JOIN "+deptTable+
+
+" ON "+employeeTable+"."+colDept+" ="+deptTable+"."+colDeptID
+
+);
+
+ //Inserts pre-defined departments
+
+InsertDepts(db);
+
+}
+</code></pre>
+
+<p>Внутри метода мы с помощью SQL запросов создаем таблицы, триггеры и представления. Запросы вызываются для базы db с помощью метода <strong>execSQL</strong>.<br/>
+ <br/>
+Метод <strong>onCreate  </strong>вызывается при создании базы данных, как только база создана, мы добавляем туда таблицы с необходимым набором полей. Вызов метода происходит, когда база данных не существует на диске, то есть для данного конкретного устройства этот метод будет вызван всего один раз, сколько бы мы потом не запускали нашу программу.<br/>
+ </p>
+
+<h2> Изменение базы данных</h2>
+
+<p> <br/>
+Иногда возникает необходимость внести изменения в базу данных: поменять схему, добавить новые таблицы или поменять типы столбцов таблиц. Все это можно сделать внутри метода <strong>onUpdate(SQLiteDatabase db,int old Version,int newVerison)</strong> .</p>
+
+<pre><code>public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+// TODO Auto-generated method stub
+
+
+
+db.execSQL("DROP TABLE IF EXISTS "+employeeTable);
+
+db.execSQL("DROP TABLE IF EXISTS "+deptTable);
+
+
+
+db.execSQL("DROP TRIGGER IF EXISTS dept_id_trigger");
+
+db.execSQL("DROP TRIGGER IF EXISTS dept_id_trigger22");
+
+db.execSQL("DROP TRIGGER IF EXISTS fk_empdept_deptid");
+
+db.execSQL("DROP VIEW IF EXISTS "+viewEmps);
+
+onCreate(db);
+
+}
+</code></pre>
+
+<p>Этот метод вызывается, когда изменяется номер, указанный в конструкторе класса. Помните то загадочное число 33, внутри конструктора <strong>DatabaseHelper</strong>? Если Вам вдруг понадобится внести изменение в свою базу, просто поменяйте номер в конструкторе. То есть, если вы измените конструктор</p>
+
+<pre><code>public DatabaseHelper(Context context) {
+
+super(context, dbName, null,34);
+
+}
+</code></pre>
+
+<p>приложение поймет, что вы хотите изменить свою базу и вызовет метод onUpgrade. Обычно внутри этого метода удаляются таблицы и создаются заново с другим набором полей. <br/>
+ </p>
+
+<h2> Управление внешними ключами</h2>
+
+<p>Давайте создадим триггер, который будет следить при добавлении нового сотрудника за тем, чтобы указанный в описании сотрудника департамент присутствовал в таблице Dept. <br/>
+ <br/>
+ SQL команда, создающая такой триггер, выглядит следующим образом:</p>
+
+<pre><code>CREATE TRIGGER fk_empdept_deptid Before INSERT ON Employees
+
+FOR EACH ROW BEGIN
+
+SELECT CASE WHEN ((SELECT DeptID FROM Dept WHERE DeptID =new.Dept ) IS NULL)
+
+THEN RAISE (ABORT,'Foreign Key Violation') END;
+
+END
+</code></pre>
+
+<p>Добавим в метод onCreate вызов метода execSQL с соответствующим запросом:</p>
+
+<pre><code>db.execSQL("CREATE TRIGGER fk_empdept_deptid " +
+
+" BEFORE INSERT "+
+
+" ON "+employeeTable+
+
+
+
+" FOR EACH ROW BEGIN"+
+
+" SELECT CASE WHEN ((SELECT "+colDeptID+" FROM "+deptTable+
+
+" WHERE "+colDeptID+"=new."+colDept+" ) IS NULL)"+
+
+" THEN RAISE (ABORT,'Foreign Key Violation') END;"+
+
+"  END;");
+</code></pre>
+
+<h1>Выполнение SQL команд в Android</h1>
+
+<p> Как уже было отмечено выше, Вы можете выполнить любую SQL команду с помощью метода <strong>db.execSQL(String statement)</strong>. <br/>
+ </p>
+
+<h2> Добавление записи в таблицу</h2>
+
+<p> Можно добавить новую запись в таблицу с помощью SQL команды <strong>INSERT</strong>, а можно воспользоваться методом <strong>db.insert</strong>:</p>
+
+<pre><code>SQLiteDatabase db=this.getWritableDatabase();
+
+ContentValues cv=new ContentValues();
+
+cv.put(colDeptID, 1);
+
+cv.put(colDeptName, "Sales");
+
+db.insert(deptTable, colDeptID, cv);
+
+
+cv.put(colDeptID, 2);
+
+cv.put(colDeptName, "IT");
+
+db.insert(deptTable, colDeptID, cv);
+
+db.close();
+</code></pre>
+
+<p>Обратите внимание, для соединения с базой данных мы вызвали метод <strong>this.getWritableDatabase()</strong>. Класс <strong>ContentValues</strong> позволяет создать карту с параметрами ключ-значение. Эта карта затем используется методом <strong>insert</strong>, который фактически добавляет запись в таблицу. Метод <strong>ContentValues.put</strong> создает пару ключ-значение. Еще одно замечание, хорошим тоном считается закрывать базу данных вызовом метода  <strong>close()</strong> после завершения выполнения группы команд.</p>
+
+<h2>Изменение значений в таблице</h2>
+
+<p>Изменить значение в какой-либо записи можно с помощью SQL команды <strong>UPDATE </strong>или с помощью метода  <strong>db.update</strong>:</p>
+
+<pre><code>public int UpdateEmp(Employee emp)
+
+{
+
+SQLiteDatabase db=this.getWritableDatabase();
+
+ContentValues cv=new ContentValues();
+
+cv.put(colName, emp.getName());
+
+cv.put(colAge, emp.getAge());
+
+cv.put(colDept, emp.getDept());
+
+return db.update(employeeTable, cv, colID+"=?", new String []{String.valueOf(emp.getID())});
+
+}
+</code></pre>
+
+<p>Метод update имеет следующие параметры: </p>
+
+<ul>
+<li><p><strong>String Table</strong>: название таблицы в которой мы хотим что-то изменить.</p></li>
+<li><p><strong>ContentValues cv</strong>: пара ключ-значение с новой информацией.</p></li>
+<li><p><strong>String where</strong>: строка-шаблон, определяющая условие  WHERE, которое проверяется для каждой строки таблицы. Ксли условие истинно, то в этой строке обновляется информация в соответствии с параметром cv.</p></li>
+<li><p><strong>String[] args</strong>: массив с аргументами, которые подставляются в строку-шаблон where.</p></li>
+</ul>
+
+
+<h2>Удаление строк</h2>
+
+<p>Удалить строку в таблице можно с помощью SQL команды <strong>DELETE</strong>, а также с помощью метода <strong>db.delete</strong>. Этот метод имеет аналогичный  <strong>update </strong>набор параметров (за исключением cv).</p>
+
+<pre><code>public void DeleteEmp(Employee emp)
+
+{
+
+SQLiteDatabase db=this.getWritableDatabase();
+
+db.delete(employeeTable,colID+"=?", new String [] {String.valueOf(emp.getID())});
+
+db.close();
+
+}
+</code></pre>
+
+<h2>Выполнение SQL запросов</h2>
+
+<p> Для выполнения запросов в Android используются два метода: <strong>db.rawQuery</strong> и <strong>db.query</strong>. Давайте сделаем запрос к базе, с целью получения списка всех департаментов:</p>
+
+<pre><code>Cursor getAllDepts()
+
+{
+
+SQLiteDatabase db=this.getReadableDatabase();
+
+Cursor cur=db.rawQuery("SELECT "+colDeptID+" as _id, "+
+
+colDeptName+" from "+deptTable,new String [] {});
+
+
+
+return cur;
+
+}
+</code></pre>
+
+<p> Метод <strong>rawQuery</strong> имеет два параметра:</p>
+
+<ul>
+<li><p><strong>String query</strong>: Строка с SQL запросом SELECT.</p></li>
+<li><p><strong>String[] selection args</strong>: массив аргументов where, если он используется в SELECT запросе.</p></li>
+</ul>
+
+
+<p><strong>Замечания!</strong> В качестве результата этого запроса возвращается объект <strong>Cursor</strong>. Если в качестве ключевого поля в таблице используется колонка с именем, отличным от<strong> _id</strong>, Вам необходимо использовать alias в форме &ldquo;SELECT [Column Name] as <em>id&rdquo;. Дело в том, что объект <strong>Cursor</strong> всегда считает, что ключевое поле имеет имя **</em>id**, и если это не так, генерируется исключение.</p>
+
+<p>Другим способом выполнения запроса к базе является вызов метода <strong>db.query</strong>. Давайте напишем метод, который выдает всех сотрудников, работающих в каком-то конкретном департаменте:</p>
+
+<pre><code>public Cursor getEmpByDept(String Dept)
+
+{
+
+SQLiteDatabase db=this.getReadableDatabase();
+
+String [] columns=new String[]{"_id",colName,colAge,colDeptName};
+
+Cursor c=db.query(viewEmps, columns, colDeptName+"=?", new String[]{Dept}, null, null, null);
+
+return c;
+
+}
+</code></pre>
+
+<p>Метод <strong>db.query</strong> имеет следующий набор параметров:</p>
+
+<ul>
+<li><p><strong>String Table Name</strong>: Имя таблицы, из которой осуществляется выборка.</p></li>
+<li><p><strong>String [ ] columns</strong>: список столбцов, которые войдут в результат.</p></li>
+<li><p><strong>String WHERE clause</strong>: шаблон where-условия или null.</p></li>
+<li><p><strong>String [ ] selection args</strong>: массив с аргументами where-условия.</p></li>
+<li><p><strong>String Group by</strong>: условие группировки.</p></li>
+<li><p><strong>String Having</strong>: условие HAVING.</p></li>
+<li><p><strong>String Order By by</strong>: порядок сортировки.</p></li>
+</ul>
+
+
+<h2> Управление объектом Cursor</h2>
+
+<p>В результате выполнения запросов нам возвращается объект <strong>Cursor</strong>, содержащий таблицу с результатами запроса. <strong>Cursor</strong>предполагает последовательную работу со строками результата. В каждый момент времени активна одна строка, на которую ссылается указатель. Ниже перечислены методы, которые используются для работы с этим объектом:</p>
+
+<ul>
+<li><p><strong>boolean moveToNext()</strong>&ndash; перемещает указатель на одну запись вперед. Возвращает false, если достигнут конец таблицы результата.</p></li>
+<li><p><strong>boolean moveToFirst()</strong>&ndash; перемещает указатель на первую строку. Возвращает false, если таблица-результат не содержит строк.</p></li>
+<li><p><strong>boolean moveToPosition(int position)</strong> - перемещает указатель на конкретную строку в таблице результатов. Если строки с таким номером нет &ndash; возвращает false.</p></li>
+<li><p><strong>boolean moveToPrevious()</strong>&ndash; перемещает указатель на одну запись назад. Возвращает false, если достигнуто начало таблицы результата.</p></li>
+<li><p><strong>boolean moveToLast()</strong>&ndash; перемещает указатель на последнюю строку. Возвращает false, если таблица-результат не содержит строк.</p></li>
+<li><p><strong>int  getColumnIndex(String column)</strong> &ndash; возвращает ссылку на колонку column в текущей строке. Для получения значения по ссылке используются методы <strong>Cursor.getInt(int ColumnIndex), getShort,getString,getDouble, getBlob</strong>. </p></li>
+</ul>
+
+
+<p>Для определение текущей позиции указателя можно воспользоваться методами:<strong>boolean isAfterLast(), isBeforeFirst, isFirst, isLast и isNull(columnIndex)</strong>. Их назначение без труда можно понять из названий.</p>
+
+<p>Если в результате выполнения запроса вы получили только одну строку, то извлечь из нее значения столбцов можно следующим образом:</p>
+
+<pre><code>public int GetDeptID(String Dept)
+
+{
+
+SQLiteDatabase db=this.getReadableDatabase();
+
+Cursor c=db.query(deptTable, new String[]{colDeptID+" as _id",colDeptName},colDeptName+"=?",
+
+new String[]{Dept}, null, null, null);
+
+c.moveToFirst();
+
+return c.getInt(c.getColumnIndex("_id"));
+
+}
+</code></pre>
+
+<p>В результате выполнения этого метода, мы получим значение колонки _id текущей строки.  После использования курсора его хорошо бы закрыть с помощью метода <strong>close()</strong>.<br/>
+ <br/>
+ Вот собственно и все. Теперь вы вполне сможете использовать базы данных в своих Android проектах.</p>
+
+<p>Если вам понравилась статья, пишите комментарии и рассказывайте друзьям.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-10T12:40:24+03:00" pubdate data-updated="true">Oct 10<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/android-helper/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2012/10/10/sqlite_1/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2012/10/10/sqlite_1/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2012/10/09/listfragments/" title="Previous Post: ListFragments - список">&laquo; ListFragments - список</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2012/10/10/speak-android/" title="Next Post: Распознавание и генерация речи в Android">Распознавание и генерация речи в Android &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

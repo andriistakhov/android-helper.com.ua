@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SlidingMenu - или новое поколение Dashboard - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Всем привет. Есть много программ с которых программисты и дизайнеры берут свои идеи. И вот одна из которых это приложение facebook для android. С &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://andriistakhov.github.io/android-helper/blog/2013/01/28/slidingmenu">
+  <link href="/android-helper/favicon.png" rel="icon">
+  <link href="/android-helper/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/android-helper/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/android-helper/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/android-helper/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/android-helper/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/android-helper/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:andriistakhov.github.io/android-helper" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/android-helper/">Blog</a></li>
+  <li><a href="/android-helper/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">SlidingMenu - или новое поколение Dashboard</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-28T18:03:57+02:00" pubdate data-updated="true">Jan 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Всем привет.</p>
+
+<p>Есть много программ с которых программисты и дизайнеры берут свои идеи.</p>
+
+<p>И вот одна из которых это приложение facebook для android.</p>
+
+<p>С этой программы дизайнеры взяли такую вещь как sliding menu.</p>
+
+<p>Давайте посмотрим, что это такое.</p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2013/01/Screenshot_2013-01-17-19-47-11.png" alt="Screenshot_2013-01-17-19-47-11" /></p>
+
+<p> </p>
+
+<p><img src="http://android-helper.com.ua/wp-content/uploads/2013/01/Screenshot_2013-01-02-02-24-31.png" alt="Screenshot_2013-01-02-02-24-31" /></p>
+
+<p> </p>
+
+<h3>Задача</h3>
+
+<p>Сделать что то подобное.</p>
+
+<h3>Реализация</h3>
+
+<p>Для реализации данной задачи, мы будем использовать открытую библиотеку <a href="https://github.com/jfeinstein10/SlidingMenu">SlidingMenu</a>.</p>
+
+<p>Также как она работает можете посмотреть, скачав приложение с <a href="https://play.google.com/store/apps/details?id=com.slidingmenu.example">маркета</a>.</p>
+
+<h3>Коды</h3>
+
+<p><strong>MainActivity.java</strong></p>
+
+<pre><code>public class MainActivity extends Activity {
+
+
+
+@Override
+
+protected void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+
+
+    setTitle("Attach");
+
+    // configure the SlidingMenu
+
+    SlidingMenu menu = new SlidingMenu(this);
+
+    menu.setMode(SlidingMenu.LEFT);
+
+    menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+
+    menu.setShadowWidthRes(R.dimen.shadow_width);
+
+    menu.setShadowDrawable(R.drawable.shadow);
+
+    menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+
+    menu.setFadeDegree(0.35f);
+
+
+
+    // ///////////
+
+    menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+
+    // //////////
+
+
+
+    menu.setMenu(R.layout.menu);
+
+}
+
+
+
+@Override
+
+public boolean onCreateOptionsMenu(Menu menu) {
+
+    // Inflate the menu; this adds items to the action bar if it is present.
+
+    getMenuInflater().inflate(R.menu.activity_main, menu);
+
+    return true;
+
+}
+
+
+
+}
+</code></pre>
+
+<p><strong>drawable/shadow.xml</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;shape xmlns:android="http://schemas.android.com/apk/res/android" &gt;
+
+
+
+&lt;gradient
+
+    android:centerColor="#11000000"
+
+    android:endColor="#33000000"
+
+    android:startColor="#00000000" /&gt;
+
+
+
+&lt;/shape&gt;
+</code></pre>
+
+<p><strong>layout/menu.xml</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:layout_width="match_parent"
+
+android:layout_height="match_parent"
+
+android:orientation="vertical" &gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/textView1"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="Menu 1"
+
+    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/textView2"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="Menu 2"
+
+    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/textView3"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="Menu 3"
+
+    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
+
+
+
+&lt;TextView
+
+    android:id="@+id/textView4"
+
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+
+    android:text="Menu 4"
+
+    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p><strong>values/dimens.xml</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;resources&gt;
+
+
+
+&lt;dimen name="slidingmenu_offset"&gt;60dp&lt;/dimen&gt;
+
+&lt;dimen name="list_padding"&gt;10dp&lt;/dimen&gt;
+
+&lt;dimen name="shadow_width"&gt;15dp&lt;/dimen&gt;
+
+
+
+&lt;/resources&gt;
+</code></pre>
+
+<h3>Видео</h3>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/eHWNIS64I0Q "></iframe></div>
+
+
+<p>Рабочий код на странице с <a href="http://android-helper.com.ua/codes/">кодами</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-28T18:03:57+02:00" pubdate data-updated="true">Jan 28<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/android-helper/blog/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/android-helper/blog/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/android-helper/blog/categories/pamiatka-razrabotchiku/'>Памятка разработчику</a>, <a class='category' href='/android-helper/blog/categories/proghrammirovaniie/'>Программирование</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="/android-helper//twitter.com/share" class="twitter-share-button" data-url="http://andriistakhov.github.io/android-helper/blog/2013/01/28/slidingmenu/" data-via="" data-counturl="http://andriistakhov.github.io/android-helper/blog/2013/01/28/slidingmenu/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/android-helper/blog/2013/01/27/pixlr-express/" title="Previous Post: PIXLR EXPRESS – инструмент для обработки фотографий">&laquo; PIXLR EXPRESS – инструмент для обработки фотографий</a>
+      
+      
+        <a class="basic-alignment right" href="/android-helper/blog/2013/01/28/dungeon-quest/" title="Next Post: Dungeon Quest – прогулка по подземельям">Dungeon Quest – прогулка по подземельям &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/31/happy_new_year/">C Новым годом!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/12/22/skype-premium/">Skype - годовой преимум аккаунт бесплатно!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/21/custom-font/">Custom Font - свои шрифты в Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/16/ganymotion-root/">Genymotion Root - Как получить права рут на емуляторе</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-helper/blog/2013/11/04/coaching_report/">Отчет по коучингу</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
