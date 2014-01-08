@@ -100,86 +100,87 @@
 
 <p>Сегодня же мы добавим кнопки :).</p>
 
+<!-- more -->
+
+
 <p>main.xml:</p>
 
-<p>[sourcecode language=&ldquo;xml&rdquo;]</p>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 
-<p>&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;utf-8&rdquo;?></p>
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-<p>&lt;LinearLayout xmlns:android=&ldquo;<a href="http://schemas.android.com/apk/res/android">http://schemas.android.com/apk/res/android</a>&rdquo;</p>
-
-<pre><code>android:id="@+id/LinearLayout01"
-
-android:layout_width="fill_parent"
-
-android:layout_height="fill_parent" &gt;
-
-
-
-&lt;ScrollView
-
-    android:id="@+id/ScrollView01"
+    android:id="@+id/LinearLayout01"
 
     android:layout_width="fill_parent"
 
-    android:layout_height="110px" &gt;
+    android:layout_height="fill_parent" &gt;
 
 
 
-    &lt;LinearLayout
+    &lt;ScrollView
 
-        android:id="@+id/LinearLayout02"
+        android:id="@+id/ScrollView01"
 
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
 
-        android:layout_height="30px"
-
-        android:orientation="vertical" &gt;
+        android:layout_height="110px" &gt;
 
 
 
-        &lt;Button
+        &lt;LinearLayout
 
-            android:id="@+id/Button01"
+            android:id="@+id/LinearLayout02"
 
             android:layout_width="wrap_content"
 
-            android:layout_height="wrap_content"
+            android:layout_height="30px"
 
-            android:text="1" /&gt;
-
-
-
-        &lt;Button
-
-            android:id="@+id/Button02"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:text="2" /&gt;
+            android:orientation="vertical" &gt;
 
 
 
-        &lt;Button
+            &lt;Button
 
-            android:id="@+id/Button03"
+                android:id="@+id/Button01"
 
-            android:layout_width="wrap_content"
+                android:layout_width="wrap_content"
 
-            android:layout_height="wrap_content"
+                android:layout_height="wrap_content"
 
-            android:text="3" /&gt;
+                android:text="1" /&gt;
 
-    &lt;/LinearLayout&gt;
 
-&lt;/ScrollView&gt;
+
+            &lt;Button
+
+                android:id="@+id/Button02"
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:text="2" /&gt;
+
+
+
+            &lt;Button
+
+                android:id="@+id/Button03"
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:text="3" /&gt;
+
+        &lt;/LinearLayout&gt;
+
+    &lt;/ScrollView&gt;
+
+
+
+&lt;/LinearLayout&gt;
 </code></pre>
-
-<p></LinearLayout></p>
-
-<p>[/sourcecode]</p>
 
 <p>Результат:</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android для начинающих | Android helper]]></title>
   <link href="http://android-helper.com.ua//blog/categories/android-dlia-nachinaiushchikh/atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-01-08T13:45:49+02:00</updated>
+  <updated>2014-01-08T22:56:52+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -23,6 +23,9 @@
 <p>Я очень рад, что некоторые из ребят в коучинге пишут замечательные топики!</p>
 
 <p>Вот с какой проблемой мы столкнулись в коучинге и как ее решали!</p>
+
+<!-- more -->
+
 
 <p>В процессе коучинга, создавая своё первое приложение &ndash; калькулятор, научился использовать кастомные шрифты. Спешу безвозмездно поделиться своим опытом!</p>
 
@@ -152,6 +155,9 @@ setFont(keyboardArea, keys);
 <p>Сегодня мы поговорим о том как с помощь Intent намерений можно выполнять самые различные операции.</p>
 
 <p>Ну что поехали?</p>
+
+<!-- more -->
+
 
 <p><strong>Открыть браузер</strong></p>
 
@@ -310,6 +316,9 @@ startActivity(intent);
 
 <p><strong>Что нам нужно?</strong></p>
 
+<!-- more -->
+
+
 <ul>
 <li><p><a href="http://android-helper.com.ua/android-studio/">Android Studio</a></p></li>
 <li><p><a href="https://www.virtualbox.org/wiki/Downloads">Oracle VM VirtualBox</a></p></li>
@@ -372,6 +381,9 @@ startActivity(intent);
 <p>За этих 2 дня мы посомтрели очень много полезной информации.</p>
 
 <p>Сегодня же стартует не менее важная презентация.</p>
+
+<!-- more -->
+
 
 <p><strong>Google I/O Pitch Night</strong></p>
 

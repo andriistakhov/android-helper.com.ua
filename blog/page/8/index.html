@@ -107,214 +107,12 @@
 
 <p>Давайте посмотрим, что это такое.</p>
 
-<p><img src="http://android-helper.com.ua/images/uploads/2013/01/Screenshot_2013-01-17-19-47-11.png" alt="Screenshot_2013-01-17-19-47-11" /></p>
-
-<p> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/01/Screenshot_2013-01-02-02-24-31.png" alt="Screenshot_2013-01-02-02-24-31" /></p>
-
-<p> </p>
-
-<h3>Задача</h3>
-
-<p>Сделать что то подобное.</p>
-
-<h3>Реализация</h3>
-
-<p>Для реализации данной задачи, мы будем использовать открытую библиотеку <a href="https://github.com/jfeinstein10/SlidingMenu">SlidingMenu</a>.</p>
-
-<p>Также как она работает можете посмотреть, скачав приложение с <a href="https://play.google.com/store/apps/details?id=com.slidingmenu.example">маркета</a>.</p>
-
-<h3>Коды</h3>
-
-<p><strong>MainActivity.java</strong></p>
-
-<pre><code>public class MainActivity extends Activity {
-
-
-
-@Override
-
-protected void onCreate(Bundle savedInstanceState) {
-
-    super.onCreate(savedInstanceState);
-
-    setContentView(R.layout.activity_main);
-
-
-
-    setTitle("Attach");
-
-    // configure the SlidingMenu
-
-    SlidingMenu menu = new SlidingMenu(this);
-
-    menu.setMode(SlidingMenu.LEFT);
-
-    menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-
-    menu.setShadowWidthRes(R.dimen.shadow_width);
-
-    menu.setShadowDrawable(R.drawable.shadow);
-
-    menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-
-    menu.setFadeDegree(0.35f);
-
-
-
-    // ///////////
-
-    menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-
-    // //////////
-
-
-
-    menu.setMenu(R.layout.menu);
-
-}
-
-
-
-@Override
-
-public boolean onCreateOptionsMenu(Menu menu) {
-
-    // Inflate the menu; this adds items to the action bar if it is present.
-
-    getMenuInflater().inflate(R.menu.activity_main, menu);
-
-    return true;
-
-}
-
-
-
-}
-</code></pre>
-
-<p><strong>drawable/shadow.xml</strong></p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-
-&lt;shape xmlns:android="http://schemas.android.com/apk/res/android" &gt;
-
-
-
-&lt;gradient
-
-    android:centerColor="#11000000"
-
-    android:endColor="#33000000"
-
-    android:startColor="#00000000" /&gt;
-
-
-
-&lt;/shape&gt;
-</code></pre>
-
-<p><strong>layout/menu.xml</strong></p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-android:layout_width="match_parent"
-
-android:layout_height="match_parent"
-
-android:orientation="vertical" &gt;
-
-
-
-&lt;TextView
-
-    android:id="@+id/textView1"
-
-    android:layout_width="wrap_content"
-
-    android:layout_height="wrap_content"
-
-    android:text="Menu 1"
-
-    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
-
-
-
-&lt;TextView
-
-    android:id="@+id/textView2"
-
-    android:layout_width="wrap_content"
-
-    android:layout_height="wrap_content"
-
-    android:text="Menu 2"
-
-    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
-
-
-
-&lt;TextView
-
-    android:id="@+id/textView3"
-
-    android:layout_width="wrap_content"
-
-    android:layout_height="wrap_content"
-
-    android:text="Menu 3"
-
-    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
-
-
-
-&lt;TextView
-
-    android:id="@+id/textView4"
-
-    android:layout_width="wrap_content"
-
-    android:layout_height="wrap_content"
-
-    android:text="Menu 4"
-
-    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
-
-
-
-&lt;/LinearLayout&gt;
-</code></pre>
-
-<p><strong>values/dimens.xml</strong></p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-
-&lt;resources&gt;
-
-
-
-&lt;dimen name="slidingmenu_offset"&gt;60dp&lt;/dimen&gt;
-
-&lt;dimen name="list_padding"&gt;10dp&lt;/dimen&gt;
-
-&lt;dimen name="shadow_width"&gt;15dp&lt;/dimen&gt;
-
-
-
-&lt;/resources&gt;
-</code></pre>
-
-<h3>Видео</h3>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/eHWNIS64I0Q "></iframe></div>
-
-
-<p>Рабочий код на странице с <a href="http://android-helper.com.ua/codes/">кодами</a>.</p>
-</div>
+<p> </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/slidingmenu/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -359,37 +157,12 @@ android:orientation="vertical" &gt;
 
 <p>Особенности Pixlr Express:</p>
 
-<ul>
-<li><p>обрезка, изменение размера, выравнивание и поворот изображений в одно движение;</p></li>
-<li><p>быстрое исправление фотографий, балансировка цвета, поправки темных фото или фото сделанных в плохих условиях освещения;</p></li>
-<li><p>  инструменты для исправления красных глаз и отбеливания зубов;</p></li>
-<li><p>эффект наложения для усиления тонуса, добавления сюрреалистических оттенков;</p></li>
-<li><p>световые эффекты для добавления блеска или четкости взгляду;</p></li>
-<li><p>возможность регулировки интенсивности и направленности эффектов;</p></li>
-<li><p>исправление эффектов размытия, удаление шумов и много другое;</p></li>
-<li><p>большое количество инструментов для настройки контрастности, яркости;</p></li>
-<li><p>делитесь прямо их приложения своими фотографиями в социальных сетях Facebook, Instagram, Twitter;</p></li>
-<li><p>возможность редактировать любое изображение, а не только фотографий сделанных с помощью камеры.</p></li>
-</ul>
-
-
-<p><strong>Версия Android: 2.2 и выше</strong></p>
-
-<p><img src="http://all4pda.org/cache/com_zoo/images/pixlr_express1_1fe5c9e8a2e6a9fbc95abaf6c4faa384.jpg" alt="pixlr_express1.jpg" />
-<img src="http://all4pda.org/cache/com_zoo/images/pixlr_express2_b529cf9067ed5eedd87c7d21d4bb686a.jpg" alt="pixlr_express2.jpg" />
-<img src="http://all4pda.org/cache/com_zoo/images/pixlr_express3_3c9a0955b836c001bf424b68bcdffb64.jpg" alt="pixlr_express3.jpg" />
-<img src="http://all4pda.org/cache/com_zoo/images/pixlr_express4_0e744ae485af21a6842dd740861dcb41.jpg" alt="pixlr_express4.jpg" />
-<img src="http://all4pda.org/cache/com_zoo/images/pixlr_express5_96f6f007aa06582b28fbccb71f3b8994.jpg" alt="pixlr_express5.jpg" /></p>
-
-<p> </p>
-
-<p><strong>Перейти на маркет</strong></p>
-
-<p><img src="http://all4pda.org/media/images/Android-Market.png" alt="" /></p>
-
-<p> Источник <a href="http://all4pda.org/multimediya/pixlr-express-instrument-dlya-obrabotki-fotografij.html">all4pda.org</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/pixlr-express/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -436,35 +209,12 @@ android:orientation="vertical" &gt;
 
 <p>Глянем, что она может делать?</p>
 
-<p>Все поклонники ресурса ex.ua, на котором собрано огромное количество видеофайлов, могут просматривать видео прямо из своего смартфона или планшета под управлением Android. Специально для этого  было создано приложение <strong>EX</strong><strong>.</strong><strong>UA</strong> <strong>видео</strong>, которое позволяет без регистрации, а главное совершенно бесплатно просматривать любое содержимое от самых последних фильмов до фильмов раритетного возраста. Нет необходимости бродить по огромному количеству сайтов, теперь все доступно из одного приложения.</p>
-
-<p>Все содержимое очень удобно расположено и разбито по категориям, что позволит в несколько кликов найти <a href="http://www.ivi.ru/videos/all/series/all/by_day/">бесплатные сериалы</a>, фильмы, клипы, мультфильмы или передачу по конкретному жанру, названию, режиссёру или актеру. Все сделано для пользователя, удобный интерфейс и быстрая работа.</p>
-
-<p>Выбрав интересующий фильм, можно перейти на страничку с его описанием, скриншотами самых важных моментов  и комментариями пользователей. Но самое главное – это то, что здесь можно найти список файлов, которые можно просмотреть прямо из приложения или же скачать себе на устройство. Многие фильмы имеют файл FLV, который значительно меньше размером основного файла, что позволит без проблем просматривать фильмы на низкоскоростных подключениях к Интернету. Все просмотренные фильмы и клипы попадают в историю, кроме того без проблем можно делать закладки с интересующим контентом.</p>
-
-<p>Приложение позволит проводит закачку нескольких файлов одновременно, в случае обрыва соединения предусмотрена докачка. Во время загрузки есть возможность просматривать видеофайлы прямо на ходу. Для того чтобы все фильмы шли необходимо на устройство установить кодеки или же профессиональный плеер MX Player PRO.</p>
-
-<p>Приложение построено на контенте популярного ресурса ex.ua, который предлагает своим пользователям тысячи разнообразных видеофайлов.</p>
-
-<p><strong>Версия Android: 2.0 и выше</strong></p>
-
-<p><img src="http://all4pda.org/images/programs/multimedia/ex_ua/ex_ua1.jpg" alt="" /></p>
-
-<p><img src="http://all4pda.org/images/programs/multimedia/ex_ua/ex_ua2.jpg" alt="" /></p>
-
-<p><img src="http://all4pda.org/images/programs/multimedia/ex_ua/ex_ua3.jpg" alt="" /></p>
-
-<p><img src="http://all4pda.org/images/programs/multimedia/ex_ua/ex_ua4.jpg" alt="" /></p>
-
-<p> </p>
-
-<p><strong>Перейти на маркет</strong></p>
-
-<p><img src="http://all4pda.org/media/images/Android-Market.png" alt="" /></p>
-
-<p>Источник <a href="http://all4pda.org/multimediya/exua-filmy-onlajn.html">all4pda.org</a></p>
-</div>
+<p> </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/ex-ua/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -509,131 +259,12 @@ android:orientation="vertical" &gt;
 
 <p>Читайте и комментируйте.</p>
 
-<p>Не секрет, что сегодня платформа Android набрала больших оборотов и робота с Web станицами стала просто необходимостью. Каждый пользователь, покупая смартфон или планшет, желает получить полнофункциональное устройство для работы Интернетом. Браузер – это инструмент, который позволит осуществить полнофункциональную работу с Web. Многие производители устройств оснащают устройства браузерами, но они обладают довольно скромными возможностями. Для этого много производителей софта разрабатывают свои браузеры Android.</p>
-
-<p>Рассмотрим самые распространенные браузеры для ОС Android</p>
-
-<p><strong>Opera mobile (</strong><a href="http://all4pda.org/index.php?option=com_zoo&amp;task=item&amp;item_id=88&amp;category_id=32&amp;Itemid=155">перейти на страницу скачки</a>)</p>
-
-<p>Один из самых популярных браузеров. Opera mobile позволяет сжимать трафик, что позволяет значительно экономить трафик и ускоряет передачу данных. Все сайты загружаются через прокси-сервера Opera, и из серверов в сжатом виде передаются на устройство. Главная страница открывается в виде плитки в которой можно лицезреть любимые сайты. В низу расположена удобная кнопка меню, а также кнопка переключения вкладок. Интерфейс очень удобный и понятный, легкий в использовании.</p>
-
-<p><img src="http://all4pda.org/media/ckfinder/images/opera%20mobile.jpg" alt="" /><img src="http://all4pda.org/media/ckfinder/images/opera%20mobile1.jpg" alt="" /></p>
-
-<p>Плюсы:</p>
-
-<ul>
-<li><p>сжатие трафика по необходимости;</p></li>
-<li><p>хорошо продуманный интерфейс;</p></li>
-<li><p>низкие требования железу.</p></li>
-</ul>
-
-
-<p>Минусы:</p>
-
-<ul>
-<li><p>нет перелистывания кнопками переключения громкости;</p></li>
-<li><p>отсутствует голосовой поиск;</p></li>
-<li><p>нет полноэкранного режима.</p></li>
-</ul>
-
-
-<p><strong>Dolphin Browser (</strong><a href="http://all4pda.org/internet/internet-brauzer-dolphin-browser.html">перейти на страницу скачки</a><strong>) </strong></p>
-
-<p>Один наиболее популярных браузеров для платформы Android. В браузере присутствует огромное количество плагинов, которые можно легко установить. Кроме этого в браузере предусмотрен голосовой поиск, а также поддержка жестов. Для их активации необходимо использовать специальный символ, который находится в нижнем углу. Как особенность &ndash; Dolphin browser работает с устройствами на Android 2+.</p>
-
-<p><img src="http://all4pda.org/media/ckfinder/images/dolphin%20browser.jpg" alt="" /><img src="http://all4pda.org/media/ckfinder/images/dolphin%20browser1.jpg" alt="" /></p>
-
-<p>Плюсы:</p>
-
-<ul>
-<li><p>наличие большого количества плагинов;</p></li>
-<li><p>голосовой поиск;</p></li>
-<li><p>предусмотрена синхронизация закладок.</p></li>
-</ul>
-
-
-<p>Минусы:</p>
-
-<ul>
-<li><p>нет перелистывания кнопками переключения громкости;</p></li>
-<li><p>нет докачки после разрыва соединения.</p></li>
-</ul>
-
-
-<p><strong>UC Browser (</strong><a href="http://all4pda.org/internet/mobilnyj-brauzer-uc-browser.html">прейти на страницу скачки</a><strong>)</strong></p>
-
-<p>Это еще один браузер для Android с возможность сжатия трафика (составит конкуренцию Opera Mobile). Он довольно новы и уже вошел в топ скачиваемых программ. В браузере предусмотрено очень удобное переключение вкладок. Также предусмотрена возможность докачки файлов, что важно при работе с мобильным интернетом. В UC предусмотрена возможность работы со страницами с помощью кнопок громкости, а также голосовой поиск. Отличный браузер для любых устройств на ОС Android.</p>
-
-<p><img src="http://all4pda.org/media/ckfinder/images/uc%20brawser.jpg" alt="" /><img src="http://all4pda.org/media/ckfinder/images/uc%20brawser1.jpg" alt="" /></p>
-
-<p>Плюсы:</p>
-
-<ul>
-<li><p>сжатие трафика;</p></li>
-<li><p>перелистывание страниц кнопками громкости;</p></li>
-<li><p>докачка файлов;</p></li>
-<li><p>удобный голосовой поиск.</p></li>
-</ul>
-
-
-<p>Минусы:</p>
-
-<ul>
-<li>не предусмотрена синхронизация закладок.</li>
-</ul>
-
-
-<p><strong>Firefox mobile (</strong><a href="http://all4pda.org/internet/firefox-nabiraet-oboroty-na-android.html">перейти на страницу закачки</a><strong>)</strong></p>
-
-<p>Не секрет, что для компьютера одним из лучших браузеров, подерживающих различные <a href="http://joomla-master.org/">шаблоны сайтов</a>, есть Firefox. Вот и для платформы Android разработчики создали мобильный браузер. В нем предусмотрена возможность использования огромного количества плагинов, которые можно доустановить. В целом браузер немного сыроват и значительно уступает аналогам других производителей по скорости и производительности работы. Возможно в будущем разработчики наверстают</p>
-
-<p><img src="http://all4pda.org/media/ckfinder/images/firefox1.jpg" alt="" /><img src="http://all4pda.org/media/ckfinder/images/firefox.jpg" alt="" /></p>
-
-<p>Плюсы:</p>
-
-<ul>
-<li><p>синхронизация вкладок, закладок и паролей;</p></li>
-<li><p>возможность использовать множество плгинов.</p></li>
-</ul>
-
-
-<p>Минусы:</p>
-
-<ul>
-<li><p>тяжелый в работе;</p></li>
-<li><p>нет перелистывания страниц кнопками громкости;</p></li>
-<li><p>нет поиска по голосу.</p></li>
-</ul>
-
-
-<p><strong>Matrox mobile (<a href="http://all4pda.org/internet/internet-brauzer-maxthon-mobile.html">перейти на страницу закачки</a>)</strong></p>
-
-<p>Это довольно удобный мобильный браузер в котором есть очень удобный и продуманный интерфейс. В Matrox mobile также есть возможность работы с кнопками регулировки звука, синхронизация закладок с сервером. Для расширения функционала предусмотрено огромное количество плагинов.</p>
-
-<p><img src="http://all4pda.org/media/ckfinder/images/matrex.png" alt="" /><img src="http://all4pda.org/media/ckfinder/images/matrex1.jpg" alt="" /></p>
-
-<p>Плюсы:</p>
-
-<ul>
-<li><p>очень удобный интерфейс;</p></li>
-<li><p>поддержка плагинов;</p></li>
-<li><p>синхронизация закладок с сервером;</p></li>
-<li><p>работа с кнопками регулировки громкости.</p></li>
-</ul>
-
-
-<p>Минусы:</p>
-
-<ul>
-<li>нет голосового поиска.</li>
-</ul>
-
-
-<p><a href="http://www.androidik.me/programmy/brauzery/">Мобильные браузеры для андроид скачать бесплатно</a> можно прямо на нашем сайте в разделе интернет. В данной статье перечислены только самые популярные браузеры для платформы Android. Как видно, функционал рассмотренных браузеров позволит выполнить все основные функции работы с Web. Выбор за Вами!</p>
-
-<p>Источник <a href="http://all4pda.org/obzory/vybor-brauzera-dlya-platformy-android.html">all4pda.org</a></p>
-</div>
+<p> </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/browsers/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -676,48 +307,12 @@ android:orientation="vertical" &gt;
 
 <p>Gameloft  предлагает всем любителям жанра экшн игру <strong>Wild Blood. </strong>Вам придется выступить в роли сера Ланцелота, которому придется сражаться с большим количеством различных демонов, которые попали в мир из врат Ада. Игра построена на движке Unreal Technology, который позволяет на экране мобильного устройства создать очень реалистичные и захватывающие сражения в трехмерной графике. Погрузись в мир захватывающих приключений и кровопролитных битв.</p>
 
-<p>Краткий сюжет:</p>
-
-<p>Король Артур начинает сходить с ума от ревности к Ланцелоту, который проявлял признаки внимания и по дружески ухаживал за королевой. Злая Моргана воспользовавшись затмением разума короля, заставляет его открыть врата в Ад. Все мерзкие существа попадают в мир королевства и разрушают все то, что было создано королем Артуром и его подданными. Кроме этого Моргана крадет королеву и уносит ее на волшебный остров Авалон. Ланцелоту остается один вариант: уничтожить всех демонов, вернуть королеву Гвиневру домой и стать товарищем Артуру, который осознал свои ошибки. Помогать в борьбе против темных сил будет сэр Гайвен – один из рыцарей круглого стола.</p>
-
-<p>Графика Wild Blood получилась очень качественной, что характерно для всех игр Gameloft выполненных на движке Unreal Technology. Вас ожидают красочные миры, эпические сражения, проработанные до мелочей персонажи и огромное количество различных спецэффектов.</p>
-
-<p><strong>Особенности Wild Blood:</strong></p>
-
-<ul>
-<li><p>10 отлично продуманных, а главное разнообразных уровней, которые приведут главного героя к Авалону;</p></li>
-<li><p>большое количество разнообразного оружия: мечи, луки, топоры и т.д.;</p></li>
-<li><p>свыше 20 видов вражеских юнитов, которые отличаются характеристиками стилем ведения боя;</p></li>
-<li><p>красочные локации с огромным количеством красивых объектов;</p></li>
-<li><p>наличие отличного сетевого мультиплеера.</p></li>
-</ul>
-
-
-<p>Игра порадует каждого игрока возможностью сетевого режима, который  позволит одновременно на поле боя свести до 8 игроков (по 4 в каждой команде). Главной целью подобного режима есть захват флага. Сетевой режим возможно осуществлять с помощью Gameloft LIVE или Wi-Fi. Gameloft LIVE позволит играть на серверах в Интернете с огромным количеством игроков со всего мира, Wi-Fi позволит играть в компании друзей, как в локальной сети.</p>
-
-<p>Wild Blood позволит Вам погрузится в захватывающие приключения сера Ланцелота.</p>
-
-<p><strong>Версия Android: 2.3 и выше</strong></p>
-
-<p><img src="http://all4pda.org/images/games/action/wild_blood/wild_blood1.jpg" alt="" /></p>
-
-<p><img src="http://all4pda.org/images/games/action/wild_blood/wild_blood2.jpg" alt="" /></p>
-
-<p><img src="http://all4pda.org/images/games/action/wild_blood/wild_blood3.jpg" alt="" /></p>
-
-<p><img src="http://all4pda.org/images/games/action/wild_blood/wild_blood4.jpg" alt="" /></p>
-
-<p><img src="http://all4pda.org/images/games/action/wild_blood/wild_blood5.jpg" alt="" /></p>
-
-<p> </p>
-
-<p><strong>Перейти на маркет</strong></p>
-
-<p><img src="http://all4pda.org/media/images/Android-Market.png" alt="" /></p>
-
-<p>Источник <a href="http://all4pda.org/ekshn/wild-blood-nezabyvaemye-priklyucheniya-sera-lancelota.html">all4pda.org</a></p>
-</div>
+<p> </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/wild-blood/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -764,49 +359,12 @@ android:orientation="vertical" &gt;
 
 <p>Посмотрим, что пишут авторы.</p>
 
-<p>Сейчас трудно представить работу на ПК без нормального файлового менеджера, который позволит значительно экономить время при просмотре файлов и папок, сделает работу с файлами удобной и быстрой. Вот и для устройств на мобильной платформе Android созданы подобные приложения, ярким представителем которых есть <strong>X-Plore</strong><strong>File </strong><strong>Manager. </strong>Данное приложение уже не один год трудится на различных мобильных ОС и зарекомендовало себя с лучшей стороны.</p>
-
-<p>Приложение позволяет выполнять все основные функции: копирование, перенос, создание папок и файлов, но кроме этого в нем присутствует еще множество функций, которые делают его использование выгоднее по сравнению с другими. Также есть возможность закрыть доступ к системным папкам, что позволит уберечь систему от нежелательных действий неопытных пользователей.</p>
-
-<p>X-Plore File Manager имеет очень гибкую систему работы с мультимедиа, что выражается в возможности воспроизведения таких файлом прямо из интерфейса приложения. Вы можете легко перейти к древовидной структуре папок, что позволит легко ориентироваться в файловой системе. Также предусмотрено две панели, которые дают возможность быстро осуществлять все основные операции.</p>
-
-<p><strong>Особенности X-Plore File Manager:</strong></p>
-
-<ul>
-<li><p>быстрый и удобный поиск в текстовых файлах;</p></li>
-<li><p>поддержка хранения данных и их обработка в системах Microsoft SkyDrive, Dropbox, Яндекс.диск, Google Drive (облачное хранилище);</p></li>
-<li><p>возможность работы с серверами данных при помощи Wi-Fi;</p></li>
-<li><p>возможность делится изображениями с миром прямо из интерфейса;</p></li>
-<li><p>предусмотрен алгоритм подсчета MD5 / SHA1 контрольных сумм фалйлов;</p></li>
-<li><p>возможность редактирования файлов с помощью встроенного редактора HEX;</p></li>
-<li><p>поддержка большинства существующих типов архивирования;</p></li>
-<li><p>копирование ссылок в буфер обмена;</p></li>
-<li><p>проведена оптимизация для ОС Android 4.1;</p></li>
-<li><p>возможность просмотра скрытых папок и файлов;</p></li>
-<li><p>гибкость настройки;</p></li>
-<li><p>улучшенная система работы в локальной сети.</p></li>
-</ul>
-
-
-<p>X-Plore File Manager – это действительно нужное приложение на любом смартфоне или планшете под управлением Android. Это приложение может взять на себя много функций, для выполнения которых необходимо доставлять различный софт. Плюсы очевидны: дополнительное место в памяти, нет необходимости учится работать с разными приложениями, высокое показатели скорости при работе с файлами.</p>
-
-<p><strong>Версия Android: 2.1 и выше</strong></p>
-
-<p><img src="http://all4pda.org/cache/com_zoo/images/x_plore_file_manager1_28644ebe0f3fabc8b2b9c048a03baf95.jpg" alt="x_plore_file_manager1.jpg" />
-<img src="http://all4pda.org/cache/com_zoo/images/x_plore_file_manager2_11752a33dab096ed3dc4a4d12441baeb.jpg" alt="x_plore_file_manager2.jpg" />
-<img src="http://all4pda.org/cache/com_zoo/images/x_plore_file_manager3_4a2f5f8348bf4e6633eb177170c0cafe.jpg" alt="x_plore_file_manager3.jpg" />
-<img src="http://all4pda.org/cache/com_zoo/images/x_plore_file_manager4_f01b1940b76c21bb746786e1f879a781.jpg" alt="x_plore_file_manager4.jpg" />
-<img src="http://all4pda.org/cache/com_zoo/images/x_plore_file_manager5_8d03243b49c80d0bf7d93a3ce1ab9993.jpg" alt="x_plore_file_manager5.jpg" /></p>
-
-<p> </p>
-
-<p><strong>Перейти на маркет</strong></p>
-
-<p><img src="http://all4pda.org/media/images/Android-Market.png" alt="" /></p>
-
-<p> Источник <a href="http://all4pda.org/sistemnye/x-plore-file-manager-udobstvo-i-prostota-raboty-s-fajlovoj-sistemoj.html">all4pda.org</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/x-plore-file-manager/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -851,220 +409,12 @@ android:orientation="vertical" &gt;
 
 <p>И что же делать? Писать свой actionbar?</p>
 
-<p>Нам на помощь приходит очень классная и бесплатная библиотека <a href="http://actionbarsherlock.com/">ActionBarSherlock</a></p>
-
-<p>Я думаю, что большая часть из вас будет ее использовать.</p>
-
-<p>Но могут быть и такие которые скажут, мы не используем сторонние библиотеки.</p>
-
-<p>Это вам решать, но от себя добавлю, что эту библиотеку рекомендует google.</p>
-
-<p>Пришло время писать код.</p>
-
-<h3>Задача</h3>
-
-<p>Сделать actionbar меню для всех телефонов.</p>
-
-<h3>Ресурсы</h3>
-
-<p>ActionBarSherlock</p>
-
-<h3>Примеры реализации</h3>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/01/feature_02.png" alt="feature_02" /></p>
-
-<p> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/01/feature_03.png" alt="feature_03" /></p>
-
-<p> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/01/feature_01.png" alt="feature_01" /></p>
-
-<p> </p>
-
-<p> </p>
-
-<h3>Реализация</h3>
-
-<ol>
-<li><p> Подключаем проект Sherlock в eclipse. Скачать можно <a href="https://api.github.com/repos/JakeWharton/ActionBarSherlock/zipball/4.2.0">тут</a>.</p></li>
-<li><p> Создаем свой проект</p></li>
-<li><p> Подключаем библиотеку sherlock к вашему проекту</p></li>
-<li><p> Делаем файл меню</p></li>
-<li><p> ВАЖНО! Все активити и фрагменты должны наследоваться от SherlockActivity и SherlockFragment</p></li>
-</ol>
-
-
-<h3>Коды</h3>
-
-<h4>menu/activity_main.xml</h4>
-
-<pre><code>&lt;menu xmlns:android="http://schemas.android.com/apk/res/android" &gt;
-
-
-
-&lt;item
-
-    android:id="@+id/item1"
-
-    android:icon="@android:drawable/ic_menu_agenda"
-
-    android:orderInCategory="100"
-
-    android:showAsAction="always|withText"
-
-    android:title="Item 1"/&gt;
-
-&lt;item
-
-    android:id="@+id/item2"
-
-    android:icon="@android:drawable/ic_menu_call"
-
-    android:orderInCategory="200"
-
-    android:showAsAction="always|withText"
-
-    android:title="Item 2"/&gt;
-
-&lt;item
-
-    android:id="@+id/item3"
-
-    android:icon="@android:drawable/ic_menu_camera"
-
-    android:orderInCategory="300"
-
-    android:showAsAction="ifRoom|withText"
-
-    android:title="Item3"/&gt;
-
-&lt;item
-
-    android:id="@+id/menu_settings"
-
-    android:orderInCategory="400"
-
-    android:showAsAction="never"
-
-    android:title="@string/menu_settings"/&gt;
-
-
-
-&lt;/menu&gt;
-</code></pre>
-
-<h4>MainActivity.java</h4>
-
-<pre><code>package com.ua.android_helper.testactionbar;
-
-
-
-import android.os.Bundle;
-
-import com.actionbarsherlock.app.SherlockActivity;
-
-import com.actionbarsherlock.view.Menu;
-
-
-
-public class MainActivity extends SherlockActivity {
-
-
-
-@Override
-
-protected void onCreate(Bundle savedInstanceState) {
-
-    super.onCreate(savedInstanceState);
-
-    setContentView(R.layout.activity_main);
-
-}
-
-
-
-@Override
-
-public boolean onCreateOptionsMenu(Menu menu) {
-
-    getSupportMenuInflater().inflate(R.menu.activity_main, menu);
-
-    return true;
-
-}
-
-
-
-}
-</code></pre>
-
-<h4>AndroidManifest.xml</h4>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-
-&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
-package="com.ua.android_helper.testactionbar"
-
-android:versionCode="1"
-
-android:versionName="1.0" &gt;
-
-
-
-&lt;uses-sdk
-
-    android:minSdkVersion="8"
-
-    android:targetSdkVersion="17" /&gt;
-
-
-
-&lt;application
-
-    android:allowBackup="true"
-
-    android:icon="@drawable/ic_launcher"
-
-    android:label="@string/app_name"
-
-    android:theme="@style/Theme.Sherlock" &gt;
-
-    &lt;activity
-
-        android:name="com.ua.android_helper.testactionbar.MainActivity"
-
-        android:label="@string/app_name" &gt;
-
-        &lt;intent-filter&gt;
-
-            &lt;action android:name="android.intent.action.MAIN" /&gt;
-
-
-
-            &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
-
-        &lt;/intent-filter&gt;
-
-    &lt;/activity&gt;
-
-&lt;/application&gt;
-
-
-
-&lt;/manifest&gt;
-</code></pre>
-
-<p><strong>Видео</strong></p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/GOB72vWY_5s "></iframe></div>
-
-
-
-</div>
+<p> </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/actionbarsherlock/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -1109,30 +459,12 @@ android:versionName="1.0" &gt;
 
 <p>Прошли те времена&hellip;.</p>
 
-<p>Но игры новые появляются.</p>
-
-<p>Популярная пошаговая РПГ Kings Bounty перебралась с ПК на мобильные устройства. Игру под названием <strong>Kings Bounty: Legions</strong> уже сейчас можно скачать бесплатно в магазине Google Play.</p>
-
-<p> <img src="http://droider.ru/wp-content/uploads/2013/01/logo5-640x312.jpg" alt="Kings Bounty: Legions" /></p>
-
-<p>Как и ожидалось, игра очень похода на своего старшего брата – оригинальную серию игр <strong>Kings Bounty</strong>. В распоряжении игрока несколько видов юнитов, которыми необходимо управлять, сражаясь с врагами на игровой доске. Не забыли разработчики и про разнообразные миссии, в которых на плечи героев лягут обязанности по зачистке округи от нечисти, спасению принцесс и добыче ценных артефактов.</p>
-
-<p><img src="http://droider.ru/wp-content/uploads/2013/01/112-300x187.jpg" alt="Kings Bounty: Legions" />
-<img src="http://droider.ru/wp-content/uploads/2013/01/212-300x187.jpg" alt="Kings Bounty: Legions" /></p>
-
-<p>Несмотря на то, что у игры нет явного ограничения для использования только на планшетах, все же оптимальным будет именно такой выбор. Недостаточный размер экрана смартфона негативно скажется на общем впечатлении от игры.</p>
-
-<p>Графическая составляющая в <strong>Kings Bounty: Legions</strong> находится на довольно высоком уровне. Как уже было сказано выше, в Google Play игру  можно скачать бесплатно, но в ней есть внутриигровой магазин, в котором у игроков есть возможность приобрести множество товаров для облегчения игрового процесса за реальные деньги.</p>
-
-<p><strong>Для игры в Kings Bounty: Legions  необходимо сетевое подключение.</strong></p>
-
-<p><a href="http://droider.ru/goto/https://play.google.com/store/apps/details?id=com.kranx.kbl">Kings Bounty: Legions в Google Play маркете</a></p>
-
-<p><img src="http://chart.apis.google.com/chart?cht=qr&amp;chs=150x150&amp;chl=market://details?id=com.kranx.kbl" alt="" /></p>
-
-<p>Источник <a href="http://droider.ru/post/kings-bounty-legions-snova-v-boy-15-01-2013/">droider.ru</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/kings-bounty-legions/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -1179,32 +511,12 @@ android:versionName="1.0" &gt;
 
 <p>Смотрим, комментируем, лайкаем.</p>
 
-<p>Не так давно на виртуальных полках гуглового магазина приложений появилась новая рисованная стрелялка от разработчиков из студии Appsomniacs LLC под названием <strong>Doodle Army</strong>.</p>
-
-<p><img src="http://droider.ru/wp-content/uploads/2013/01/logo10-640x312.jpg" alt="Doodle Army" /></p>
-
-<p>Разработчики предлагаю всем желающим сразиться с нарисованными врагами <strong>на шести разных картах</strong>. Главный герой сможет побывать во Вьетнаме, Египте и даже Марсе. На каждой карте вашей главной задачей будет уничтожение всех врагов.</p>
-
-<p>Небольшое количество карт с лихвой компенсируется огромным арсеналом, который насчитывает <strong>около 40 видов оружия всех форм и размеров</strong>, начиная от простых винтовок и заканчивая лазерами.</p>
-
-<p><img src="http://droider.ru/wp-content/uploads/2013/01/117-300x168.jpg" alt="Doodle Army" />
-<img src="http://droider.ru/wp-content/uploads/2013/01/217-300x168.jpg" alt="Doodle Army" /></p>
-
-<p>Несмотря на рисованную и внешне простую графику, игра изобилует всевозможными яркими спецэффектами и в целом выглядит довольно приятно. Приятно, что разработчики не забыли про управление. При желании вы сможете выбрать один из двух разных типов расположения экранных клавиш.</p>
-
-<p>В магазине Google Play игра представлена в двух вариантах – бесплатном с ограниченным количеством оружия, персонажей и всего одной картой, а также полноценном, который обойдется вам в 0.99$.</p>
-
-<p><a href="http://droider.ru/goto/http://play.google.com/store/apps/details?id=com.chadtowns.daxfree&amp;feature=more_from_developer#?t=W251bGwsMSwxLDEwMiwiY29tLmNoYWR0b3ducy5kYXhmcmVlIl0.">Doodle Army lite в Google Play маркете</a></p>
-
-<p><img src="http://chart.apis.google.com/chart?cht=qr&amp;chs=150x150&amp;chl=market://details?id=com.chadtowns.daxfree" alt="" /></p>
-
-<p><a href="http://droider.ru/goto/https://play.google.com/store/apps/details?id=com.chadtowns.dax&amp;feature=more_from_developer#?t=W251bGwsMSwxLDEwMiwiY29tLmNoYWR0b3ducy5kYXgiXQ..">Doodle Army в Google Play маркете за 1$</a></p>
-
-<p><img src="http://chart.apis.google.com/chart?cht=qr&amp;chs=150x150&amp;chl=market://details?id=com.chadtowns.dax" alt="" /></p>
-
-<p>Источник <a href="http://droider.ru/post/doodle-army-risovannaya-strelyalka-19-01-2013/">droider.ru</a></p>
-</div>
+<p> </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/doodle-army/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -1249,23 +561,12 @@ android:versionName="1.0" &gt;
 
 <p>А и чуть не забыл, пишем комментарии и лайки приветствуются тоже  :lol:</p>
 
-<p>В последнее время в магазине Google Play все чаще стали появляться поддельные приложения, маскирующиеся под именитые и популярные аналоги. Об этом вчера в своем отчете сообщили эксперты из компании <a href="http://droider.ru/goto/http://www.net-security.org/">Help Net Security</a>.</p>
-
-<p><img src="http://droider.ru/wp-content/uploads/2013/01/125-521x400.jpg" alt="Help Net Security" /></p>
-
-<p>По данным исследователей, такая проблема существует не только на Android. С поддельными приложениями сталкиваются и пользователи яблочной платформы. Но в <strong>App Store</strong> такие программы долго не задерживаются. Да и нанести особого ущерба пользователям, по данным экспертов, они не могут.</p>
-
-<p>С <strong>Android</strong> ситуация обстоит несколько иначе. Владельцы Android устройств, которые установили поддельные приложения, рискуют лишиться своей личной информации, или получить целую гору рекламных сообщений и уведомлений.</p>
-
-<p> <img src="http://droider.ru/wp-content/uploads/2013/01/224-518x400.jpg" alt="Help Net Security" /></p>
-
-<p>В большинстве случаев поддельные приложения похожи на оригинал не только названием.  Обычно разработчики таких программ используют оригинальные скриншоты, а иногда и копируют часть описания.</p>
-
-<p>Чтобы обезопасить себя от поддельных приложений в <strong>Google Play</strong>, мы настоятельно рекомендуем пользователям перед скачиванием внимательно прочитать описание приложения, просмотреть его рейтинг и отзывы.</p>
-
-<p>Источник <a href="http://droider.ru/post/help-net-security-v-google-play-mnogo-poddelnyih-prilozheniy-22-01-2013/">droider.ru</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/help-net-security/">Read on &rarr;</a>
+    </footer>
   
 
 
