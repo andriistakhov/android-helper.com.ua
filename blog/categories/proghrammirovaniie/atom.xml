@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Программирование | Android helper]]></title>
   <link href="http://android-helper.com.ua//blog/categories/proghrammirovaniie/atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-01-07T20:39:07+02:00</updated>
+  <updated>2014-01-08T10:43:01+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -188,8 +188,7 @@ adb shell chmod 6755 /system/xbin/su
 
 <h4>Видео урок</h4>
 
-<iframe width="480" height="360" src="http://android-helper.com.ua///www.youtube.com/embed/h3RfnmF0C9Q" frameborder="0" allowfullscreen></iframe>
-
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/rsBGF9_Un8o "></iframe></div></p>
 
 <ol>
 <li>Ставьте лайк</li>
