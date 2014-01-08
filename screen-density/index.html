@@ -126,7 +126,7 @@
 &ndash; если разрешение 320х240, ширина экрана = 240 px. Кнопка займет уже не пол-экрана в ширину, а весь экран<br/>
 &ndash; если же разрешение 1280х800, ширина = 800 px. Кнопка опять же будет занимать в ширину не пол-экрана, а чуть меньше трети</p>
 
-<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_differentResolutions.jpg" alt="" /></p>
+<p><img src="http://android-helper.com.ua/images/uploads/2012/09/20110811_L0007_L_differentResolutions.jpg" alt="" /></p>
 
 <p>А ведь экран приложения – это обычно не одна кнопка, а набор из многих элементов и все они будут расползаться или сжиматься на разных разрешениях. Поэтому использовать px при разработке НЕ рекомендуется.</p>
 
@@ -153,7 +153,7 @@ HTC <strong>Flyer</strong>: 7 inch, 1280x800 px, 170 dpi</p>
 
 <p>Я создам такой экран:</p>
 
-<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_DesireScreen.jpg" alt="" /></p>
+<p><img src="http://android-helper.com.ua/images/uploads/2012/09/20110811_L0007_L_DesireScreen.jpg" alt="" /></p>
 
 <p>Это несколько кнопок, в которых ширина и размер шрифта определены с использованием разных единиц измерения. На каждой кнопке для наглядности я написал ее ширину (<strong>layout_width</strong>) и размер шрифта (<strong>textSize</strong>) через запятую. Обратите внимание, что ширина всех кнопок кроме последней одинакова. Так происходит потому, что 1 in = 72 pt = 25,4 mm в любом случае, а для данного экрана также 1 in = 252 px = 252 dp. Шрифты также везде одинаковы, т.к. размер шрифта по умолчанию равен 14 sp и в данном случае равен 14 px.</p>
 
@@ -252,7 +252,7 @@ android:text="wrap_content, default"&gt;
 
 <p>Посмотрим, как это будет выглядеть на экранах других устройств:</p>
 
-<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_ALLScreensMDI.jpg" alt="" /></p>
+<p><img src="http://android-helper.com.ua/images/uploads/2012/09/20110811_L0007_L_ALLScreensMDI.jpg" alt="" /></p>
 
 <p>Для всех экранов я поставил режим <strong>mdpi</strong>. Скриншоты экранов смасштабированы к одному размеру для наглядности. Надо понимать, что на самом деле диагонали экранов существенно отличаются, а наша цель – добиться, чтобы приложение выглядело одинаково на различных устройствах.</p>
 
@@ -262,7 +262,7 @@ android:text="wrap_content, default"&gt;
 
 <p>Видно, что приложение выглядит достаточно по разному на трех экранах. Так было бы, если бы не существовало коэфициента Screen Density. Но он есть и давайте смотреть, чем он полезен. Я включу режим <strong>ldpi </strong>для <strong>Wildfire </strong>и <strong>xhdpi </strong>для <strong>Flyer</strong>. <strong>Desire </strong>оставляю в <strong>mdpi</strong>.</p>
 
-<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_ALLScreensSMHDI.jpg" alt="" /></p>
+<p><img src="http://android-helper.com.ua/images/uploads/2012/09/20110811_L0007_L_ALLScreensSMHDI.jpg" alt="" /></p>
 
 <p>Ширина кнопок указанная в in, mm, pt неизменна, на эти единицы измерения режимы Density влияния не имеют. Нам интересны четвертая и пятая кнопки. Видим, что на экранах Wildfire и Flyer отличаются размеры px и dp, т.к. мы сменили mdpi на ldpi и xhdpi. Для Wildfire 1 dp стал равен 0,75 px, а для Flyer 1 dp = 2 px. Также видим, что изменился шрифт на кнопках, где размер шрифта был указан по умолчанию или в sp-единицах. Он так же, как и dp смасштабировался благодаря Density режимам. А шрифт, размер которого был указан в px (четвертая кнопка) оставался неизменным и на Wildfire выглядит крупным, а на Flyer – мелким.</p>
 
@@ -274,11 +274,11 @@ android:text="wrap_content, default"&gt;
 
 <p>Для создания этого материала я использовал различные конфигурации экранов, которые можно создавать самому:</p>
 
-<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_ScreenConfigs.jpg" alt="" /></p>
+<p><img src="http://android-helper.com.ua/images/uploads/2012/09/20110811_L0007_L_ScreenConfigs.jpg" alt="" /></p>
 
 <p>Вы наверно обратили внимание, что в папке Андроид-проекта в Eclipse есть папки <strong>drawable </strong>c суффиксами hdpi, ldpi, mdpi:</p>
 
-<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/09/20110811_L0007_L_drawable.jpg" alt="" /></p>
+<p><img src="http://android-helper.com.ua/images/uploads/2012/09/20110811_L0007_L_drawable.jpg" alt="" /></p>
 
 <p>Папка drawable используется для хранения изображений, а суффиксы дают понять системе из какой именно drawable использовать картинки при текущем Density режиме. Подробнее об этом можно почитать в <a href="http://developer.android.com/guide/topics/resources/providing-resources.html">хелпе</a>. Кстати, там же вы найдете уже изученный нами <strong>–</strong><strong>land</strong>, который связан с горизонтальной ориентацией экрана. Будем по мере изучения Андроид знакомиться с остальными.</p>
 

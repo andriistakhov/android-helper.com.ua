@@ -135,7 +135,7 @@
 
 <p>Вот простой, но полный пример реализации множественных потоков UI, с помощью фрагментов. Начнем с проектирования ландшафтного layout&#8217;a, содержащего список элементов слева и данные по ним справа. Так выглядит нужный нам layout:</p>
 
-<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-fragment-land_new.png" alt="" /></p>
+<p><img src="http://android-helper.com.ua/images/uploads/2012/07/device-fragment-land_new.png" alt="" /></p>
 
 <p>Код для Activity не особенно интересен, он просто вызывает setContentView() со следующим макетом:</p>
 
@@ -417,7 +417,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
 
 <p>Настало время для добавления еще одного потока UI в наше приложение. Когда экран находится в портретном режиме, то недостаточно места для отображения двух фрагментов бок о бок. То есть мы хотим, чтобы отображался только список:</p>
 
-<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-fragment-port1_new.png" alt="" /></p>
+<p><img src="http://android-helper.com.ua/images/uploads/2012/07/device-fragment-port1_new.png" alt="" /></p>
 
 <p>Напишем новый layout для портретной ориентации:</p>
 
@@ -448,7 +448,7 @@ android:layout_height="match_parent" &gt;
 
 <p>Теперь у нас нет контейнера для отображения данных для TitlesFragment, отображается только список. При нажатии на элемент списка теперь нужно вызывать отдельное Activity, в котором и будут отображаться данные:</p>
 
-<p><img src="http://android-helper.com.ua/wp-content/uploads/2012/07/device-fragment-port2_new.png" alt="" /></p>
+<p><img src="http://android-helper.com.ua/images/uploads/2012/07/device-fragment-port2_new.png" alt="" /></p>
 
 <p>Теперь, всё что от нас требуется — использовать уже готовый DetailsFragment:</p>
 
