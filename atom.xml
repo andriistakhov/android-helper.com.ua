@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-01-08T10:57:09+02:00</updated>
+  <updated>2014-01-08T11:37:01+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -250,6 +250,9 @@ setFont(keyboardArea, keys);
 <p>Сегодня я хотел бы поделится своим опытом &ndash; <strong>&ldquo;Как получить доступ к базе данных в Ganymotion?&rdquo;</strong></p>
 
 <p>Готовы? Тогда вперед.</p>
+
+<!-- more -->
+
 
 <h4>Подготовка</h4>
 

@@ -420,47 +420,12 @@ setFont(keyboardArea, keys);
 
 <p>Готовы? Тогда вперед.</p>
 
-<h4>Подготовка</h4>
-
-<ol>
-<li><a href="http://android-helper.com.ua/android-studio-genymotion/">Установка Ganymotion</a></li>
-<li>Выбираем из списка нужный емулятор</li>
-<li><a href="https://drive.google.com/file/d/0B-p1r5SNN4adTGgyajV6ckNtV00/edit?usp=sharing">Скачиваем root файл</a>.</li>
-<li>Открываем <strong>terminal</strong> &ndash; Mac (<strong>cmd</strong> &ndash; Windows)</li>
-</ol>
-
-
-<h4>Root</h4>
-
-<p>Заходим в папку где у вас скачан файл (см. выше)</p>
-
-<p>И в terminal пишем следующее!</p>
-
-<pre><code>adb devices
-adb root
-adb connect &lt;IP вашего устройства см. adb devices вместе с портом&gt;
-adb remount
-adb push su /system/xbin/
-adb push su /system/bin
-adb shell chmod 6755 /system/bin/su
-adb shell chmod 6755 /system/xbin/su
-</code></pre>
-
-<p>Все ваш емулятор теперь имеет права root.</p>
-
-<h4>Видео урок</h4>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/rsBGF9_Un8o "></iframe></div>
-
-
-<ol>
-<li>Ставьте лайк</li>
-<li>Пишите комментарии</li>
-<li>Рассказывайте друзьям</li>
-</ol>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/ganymotion-root/">Read on &rarr;</a>
+    </footer>
   
 
 
