@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Памятка разработчику | Android helper]]></title>
   <link href="http://android-helper.com.ua//categories/pamiatka-razrabotchiku/atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-01-10T21:52:54+02:00</updated>
+  <updated>2014-01-11T20:13:26+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -194,7 +194,7 @@ adb shell chmod 6755 /system/xbin/su
 
 <h4>Видео урок</h4>
 
-<p>{% youtube rsBGF9_Un8o %}</p>
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/rsBGF9_Un8o "></iframe></div></p>
 
 <ol>
 <li>Ставьте лайк</li>
@@ -498,7 +498,7 @@ startActivity(intent);
 
 <p><strong>Видео</strong></p>
 
-<p>{% youtube 63T-8YRlFmE %}</p>
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/63T-8YRlFmE "></iframe></div></p>
 
 <p>Надеюсь статья была для вас полезной. Если да нажимайте рассказать друзьям :)</p>
 ]]></content>
