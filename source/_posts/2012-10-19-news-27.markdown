@@ -1,0 +1,903 @@
+---
+author: andrew
+comments: true
+date: 2012-10-19 19:06:51+00:00
+layout: post
+slug: '%d0%b4%d0%b0%d0%b9%d0%b4%d0%b6%d0%b5%d1%81%d1%82-%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d0%b5%d1%81%d0%bd%d1%8b%d1%85-%d0%bd%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b5%d0%b9-%d0%b8-%d0%bc%d0%b0%d1%82%d0%b5%d1%80'
+title: Дайджест интересных новостей и материалов из мира IT за последнюю неделю №27
+  (13 — 19 октября 2012)
+wordpress_id: 824
+categories:
+- Новости сайта
+- Памятка разработчику
+- Программы для android
+---
+
+Из последних новостей
+
+
+
+
+
+Предлагаем вашему вниманию очередную подборку с ссылками на новости, интересные материалы и полезные ресурсы.  
+![](http://habrastorage.org/storage2/c71/e2a/256/c71e2a2564068940c470cc5397ef9c49.png)  
+
+
+
+<!-- more -->
+
+
+### Горячая семерка
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![](http://habrastorage.org/storage2/b7a/e2c/aa8/b7ae2caa8cf07084bbf46d89a8fbe15d.png)
+
+
+
+
+
+
+
+### Прошедшие и будущие мероприятия октября
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+18 октября в Киеве [стартовала международная конференция IDCEE](http://habrahabr.ru/post/155337/), а сегодня [были названы победители конкурса стартапов](http://ain.ua/2012/10/19/98741). Недавно прошла Fronteers 2012 — лучшая конференция по клиентской разработке, с отчетом можно ознакомиться [здесь](http://tohtml.it/post/33822898596/fronteers2012). Также, на прошлой неделе проходила YAC, с которой уже стали доступны [видео докладов](http://events.yandex.ru/events/yac/2012/talks/#frontend). Кроме этого, намечается парочка интересных мероприятий: [Apple «покажет что-то» 23-го октября](http://www.overclockers.ru/hardnews/50140/Priglasheniya_na_meropriyatie_Apple_namechennoe_na_23_oktyabrya_uzhe_razoslany.html), а в конце месяца [Google скорее всего покажет новую версию Android](http://www.youhtc.ru/2012/10/novaya-versiya-android-v-konce-oktyabrya/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![](http://habrastorage.org/storage2/247/739/e1b/247739e1b416af62303f69a48a14a456.png)
+
+
+
+
+
+
+
+### Bootstrap
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Проект Bootstrap продолжает оставаться в тренде среди веб-разработчиков. Отличную подборку всякого полезного для него можно найти в [этой статье](http://habrahabr.ru/post/154687/). Кроме этого, желающие могут ознакомиться с туториалом по созданию [адаптивной темы для WordPress с помощью Bootstrap](http://blog.teamtreehouse.com/responsive-wordpress-bootstrap-theme-tutorial)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![](http://habrastorage.org/storage2/262/844/666/26284466663a6ef243e812b97e20fd6c.png)
+
+
+
+
+
+
+
+### Internet Explorer 10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Интересная статья, [где подробно можно прочесть о том, чего стоит ожидать от нового IE10](http://www.mobilexweb.com/blog/windows-8-surface-ie10-html5). А [здесь](http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/) можно ознакомиться с нюансами работы Responsive Design в Snap Mode. Плюс, ожидаем [предварительную верси. IE10 для Windows 7 к середине ноября](http://viennaos.net/articles/3252-predvaritelnaya-versiya-interner-explorer-10-poyavitsya-v-seredine-noyabrya.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![](http://habrastorage.org/storage2/084/60e/6e4/08460e6e482449212a697b8062ac9df8.png)
+
+
+
+
+
+
+
+### Расширяем CSS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Препроцессоры становятся все популярней. [Эта статья покажет](http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/), на сколько гибкими могут стать таблицы стилей с использованием OOCSS + Sass. [Здесь можно посмотреть, как с помощью несложного SCSS-миксина грузить изображения для ретина-дисплеев](http://37signals.com/svn/posts/3271-easy-retina-ready-images-using-scss). Те, кто хорошо воспринимает на слух англоязычную информацию, могут открыть для себя [SassCast](http://sasscast.tumblr.com/) — подкаст на тему Sass. Ну, и напоследок загляните в[sassmeister](http://sassmeister.com/) — песочницу для работы с Sass/SCSS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![](http://habrastorage.org/storage2/1b4/866/b43/1b4866b439d67c0d8575aebf831026db.png)
+
+
+
+
+
+
+
+### [Учебник jQuery для начинающих](http://habrahabr.ru/post/155107/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Многие, кто начинал учить jQuery по русскоязычным ресурсам, не могли обойти стороной [сайт](http://anton.shevchuk.name/) Антона Шевчука, а некоторые даже начинали изучение со статей на этом сайте. Антон решился и [собрал все свои статьи из серии «jQuery для начинающих»](http://habrahabr.ru/post/155107/) в одном учебнике, который и представил на суд общественности.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![](http://habrastorage.org/storage2/f6f/062/60d/f6f06260dd80d8d31e7c4e107b461a43.png)
+
+
+
+
+
+
+
+### Surface на подходе
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[Microsoft раскрыла цены на Surface RT](http://habrahabr.ru/post/155001/) в [официальном магазине](http://surface.microsoftstore.com/store/msstore/Content/pbpage.Surface), по итогам чего [младшая модель Surface была распродана за сутки](http://itc.ua/news/microsoft-rasprodala-po-predvaritelnyim-zakazam-vse-planshetyi-surface-rt-tsenoy-499/). Тем временем Microsoft запускает на ТВ [новую рекламу Microsoft Surface](http://wpos.com.ua/microsoft-zapuskaet-na-tv-novuyu-reklamu-microsoft-surface.html) и[первый рекламный ролик Windows 8](http://www.3dnews.ru/software-news/636608/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![](http://habrastorage.org/storage2/d6f/a12/f9c/d6fa12f9c1b7ef2e341b0771182a3a23.png)
+
+
+
+
+
+
+
+### [Google StreetView приглашает побродить в одном из их датацентров](http://gagadget.com/other/2012-10-18-google_streetview_priglashaet_pobrodit_v_odnom_iz_ikh_datatsentrov)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+В Google решили показать один из своих датацентров, находящийся в городе Ленуар. Теперь многие смогут убедиться, что креативные идеи в оформлении помещений айтишного гиганта используются не только в рабочих офисах и комнатах отдыха, но и в теж же датацентрах  
+  
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/ba6/1d0/aa9/ba61d0aa90be53f9f7f44faeabb67e78.gif) Разработка
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Видео докладов c последнего YAC](http://events.yandex.ru/events/yac/2012/talks/#frontend)
+
+
+
+  * [Подборка полезного для любителей Twitter Bootstrap](http://habrahabr.ru/post/154687/)
+
+
+
+  * [Новая статья от Chris Coyier на smashingmagazine:](http://coding.smashingmagazine.com/2012/10/15/css-qa-4/) SVG Fallback, Vertical Rhythm, CSS Project Structure ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Нативная клиентская валидация для веб форм средствами браузеров](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/). Хорошо расписаны основные проблемы, возникающие при использовании html5 в формах для валидации ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Эффект разворачивания бумажной открытки](http://tympanus.net/Development/PFold/index3.html) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [LearnStreet — новый проект для интерактивного изучения JavaScript, Python, Ruby (в стиле CodeAcademy и khanacademy)](http://www.learnstreet.com/lessons/languages/javascript) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Создание параллакс-эффекта на примере простого урока](http://net.tutsplus.com/tutorials/html-css-techniques/simple-parallax-scrolling-technique/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Как создать адаптивную тему для WordPress с помощью Bootstrap](http://blog.teamtreehouse.com/responsive-wordpress-bootstrap-theme-tutorial) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Как сделать Lazy-Loading для изображений на сайте](http://speckyboy.com/2012/10/18/how-to-create-lazy-loading-images-for-your-website/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Использование мета тега viewport в неадаптивных шаблонах (перевод)](http://ruseller.com/lessons.php?rub=2&id=1560)
+
+
+
+  * [Строим радиальный градиент средствами HTML5](http://www.script-tutorials.com/html5-radial-gradient/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [HTML5 media and data URIs](http://www.iandevlin.com/blog/2012/09/html5/html5-media-and-data-uri) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [fbootstrapp](http://ckrack.github.com/fbootstrapp/) — фреймворк на основе bootstrap для создания iframe-приложений под фейсбук ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Подготовка к верстке адаптивных сайтов](http://davidwalsh.name/responsive-css) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Как переделать jQuery accordion на такой же, но на CSS3](http://www.script-tutorials.com/turn-jquery-accordion-into-css3-accordion/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Sciter — встраиваемый HTML/CSS/scripting engine](http://habrahabr.ru/post/154697/)
+
+
+
+  * [Готовим Sublime Text 2 для front-end](http://habrahabr.ru/post/154667/)
+
+
+
+  * [SassCast](http://sasscast.tumblr.com/post/33342368483/in-this-episode-of-sasscast-we-sat-down-with-the) — подкаст, где ведущие разговаривают о Sass с Крисом Койером ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/37d/ecd/fa7/37decdfa7563eab84a2a41fbf4690320.gif) CSS
+
+
+
+
+
+
+
+
+
+
+
+
+  * [box-shadow vs. drop-shadow filter: полное сравнение](http://demosthenes.info/blog/598/boxshadow-property-vs-dropshadow-filter-a-complete-comparison) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Кнопки в Metro-стиле стиле Microsoft Windows 8 на CSS3](http://ace-subido.github.com/css3-microsoft-metro-buttons/index.html) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Ryan Seddon (css ninja) делится секретами работы с checkbox-ами](http://thecssninja.com/talks/ridiculous_checkboxes/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [OOCSS + Sass = The best way to CSS](http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Нестандартный подход к media queries](http://www.the-haystack.com/2012/10/17/nesting-media-queries/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Flexbox – быстрый путь к раскладочному блаженству?](http://css-live.ru/articles/flexbox-bystryj-put-k-raskladochnomu-blazhenstvu.html)
+
+
+
+  * [Загружаем изображения для ретина-дисплеев с помощью SCSS](http://37signals.com/svn/posts/3271-easy-retina-ready-images-using-scss) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Короткое видео на тему «Multiple Background Images with CSS»](http://blog.teamtreehouse.com/quick-tip-multiple-background-images-with-css) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Вращающееся меню на CSS](http://ruseller.com/lessons.php?rub=2&id=1563)
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/d72/076/bca/d72076bca6f7545c0633a6c4419d317c.gif) JavaScripts
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Pikaday](http://dbushell.com/2012/10/09/pikaday-javascript-datepicker/) — компонент для выбора даты ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [kwicks](http://devsmash.com/projects/kwicks) — симпатичный аккордеон ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [полезный апгрейд для табов на jQuery ui](http://jsfiddle.net/jasonday/fdhaS/embedded/result/)
+
+
+
+  * [Учебник jQuery для начинающих](http://habrahabr.ru/post/155107/)
+
+
+
+  * [Загрузчик модулей RequireJS](http://stepansuvorov.com/blog/2012/10/%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B5%D0%B9-requirejs/)
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/7bc/3d0/d88/7bc3d0d883a49a00265feb7836c802aa.gif) Браузеры
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Предварительная версия IE10 для Windows 7 появится в середине ноября](http://viennaos.net/articles/3252-predvaritelnaya-versiya-interner-explorer-10-poyavitsya-v-seredine-noyabrya.html)
+
+
+
+  * [Подробно о том, чего ожидать от нового IE10](http://www.mobilexweb.com/blog/windows-8-surface-ie10-html5), а также о том, [как в нем работает Responsive Design](http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Internet Explorer для Xbox](http://habrahabr.ru/post/155073/)
+
+
+
+  * [Проект Mozilla начал тестирование каталога приложений Firefox Marketplace для платформы Android](http://www.opennet.ru/opennews/art.shtml?num=35126)
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/63c/872/b21/63c872b219c18a3947a9d98a6bb6a345.gif) Новости
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Касперский работает над собственной ОС](http://eugene.kaspersky.ru/2012/10/16/secure-os-for-industrial-control-system-scada/)
+
+
+
+  * [Apple приглашает на мероприятие, намеченное на 23 октября](http://www.overclockers.ru/hardnews/50140/Priglasheniya_na_meropriyatie_Apple_namechennoe_na_23_oktyabrya_uzhe_razoslany.html)
+
+
+
+  * [IDCEE 2012 — день первый](http://habrahabr.ru/post/155337/)
+
+
+
+  * [Названы победители конкурса стартапов на IDCEE-2012](http://ain.ua/2012/10/19/98741)
+
+
+
+  * [В персональной поисковой выдаче Google появятся личные документы пользователя](http://habrahabr.ru/post/154949/)
+
+
+
+  * [Google анонсировала новый Chromebook с чипом ARM по цене $249](http://itc.ua/news/google-anonsirovala-novyiy-chromebook-s-chipom-arm-po-tsene-249/)
+
+
+
+  * [YouTube отказался от подсчета кликов для рейтинга популярности](http://habrahabr.ru/post/154671/)
+
+
+
+  * [Google StreetView приглашает побродить в одном из их датацентров](http://gagadget.com/other/2012-10-18-google_streetview_priglashaet_pobrodit_v_odnom_iz_ikh_datatsentrov)
+
+
+
+  * [Квартальный доход Microsoft достиг $16 млрд](http://itc.ua/news/kvartalnyiy-dohod-microsoft-dostig-16-mlrd/)
+
+
+
+  * [Только ASUS и сама Microsoft осуществят 25 октября запуск планшетов Windows RT](http://www.3dnews.ru/news/636653/)
+
+
+
+  * [Microsoft сообщила стоимость Surface RT на официальном сайте: от $500](http://habrahabr.ru/post/155001/), по итогам чего [младшая модель Surface была распродана за сутки](http://itc.ua/news/microsoft-rasprodala-po-predvaritelnyim-zakazam-vse-planshetyi-surface-rt-tsenoy-499/)
+
+
+
+  * [Число одновременных пользователей Skype недавно превысило 45 млн](http://www.towave.ru/news/kolichestvo-polzovatelei-skype-prevysilo-45-mln-issledovanie.html)
+
+
+
+  * [Проект Mozilla выпустил язык программирования Rust 0.4](http://www.opennet.ru/opennews/art.shtml?num=35097)
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/eb8/00e/9ef/eb800e9ef3b0e10e217087ef742628a3.gif) Сервисы
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Cacoo — сервис для создания диаграмм, вайрфреймов и т.д.](https://cacoo.com/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [webink fontdropper — сервис-букмарклет, позволяющий применить к тексту любого сайту любой шрифт из целого набор библиотеки компании webink](http://www.webink.com/fontdropper) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Japonizer — генератор настраиваемых фоновых текстур в традиционном японском стиле](http://wanokoto.net/japonizes) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [sassmeister — песочница для работы с Sass](http://sassmeister.com/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Сервис от Lea Verou для настройки контраста по стандартам WCAG 2.0](http://leaverou.github.com/contrast-ratio/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/eb8/00e/9ef/eb800e9ef3b0e10e217087ef742628a3.gif) Demo
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Atari перевели некоторые игры на HTML5](http://www.atari.com/arcade) и [как это происходило](http://youtu.be/J6QXRFuUSZs)
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/be5/3e4/256/be53e4256e771ad12bc412af8b30f91e.gif) Сайты с интересным дизайном и функциональностью
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Бодрый сайт-портфолио с простыми но эффектными анимационными переходами](http://www.worstprod.com/)
+
+
+
+  * [exitzeroproject.org](http://www.exitzeroproject.org/) — современный сайт с нестандартной навигацией
+
+
+
+  * [занимательный с любой точки зрения сайт](http://www.moma.org/interactives/exhibitions/2012/centuryofthechild/)
+
+
+
+  * [woodwork.nl](http://woodwork.nl/) — сайт, где навигация выполнена в стиле sliding doors
+
+
+
+  * [http://kikk.be/2012](http://kikk.be/2012/home.htm?lng=en/) — сайт для вестивая KIKK с симпатичным дизайном и интересной функциональностью
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/be5/3e4/256/be53e4256e771ad12bc412af8b30f91e.gif) Дизайн
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Evolution of Apple Ads 1975-2002](http://www.retronaut.co/2011/10/evolution-of-apple-ads-1975-2002/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Скрытый смысл в действительно хороших логотипах](http://www.webdesignerdepot.com/2012/10/the-hidden-meaning-behind-really-good-logos/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Mobile Design Details: Pull to Refresh](http://www.lukew.com/ff/entry.asp?1643) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Retro Style in Web Design](http://www.splashnology.com/article/retro-style-in-web-design/6771/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Десять трюков для успешного создания меню в сайтах с адаптивным (responsive) дизайном](http://blog.usabilla.com/10-tips-how-to-handle-responsive-navigation-menus-successfully/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Очень наглядный урок о создании бесшовной текстуры в фотошопе](http://www.proworks.com/blog/2012/10/18/how-to-create-a-seamless-pattern-in-photoshop/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Создание в фотошопе 3D текста с креативным эффектом](http://www.webdesignfact.com/2012/10/photoshop-tutorial-3d-text-effects.html) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Создание разбалансированности: использование асимметрии в веб-дизайне](http://tympanus.net/codrops/2012/10/18/creating-off-center-balance-using-asymmetry-in-web-design/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Новые техники кадрирования в фотошопе последней версии «Crop Until You Drop»](http://psd.tutsplus.com/tutorials/tools-tips/crop-until-you-drop/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Тест на знание Photoshop CS6](http://psd.tutsplus.com/articles/quizzes/test-your-photoshop-cs6-knowledge-4/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Техники UI при создании успешных цифровых продуктов](http://dzineblog.com/2012/10/user-interface-techniques-for-creating-successful-digital-products.html) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/be5/3e4/256/be53e4256e771ad12bc412af8b30f91e.gif) Подборка бесплатных дизайнерских печенек
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Пять десятков шрифтов: от Sacred Place и до Kenyan Coffee](http://www.antsmagazine.com/fonts/50-fresh-free-fonts-for-download/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Три с половиной десятка декоративных шрифтов: от Astonished в стиле гранж и до рукописного BudHand](http://www.1stwebdesigner.com/freebies/35-cool-free-fonts/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Пакет из одиннадцати хэллоуниских шрифтов](http://www.pvmgarage.com/2012/10/11-free-creepy-halloween-fonts/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Необычный декоративный шрифт без засечек Slinkster, в котором буквы создаются окружностями задающими форму](http://www.myfonts.com/fonts/will-ryan/slinkster/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Исходники в PSD-формате различных вертикальных меню](http://designerves.com/article/free-vertical-menu-psd-files/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [PSD с UI для веб-дизайна в золотых цветах с темным фоном](http://www.pixel-fabric.com/dark-gold-ui-kit-4) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Набор различных переключателей в PSD](http://www.graphicsfuel.com/2012/10/toggle-switches-ui-elements-psd/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [За подписку предлагается пакет с iPhone UI темой для быстрого создания приложений](http://medialoot.com/item/free-iphone-app-template-appview/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Хорошо структурированная 55Мб PSD-шка «iOS 6 iTunes & App Store GUI»](http://playground.christophebeghin.fr/ios6/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Пакеты с Photoshop Actions для создания винтажных фото-эффектов](http://www.1stwebdesigner.com/freebies/40-free-photoshop-actions-vintage-effect/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+
+
+
+
+
+
+
+### ![](http://habrastorage.org/storage2/cc0/d6f/fe8/cc0d6ffe8d4e924a9bf96ab304d98fa0.gif) Занимательное
+
+
+
+
+
+
+
+
+
+
+
+
+  * [Впечатляющая инфографика: Свежий взгляд на HTML5](http://www.script-tutorials.com/infographic-a-fresh-look-at-html5/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Несколько интересных особенностей Windows 8](http://habrahabr.ru/post/155379/)
+
+
+
+  * [Fronteers 2012 — лучшая конференция по клиентской разработке, часть 1](http://tohtml.it/post/33822898596/fronteers2012)
+
+
+
+  * [diy.org — образовательный портал для детей и не только, которые хотят что либо сделать](https://diy.org/) ![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Подборка сервисов для расширения возможностей вашего Dropbox](http://habrahabr.ru/post/154993/)
+
+
+
+  * [10 наиболее активных стран в Facebook](http://ain.ua/2012/10/16/98309)
+
+
+
+  * [Акустический штрих-код прост и универсален](http://www.3dnews.ru/news/636640/)
+
+
+
+  * [Три рекламных ролика ASUS PadFone 2](http://www.3dnews.ru/news/636704/)
+
+
+
+  * [Уличная реклама Microsoft Surface появилась и во Франции — намёк на запуск в Европе](http://www.3dnews.ru/news/636600/)
+
+
+
+  * [Internet Explorer 9 Commercial (Google Chrome Version) ](http://www.youtube.com/watch?v=J-HieaOI00s&feature=player_embedded)![](http://habrastorage.org/storage2/7c9/add/77b/7c9add77b3d706b394bcc16238e762f1.gif)
+
+
+
+  * [Видео дня: первая телевизионная реклама Microsoft Surface](http://wpos.com.ua/microsoft-zapuskaet-na-tv-novuyu-reklamu-microsoft-surface.html) и [первый рекламный ролик Windows 8](http://www.3dnews.ru/software-news/636608/)
+
+
+
+
+
+
+  
+  
+[Ссылка](http://habrahabr.ru/company/zfort/blog/154633/) на дайджест за прошлую неделю.  
+Материал подготовили [dersmoll](http://habrahabr.ru/users/dersmoll/) и [alekskorovin](http://habrahabr.ru/users/alekskorovin/)
+
+
+
+
+
+Статья из сайта [habrahabr.ru](http://habrahabr.ru/company/zfort/blog/155431/)
+
+
+
+
+
+От себя хочу выразить благодарность за такой труд.

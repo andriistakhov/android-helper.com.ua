@@ -1,0 +1,89 @@
+---
+author: andrew
+comments: true
+date: 2013-04-02 23:13:42+00:00
+layout: post
+slug: selector
+title: Selector - изменение стандартных элементов
+wordpress_id: 1351
+categories:
+- Android для начинающих
+- Android для профессионалов
+- Программирование
+---
+
+Всем привет.
+
+
+
+
+
+Сегодня один из моих читателей попросил написать статью как можно изменять цвет елементам.
+
+
+
+
+
+В своем примере я покажу, как можно менять цвет выбранной кнопки.
+
+
+
+
+ <!-- more -->
+
+
+
+
+А теперь части кода:
+
+
+
+
+
+**colors.xml**
+
+
+
+
+
+	<color name="widget_button_pressed">#FFFF00</color>
+
+	<color name="widget_button">#00000000</color>
+
+	<color name="widget_background">#FF000000</color>
+
+
+
+	<?xml version="1.0" encoding="utf-8"?>
+
+	<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+		<item android:drawable="@color/widget_button_pressed" android:state_pressed="true"/>
+
+		<item android:drawable="@color/widget_button_pressed" android:state_selected="true"/>
+
+		<item android:drawable="@color/widget_button_pressed" android:state_focused="true"/>
+
+		<item android:drawable="@color/widget_button"/>
+
+	</selector>
+
+
+
+	<Button
+
+		android:layout_width="wrap_content"
+
+		android:layout_height="wrap_content"
+
+		android:background="@drawable/button_selector"
+
+		android:text="@string/hello_world" />
+
+
+
+
+
+Полный проект вы можете скачать на нашей [странице с кодами](http://android-helper.com.ua/codes/).

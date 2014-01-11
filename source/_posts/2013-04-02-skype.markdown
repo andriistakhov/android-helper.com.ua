@@ -1,0 +1,38 @@
+---
+author: andrew
+comments: true
+date: 2013-04-02 13:11:41+00:00
+layout: post
+slug: '%d0%bf%d1%80%d0%b8%d0%bb%d0%be%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5-skype-%d0%be%d0%b1%d0%bd%d0%be%d0%b2%d0%b8%d0%bb%d0%be%d1%81%d1%8c-%d0%bf%d0%be%d0%b4%d0%b4%d0%b5%d1%80%d0%b6%d0%ba%d0%b0-%d0%bf%d0%be'
+title: 'Приложение Skype обновилось: поддержка портретной ориентации и нескольких
+  новых языков'
+wordpress_id: 1348
+categories:
+- Программы для android
+---
+
+
+
+
+
+![Приложение Skype обновилось: поддержка портретной ориентации и нескольких новых языков](http://android.com.ua/images/News/skype-tablets-updated.jpg)
+
+
+
+
+
+Android клиент популярной программы для видеосвязи Skype обновился. В новой версии разработчики добавили поддержку портретной ориентации для планшетов а также добавили португальский и норвежский языки. Загрузить Skype можно бесплатно с магазина [Google Play](https://play.google.com/store/apps/details?id=com.skype.raider).
+
+
+
+
+
+![](http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=https://play.google.com/store/apps/details?id=com.skype.raider)
+
+
+
+
+
+
+
+

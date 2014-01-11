@@ -1,0 +1,43 @@
+---
+author: andrew
+comments: true
+date: 2013-04-04 03:51:09+00:00
+layout: post
+slug: '%d0%b1%d0%b5%d0%bd%d1%87%d0%bc%d0%b0%d1%80%d0%ba-3d-mark-%d1%82%d0%b5%d0%bf%d0%b5%d1%80%d1%8c-%d0%b8-%d0%bd%d0%b0-android'
+title: Бенчмарк 3D Mark теперь и на Android
+wordpress_id: 1357
+categories:
+- Программы для android
+---
+
+
+
+
+
+![](http://android.com.ua/images/News/3dmark_banner-630x307.jpg)
+
+
+
+
+
+Разработчики популярного бенчмарка 3D Mark выпустили мобильную версию теста для операционной системы Android. Сейчас приложение уже поддерживает свыше тысячи различных устройств и в будущем их количество будет только расти. Сам тест включает проверку процессора и графического ядра посредством OpenGL ES 2.0.
+
+
+
+
+
+
+
+
+
+![](http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=https://play.google.com/store/apps/details?id=com.futuremark.dmandroid.application)
+
+
+
+
+
+
+
+
+  
+![](http://android.com.ua/templates/Androidnew/images/rtd.gif)

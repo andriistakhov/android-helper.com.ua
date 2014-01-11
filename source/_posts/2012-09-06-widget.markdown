@@ -1,0 +1,359 @@
+---
+author: andrew
+comments: true
+date: 2012-09-06 11:47:31+00:00
+layout: post
+slug: widget
+title: Создание Google Android виджетов
+wordpress_id: 574
+categories:
+- Android для начинающих
+- Android для профессионалов
+- Программирование
+---
+
+Продолжим описание android программирования.
+
+
+
+
+
+Все вы наверное видели красивые widget у себя на рабочем столе телефона.
+
+
+
+
+
+Вы угадали, сегодня речь пойдет именно о них.
+
+
+
+
+
+Ну что поехали.
+
+
+ <!-- more -->
+
+
+Оригинал статьи [тут](http://www.mobilab.ru/articles/109/).
+
+
+
+
+
+С начала этого года (прим. автора с 2007 года) команда разработчиков **Android** упорно работала над созданием нового релиза, который получил название**Android 1.5**. В его состав входит **AppWidget framework**, предназначенный для создания виджетов, которые пользователь может размещать на своем домашнем экране. Виджеты могут импортировать и отображать в удобной для пользователя форме информацию из Ваших Android приложений. Например, можно создать виджет, который будет отображать список невыполненных дел или давать информацию об играющей в фоновом режиме музыке.
+
+
+
+
+
+![](http://android-helper.com.ua/images/uploads/2012/09/Awidget.png)
+
+
+
+
+
+Когда пользователь перетаскивает виждет на домашний экран, он фактически резервирует место, на котором будет отображаться контент из Вашего приложения. Кроме того, пользователь может взаимодействовать с Вашим приложением через виджет, например, приостанавливать проигрывание музыки. Если у Вас есть сервис, работающий в фоновом режиме, Вы можете обновлять виджет по собственному графику, или использовать стандартный механизм из **AppWidget framework**.
+
+
+
+
+
+Виджет представляет собой BroadcastReceiver скрещенный с XML описанием параметров виждета. **AppWidget framework**связывается с Вашим виджетом через радиовещание, когда требуется обновление. Обновления строятся и посылаются с помощью RemoteViews, включающий контент, для отображения на домашней странице.
+
+
+
+
+
+Вы без особого труда можете создать виджет для своего приложения. Давайте создадим виджет для Android приложения "Слово дня" ([исходники](http://code.google.com/p/wiktionary-android/source/browse/#svn/trunk/SimpleWiktionary)). Я не буду рассматривать здесь это приложение, а сосредоточусь на самом виджете.
+
+
+
+
+
+Прежде всего нужно создать XML описание виджета, указав там область домашнего экрана, которую Вы хотели бы зарезервировать для своего виджета, начальный слой для отображения, а также частоту обновления информации. Домашний экран **Android** разбит на ячейки, так что указанные вами размеры округляются до размеров ячеек. Это может сбить с толку. Возможно вам поможет вот эта формула
+
+
+
+
+
+Минимальный размер в dip=(Число ячеек * 74dip)-2dip
+
+
+
+
+
+В нашем примере мы хотим создать виджет, который будет занимать 2 ячейки в ширину и 1 в высоту. Это значит, что минимальный размер должен составлять 146dip x 72dip. Мы хотим, чтобы информация обновлялась раз в день, то есть через каждые 86,400,000 миллисекунд. XML metadata имеет вид:
+
+
+
+
+
+
+	<appwidget-provider
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:minWidth="146dip"
+
+    android:minHeight="72dip"
+
+    android:initialLayout="@layout/widget_message"
+
+    android:updatePeriodMillis="86400000"
+
+    />
+
+
+
+
+Теперь давайте сопоставим эти XML данные и BroadcastReceiver в AndroidManifest:
+
+
+
+
+	<!-- Broadcast Receiver that will process AppWidget updates -->
+
+	<receiver android:name=".WordWidget" android:label="@string/widget_name">
+
+    <intent-filter>
+
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+
+    </intent-filter>
+
+    <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_word" />
+
+	</receiver>
+
+
+
+	<!-- Service to perform web API queries -->
+
+	<service android:name=".WordWidget$UpdateService" />
+
+
+
+
+
+
+
+Давайте напишем код для BroadcastReceiver, который будет управлять **AppWidget** запросами. Чтобы помочь виджету управлять различными радиовещательными событиями, разработчики написали класс **AppWidgetProvider**. Важно отметить, что мы запустим фоновый сервис, чтобы выполнять обновления. Это связано с тем, что BroadcastReceivers - потомок Application Not Responding (ANR) таймера, который может предложить пользователю закрыть приложение, если запрос выполняется слишком долго. Выполнение веб запроса может занимать несколько секунд, поэтому мы используем именно сервисы, чтобы избежать ANR таймаутов.
+
+
+
+	/**
+
+	 * Определяем простой виджет, который отображает слово дня. Для обновлений
+
+	 * мы порождаем фоновой сервис {@link Service} для выполнения API запросов.
+
+	 */
+
+	public class WordWidget extends AppWidgetProvider {
+
+    @Override
+
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager,
+
+        int[] appWidgetIds) {
+
+        // Чтобы предотвратить любые ANR таймацты, мы выполняем обновление в сервисе.
+
+        context.startService(new Intent(context, UpdateService.class));
+
+    }
+
+ 
+
+    public static class UpdateService extends Service {
+
+        @Override
+
+        public void onStart(Intent intent, int startId) {
+
+            // Выполняем сегодняшнее обновление виджета.
+
+            RemoteViews updateViews = buildUpdate(this);
+
+ 
+
+            // Помещаем обновление этого выджета на домашний экран
+
+            ComponentName thisWidget = new ComponentName(this, WordWidget.class);
+
+            AppWidgetManager manager = AppWidgetManager.getInstance(this);
+
+            manager.updateAppWidget(thisWidget, updateViews);
+
+        }
+
+ 
+
+        /**
+
+                     * Строим обновление виджета, чтобы показать текущее слово.
+
+                     * Заблокируем пока не получим online ответ.
+
+         */
+
+        public RemoteViews buildUpdate(Context context) {
+
+            // Берем название месяца из ресурсов
+
+            Resources res = context.getResources();
+
+            String[] monthNames = res.getStringArray(R.array.month_names);
+
+ 
+
+            // ищем текущий месяц и день
+
+            Time today = new Time();
+
+            today.setToNow();
+
+ 
+
+            // Заголовок страницы в вмде "Wiktionary:Word of the day/March 21"
+
+            String pageName = res.getString(R.string.template_wotd_title,
+
+                monthNames[today.month], today.monthDay);
+
+            RemoteViews updateViews = null;
+
+            String pageContent = "";
+
+ 
+
+            try {
+
+                // Пытаемся послать запрос Wiktionary API для получения слова дня
+
+                SimpleWikiHelper.prepareUserAgent(context);
+
+                pageContent = SimpleWikiHelper.getPageContent(pageName, false);
+
+            } catch (ApiException e) {
+
+                Log.e("WordWidget", "Couldn't contact API", e);
+
+            } catch (ParseException e) {
+
+                Log.e("WordWidget", "Couldn't parse API response", e);
+
+            }
+
+ 
+
+            // Используем регулярное выражение для парсинга слов и их описания
+
+            Pattern pattern = Pattern.compile(SimpleWikiHelper.WORD_OF_DAY_REGEX);
+
+            Matcher matcher = pattern.matcher(pageContent);
+
+            if (matcher.find()) {
+
+                // Выполняем обновление контента виджета
+
+                updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_word);
+
+ 
+
+                String wordTitle = matcher.group(1);
+
+                updateViews.setTextViewText(R.id.word_title, wordTitle);
+
+                updateViews.setTextViewText(R.id.word_type, matcher.group(2));
+
+                updateViews.setTextViewText(R.id.definition, matcher.group(3).trim());
+
+ 
+
+                // Когда пользователь кликает на виджет, запускается страница Wiktionary.
+
+                String definePage = res.getString(R.string.template_define_url,
+
+                        Uri.encode(wordTitle));
+
+                Intent defineIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(definePage));
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(context,
+
+                        0 /* no requestCode */, defineIntent, 0 /* no flags */);
+
+                updateViews.setOnClickPendingIntent(R.id.widget, pendingIntent);
+
+ 
+
+            } else {
+
+                // Слово дня не найдено, показываем ошибку
+
+                updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_message);
+
+                CharSequence errorMessage = context.getText(R.string.widget_error);
+
+                updateViews.setTextViewText(R.id.message, errorMessage);
+
+            }
+
+            return updateViews;
+
+        }
+
+ 
+
+        @Override
+
+        public IBinder onBind(Intent intent) {
+
+            // Мы не хотим привязываться к этому сервису
+
+            return null;
+
+        }
+
+    }
+
+	}
+
+ 
+
+
+Все. Мы написали виджет для приложения Wiktionary "Слово дня". Когда требуется обновление, мы с помощью online API получаем новые данные. **AppWidget framework** автоматически запрашивает у нас обновления, например в момент добавления виджета на экран или согласно своему расписанию - раз в день.
+
+
+
+
+
+Вообще виджеты стоит создавать для отображения не очень часто обновляемых данных (не чаще чем раз в час). Старайтесь обновлять информацию как можно реже и предусмотрите возможность ручного обновления.
+
+
+
+
+
+Созданные таким образом виджеты можно размещать на любом домашнем экране, поддерживающим **AppWidget framework**.
+
+
+
+
+
+Спасибо вам, за то что вы с нами.
+
+
+
+
+
+Ожидаем ваших комментариев.
+
+
+
+
+
+
+
+Коды вы можете скачать [тут](http://android-helper.com.ua/forms)

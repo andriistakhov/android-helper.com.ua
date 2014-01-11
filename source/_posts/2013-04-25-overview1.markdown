@@ -1,0 +1,133 @@
+---
+author: andrew
+comments: true
+date: 2013-04-25 08:07:31+00:00
+layout: post
+slug: overview1
+title: Обзор программ
+wordpress_id: 1422
+categories:
+- Программы для android
+---
+
+### Цель
+
+
+
+
+
+Найти качественные программы для вашего бизнеса и вообще для работы.
+
+
+<!-- more -->
+
+
+### Ресурсы
+
+
+
+
+
+[Видео-интервью](http://nrsecrets.ru/hodchenkov-2/) Артема Мельника и Евгения Ходченкова. Рекомендую к просмотру, тем кто хочет изменить свою жизнь.
+
+
+
+
+
+### Видео обзор
+
+
+
+{% youtube FMOwtZT8k6c %}
+
+
+
+
+
+### Установить программы
+
+
+
+
+
+
+
+
+  1. [Family Mobile](https://play.google.com/store/apps/details?id=com.familymobile)
+
+
+
+  2. [Mindjet Maps for Android](https://play.google.com/store/apps/details?id=net.thinkingspace)
+
+
+
+  3. [Any.DO To Do List | Task List](https://play.google.com/store/apps/details?id=com.anydo)
+
+
+
+  4. [Evernote](https://play.google.com/store/apps/details?id=com.evernote)
+
+
+
+  5. [Dropbox](https://play.google.com/store/apps/details?id=com.dropbox.android)
+
+
+
+  6. [Английский с Лео](https://play.google.com/store/apps/details?id=com.lingualeo.android)
+
+
+
+  7. [Скорочтение](https://play.google.com/store/apps/details?id=com.heku.readingtrainer)
+
+
+
+  8. [uPackingList](https://play.google.com/store/apps/details?id=com.nixsolutions.upack)
+
+
+
+  9. [Skyscanner - All Flights!](https://play.google.com/store/apps/details?id=net.skyscanner.android.main)
+
+
+
+  10. [Passbook for Android](https://play.google.com/store/apps/details?id=org.ligi.ticketviewer)
+
+
+
+  11. [RoboForm](https://play.google.com/store/apps/details?id=com.siber.roboform)
+
+
+
+  12. [TED](https://play.google.com/store/apps/details?id=com.ted.android)
+
+
+
+  13. [Aston Forex Mobile Trader](https://play.google.com/store/apps/details?id=com.astonforex.mobile)
+
+
+
+  14. [Bump](https://play.google.com/store/apps/details?id=com.bumptech.bumpga)
+
+
+
+
+
+
+### Заключенние
+
+
+
+
+
+Надеюсь вам понравился обзор. Жду от вас предложений по интересующим вас программам.
+
+
+
+
+
+### Благодарность
+
+
+
+
+
+Тем кто хочет, что бы такой информации было больше, нажмите на все социальные кнопки. И пусть все ваши друзья узнают об этом обзоре.

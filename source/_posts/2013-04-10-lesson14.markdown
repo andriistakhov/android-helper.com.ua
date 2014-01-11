@@ -1,0 +1,36 @@
+---
+author: andrew
+comments: true
+date: 2013-04-10 12:40:30+00:00
+layout: post
+slug: lesson14
+title: Урок 14 - Добавление звука на Splashscreen
+wordpress_id: 1406
+categories:
+- Android для начинающих
+- Программирование
+---
+
+Добрый день.
+
+
+
+
+
+14 выпуск передачи — Программирование под андроид.
+
+
+
+
+
+Сегодня в уроке : Добавление звука на Splashscreen 
+
+
+<!-- more -->
+
+
+Смотрим, учимся, рассказываем друзьям.
+
+{% youtube mOs_M8_Tyks %}
+
+

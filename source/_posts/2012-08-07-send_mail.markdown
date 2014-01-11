@@ -1,0 +1,56 @@
+---
+author: andrew
+comments: true
+date: 2012-08-07 08:22:43+00:00
+layout: post
+slug: send_mail
+title: Отправка почты вашим приложением.
+wordpress_id: 413
+categories:
+- Android для начинающих
+- Android для профессионалов
+- Программирование
+---
+
+Несколько дней наз столкнулся с задачей отправки почты с приложения.
+
+
+
+
+
+И как оказалось и тут google позаботился о нас.
+
+
+ <!-- more -->
+
+
+Пример кода:
+
+
+
+
+
+
+
+	Intent it = new Intent(Intent.ACTION_SEND);   
+
+	it.putExtra(Intent.EXTRA_EMAIL, "me@abc.com");   
+
+	it.putExtra(Intent.EXTRA_TEXT, "The email body text");   
+
+	it.setType("text/plain");   
+
+	context.startActivity(Intent.createChooser(it, "Choose Email Client")); 
+
+
+
+
+
+
+
+
+
+
+После этого будет вызван диалог выбора почтового клиента.
+
+

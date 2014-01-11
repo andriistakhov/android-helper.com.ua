@@ -1,0 +1,105 @@
+---
+author: andrew
+comments: true
+date: 2012-05-15 11:38:03+00:00
+layout: post
+slug: install
+title: Программирование для начинающих - Начало
+wordpress_id: 251
+categories:
+- Android для начинающих
+- Памятка разработчику
+- Программирование
+---
+
+Добрый день друзья.
+
+
+
+
+
+Сегодня у нас стартует рубрика программирования для начинающих.
+
+
+
+
+
+Освоив эту рубрику, вы станете не только понимать Android, но и быть неким гуру в разработке.
+
+
+
+ <!-- more -->
+
+ 
+
+
+
+
+
+Перед началом программирования, нужно подготовить ваш компьютер.
+
+
+
+
+
+
+
+
+
+
+
+
+  1. Устанавливаем [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk-6u32-downloads-1594644.html)
+
+
+
+  2. Установим [Android SDK](http://developer.android.com/sdk/index.html)
+
+
+
+  3. Скачаем [Eclipse](http://eclipse.org/downloads/) (рекомендую Classic)
+
+
+
+  4. Установим [Android плагин для Eclipse (ADT)](http://developer.android.com/sdk/eclipse-adt.html#downloading)
+
+
+
+  5. Подключим ваше устройство, [устанавливаем драйвера](http://developer.android.com/sdk/win-usb.html). Если драйверов нету, тогда добавляйте его как ADT Interface (Android устройство)
+
+
+
+  6. Научимся пользоваться эмулятором
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+Если есть вопросы, задавайте их в соц. сетях или в Twitter.
+
+
+
+
+
+ 
+
+
+
+
+
+После завершения этих задач, можно будет приступить к написанию вашей первой программы.
+
+
+
+

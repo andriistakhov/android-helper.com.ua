@@ -1,0 +1,157 @@
+---
+author: andrew
+comments: true
+date: 2013-08-20 08:37:00+00:00
+layout: post
+slug: intents
+title: Магические Intents - как ими пользоваться
+wordpress_id: 1680
+categories:
+- Android для начинающих
+- Android для профессионалов
+- Памятка разработчику
+- Программирование
+---
+
+
+Добрый день друзья.
+Сегодня наша статья будет полезна не только гуру android программирования, но и тем кто только стал на этот не легкий тернистый путь.
+
+Сегодня мы поговорим о том как с помощь Intent намерений можно выполнять самые различные операции.
+
+Ну что поехали?
+
+<!-- more -->
+
+**Открыть браузер**
+
+	Uri uri = Uri.parse("http://www.google.com");
+	Intent it  = new Intent(Intent.ACTION_VIEW,uri);
+	startActivity(it);
+
+**Открыть карту с координатами**
+
+	Uri uri = Uri.parse("geo:38.899533,-77.036476");
+	Intent it = new Intent(Intent.Action_VIEW,uri);
+	startActivity(it); 
+
+**Показать путь**
+
+	Uri uri = Uri.parse("http://maps.google.com/maps?f=d&saddr=startLat%20startLng&daddr=endLat%20endLng&hl=en");
+	Intent it = new Intent(Intent.ACTION_VIEW,URI);
+	startActivity(it);
+
+**Позвонить с программы**
+
+	Uri uri = Uri.parse("tel:xxxxxx");
+	Intent it = new Intent(Intent.ACTION_DIAL, uri);  
+	startActivity(it);  
+
+	Uri uri = Uri.parse("tel.xxxxxx");
+	Intent it =new Intent(Intent.ACTION_CALL,uri);
+
+Не забудьте добавить разрешение в манифесте.
+
+	<uses-permission id="android.permission.CALL_PHONE" />
+
+**Отправка сообщения с помощью встроенной программы**
+
+	Intent it = new Intent(Intent.ACTION_VIEW);   
+	it.putExtra("sms_body", "The SMS text");   
+	it.setType("vnd.android-dir/mms-sms");   
+	startActivity(it);  
+
+**Отправка сообщения на номер телефона**
+
+	Uri uri = Uri.parse("smsto:0800000123");   
+	Intent it = new Intent(Intent.ACTION_SENDTO, uri);   
+	it.putExtra("sms_body", "The SMS text");   
+	startActivity(it);  
+
+**Отправка MMS**
+
+	Uri uri = Uri.parse("content://media/external/images/media/23");   
+	Intent it = new Intent(Intent.ACTION_SEND);   
+	it.putExtra("sms_body", "some text");   
+	it.putExtra(Intent.EXTRA_STREAM, uri);   
+	it.setType("image/png");   
+	startActivity(it); 
+
+**Отправка почты**
+ 
+	Uri uri = Uri.parse("mailto:xxx@abc.com");
+	Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+	startActivity(it);
+
+	Intent it = new Intent(Intent.ACTION_SEND);   
+	it.putExtra(Intent.EXTRA_EMAIL, "me@abc.com");   
+	it.putExtra(Intent.EXTRA_TEXT, "The email body text");   
+	it.setType("text/plain");   
+	startActivity(Intent.createChooser(it, "Choose Email Client"));  
+
+	Intent it=new Intent(Intent.ACTION_SEND);     
+	String[] tos={"me@abc.com"};     
+	String[] ccs={"you@abc.com"};     
+	it.putExtra(Intent.EXTRA_EMAIL, tos);     
+	it.putExtra(Intent.EXTRA_CC, ccs);     
+	it.putExtra(Intent.EXTRA_TEXT, "The email body text");     
+	it.putExtra(Intent.EXTRA_SUBJECT, "The email subject text");     
+	it.setType("message/rfc822");     
+	startActivity(Intent.createChooser(it, "Choose Email Client"));   
+
+
+**Добавление файлов**
+
+	Intent it = new Intent(Intent.ACTION_SEND);   
+	it.putExtra(Intent.EXTRA_SUBJECT, "The email subject text");   
+	it.putExtra(Intent.EXTRA_STREAM, "file:///sdcard/mysong.mp3");   
+	sendIntent.setType("audio/mp3");   
+	startActivity(Intent.createChooser(it, "Choose Email Client"));
+
+**Проигрывание музыки**
+
+	Intent it = new Intent(Intent.ACTION_VIEW);
+	Uri uri = Uri.parse("file:///sdcard/song.mp3");
+	it.setDataAndType(uri, "audio/mp3");
+	startActivity(it);
+
+	Uri uri = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, "1");   
+	Intent it = new Intent(Intent.ACTION_VIEW, uri);   
+	startActivity(it);  
+
+**Удаление программы**
+
+	Uri uri = Uri.fromParts("package", strPackageName, null);   
+	Intent it = new Intent(Intent.ACTION_DELETE, uri);   
+	startActivity(it);
+
+	Uri uninstallUri = Uri.fromParts("package", "xxx", null);
+	returnIt = new Intent(Intent.ACTION_DELETE, uninstallUri);
+
+**Установка программы**
+
+	Uri installUri = Uri.fromParts("package", "xxx", null);
+	returnIt = new Intent(Intent.ACTION_PACKAGE_ADDED, installUri);
+
+**Поиск на маркете**
+
+	Uri uri = Uri.parse("market://search?q=pname:pkg_name");  
+	Intent it = new Intent(Intent.ACTION_VIEW, uri);  
+	startActivity(it);  
+
+
+**Показать детали программы**
+
+	Uri uri = Uri.parse("market://details?id=app_id");  
+	Intent it = new Intent(Intent.ACTION_VIEW, uri);  
+	startActivity(it);  
+
+**Поиск в Google**
+
+	Intent intent = new Intent();
+	intent.setAction(Intent.ACTION_WEB_SEARCH);
+	intent.putExtra(SearchManager.QUERY,"searchString")
+	startActivity(intent);
+
+
+Ну вот и все, расскажи своим друзьям. Нажимай лайки и пиши свои комментарии.

@@ -4,11 +4,11 @@ require 'sass-globbing'
 project_type = :stand_alone
 
 # Publishing paths
-http_path = "/android-helper/"
-http_images_path = "/android-helper/images"
+http_path = "/github/"
+http_images_path = "/github/images"
 http_generated_images_path = "/images"
-http_fonts_path = "/android-helper/fonts"
-css_dir = "public/android-helper/stylesheets"
+http_fonts_path = "/github/fonts"
+css_dir = "public/github/stylesheets"
 
 # Local development paths
 sass_dir = "sass"

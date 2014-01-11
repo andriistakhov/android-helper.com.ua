@@ -1,0 +1,30 @@
+---
+author: andrew
+comments: true
+date: 2013-04-05 20:13:12+00:00
+layout: post
+slug: lesson12
+title: Урок 12 - Запуск Activity
+wordpress_id: 1397
+categories:
+- Android для начинающих
+- Программирование
+---
+
+Добрый день друзья.
+
+
+
+
+
+12 выпуск передачи - Программирование под андроид.
+
+
+<!-- more -->
+
+
+Смотрим, учимся, рассказываем друзьям.
+
+
+{% youtube tYVErdtRY9o %}
+

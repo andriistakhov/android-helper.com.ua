@@ -1,0 +1,358 @@
+---
+author: andrew
+comments: true
+date: 2012-12-06 22:04:44+00:00
+layout: post
+slug: phonegap1
+title: 'PhoneGap: пишем для Android на Html и JavaScript'
+wordpress_id: 986
+categories:
+- Android для начинающих
+- Android для профессионалов
+- Программирование
+---
+
+Всем привет.
+
+
+
+
+
+Как истинный программист, не сижу на месте, а постоянно развиваюсь.
+
+
+
+
+
+И что бы доносить вам ценную информацию, я читаю много сайтов.
+
+
+
+
+
+Но к сожалению, не могу все переработать сам.
+
+<!-- more -->
+
+
+
+Поэтому просто выставляю интересные статьи на блоге.
+
+
+
+
+
+Речь пойдет о PhoneGap.
+
+
+
+
+
+![](http://android-helper.com.ua/images/uploads/2012/12/завантаження.jpg)
+
+
+
+Что это такое и для чего оно надо. Спросите вы.
+
+
+
+
+
+Но постойте, ведь много программистов никогда не писали на java. А свои приложения хотят показать всему миру.
+
+
+
+
+
+И тут на помощь им приходить движек PhoneGap.
+
+
+
+
+
+На этом движке пишут приложения на HTML5 + JavaScript + CSS.
+
+
+
+
+
+Не буду вас долго мучат. Сразу к делу.
+
+
+
+
+
+1. Создаем проект
+
+
+
+
+
+2. Подготавливаем проект
+
+
+
+
+
+Из архива, который можно скачать [тут](http://phonegap.com/download), нам понадобится:
+
+
+
+
+
+
+
+
+  1. Файл cordova-2.2.0.jar из lib/android копируем в libs
+
+
+
+  2. Файл cordova-2.2.0.js из lib/android копируем в assets/www
+
+
+
+  3. Каталог xml из lib/android копируем в res
+
+
+
+
+
+
+3. Теперь меняем код главного Activity:
+
+
+	package com.android_helper.phonegap1;
+
+	import org.apache.cordova.DroidGap;
+
+	import android.os.Bundle;
+
+	public class MainActivity extends DroidGap {
+
+
+
+	@Override
+
+	public void onCreate(Bundle savedInstanceState) {
+
+		super.onCreate(savedInstanceState);
+
+		super.loadUrl("file:///android_asset/www/index.html");
+
+	}
+
+	}
+
+
+
+
+
+
+
+
+Тут мы изменили имя абстрактного предка на DroidGap, убрали метод setContentView, который устанавливал "андроидную" разметку и выполнили загрузку локальной html-страницы, в которой дальше все и будет происходить. Кстати и создадим её в каталоге assets/www/index.html:
+
+
+	<!DOCTYPE html>
+
+	<html>
+
+  	<head>
+
+   	 <title>Device Properties Example</title>
+
+
+
+    	<script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+
+    	<script type="text/javascript" charset="utf-8">
+
+
+
+    	// Wait for Cordova to load
+
+    	//
+
+    	document.addEventListener("deviceready", onDeviceReady, false);
+
+
+
+    	// Cordova is ready
+
+    	//
+
+   	 function onDeviceReady() {
+
+        var element = document.getElementById('deviceProperties');
+
+
+
+        element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
+
+                            'Device Cordova: '  + device.cordova  + '<br />' + 
+
+                            'Device Platform: ' + device.platform + '<br />' + 
+
+                            'Device UUID: '     + device.uuid     + '<br />' + 
+
+                            'Device Version: '  + device.version  + '<br />';
+
+    	}
+
+
+
+    	</script>
+
+ 	 </head>
+
+  	<body>
+
+    	<p id="deviceProperties">Loading device properties...</p>
+
+  	</body>
+
+	</html>
+
+
+
+
+
+4. Добавляем разрешения (permission) в AndroidManifest.xml
+
+
+
+		<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+		package="com.android_helper.phonegap1"
+
+		android:versionCode="1"
+
+		android:versionName="1.0" >
+
+
+
+		<supports-screens
+
+		android:anyDensity="true"
+
+		android:largeScreens="true"
+
+		android:normalScreens="true"
+
+		android:resizeable="true"
+
+		android:smallScreens="true" />
+
+
+
+		<uses-sdk
+
+		android:minSdkVersion="8"
+
+		android:targetSdkVersion="15" />
+
+
+
+		<uses-permission android:name="android.permission.VIBRATE" />
+
+		<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+		<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+		<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+		<uses-permission android:name="android.permission.INTERNET" />
+
+		<uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+		<uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+		<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+		<uses-permission android:name="android.permission.READ_CONTACTS" />
+
+		<uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+		<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+		<uses-permission android:name="android.permission.BROADCAST_STICKY" />
+
+
+
+		<application
+
+		android:icon="@drawable/ic_launcher"
+
+		android:label="@string/app_name"
+
+		android:theme="@style/AppTheme" >
+
+		<activity
+
+			android:name=".MainActivity"
+
+			android:configChanges="orientation|keyboardHidden"
+
+			android:label="@string/title_activity_main" >
+
+			<intent-filter>
+
+				<action android:name="android.intent.action.MAIN" />
+
+
+
+				<category android:name="android.intent.category.LAUNCHER" />
+
+			</intent-filter>
+
+		</activity>
+
+	</application>
+
+
+
+	</manifest>
+
+
+
+
+
+Рекомендую убрать те которыми не пользуетесь. Ведь при установке приложения пользователь уйдет в астрал. И подумает, что ваше приложение шпион. :)
+
+
+
+
+
+Ну вот и все.
+
+
+
+
+
+Запускаем и смотрим.
+
+
+
+
+
+![](http://android-helper.com.ua/images/uploads/2012/12/Screenshot-5554-dev22-1.png)
+
+
+
+Рабочий код на странице с [кодами](http://android-helper.com.ua/codes/).
+
+
+
+
+
+Понравилось, нажми лайк и расскажи своим друзьям.
+
+
+
+

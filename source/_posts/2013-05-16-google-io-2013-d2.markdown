@@ -1,0 +1,45 @@
+---
+author: andrew
+comments: true
+date: 2013-05-16 16:05:50+00:00
+layout: post
+slug: google-io-2013-d2
+title: Все онлайн трансляции из Google I/O 2013 (день 2)
+wordpress_id: 1507
+categories:
+- Android для начинающих
+- Android для профессионалов
+- Памятка разработчику
+- Программирование
+---
+
+Срочно!
+
+
+
+
+
+Все трансляции в одном месте!<!-- more -->
+
+
+
+
+
+**Google I/O 2013: Day 2 Android Sessions**
+
+
+
+
+
+**Google I/O 2013 Technical Sessions 2**
+
+
+
+
+
+**Google I/O 2013 Chrome Sessions**
+
+
+
+
+{% youtube hXPAXKb-LQE %}

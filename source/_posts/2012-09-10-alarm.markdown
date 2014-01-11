@@ -1,0 +1,535 @@
+---
+author: andrew
+comments: true
+date: 2012-09-10 14:34:19+00:00
+layout: post
+slug: alarm
+title: Программируем буильник или использование AlarmManager в Android
+wordpress_id: 599
+categories:
+- Android для начинающих
+- Android для профессионалов
+- Программирование
+---
+
+При разработке приложения порой бывает необходимо выполнять какие-то действия в будущем. Например, вы хотите создать будильник или периодически отправлять данные на свой сайт в строго определенное время. Для решения подобных задач в Android используется класс**AlarmManager**, который позволяет выполнять код в требуемый момент времени, даже если ваше приложение не запущено. То-есть AlarmManager - аналог corn в Linux или планировщика задач Windows. Вы говорите, что такой-то кусок кода должен выполниться тогда-то и AlarmManager обеспечивает запуск кода. В англоязычный литературе таймер, который выполняет код в требуемый момент времени обозначается термином**alarm**. Давайте в рамках данной статьи называть этот таймер**будильником**, чтобы отделить это понятие от таймера.
+
+
+
+ <!-- more -->
+
+## Несколько слов о классе AlarmManager
+
+
+
+
+
+Фактически класс AlarmManager обеспечивает доступ к сервису планировки задач Android. Для получения объекта этого класса нужно вызвать метод **Context.getSystemService(Context.ALARM_SERVICE)**. **AlarmManager** регистрирует в системе интент и когда наступает обозначенное время, AlarmManager запускает этот интент. Если момент вызова приложение закрыто, то оно будет вновь запущено. AlarmManager нужно использовать только в случае, если код должен быть выполнен даже при закрытом приложении, во всех других случаях рекомендуется использовать класс **Handler**.  
+  
+Класс AlarmManager довольно прост. В нашем распоряжении шесть методов:  
+  
+
+
+
+
+
+
+
+
+
+  * **void cancel(PendingIntent operation)** - отменяет установленный таймер для переданного в качестве параметра интента.
+
+
+
+  * **void set (int type, long triggerAtMillis, PendingIntent operation)** - устанавливает будильник, который сработает один раз.
+
+
+
+  * **void setInexactRepeating (int type, long triggerAtMillis, long intervalMillis, PendingIntent operation)** - установка будильника с неточным повторением.
+
+
+
+  * **setRepeating(int type, long triggerAtMillis, long intervalMillis, PendingIntent operation)**- установка будильника с точным повторением.
+
+
+
+  * **setTime(long millis)** - установка системного времени.
+
+
+
+  * **setTimeZone(String timeZone)** - установка временной зоны, выбранной по-умолчанию.
+
+
+
+
+
+
+  
+Здесь **PendingIntent**- класс, который представляет интент и связанное с его выполнением действие. Передавая PendingIntent другому приложению Вы тем самым даете ему право запускать кусок кода из своей программы.  
+  
+В качестве типа будильника (параметр **type**) может быть передано одно из значений ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC и RTC_WAKEUP. ELAPSED_REALTIME и ELAPSED_REALTIME_WAKEUP - время задается с момента загрузки устройства, а RTC и RTC_WAKEUP - системное время в UTC. Для ELAPSED_REALTIME и RTC если устройство находится в спящем режиме в момент срабатывания будильника, то связанный с ним интент будет вызван позже, когда пользователь выведет устройство из спящего режима. Для ELAPSED_REALTIME_WAKEUP и RTC_WAKEUP если устройство находится в спящем режиме, оно немедленно пробуждается и вызывается интент.
+
+
+
+
+
+## Программируем приложение-будильник для Android
+
+
+
+
+
+Давайте в качестве примера разработаем приложение - будильник. При запуске программы пользователю будет показано окно с тремя кнопками. С их помощью пользователь сможет: установить будильник, который срабатывает один раз; будильник, который будет срабатывать периодически; а также удалить ранее установленные будильники. 
+
+
+
+
+
+![](http://android-helper.com.ua/images/uploads/2012/09/device-2012-09-10-172549.png)
+
+
+
+Создадим новый проект в макет шаблона добавим три кнопки
+
+
+
+
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:orientation="vertical" >
+
+
+
+    <Button
+
+        android:id="@+id/btStart"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:onClick="startRepeatingTimer"
+
+        android:padding="@dimen/padding_medium"
+
+        android:text="Start"
+
+        tools:context=".WidgetAlarmManagerActivity" />
+
+
+
+    <Button
+
+        android:id="@+id/btCancel"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:onClick="cancelRepeatingTimer"
+
+        android:padding="@dimen/padding_medium"
+
+        android:text="Cancel"
+
+        tools:context=".WidgetAlarmManagerActivity" />
+
+
+
+    <Button
+
+        android:id="@+id/btOneTime"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:onClick="onetimeTimer"
+
+        android:padding="@dimen/padding_medium"
+
+        android:text="One Time"
+
+        tools:context=".WidgetAlarmManagerActivity" />
+
+
+
+	</LinearLayout>
+
+
+
+Кнопка **btStart** устанавливает повторяющийся будильник, кнопка **btCancel**- отменяет его. Кнопка **btOneTime**- создает не повторяющийся будильник. Прямо в шаблоне мы указали методы, которые будут вызываться при нажатии на кнопки: startRepeatingTimer, cancelRepeatingTimer и onetimeTimer соответственно. Код этих методов будут приведен в классе Activity.  
+   
+Для работы с **AlarmManager** напишем отдельный класс. В качестве базового класса используем BroadcastReciever. Наш класс будет управлять зарегистрированным с помощью AlarmManager интентом. Мы переопределим метод **onReceive()**, который будет вызываться после получения интента. Внутри метод onReceive() мы должны попытаться получить связанные с интентом параметры. В своей программе мы будем использовать один параметр ONE_TIME, который позволяет определить, относится ли интент к однократно срабатывающему будильнику или нет. После того, как значение ONE_TIME получено, пользователю показывается соответствующее сообщение.   
+   
+Также в этом классе определим методы setAlarm(), cancelAlarm() и onetimeTimer(). Конечно эти методы можно было определить и в другом месте, мы включили их в данный класс из соображения простоты примера.
+
+
+
+
+
+
+
+
+  * Метод setAlarm() устанавливает повторяющийся будильник с помощью метода setRepeating(). Этому методу требуется четыре параметра: тип будильника, время запуска (устанавливаем текущий момент), интервал в миллисекундах, интент, который будет вызываться при срабатывании будильника.
+
+
+
+  * Метод cancelAlarm() отменяет зарегистрированный ранее будильник с помощью вызова метода cancel(), которому перезается в качестве параметра интент. При совпадении этого параметра с зарегистрированным ранее интентом, произойдет удаление будильника.
+
+
+
+  * Метод onetimeTimer() создает будильник, который срабатывает один раз. Делается с помощью метода set(), которому передается три параметра: тип будильника, время запуска, вызываемый интент.
+
+
+		package com.example.alarm;
+
+		import java.text.Format;
+
+		import java.text.SimpleDateFormat;
+
+		import java.util.Date;
+
+		import android.app.AlarmManager;
+
+		import android.app.PendingIntent;
+
+		import android.content.BroadcastReceiver;
+
+		import android.content.Context;
+
+		import android.content.Intent;
+
+		import android.os.Bundle;
+
+		import android.os.PowerManager;
+
+		import android.widget.Toast;
+
+		public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
+
+
+
+		final public static String ONE_TIME = "onetime";
+
+
+
+		@Override
+
+		public void onReceive(Context context, Intent intent) {
+
+		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+
+		PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
+
+		// Осуществляем блокировку
+
+		wl.acquire();
+
+
+
+		// Здесь можно делать обработку.
+
+		Bundle extras = intent.getExtras();
+
+		StringBuilder msgStr = new StringBuilder();
+
+
+
+		if (extras != null && extras.getBoolean(ONE_TIME, Boolean.FALSE)) {
+
+			// проверяем параметр ONE_TIME, если это одиночный будильник,
+
+			// выводим соответствующее сообщение.
+
+			msgStr.append("Одноразовый будильник: ");
+
+		}
+
+		Format formatter = new SimpleDateFormat("hh:mm:ss a");
+
+		msgStr.append(formatter.format(new Date()));
+
+
+
+		Toast.makeText(context, msgStr, Toast.LENGTH_LONG).show();
+
+
+
+		// Разблокируем поток.
+
+		wl.release();
+
+		}
+
+
+
+		public void SetAlarm(Context context) {
+
+		AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+		Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+
+		intent.putExtra(ONE_TIME, Boolean.FALSE); // Задаем параметр интента
+
+		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+		// Устанавливаем интервал срабатывания в 5 секунд.
+
+		am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 5, pi);
+
+		}
+
+
+
+		public void CancelAlarm(Context context) {
+
+		Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+
+		PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+		alarmManager.cancel(sender); // Отменяем будильник, связанный с интентом данного класса
+
+		}
+
+
+
+		public void setOnetimeTimer(Context context) {
+
+		AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+		Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+
+		intent.putExtra(ONE_TIME, Boolean.TRUE); // Задаем параметр интента
+
+		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+		am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pi);
+
+		}
+
+		}
+
+
+
+
+
+
+
+Ниже приводится файл манифеста. Обратите внимание, для корректной работы программе необходимо дать разрешение**WAKE_LOCK**, поскольку мы используем блокировку потока в методе onReceive(). Также тут мы регистрируем AlarmManagerBroadcastReceiver, как получатель широковещательных сообщений
+
+
+	<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="com.example.alarm"
+
+    android:versionCode="1"
+
+    android:versionName="1.0" >
+
+
+
+    <uses-sdk
+
+        android:minSdkVersion="8"
+
+        android:targetSdkVersion="15" />
+
+
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
+
+    <application
+
+        android:icon="@drawable/ic_launcher"
+
+        android:label="@string/app_name"
+
+        android:theme="@style/AppTheme" >
+
+        <activity
+
+            android:name=".MainActivity"
+
+            android:label="@string/title_activity_main" >
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+
+
+
+        <receiver android:name="AlarmManagerBroadcastReceiver" >
+
+        </receiver>
+
+    </application>
+
+
+
+	</manifest>
+
+
+
+
+
+
+Теперь давайте напишем класс, в котором реализуем обработчики кнопок. Здесь мы создадим экземпляр описанного выше класса AlarmManagerBroadcastReciever и будем вызывать методы setAlarm(), cancelAlarm() и setOnetime(). 
+
+
+
+
+	package com.example.alarm;
+
+
+
+	import android.app.Activity;
+
+	import android.content.Context;
+
+	import android.os.Bundle;
+
+	import android.view.Menu;
+
+	import android.view.View;
+
+	import android.widget.Toast;
+
+
+
+	public class MainActivity extends Activity {
+
+
+
+	private AlarmManagerBroadcastReceiver alarm;
+
+
+
+	@Override
+
+	public void onCreate(Bundle savedInstanceState) {
+
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.activity_main);
+
+		alarm = new AlarmManagerBroadcastReceiver();
+
+	}
+
+
+
+	@Override
+
+	protected void onStart() {
+
+		super.onStart();
+
+	}
+
+
+
+	public void startRepeatingTimer(View view) {
+
+		Context context = this.getApplicationContext();
+
+		if (alarm != null) {
+
+			alarm.SetAlarm(context);
+
+		} else {
+
+			Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+
+		}
+
+	}
+
+
+
+	public void cancelRepeatingTimer(View view) {
+
+		Context context = this.getApplicationContext();
+
+		if (alarm != null) {
+
+			alarm.CancelAlarm(context);
+
+		} else {
+
+			Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+
+		}
+
+	}
+
+
+
+	public void onetimeTimer(View view) {
+
+		Context context = this.getApplicationContext();
+
+		if (alarm != null) {
+
+			alarm.setOnetimeTimer(context);
+
+		} else {
+
+			Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+
+		}
+
+	}
+
+
+
+	@Override
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		getMenuInflater().inflate(R.menu.activity_main, menu);
+
+		return true;
+
+	}
+
+
+
+	}
+
+
+
+
+
+При надатии на кнопки будут установлен будильник.
+
+
+
+
+
+Комментируем и подписываемся на обновления.
+
+
+
+
+
+Коды вы можете скачать [тут](http://android-helper.com.ua/forms)
