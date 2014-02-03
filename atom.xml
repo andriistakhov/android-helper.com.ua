@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-02-03T13:04:25+02:00</updated>
+  <updated>2014-02-03T13:10:20+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Android-studio-offline]]></title>
+    <title type="html"><![CDATA[Android Studio - работа в режиме Offline]]></title>
     <link href="http://android-helper.com.ua//android-studio-offline/"/>
     <updated>2014-02-03T12:44:20+02:00</updated>
     <id>http://android-helper.com.ua//android-studio-offline</id>
@@ -37,25 +37,11 @@
 <h4>Инструкция</h4>
 
 <ol>
-<li>Ставим полное значения сборщика gradle</li>
+<li>Ставим полное значения сборщика gradle <img src="https://www.evernote.com/shard/s122/sh/19b47883-07f1-4ade-95c5-f4b366226cad/84bfef8d4f915f032d48326fbcd7f471/deep/0/android_helper-build.gradle----android_helper----android_helper------Git-VKR-VKClient-VKClient----Android-Studio-(Preview" alt="build.gradle" /></li>
+<li>Ставим точное название support библиотек <img src="https://www.evernote.com/shard/s122/sh/6d345eb9-0eae-4361-a6a5-c2ad370d1ed0/adfa8e0cd7922058a6a25708512b7be2/deep/0/android_helper-build.gradle----android_helper----android_helper------Git-VKR-VKClient-VKClient----Android-Studio-(Preview" alt="build.gradle" /></li>
+<li>Ставим режим Offline mode в настройках Android Studio <img src="https://www.evernote.com/shard/s122/sh/94fc84c1-2cac-4400-b8b1-f831c953fd6f/b50085e9b238e7c4c3cbfe99bff52215/deep/0/Preferences.png" alt="Android Studio - Preferences" /></li>
 </ol>
 
-
-<p><img src="https://www.evernote.com/shard/s122/sh/19b47883-07f1-4ade-95c5-f4b366226cad/84bfef8d4f915f032d48326fbcd7f471/deep/0/android_helper-build.gradle----android_helper----android_helper------Git-VKR-VKClient-VKClient----Android-Studio-(Preview" alt="build.gradle" />-0.4.3.png)</p>
-
-<ol>
-<li>Ставим точное название support библиотек</li>
-</ol>
-
-
-<p><img src="https://www.evernote.com/shard/s122/sh/6d345eb9-0eae-4361-a6a5-c2ad370d1ed0/adfa8e0cd7922058a6a25708512b7be2/deep/0/android_helper-build.gradle----android_helper----android_helper------Git-VKR-VKClient-VKClient----Android-Studio-(Preview" alt="build.gradle" />-0.4.3.png)</p>
-
-<ol>
-<li>Ставим режим Offline mode в настройках Android Studio</li>
-</ol>
-
-
-<p><img src="https://www.evernote.com/shard/s122/sh/94fc84c1-2cac-4400-b8b1-f831c953fd6f/b50085e9b238e7c4c3cbfe99bff52215/deep/0/Preferences.png" alt="Android Studio - Preferences" /></p>
 
 <p>Оставляйте ваши комментарии под видео и подписывайтесь на рассылку!</p>
 ]]></content>
