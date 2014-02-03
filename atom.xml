@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-01-15T13:33:29+02:00</updated>
+  <updated>2014-02-03T13:04:25+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android-studio-offline]]></title>
+    <link href="http://android-helper.com.ua//android-studio-offline/"/>
+    <updated>2014-02-03T12:44:20+02:00</updated>
+    <id>http://android-helper.com.ua//android-studio-offline</id>
+    <content type="html"><![CDATA[<p>Всем привет!</p>
+
+<p>Недавно в одной из моих коуч групп, был задан вопрос по поводу работы с Android Studio в режиме без Internet.</p>
+
+<p>Кому интересно, прошу к прочтению!</p>
+
+<!-- more -->
+
+
+<p>Думаю, что ответом будет этот фрагмент видео урока, о том как решить эту проблему.</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/2DxndZTpK70 "></iframe></div>
+
+
+<p>Несколько картинок для тех кто не хочет смотреть видео!</p>
+
+<h4>Инструкция</h4>
+
+<ol>
+<li>Ставим полное значения сборщика gradle</li>
+</ol>
+
+
+<p><img src="https://www.evernote.com/shard/s122/sh/19b47883-07f1-4ade-95c5-f4b366226cad/84bfef8d4f915f032d48326fbcd7f471/deep/0/android_helper-build.gradle----android_helper----android_helper------Git-VKR-VKClient-VKClient----Android-Studio-(Preview" alt="build.gradle" />-0.4.3.png)</p>
+
+<ol>
+<li>Ставим точное название support библиотек</li>
+</ol>
+
+
+<p><img src="https://www.evernote.com/shard/s122/sh/6d345eb9-0eae-4361-a6a5-c2ad370d1ed0/adfa8e0cd7922058a6a25708512b7be2/deep/0/android_helper-build.gradle----android_helper----android_helper------Git-VKR-VKClient-VKClient----Android-Studio-(Preview" alt="build.gradle" />-0.4.3.png)</p>
+
+<ol>
+<li>Ставим режим Offline mode в настройках Android Studio</li>
+</ol>
+
+
+<p><img src="https://www.evernote.com/shard/s122/sh/94fc84c1-2cac-4400-b8b1-f831c953fd6f/b50085e9b238e7c4c3cbfe99bff52215/deep/0/Preferences.png" alt="Android Studio - Preferences" /></p>
+
+<p>Оставляйте ваши комментарии под видео и подписывайтесь на рассылку!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C Новым годом!]]></title>
@@ -1302,301 +1350,6 @@ private void prepareNotificationBar() {
 <p>Также мы выложили на <a href="https://play.google.com/store/apps/details?id=com.android_helper.ActionBarNotification">Play Market</a> наше приложение. Установив его, вы сможете посмотреть как оно работает. (Не забудьте поставить +1 и написать позитивный комментарий :) ).</p>
 
 <p><a href="https://play.google.com/store/apps/details?id=com.android_helper.ActionBarNotification"><img src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" alt="Android app on Google Play" /></a></p>
-
-<h3>Оценка статьи</h3>
-
-<p>Надеюсь, что вам понравилась статья. Жду ваши комментарии и несколько лайков.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Красочный переход между Activity]]></title>
-    <link href="http://android-helper.com.ua//splitacivity/"/>
-    <updated>2013-04-28T08:57:24+03:00</updated>
-    <id>http://android-helper.com.ua//splitacivity</id>
-    <content type="html"><![CDATA[<h3>Задача</h3>
-
-<p>Красочный переход между Activity.</p>
-
-<p> <!-- more --></p>
-
-<h3>Краткое описание</h3>
-
-<p>Многие из вас видели как красиво в некоторых приложениях идут переходы между Activity. Если взять простые примеры от Google, то вы увидите только плавное смещение с лева на право. А у нас с вами задача сделать так, что бы из первого Activity появлялось второе.</p>
-
-<h3>Видео урок</h3>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Bfh0cJBOASQ "></iframe></div>
-
-
-<h3>Коды</h3>
-
-<p><strong>Activity1.java</strong></p>
-
-<pre><code>    SplitAnimation.startActivity(Activity1.this, new Intent(Activity1.this, Activity2.class));
-</code></pre>
-
-<p><strong>Activity2.java</strong></p>
-
-<pre><code>    @Override
-
-protected void onCreate(Bundle savedInstanceState) {
-
-    super.onCreate(savedInstanceState);
-
-
-
-    // Preparing the 2 images to be split
-
-    SplitAnimation.prepareAnimation(this);
-
-
-
-    setContentView(R.layout.act_two);
-
-
-
-    // Animating the items to be open, revealing the new activity
-
-    SplitAnimation.animate(this, 1000);
-
-}
-
-
-
-@Override
-
-protected void onStop() {
-
-    // If we're currently running the entrance animation - cancel it
-
-    SplitAnimation.cancel();
-
-
-
-    super.onStop();    //To change body of overridden methods use File | Settings | File Templates.
-
-}
-</code></pre>
-
-<p><strong>SplitAnimation.java</strong></p>
-
-<pre><code>    public static void startActivity(Activity currActivity, Intent intent) {
-
-    // Подготовка acticity
-
-    prepare(currActivity);
-
-
-
-    currActivity.startActivity(intent);
-
-    // Чистка анимаций текущей activity
-
-    currActivity.overridePendingTransition(0, 0);
-
-}
-
-
-
-private static void prepare(Activity currActivity) {
-
-
-
-    // Получаем content activity и делаем из него bitmap
-
-    View root = currActivity.getWindow().getDecorView().findViewById(android.R.id.content);
-
-    root.setDrawingCacheEnabled(true);
-
-    Bitmap bmp = root.getDrawingCache();
-
-
-
-    // Указываем в какой части экрана будет делится activity
-
-    splitYCoord = bmp.getHeight() / 2;
-
-
-
-    // Разделяем экран
-
-    mBmp1 = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), splitYCoord);
-
-    mBmp2 = Bitmap.createBitmap(bmp, 0, splitYCoord, bmp.getWidth(), bmp.getHeight() - splitYCoord);
-
-
-
-    // Указываем координаты положения частей activity
-
-    mLoc1 = new int[]{0, root.getTop()};
-
-    mLoc2 = new int[]{0, root.getTop() + splitYCoord};
-
-}
-
-
-
-public static void prepareAnimation(final Activity destActivity) {
-
-    mTopImage = createImageView(destActivity, mBmp1, mLoc1);
-
-    mBottomImage = createImageView(destActivity, mBmp2, mLoc2);
-
-}
-
-
-
-private static ImageView createImageView(Activity destActivity, Bitmap bmp, int loc[]) {
-
-    ImageView imageView = new ImageView(destActivity);
-
-    imageView.setImageBitmap(bmp);
-
-
-
-    WindowManager.LayoutParams windowParams = new WindowManager.LayoutParams();
-
-    windowParams.gravity = Gravity.TOP;
-
-    windowParams.x = loc[0];
-
-    windowParams.y = loc[1];
-
-    windowParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-    windowParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-    windowParams.flags =
-
-            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
-
-    ;
-
-    windowParams.format = PixelFormat.TRANSLUCENT;
-
-    windowParams.windowAnimations = 0;
-
-    destActivity.getWindowManager().addView(imageView, windowParams);
-
-
-
-    return imageView;
-
-}
-
-
-
-public static void animate(final Activity destActivity, final int duration) {
-
-    animate(destActivity, duration, new DecelerateInterpolator());
-
-}
-
-
-
-public static void animate(final Activity destActivity, final int duration, final TimeInterpolator interpolator) {
-
-
-
-    // Post this on the UI thread's message queue. It's needed for the items to be already measured
-
-    new Handler().post(new Runnable() {
-
-
-
-        @Override
-
-        public void run() {
-
-            mSetAnim = new AnimatorSet();
-
-            mTopImage.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-
-            mBottomImage.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-
-            mSetAnim.addListener(new Animator.AnimatorListener() {
-
-                @Override
-
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-
-
-                @Override
-
-                public void onAnimationEnd(Animator animation) {
-
-                    clean(destActivity);
-
-                }
-
-
-
-                @Override
-
-                public void onAnimationCancel(Animator animation) {
-
-                    clean(destActivity);
-
-                }
-
-
-
-                @Override
-
-                public void onAnimationRepeat(Animator animation) {
-
-
-
-                }
-
-            });
-
-
-
-            // Animating the 2 parts away from each other
-
-            Animator anim1 = ObjectAnimator.ofFloat(mTopImage, "translationY", mTopImage.getHeight() * -1);
-
-            Animator anim2 = ObjectAnimator.ofFloat(mBottomImage, "translationY", mBottomImage.getHeight());
-
-
-
-            if (interpolator != null) {
-
-                anim1.setInterpolator(interpolator);
-
-                anim2.setInterpolator(interpolator);
-
-            }
-
-
-
-            mSetAnim.setDuration(duration);
-
-            mSetAnim.playTogether(anim1, anim2);
-
-            mSetAnim.start();
-
-        }
-
-    });
-
-}
-</code></pre>
-
-<h3>Скачать коды</h3>
-
-<p>Скачать коды программы вы можете на нашей <a href="http://android-helper.com.ua/codes/">странице</a></p>
-
-<h3>Скачать приложение</h3>
-
-<p>Также мы выложили на <a href="https://play.google.com/store/apps/details?id=com.android_helper.SplitActivityAnimation">Play Market</a> наше приложение. Установив его, вы сможете посмотреть как оно работает. (Не забудьте поставить +1 и написать позитивный комментарий :) ).</p>
-
-<p><a href="https://play.google.com/store/apps/details?id=com.android_helper.SplitActivityAnimation"><img src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" alt="Android app on Google Play" /></a></p>
 
 <h3>Оценка статьи</h3>
 
