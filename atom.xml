@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-02-09T20:38:18+02:00</updated>
+  <updated>2014-02-09T20:40:25+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -31,7 +31,8 @@
 
 <p>Если у вас есть вопросы пишите, я буду снимать видео решения этим вопросам.</p>
 
-<p>&lt;% youtube NVWs6uAPt00 %></p>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/NVWs6uAPt00 "></iframe></div>
+
 
 <p>Понравилось? Жми лайк!</p>
 ]]></content>
