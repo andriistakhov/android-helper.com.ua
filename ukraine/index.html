@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Мультиязычное приложение на Android - Android helper</title>
+  <title>Украину - теперь ее не победить! - Android helper</title>
   <meta name="author" content="Andrii Stakhov">
 
   
-  <meta name="description" content="Добрый день друзья. Очень много программистов сейчас сталкиваются с много язычными приложениями. Я решил поделится опытом работы с такими &hellip;">
+  <meta name="description" content="Привет друзья. Я очень долго молчал наблюдая ситуацию которая сложилась в моей стране &ndash; Украине. После вчерашних событий на нашей славной &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://android-helper.com.ua//multilanguage">
+  <link rel="canonical" href="http://android-helper.com.ua//ukraine">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
@@ -73,7 +73,7 @@
   
   <header>
     
-      <h1 class="entry-title">Мультиязычное приложение на Android</h1>
+      <h1 class="entry-title">Украину - теперь ее не победить!</h1>
     
     
       <p class="meta">
@@ -89,195 +89,37 @@
   
 
 
-<time datetime="2012-09-12T12:12:10+03:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+<time datetime="2014-02-21T22:34:35+02:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://android-helper.com.ua/">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Добрый день друзья.</p>
+<div class="entry-content"><p><img src="https://lh4.googleusercontent.com/Y1zNt2OrZwRYgsuabxIU4FYxiSp2kDd8rTayHAk6IBo=w559-h207-p-no" alt="Ukraine" /></p>
 
-<p>Очень много программистов сейчас сталкиваются с много язычными приложениями.</p>
+<p>Привет друзья.</p>
 
-<p>Я решил поделится опытом работы с такими приложениями.</p>
+<p>Я очень долго молчал наблюдая ситуацию которая сложилась в моей стране &ndash; Украине.</p>
 
-<!-- more -->
+<p>После вчерашних событий на нашей славной земле, много мужчин пустили не одну слезу, вместе с матерями погибших парней. От моральных уродов, которые били в &ldquo;спину&rdquo; (точнее в шею). Очень много хороших ребят, погибло от пуль снайперов.</p>
 
+<p>Так вот, я учу своего сына не плакать, но сам не смог смотреть что бы не плакать, как умерли настоящие патриоты своей страны. Они как и я хотятели поменять страну к лучшему.</p>
 
-<p>Есть 2 подхода разработки таких приложений.</p>
+<p>Знаю, что много людей скажут, что сами напросились, нечего под пули лезть. Так вот, сидите и помалкивайте. И живите в том маленьком безобразном мире который вас окружает. И думайте, что все хорошо. А также не забывайте отдать ментам их дань и всунуть несколько взяток. А потом своровать, то что тебе доверили люди.</p>
 
-<ol>
-<li><p> Язык приложения зависит от языка системы</p></li>
-<li><p> Возможность менять язык в самом приложении</p></li>
-</ol>
+<p>Я очень горд, что живу в такой замечательной стране как Украина. И очень рад, что все украинцы по всему миру поддержали тот тяжелый переходной период, от &ldquo;совка&rdquo; к самой самоорганизованой организации.</p>
 
+<p>Сейчас МАЙДАН, это то что делали наши предки КОЗАКИ в лучшие свои годы правления. У нас никогда не было царя и никогда не будет. Мы можем работать и без президента, и без смотрящих. Украинцы самый самоорганизованный народ.</p>
 
-<p>Ну что приступим.</p>
+<p>Мне очень импонирует, то что МАЙДАН, отправляет &ldquo;идти лесом&rdquo; всех политиков, которые пытаются на нем выгрести.</p>
 
-<h3>Язык приложения зависит от языка системы</h3>
+<p>Что касается &ldquo;Правого Сектора&rdquo;. Ребята вы наши герои. И я очень надеюсь, что никакая мразь, больше не сможет пролить ни крапли крови моих братьев &ndash; украинцев.</p>
 
-<p>В android для реализации данного подхода, используется следующая структура вложения папок.</p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2012/09/m1.png" alt="" /></p>
-
-<p>Тут все просто, создаем папку с расширением ru (Для России), fr &ndash; Франции и так далее.</p>
-
-<p>Больше информации вы можете получить <a href="http://developer.android.com/intl/ru/training/basics/supporting-devices/languages.html">тут</a>.</p>
-
-<p>strings.xml &ndash; с папки values</p>
-
-<pre><code>&lt;resources&gt;
-
-
-
-&lt;string name="app_name"&gt;multilanguage&lt;/string&gt;
-
-&lt;string name="hello_world"&gt;Hello world!&lt;/string&gt;
-
-&lt;string name="menu_settings"&gt;Settings&lt;/string&gt;
-
-&lt;string name="title_activity_main"&gt;MainActivity&lt;/string&gt;
-
-
-
-&lt;/resources&gt;
-</code></pre>
-
-<p>strings.xml &ndash; с папки values-ru</p>
-
-<pre><code>&lt;resources&gt;
-
-
-
-&lt;string name="app_name"&gt;multilanguage&lt;/string&gt;
-
-&lt;string name="hello_world"&gt;Привет Мир!&lt;/string&gt;
-
-&lt;string name="menu_settings"&gt;Настройки&lt;/string&gt;
-
-&lt;string name="title_activity_main"&gt;Главное активити&lt;/string&gt;
-
-
-
-&lt;/resources&gt;
-</code></pre>
-
-<h3>Возможность менять язык в самом приложении</h3>
-
-<p>Вот тут более интересней тема.</p>
-
-<p>Для того что бы приложение на лету поменяло язык нужно сделать следующее.</p>
-
-<p>Создаем файл который наследуется от Application.</p>
-
-<pre><code>package com.example.multilanguage;
-
-
-
-import java.util.Locale;
-
-
-
-import android.app.Application;
-
-import android.content.res.Configuration;
-
-
-
-public class MyApp extends Application {
-
-
-
-private Locale locale = null;
-
-
-
-@Override
-
-public void onConfigurationChanged(Configuration newConfig) {
-
-    super.onConfigurationChanged(newConfig);
-
-    if (locale != null) {
-
-        newConfig.locale = locale;
-
-        Locale.setDefault(locale);
-
-        getBaseContext().getResources().updateConfiguration(newConfig,
-
-                getBaseContext().getResources().getDisplayMetrics());
-
-    }
-
-}
-
-
-
-@Override
-
-public void onCreate() {
-
-    super.onCreate();
-
-
-
-    Configuration config = getBaseContext().getResources().getConfiguration();
-
-
-
-    String lang = "ru";
-
-    if (!"".equals(lang) &amp;&amp; !config.locale.getLanguage().equals(lang)) {
-
-        locale = new Locale(lang);
-
-        Locale.setDefault(locale);
-
-        config.locale = locale;
-
-        getBaseContext().getResources().updateConfiguration(config,
-
-                getBaseContext().getResources().getDisplayMetrics());
-
-    }
-
-}
-
-
-
-}
-</code></pre>
-
-<p>Вот и все.</p>
-
-<p>Теперь если вам нужно изменить язык при нажатии на кнопку вызываете просто:</p>
-
-<pre><code>Configuration config = getBaseContext().getResources().getConfiguration();
-
-
-
-    String lang = "ru";
-
-    if (!"".equals(lang) &amp;&amp; !config.locale.getLanguage().equals(lang)) {
-
-        locale = new Locale(lang);
-
-        Locale.setDefault(locale);
-
-        config.locale = locale;
-
-        getBaseContext().getResources().updateConfiguration(config,
-
-                getBaseContext().getResources().getDisplayMetrics());
-
-    }
-</code></pre>
-
-<p>Если вам понравилась статья пишите комментарии и рассказывайте друзьям.</p>
-
-<p>Коды вы можете скачать <a href="http://android-helper.com.ua/forms">тут</a></p>
+<p>СЛАВА УКРАИНЕ!!!!</p>
 </div>
 
 
@@ -286,7 +128,7 @@ public void onCreate() {
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+<span class="byline author vcard">Posted by <span class="fn">Andrii Stakhov</span></span>
 
       
 
@@ -300,21 +142,15 @@ public void onCreate() {
   
 
 
-<time datetime="2012-09-12T12:12:10+03:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+<time datetime="2014-02-21T22:34:35+02:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/categories/proghrammirovaniie/'>Программирование</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//multilanguage/" data-via="helperandroid" data-counturl="http://android-helper.com.ua//multilanguage/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//ukraine/" data-via="helperandroid" data-counturl="http://android-helper.com.ua//ukraine/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -327,14 +163,18 @@ public void onCreate() {
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/alarm/" title="Previous Post: Программируем буильник или использование AlarmManager в Android">&laquo; Программируем буильник или использование AlarmManager в Android</a>
+        <a class="basic-alignment left" href="/anti-police/" title="Previous Post: АнтиГАИ - то, что нужно в дороге!">&laquo; АнтиГАИ - то, что нужно в дороге!</a>
       
-      
-        <a class="basic-alignment right" href="/holo-style/" title="Next Post: Добавляем к Android-приложению стили Android 4">Добавляем к Android-приложению стили Android 4 &raquo;</a>
       
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -472,6 +312,22 @@ public void onCreate() {
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'androidhelper';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://android-helper.com.ua//ukraine/';
+        var disqus_url = 'http://android-helper.com.ua//ukraine/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
