@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-02-28T10:35:27+02:00</updated>
+  <updated>2014-02-28T14:36:47+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Вебинар! Как заработать на своем приложении?]]></title>
+    <link href="http://android-helper.com.ua//android-success-webinar-post/"/>
+    <updated>2014-02-28T13:49:29+02:00</updated>
+    <id>http://android-helper.com.ua//android-success-webinar-post</id>
+    <content type="html"><![CDATA[<p>Смотрим вебинар и задаем вопросы!</p>
+
+<h4>Видео</h4>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/VXDur--YOP0 "></iframe></div>
+
+
+<p>Приложение АнтиГАИ <a href="http://www.xn--80aaitc0a9a.xn--p1ai/">www.антигаи.рф</a>
+Скачать можно по ссылке
+<a href="https://play.google.com/store/apps/details?id=anti.gai">https://play.google.com/store/apps/details?id=anti.gai</a></p>
+
+<p>BeAppy &ndash; разработка мобильных приложений <a href="http://beappy.ru/">http://beappy.ru</a>
+Свяжитесь с нами &ndash; <a href="mailto:beappy@ya.ru">beappy@ya.ru</a></p>
+
+<h4>Условия конкурса</h4>
+
+<p><strong>1. Вступить в группы в любую из групп:</strong>
+&ndash; <a href="https://vk.com/androidhelper">VK.com</a>
+&ndash; <a href="https://www.facebook.com/AndroidHelper?ref=hl">Facebook</a>
+&ndash; <a href="google.com/+Android-helperUa">Google+</a></p>
+
+<p><strong>2. Установить себе статус</strong></p>
+
+<blockquote><p>Я смотрю вебинар!
+И участвую в конкурсе!
+<a href="http://android-helper.com.ua/android-success-webinar-post">http://android-helper.com.ua/android-success-webinar-post</a>
+Спасибо BeAppy &ndash; разработка мобильных приложений <a href="http://beappy.ru">http://beappy.ru</a></p></blockquote>
+
+<p><strong>3. Отписать результаты по ссылке!</strong></p>
+
+<p><a href="https://docs.google.com/forms/d/1QE0X0vPxVecm41-Mr8cnfTLKQmsUvW0y9I4MnjI48ts/viewform">Форма</a></p>
+
+<h4>Вопросы можно задавать ниже!</h4>
+
+<table background="transparent" cellspacing="2">
+<tr valign="top">
+<td valign="top">
+<div id="vk_comments" valign="top"></div>
+<script type="text/javascript">
+VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
+</script>
+</td>
+<td valign="top">
+<div id="facebook_comments" aria-live="polite">
+      Included file &#8216;post/facebook_comments.html&#8217; not found in _includes directory
+</div>
+</td>
+</tr>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Как заработать на своем приложении?]]></title>
@@ -1324,88 +1382,6 @@ Android studio &ndash; Структура</p>
 <img src="http://android-helper.com.ua/images/uploads/2013/05/ym3-576x1024.png" alt="ym3" />
 <img src="http://android-helper.com.ua/images/uploads/2013/05/ym2-576x1024.png" alt="ym2" />
 <img src="http://android-helper.com.ua/images/uploads/2013/05/ym1-576x1024.png" alt="ym1" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Обзор Google Hangouts]]></title>
-    <link href="http://android-helper.com.ua//google-hangouts-review/"/>
-    <updated>2013-05-20T19:27:22+03:00</updated>
-    <id>http://android-helper.com.ua//google-hangouts-review</id>
-    <content type="html"><![CDATA[<p>Всем привет.</p>
-
-<p>Вот и закончились славные дни Google I/O.</p>
-
-<p>Теперь я и моя команда будем по немногу делать описание всего того, что можно было увидеть на этой конференции.</p>
-
-<p>Сегодня я вам расскажу о замечательной программе <strong>Hangouts</strong>.</p>
-
-<!-- more -->
-
-
-<p>Чем же она так понравилась пользователям и почему я сам ею пользуюсь, это все вы узнаете далее.</p>
-
-<h3>История</h3>
-
-<p>Несколько лет назад, когда я еще работал в одной из Винницких ИТ компаний. Наш заказчик очень активно использовал сервисы Google в своей работе. И мне всегда было интересно почему?</p>
-
-<p>И вот прошло некое количество времени и мне попал в руки первый смартфон на базе любимой нами системы android. И первое что я увидел, это был сервис Google Talk. Почему я его увидел первым. Все было из-за того, что с заказчиками мы общались исключительно в нем. И он мне показался очень легким и классным. И к тому же не садя батарею, я мог переписываться с женой.</p>
-
-<p>Несколько месяцев назад я узнал об хорошей программе WhatsApp. Она позволяла вести переписку не только с android устройствами но и iOS.</p>
-
-<p>И тут в первый день презентации, компания Google представила замечательную программу <strong>Hangouts</strong>. Вот об этой программе мы сегодня и поговорим.</p>
-
-<h3>Описание</h3>
-
-<p>Что же она может делать? Спросите вы. А вот что.</p>
-
-<ol>
-<li><p> Видео звонки до 10 человек</p></li>
-<li><p> Вести переписку со своими друзьями, как с одним так и с многими</p></li>
-<li><p> Отправлять фото</p></li>
-<li><p> Выставить режим когда вас не беспокоить</p></li>
-<li><p> Около 255 смайлов</p></li>
-<li><p> Есть версии для Android, iOS, Web client.</p></li>
-</ol>
-
-
-<p>Ребята, очень рекоммендую.</p>
-
-<p>Кто поставит, можете меня добавить в чат. Пообщаюсь с большим удовольствием. Наша группа на <a href="https://plus.google.com/b/109843462745343604592/109843462745343604592/posts">Google+</a>. Там вы можете найти мой акаунт. :)</p>
-
-<h3>Установка</h3>
-
-<p>Скачать вы можете по <a href="http://www.google.com/+/learnmore/hangouts/">ссылке</a>.</p>
-
-<h3>Экраны</h3>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/Screenshot_2013-05-15-23-39-47-576x1024.png" alt="Screenshot_2013-05-15-23-39-47-576x1024" /></p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/google-hangouts-7-576x1024.jpg" alt="google-hangouts-7" /></p>
-
-<p> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/google-hangouts-6-576x1024.jpg" alt="google-hangouts-6" /></p>
-
-<p> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/google-hangouts-5-576x1024.jpg" alt="google-hangouts-5" /></p>
-
-<p> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/google-hangouts-4-576x1024.jpg" alt="google-hangouts-4" /></p>
-
-<p> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/google-hangouts-3-576x1024.jpg" alt="google-hangouts-3" /></p>
-
-<p> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/google-hangouts-2-576x1024.jpg" alt="google-hangouts-2" /></p>
-
-<p> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/google-hangouts-1-576x1024.jpg" alt="google-hangouts-1" /></p>
 ]]></content>
   </entry>
   
