@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-03-03T00:10:13+02:00</updated>
+  <updated>2014-03-03T09:10:14+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -75,14 +75,14 @@
 <h2>Вопросы можно задавать ниже!</h2>
 
 <table background="transparent" cellspacing="2">
-<tr valign="top">
-<td valign="top">
+<tr style="vertical-align: top;">
+<td style="vertical-align: top;">
 <div id="vk_comments"></div>
 <script type="text/javascript">
     VK.Widgets.Comments("vk_comments", {limit: 10, width: "450", attach: "*"});
 </script>
 </td>
-<td valign="top">
+<td style="vertical-align: top;">
 <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</a></noscript>
 <div
