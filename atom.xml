@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-03-03T09:10:14+02:00</updated>
+  <updated>2014-03-03T09:17:33+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -79,7 +79,7 @@
 <td style="vertical-align: top;">
 <div id="vk_comments"></div>
 <script type="text/javascript">
-    VK.Widgets.Comments("vk_comments", {limit: 10, width: "450", attach: "*"});
+    VK.Widgets.Comments("vk_comments", {limit: 10, width: "400", attach: "*"});
 </script>
 </td>
 <td style="vertical-align: top;">
@@ -88,7 +88,7 @@
 <div
         class="fb-comments"
         data-href="http://android-helper.com.ua//android-success-webinar-post/"
-        data-num-posts="5"
+        data-num-posts="10"
         data-width="400"
         data-colorscheme="light" ></div>
 </div>
