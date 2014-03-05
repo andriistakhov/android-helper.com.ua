@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-03-05T16:39:21+02:00</updated>
+  <updated>2014-03-05T16:46:52+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Реклама в Android]]></title>
+    <link href="http://android-helper.com.ua//android-advertisement/"/>
+    <updated>2014-03-05T15:35:00+02:00</updated>
+    <id>http://android-helper.com.ua//android-advertisement</id>
+    <content type="html"><![CDATA[<p>Привет друзья.</p>
+
+<p>У нас новый вебинар &ndash; <strong>&ldquo;Реклама в android&rdquo;</strong>.</p>
+
+<p>Прошу к просмотру ролика.</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/r6rW6ldq65o "></iframe></div>
+
+
+
+
+<!-- more -->
+
+
+<p>Время проведения : <strong>6.03.2014 11.00 по Киев (13.00 МСК)</strong></p>
+
+<h2>А вот и сам вебинар!</h2>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Wiq0G68P2FY "></iframe></div>
+
+
+<h2>Участвовать в конкурсе</h2>
+
+<p>Для участия перейдите по <a href="http://android-helper.com.ua/android-success-webinar-post/">ссылке</a></p>
+
+<h2>Вопросы можно задавать ниже!</h2>
+
+<table background="transparent" cellspacing="2">
+<tr style="vertical-align: top;">
+<td style="vertical-align: top;">
+<div id="vk_comments"></div>
+<script type="text/javascript">
+    VK.Widgets.Comments("vk_comments", {limit: 10, width: "400", attach: "*"});
+</script>
+</td>
+<td style="vertical-align: top;">
+<div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</a></noscript>
+<div
+        class="fb-comments"
+        data-href="http://android-helper.com.ua//android-advertisement/"
+        data-num-posts="10"
+        data-width="400"
+        data-colorscheme="light" ></div>
+</div>
+</td>
+</tr>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Вебинар! Как заработать на своем приложении?]]></title>
@@ -1276,140 +1333,6 @@ Android studio &ndash; Структура</p>
 <h3>Завершение</h3>
 
 <p>Надеюсь вам понравилась статья. Если кто то, что нарыл нового в студии, то пишите, буду обновлять статью.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Яндекс.Музыка обзор]]></title>
-    <link href="http://android-helper.com.ua//yandex-music/"/>
-    <updated>2013-05-23T12:27:08+03:00</updated>
-    <id>http://android-helper.com.ua//yandex-music</id>
-    <content type="html"><![CDATA[<h3>Что это?</h3>
-
-<p>Привет друзья. Каждый из вас слышал о компании <strong>Яндекс</strong>. Возможно даже некоторые слышали о сервисе <strong>Яндекс.Музыка</strong>.</p>
-
-<p>Год назад, компания <strong>Яндекс</strong> впервые запустила мобильную версию своего сервиса для iOS.</p>
-
-<p> <!-- more --></p>
-
-<h3>Что это дало?</h3>
-
-<p>А дало это много. Во-первых, у пользователей мобильных платформ, появился хороший плеер как для локальных файлов, так и для <strong>Яндекс.Музыки</strong>. Во-вторых, в следующих версиях появилась возможность слушать радио. И еще одним большим плюсом стала возможность искать понравившуюся песню с помощью звука.</p>
-
-<h3>И что дальше?</h3>
-
-<p>Так как пользователи iOS были очень довольны, а пользователям Android ничего не попало. Компания Яндекс решила создать и приложение под Android. И вот сегодня это приложение попало в сеть. Какое преимущество получили пользователи Android.</p>
-
-<h3>Основные возможности</h3>
-
-<ol>
-<li></li>
-</ol>
-
-
-<p>Первое что попадает в глаза, это хороший и качественный интерфейс.</p>
-
-<ol>
-<li><p> Возможность слушать:</p>
-
-<ul>
-<li><p>Локальные файлы</p></li>
-<li><p>Музыку с Яндекс.Диска</p></li>
-<li><p>Музыку с Яндекс.Музыки (плейлисты)</p></li>
-</ul>
-</li>
-<li></li>
-</ol>
-
-
-<p>Осуществлять поиск по огромнейшей базе Яндекс каталога.</p>
-
-<ol>
-<li></li>
-</ol>
-
-
-<p>Поиск по звуковому фрагменту. Просто приставьте телефон к играющему устройству.</p>
-
-<ol>
-<li></li>
-</ol>
-
-
-<p>Еще одно преимущество, это возможность слушать Радио. Его можно прослушивать как из меню, так и по исполнителю. А также можно сохранить себе на телефон.</p>
-
-<ol>
-<li></li>
-</ol>
-
-
-<p>Что порадовало, так это когда ты нашел трек, то по треку можно открыть альбом в котором он есть, либо артиста. И увидеть список треков из альбома, либо от артиста.</p>
-
-<ol>
-<li></li>
-</ol>
-
-
-<p>Для тех кто постоянно в дороге, а свою музыку он хочет слушать везде. Можно сохранить всю вашу музыку на телефон и слушать ее оффлайн.</p>
-
-<ol>
-<li></li>
-</ol>
-
-
-<p>Из меню “Что нового?” можно следить за последними новинками и популярными песнями.</p>
-
-<ol>
-<li></li>
-</ol>
-
-
-<p>В настройках можно указать куда кешировать и сохранять ваши треки.</p>
-
-<ol>
-<li>.</li>
-</ol>
-
-
-<p>Легальность всей музыки.</p>
-
-<ol>
-<li>.</li>
-</ol>
-
-
-<p>Порадовало, что когда делаешь подписку, то приложение с полным функционалом можно использовать целый месяц бесплатно и только в следующем месяце снимут 5$.</p>
-
-<h3>Моя оценка</h3>
-
-<p>Все просто супер. Есть несколько недостатков, но я думаю, что руководство и разработчики это все быстро исправят. А также ждем версию под планшеты.</p>
-
-<h3>Скачать</h3>
-
-<p><a href="https://play.google.com/store/apps/details?id=ru.yandex.music"><img src="https://developer.android.com/images/brand/ru_generic_rgb_wo_60.png" alt="Get it on Google Play" /></a> </p>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/ymqr.png" alt="ymqr" /></p>
-
-<h3>Экраны</h3>
-
-<p><img src="http://android-helper.com.ua/images/uploads/2013/05/ym18-576x1024.png" alt="ym18" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym17-576x1024.png" alt="ym17" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym16-576x1024.png" alt="ym16" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym15-576x1024.png" alt="ym15" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym14-576x1024.png" alt="ym14" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym13-576x1024.png" alt="ym13" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym12-576x1024.png" alt="ym12" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym11-576x1024.png" alt="ym11" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym10-576x1024.png" alt="ym10" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym9-576x1024.png" alt="ym9" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym8-576x1024.png" alt="ym8" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym7-576x1024.png" alt="ym7" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym6-576x1024.png" alt="ym6" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym5-576x1024.png" alt="ym5" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym4-576x1024.png" alt="ym4" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym3-576x1024.png" alt="ym3" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym2-576x1024.png" alt="ym2" />
-<img src="http://android-helper.com.ua/images/uploads/2013/05/ym1-576x1024.png" alt="ym1" /></p>
 ]]></content>
   </entry>
   

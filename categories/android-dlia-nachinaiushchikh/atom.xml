@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android для начинающих | Android helper]]></title>
   <link href="http://android-helper.com.ua//categories/android-dlia-nachinaiushchikh/atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-03-05T16:43:29+02:00</updated>
+  <updated>2014-03-05T16:46:52+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -365,7 +365,7 @@ startActivity(intent);
 
 <p><strong>Видео</strong></p>
 
-<p>{% youtube 63T-8YRlFmE %}</p>
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/63T-8YRlFmE "></iframe></div></p>
 
 <p>Надеюсь статья была для вас полезной. Если да нажимайте рассказать друзьям :)</p>
 ]]></content>
@@ -393,7 +393,7 @@ startActivity(intent);
 
 <p>Ну что смотрим?</p>
 
-<p>{% youtube 9yZ6KpZ6y44 %}</p>
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/9yZ6KpZ6y44 "></iframe></div></p>
 ]]></content>
   </entry>
   
@@ -412,7 +412,7 @@ startActivity(intent);
 
 <p><strong>Google I/O 2013 Chrome Sessions</strong></p>
 
-<p>{% youtube hXPAXKb-LQE %}</p>
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/hXPAXKb-LQE "></iframe></div></p>
 ]]></content>
   </entry>
   
