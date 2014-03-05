@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Коучинг | Android helper]]></title>
   <link href="http://android-helper.com.ua//categories/kouchingh/atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-03-05T16:39:21+02:00</updated>
+  <updated>2014-03-05T16:43:29+02:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -29,7 +29,7 @@
 
 <p>Месяц назад был проведен вебинар, по заработку на android программах. Из этого вебинара подали заявки на участие 9 человек. Все они сейчас проходят обучение и буду в скором времени возвращать свои инвестиции.</p>
 
-<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/0xGKIHkRF8Y "></iframe></div></p>
+<p>{% youtube 0xGKIHkRF8Y %}</p>
 
 <p>Что было сделано за этот месяц:</p>
 
