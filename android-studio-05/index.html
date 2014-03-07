@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>SlidingMenu - или новое поколение Dashboard - Android helper</title>
+  <title>Android Studio - 0.5.0 Release - Android helper</title>
   <meta name="author" content="Andrii Stakhov">
 
   
-  <meta name="description" content="Всем привет. Есть много программ с которых программисты и дизайнеры берут свои идеи. И вот одна из которых это приложение facebook для android. С &hellip;">
+  <meta name="description" content="Друзья всем привет. Спешу сообщить вам, что всеми любимая android studio обновилась до версии 0.5.0. Что нового? Поддержка Android Gradle plugin 0.9 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://android-helper.com.ua//slidingmenu">
+  <link rel="canonical" href="http://android-helper.com.ua//android-studio-05">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/github/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
@@ -78,7 +78,7 @@
   
   <header>
     
-      <h1 class="entry-title">SlidingMenu - или новое поколение Dashboard</h1>
+      <h1 class="entry-title">Android Studio - 0.5.0 Release</h1>
     
     
       <p class="meta">
@@ -94,7 +94,7 @@
   
 
 
-<time datetime="2013-01-28T18:03:57+02:00" pubdate data-updated="true">Jan 28<span>th</span>, 2013</time>
+<time datetime="2014-03-07T09:54:44+02:00" pubdate data-updated="true">Mar 7<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://android-helper.com.ua/">Comments</a>
@@ -104,224 +104,49 @@
   </header>
 
 
-<div class="entry-content"><p>Всем привет.</p>
+<div class="entry-content"><p>Друзья всем привет.</p>
 
-<p>Есть много программ с которых программисты и дизайнеры берут свои идеи.</p>
+<p>Спешу сообщить вам, что всеми любимая <a href="http://developer.android.com/sdk/installing/studio.html">android studio</a> обновилась до версии 0.5.0.</p>
 
-<p>И вот одна из которых это приложение facebook для android.</p>
+<p><img src="http://kostyay.name/wp-content/uploads/2013/09/android_studio.gif" alt="" /></p>
 
-<p>С этой программы дизайнеры взяли такую вещь как sliding menu.</p>
+<!-- more -->
 
-<p>Давайте посмотрим, что это такое.</p>
 
-<p> <!-- more --></p>
+<h3>Что нового?</h3>
 
-<p><img src="http://android-helper.com.ua/images/uploads/2013/01/Screenshot_2013-01-17-19-47-11.png" alt="Screenshot_2013-01-17-19-47-11" /></p>
+<ol>
+<li>Поддержка Android Gradle plugin 0.9.
+Теперь вам для роботы необходимо использовать <strong>0.9</strong> версию. Как обновить вашу версию можно посмотреть <a href="http://tools.android.com/tech-docs/new-build-system/migrating_to_09">тут</a>)</li>
+<li>Используется движек от IntelliJ 13.1 EAP.</li>
+<li>Поддержка Gradle</li>
+<li>Полная работа в offline режиме
+<img src="http://tools.android.com/_/rsrc/1394146962744/recent/androidstudio050released/offline_mode_complete.png" alt="" /></li>
+<li>Поддержка source папок вне root папки</li>
+<li>Поддержка различных способов сборки</li>
+<li>Lint</li>
+<li>Обновлен движек поиска ошибок. К примеру теперь можно не беспокоится о том какой объект вы пытаетесь получить из метода <strong>findViewById</strong>.
+<img src="http://tools.android.com/_/rsrc/1394146962719/recent/androidstudio050released/lint-cast.png" alt="" /></li>
+<li>также в файле <strong>lint.xml</strong> можно добавлять фильтры ошибок. А также игнорировать некоторые файлы.
+  <ignore regexp="res/.*layout.*/activation.xml" />
+  <ignore path="res/**/activation.xml" /></li>
+<li>флаг в Gradle packageSuffix, используется где suffix не начинается с точки.</li>
+<li>Во время редакиторования ресурсных файлов, теперь вы можете видеть закончиный код и его документацию.</li>
+<li>Закрыто огромнейшее количество багов.</li>
+</ol>
 
-<p> </p>
 
-<p><img src="http://android-helper.com.ua/images/uploads/2013/01/Screenshot_2013-01-02-02-24-31.png" alt="Screenshot_2013-01-02-02-24-31" /></p>
+<h3>Install</h3>
 
-<p> </p>
+<p>Установка проходит очень легко. Вам нужно нажать Help > Check for Update.</p>
 
-<h3>Задача</h3>
+<p>Если вы хотите скачать полную версию, то тогда это можно сделать по <a href="http://tools.android.com/download/studio/canary/0-5-0">ссылке</a>.</p>
 
-<p>Сделать что то подобное.</p>
+<h3>Решение проблем</h3>
 
-<h3>Реализация</h3>
+<p>Все проблемы можно решить и спросить по <a href="http://tools.android.com/knownissues">ссылке</a>, а также задать в комментариях к этой статье.</p>
 
-<p>Для реализации данной задачи, мы будем использовать открытую библиотеку <a href="https://github.com/jfeinstein10/SlidingMenu">SlidingMenu</a>.</p>
-
-<p>Также как она работает можете посмотреть, скачав приложение с <a href="https://play.google.com/store/apps/details?id=com.slidingmenu.example">маркета</a>.</p>
-
-<h3>Коды</h3>
-
-<p><strong>MainActivity.java</strong></p>
-
-<pre><code>public class MainActivity extends Activity {
-
-
-
-@Override
-
-protected void onCreate(Bundle savedInstanceState) {
-
-    super.onCreate(savedInstanceState);
-
-    setContentView(R.layout.activity_main);
-
-
-
-    setTitle("Attach");
-
-    // configure the SlidingMenu
-
-    SlidingMenu menu = new SlidingMenu(this);
-
-    menu.setMode(SlidingMenu.LEFT);
-
-    menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-
-    menu.setShadowWidthRes(R.dimen.shadow_width);
-
-    menu.setShadowDrawable(R.drawable.shadow);
-
-    menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-
-    menu.setFadeDegree(0.35f);
-
-
-
-    // ///////////
-
-    menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-
-    // //////////
-
-
-
-    menu.setMenu(R.layout.menu);
-
-}
-
-
-
-@Override
-
-public boolean onCreateOptionsMenu(Menu menu) {
-
-    // Inflate the menu; this adds items to the action bar if it is present.
-
-    getMenuInflater().inflate(R.menu.activity_main, menu);
-
-    return true;
-
-}
-
-
-
-}
-</code></pre>
-
-<p><strong>drawable/shadow.xml</strong></p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-
-&lt;shape xmlns:android="http://schemas.android.com/apk/res/android" &gt;
-
-
-
-&lt;gradient
-
-    android:centerColor="#11000000"
-
-    android:endColor="#33000000"
-
-    android:startColor="#00000000" /&gt;
-
-
-
-&lt;/shape&gt;
-</code></pre>
-
-<p><strong>layout/menu.xml</strong></p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-android:layout_width="match_parent"
-
-android:layout_height="match_parent"
-
-android:orientation="vertical" &gt;
-
-
-
-&lt;TextView
-
-    android:id="@+id/textView1"
-
-    android:layout_width="wrap_content"
-
-    android:layout_height="wrap_content"
-
-    android:text="Menu 1"
-
-    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
-
-
-
-&lt;TextView
-
-    android:id="@+id/textView2"
-
-    android:layout_width="wrap_content"
-
-    android:layout_height="wrap_content"
-
-    android:text="Menu 2"
-
-    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
-
-
-
-&lt;TextView
-
-    android:id="@+id/textView3"
-
-    android:layout_width="wrap_content"
-
-    android:layout_height="wrap_content"
-
-    android:text="Menu 3"
-
-    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
-
-
-
-&lt;TextView
-
-    android:id="@+id/textView4"
-
-    android:layout_width="wrap_content"
-
-    android:layout_height="wrap_content"
-
-    android:text="Menu 4"
-
-    android:textAppearance="?android:attr/textAppearanceLarge" /&gt;
-
-
-
-&lt;/LinearLayout&gt;
-</code></pre>
-
-<p><strong>values/dimens.xml</strong></p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-
-&lt;resources&gt;
-
-
-
-&lt;dimen name="slidingmenu_offset"&gt;60dp&lt;/dimen&gt;
-
-&lt;dimen name="list_padding"&gt;10dp&lt;/dimen&gt;
-
-&lt;dimen name="shadow_width"&gt;15dp&lt;/dimen&gt;
-
-
-
-&lt;/resources&gt;
-</code></pre>
-
-<h3>Видео</h3>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/eHWNIS64I0Q "></iframe></div>
-
-
-<p>Рабочий код на странице с <a href="http://android-helper.com.ua/codes/">кодами</a>.</p>
+<p><img src="http://tools.android.com/_/rsrc/1394147196363/recent/androidstudio050released/studio050.png" alt="" /></p>
 </div>
 
 
@@ -330,7 +155,7 @@ android:orientation="vertical" &gt;
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+<span class="byline author vcard">Posted by <span class="fn">Andrii Stakhov</span></span>
 
       
 
@@ -344,21 +169,15 @@ android:orientation="vertical" &gt;
   
 
 
-<time datetime="2013-01-28T18:03:57+02:00" pubdate data-updated="true">Jan 28<span>th</span>, 2013</time>
+<time datetime="2014-03-07T09:54:44+02:00" pubdate data-updated="true">Mar 7<span>th</span>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/categories/pamiatka-razrabotchiku/'>Памятка разработчику</a>, <a class='category' href='/categories/proghrammirovaniie/'>Программирование</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//slidingmenu/" data-via="helperandroid" data-counturl="http://android-helper.com.ua//slidingmenu/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//android-studio-05/" data-via="helperandroid" data-counturl="http://android-helper.com.ua//android-studio-05/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -371,10 +190,8 @@ android:orientation="vertical" &gt;
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/pixlr-express/" title="Previous Post: PIXLR EXPRESS – инструмент для обработки фотографий">&laquo; PIXLR EXPRESS – инструмент для обработки фотографий</a>
+        <a class="basic-alignment left" href="/android-advertisement/" title="Previous Post: Реклама в android">&laquo; Реклама в android</a>
       
-      
-        <a class="basic-alignment right" href="/dungeon-quest/" title="Next Post: Dungeon Quest – прогулка по подземельям">Dungeon Quest – прогулка по подземельям &raquo;</a>
       
     </p>
   </footer>
@@ -528,8 +345,8 @@ android:orientation="vertical" &gt;
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://android-helper.com.ua//slidingmenu/';
-        var disqus_url = 'http://android-helper.com.ua//slidingmenu/';
+        var disqus_identifier = 'http://android-helper.com.ua//android-studio-05/';
+        var disqus_url = 'http://android-helper.com.ua//android-studio-05/';
         var disqus_script = 'embed.js';
       
     (function () {
