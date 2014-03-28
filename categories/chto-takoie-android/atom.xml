@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Что такое Android | Android helper]]></title>
   <link href="http://android-helper.com.ua//categories/chto-takoie-android/atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-03-12T17:37:15+02:00</updated>
+  <updated>2014-03-28T09:59:04+07:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Custom Font - свои шрифты в Android]]></title>
     <link href="http://android-helper.com.ua//custom-font/"/>
-    <updated>2013-11-21T14:47:23+02:00</updated>
+    <updated>2013-11-21T19:47:23+07:00</updated>
     <id>http://android-helper.com.ua//custom-font</id>
     <content type="html"><![CDATA[<p>Друзья всем привет.</p>
 
@@ -147,7 +147,7 @@ setFont(keyboardArea, keys);
   <entry>
     <title type="html"><![CDATA[BitByte — для тех, кого волнует профессиональное развитие в IT-сфере]]></title>
     <link href="http://android-helper.com.ua//bitbyte/"/>
-    <updated>2013-04-04T07:12:44+03:00</updated>
+    <updated>2013-04-04T11:12:44+07:00</updated>
     <id>http://android-helper.com.ua//bitbyte</id>
     <content type="html"><![CDATA[<p>20 апреля в Санкт-Петербурге <a href="http://spb.itmozg.ru/">ITmozg</a> снова соберет на одной площадке новичков и профессионалов IT-рынка на ежегодном Фестивале профессионального развития — <a href="http://bitbyte.itmozg.ru/">BitByte</a>. </p>
 
@@ -172,7 +172,7 @@ setFont(keyboardArea, keys);
   <entry>
     <title type="html"><![CDATA[Несколько слухов об Android Key Lime Pie]]></title>
     <link href="http://android-helper.com.ua//android-key-lime-pie/"/>
-    <updated>2013-04-04T07:02:27+03:00</updated>
+    <updated>2013-04-04T11:02:27+07:00</updated>
     <id>http://android-helper.com.ua//android-key-lime-pie</id>
     <content type="html"><![CDATA[<p>Ну что, кто может сказать, когда мы уже, наконец, увидим следующую версию Android? Наверное, большинство из читателей скажет, что подобное событие произойдёт на мероприятии Google I/O. Во всяком случае об этом твердит большинство источников, и именно на это намекает прошлый опыт. Так что терпеливо ждём 15 мая.</p>
 
@@ -201,7 +201,7 @@ setFont(keyboardArea, keys);
   <entry>
     <title type="html"><![CDATA[Доктор Веб: обзор Android-угроз в 2012 году]]></title>
     <link href="http://android-helper.com.ua//doctor-web/"/>
-    <updated>2013-01-30T23:00:56+02:00</updated>
+    <updated>2013-01-31T04:00:56+07:00</updated>
     <id>http://android-helper.com.ua//doctor-web</id>
     <content type="html"><![CDATA[<p>Компания «Доктор Веб» сделала обзор Android-угроз в 2012 году. С угрозами со стороны вредоносных программ ОС Android столкнулась практически с момента своего появления на рынке. И хотя многие пользователи поначалу восприняли этот факт скептически, постепенно их сомнения сменились обеспокоенностью за безопасность используемых мобильных устройств, так как число вредоносных приложений продолжало неуклонно расти. Прошедший 2012 год в этом плане не стал исключением.</p>
 
@@ -233,7 +233,7 @@ setFont(keyboardArea, keys);
   <entry>
     <title type="html"><![CDATA[Android заняла 70 процентов рынка смартфонов в 2012 году]]></title>
     <link href="http://android-helper.com.ua//android-70/"/>
-    <updated>2013-01-30T22:56:40+02:00</updated>
+    <updated>2013-01-31T03:56:40+07:00</updated>
     <id>http://android-helper.com.ua//android-70</id>
     <content type="html"><![CDATA[<p>По последним данным агентства Strategy Analytics за 2012 год в мире было продано около 700 миллионов смартфонов, при этом 684 процента от этого количества составляли устройства на базе платформы <a href="http://androidnews.com.ua/">Android</a>, iOS получила 194 процента, а 122 процентов пришлось на другие программные платформы. Что касается производителей смартфонов, то лидирующие позиции в 2012 году остались за Apple и Samsung, как по уровню прибыли, так и по объемам продаж. По мнению аналитиков, именно эти две компании сегодня можно считать главными противоборствующими сторонами в мобильной индустрии, а противостояние Apple и <a href="http://androidnews.com.ua/other-news/2740-google-rabotaet-nad-android-ochkami.html">Google</a> начало отходить на второй план. Также в Strategy Analytics обращают внимание на замедление темпов развития рынка смартфонов. К примеру, в 2011 году рост поставок смартфонов в мире составил 64 процента, а в прошлом только 43.</p>
 ]]></content>

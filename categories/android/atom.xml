@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Android | Android helper]]></title>
+  <link href="http://android-helper.com.ua//categories/android/atom.xml" rel="self"/>
+  <link href="http://android-helper.com.ua//"/>
+  <updated>2014-03-28T09:59:04+07:00</updated>
+  <id>http://android-helper.com.ua//</id>
+  <author>
+    <name><![CDATA[Andrii Stakhov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Android Studio обновления 5.0.3]]></title>
+    <link href="http://android-helper.com.ua//android-studio-5-dot-0-3/"/>
+    <updated>2014-03-28T09:34:19+07:00</updated>
+    <id>http://android-helper.com.ua//android-studio-5-dot-0-3</id>
+    <content type="html"><![CDATA[<p>Привет друзья.</p>
+
+<p>Я решил публиковать на блоге последние обновления <a href="http://tools.android.com/recent/androidstudio053released">Android Studio</a>.</p>
+
+<p><img src="https://lh3.googleusercontent.com/-qRSZQHP0dk0/UzThAX0ztwI/AAAAAAAAAJE/jtyOHmT69fo/w731-h549-no/studio_splash.png" alt="Android Studio" /></p>
+
+<p>Так вот, сегодня наша любимая среда разработки, обновилась до версии <strong>5.0.3</strong></p>
+
+<p>Что же туда попало? Много чего интересного!</p>
+
+<!-- more -->
+
+
+<p><strong>1. Обновлен движек IntelliJ IDE до 13.1.1</strong></p>
+
+<p>А это огромнешнее количество пофикшеных багов + оптимизация. Что входит в это обновление &ndash; <a href="http://confluence.jetbrains.com/display/IDEADEV/IntelliJ+IDEA+13.1.1+Release+Notes">IntelliJ IDE 13.1.1 &ndash; Release Notes</a>
+<strong>2. Gradle:</strong></p>
+
+<p>Появилась возможность импортировать модули в существующие проекты.</p>
+
+<p>Теперь ошибки показываются не только в сплывающей подсказкой, а и полноценным диалогом ошибки.
+<img src="http://tools.android.com/_/rsrc/1395963475880/recent/androidstudio053released/balloons.png" alt="" /></p>
+
+<p>Окно вариантов билдов, теперь показывает конфликтные варианты.</p>
+
+<p><strong>3. Шаблоны</strong></p>
+
+<p>Теперь во время создания нового активити, вы можете выбрать один из вариантов его заполнения.
+<img src="http://tools.android.com/_/rsrc/1395963475913/recent/androidstudio053released/choose-source-set.png" alt="" /></p>
+
+<p>Во время создания любого из android компонентов, можно выбрать конкретный элемент
+<img src="http://tools.android.com/_/rsrc/1395963475849/recent/androidstudio053released/activity-categories.png" alt="" /></p>
+
+<p>Исправлено множество ошибок.</p>
+
+<p><a href="http://android-helper.com.ua/android-studio-05/">Как устанавливать Android Studio?</a></p>
+]]></content>
+  </entry>
+  
+</feed>

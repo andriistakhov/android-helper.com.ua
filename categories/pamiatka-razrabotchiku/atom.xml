@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Памятка разработчику | Android helper]]></title>
   <link href="http://android-helper.com.ua//categories/pamiatka-razrabotchiku/atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-03-12T17:37:15+02:00</updated>
+  <updated>2014-03-28T09:59:04+07:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Custom Font - свои шрифты в Android]]></title>
     <link href="http://android-helper.com.ua//custom-font/"/>
-    <updated>2013-11-21T14:47:23+02:00</updated>
+    <updated>2013-11-21T19:47:23+07:00</updated>
     <id>http://android-helper.com.ua//custom-font</id>
     <content type="html"><![CDATA[<p>Друзья всем привет.</p>
 
@@ -147,7 +147,7 @@ setFont(keyboardArea, keys);
   <entry>
     <title type="html"><![CDATA[Genymotion Root - Как получить права рут на емуляторе]]></title>
     <link href="http://android-helper.com.ua//ganymotion-root/"/>
-    <updated>2013-11-16T18:03:39+02:00</updated>
+    <updated>2013-11-16T23:03:39+07:00</updated>
     <id>http://android-helper.com.ua//ganymotion-root</id>
     <content type="html"><![CDATA[<h3>Как зарутить ganymotion?</h3>
 
@@ -208,7 +208,7 @@ adb shell chmod 6755 /system/xbin/su
   <entry>
     <title type="html"><![CDATA[Магические Intents - как ими пользоваться]]></title>
     <link href="http://android-helper.com.ua//intents/"/>
-    <updated>2013-08-20T11:37:00+03:00</updated>
+    <updated>2013-08-20T15:37:00+07:00</updated>
     <id>http://android-helper.com.ua//intents</id>
     <content type="html"><![CDATA[<p>Добрый день друзья.
 Сегодня наша статья будет полезна не только гуру android программирования, но и тем кто только стал на этот не легкий тернистый путь.</p>
@@ -371,7 +371,7 @@ startActivity(intent);
   <entry>
     <title type="html"><![CDATA[Genymotion - обзор возможностей]]></title>
     <link href="http://android-helper.com.ua//genymotion-review/"/>
-    <updated>2013-07-18T10:33:20+03:00</updated>
+    <updated>2013-07-18T14:33:20+07:00</updated>
     <id>http://android-helper.com.ua//genymotion-review</id>
     <content type="html"><![CDATA[<h3>Genymotion</h3>
 
@@ -443,7 +443,7 @@ startActivity(intent);
   <entry>
     <title type="html"><![CDATA[Android Studio и альтернативный емулятор - Genymotion]]></title>
     <link href="http://android-helper.com.ua//android-studio-genymotion/"/>
-    <updated>2013-07-05T12:49:21+03:00</updated>
+    <updated>2013-07-05T16:49:21+07:00</updated>
     <id>http://android-helper.com.ua//android-studio-genymotion</id>
     <content type="html"><![CDATA[<p>В этой статье я расскажу как как установить среду разработки Android используя Android Studio и Genymotion. При переходе от Eclispe/ADT к Android Studio я исследовал альтернативные конфигурации для улучшения сборочной среды. Нашел неплохой эмулятор Genymotion. Интересный, довольно быстрый и очень простой.</p>
 
