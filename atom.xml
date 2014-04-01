@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-03-29T20:23:47+07:00</updated>
+  <updated>2014-04-01T10:07:48+07:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Результаты конкурса. Получи книгу - "Программирование под Android"]]></title>
+    <link href="http://android-helper.com.ua//concurs-winner/"/>
+    <updated>2014-04-01T09:53:11+07:00</updated>
+    <id>http://android-helper.com.ua//concurs-winner</id>
+    <content type="html"><![CDATA[<p>Привет уважаемые подписчики.</p>
+
+<p>Вот и закончился у нас конкурс.</p>
+
+<p>В котором приняло участие &ndash; <strong>8 человек</strong>.</p>
+
+<p>Кто же победил в этом конкурсе?</p>
+
+<p><img src="https://lh3.googleusercontent.com/-rC2gPzlSqn8/UzorlP9djzI/AAAAAAAALpQ/S2RC50fn_WI/w791-h593-no/WlgfBzdJBeQ.jpg" alt="" /></p>
+
+<!-- more -->
+
+
+<p>Мы старались провести этот конкурс с максимально большим охватом аудитории.</p>
+
+<p>Именно для этого и были выбраны 3 социальные сети: Вконтакте, Facebook и Google+.</p>
+
+<p>Давайте тогда посмотрим за тем кто же выиграл в конкурсе!</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/A3LwDb3zP1k "></iframe></div>
+
+
+<p>Наши победители:</p>
+
+<ol>
+<li><a href="https://vk.com/id19650728">Макс Винокуров</a></li>
+<li><a href="https://vk.com/id108590886">Валентина Койнаш</a></li>
+</ol>
+
+
+<p>Мои поздравления победителям!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Android Studio обновления 0.5.3]]></title>
@@ -1267,71 +1306,6 @@ startActivity(intent);
 <p>поддержка консоли: Genymotion предоставляет возможность написать модификации скрипта для состояний сенсора.</p>
 
 <p>Давайте уточним, наличие быстрой виртуальной машины никак не значит что вы не должны тестировать на реальных устройствах. Это хорошая возможность быстро на кидать и отшлифовать прототип. Как не крути, лучшим способом удостоверится, что все работает плавно на реальных устройствах на них и провеять. У Genymotion все еще есть некоторые незначительные баг/недостающие фичи (это все еще Бета). Но его скорость, простота интеграции в среду разработки делают его мощным инструментом в арсенале разработчика.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android Studio и альтернативный емулятор - Genymotion]]></title>
-    <link href="http://android-helper.com.ua//android-studio-genymotion/"/>
-    <updated>2013-07-05T16:49:21+07:00</updated>
-    <id>http://android-helper.com.ua//android-studio-genymotion</id>
-    <content type="html"><![CDATA[<p>В этой статье я расскажу как как установить среду разработки Android используя Android Studio и Genymotion. При переходе от Eclispe/ADT к Android Studio я исследовал альтернативные конфигурации для улучшения сборочной среды. Нашел неплохой эмулятор Genymotion. Интересный, довольно быстрый и очень простой.</p>
-
-<p><strong>Что нам нужно?</strong></p>
-
-<!-- more -->
-
-
-<ul>
-<li><p><a href="http://android-helper.com.ua/android-studio/">Android Studio</a></p></li>
-<li><p><a href="https://www.virtualbox.org/wiki/Downloads">Oracle VM VirtualBox</a></p></li>
-<li><p><a href="http://www.genymotion.com/">Genymotion Android emulator</a></p></li>
-<li><p><a href="http://www.genymotion.com/">Genymotion Android studio plugin</a></p></li>
-</ul>
-
-
-<p><strong>Установка Oracle VM VirtualBox</strong> Если вы используете Windows в загруженном вами пакете будет все необходимое, в противном случае вам нужно будет скачать и установить ее самостоятельно. Процесс простой и прямолинейный но эти действия необходимо выполнить иначе Android Emulator не запуститься.</p>
-
-<p><strong>Установка Genymotion Android device emulator</strong> Первое что нужно это сделать создать аккаунт, чтобы иметь возможность скачать эмулятор. Вы можете выбирать среди платформ, в моем случае это Mac OS X. Когда вы его скачали и установили у вас должно получиться что-то такое:</p>
-
-<p><img src="https://lh4.googleusercontent.com/-XTLtY_Lu-uo/UdZ1ohxTDpI/AAAAAAAAIxU/UHNpDYatWSE/w878-h549-no/emulator1.png" alt="Genymotion Android device emulator" /></p>
-
-<p>Genymotion Android device emulator</p>
-
-<p>У вас может быть доступно множество эмуляторов. Вы выбираете и грузите его с сети. Как результат у вас готовый эмулятор.</p>
-
-<p><img src="https://lh3.googleusercontent.com/-bSICk3KwvT0/UdZ1oresDZI/AAAAAAAAIxE/VXQYFWzmdBs/w878-h549-no/emulator2.png" alt="Genymotion Android device emulator" /></p>
-
-<p>Genymotion Android device emulator</p>
-
-<p><strong>Установка Android Studio Plugin</strong> Чтобы интегрировать средство разработки с эмулятором вам необходимо установить плагин для Android Studio. Зайдите в Preferences там Plugin, выбираем нужный нам. Добавляем плагин который мы уже скачали и видим:</p>
-
-<p><img src="https://lh3.googleusercontent.com/-7ESa9bvI8oY/UdZ1ouyWdyI/AAAAAAAAIxQ/cod9TPdH1Qc/w878-h549-no/emulator3.png" alt="Genymotion Android Studio Plugin" /></p>
-
-<p>Genymotion Android Studio Plugin</p>
-
-<p><strong>Результат</strong></p>
-
-<p>Теперь вы можете запустить Android проект и вы увидите:</p>
-
-<p><img src="https://lh4.googleusercontent.com/-pu_27RpWvZI/UdZ1pYXK1xI/AAAAAAAAIxM/qk4W1XYDUw4/w878-h549-no/emulator4_1.png" alt="Genymotion Android Studio Plugin" /></p>
-
-<p>Genymotion Android Studio Plugin</p>
-
-<p>Эмулятор полностью интегрирован в вашу среду разработки . Первый раз когда вы запустите эмулятор вы можете увидеть диалог который спросит путь к Android SDK:</p>
-
-<p><img src="https://lh3.googleusercontent.com/-kJdXolrj9RQ/UdZ1pOHCHFI/AAAAAAAAIxI/L8cSs1wTSNk/w878-h549-no/emulator4.png" alt="Genymotion Android Studio Plugin" /></p>
-
-<p>Genymotion Android Studio Plugin</p>
-
-<p>Как-только все настроено можно запускать свой проект. <img src="https://lh4.googleusercontent.com/-vvfjkEI4RRw/UdZ1ph1p7II/AAAAAAAAIxc/n31dDQvUqj4/w878-h549-no/emulator5.png" alt="Genymotion Android Studio Plugin" /></p>
-
-<p><strong>Видео</strong></p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/63T-8YRlFmE "></iframe></div>
-
-
-<p>Надеюсь статья была для вас полезной. Если да нажимайте рассказать друзьям :)</p>
 ]]></content>
   </entry>
   
