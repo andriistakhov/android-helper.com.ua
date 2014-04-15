@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-04-01T10:07:48+07:00</updated>
+  <updated>2014-04-15T11:22:53+03:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -14,9 +14,53 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Как установить сервисы Google на Genymotion]]></title>
+    <link href="http://android-helper.com.ua//google-in-genymotion/"/>
+    <updated>2014-04-14T20:19:29+03:00</updated>
+    <id>http://android-helper.com.ua//google-in-genymotion</id>
+    <content type="html"><![CDATA[<p>Привет друзья.</p>
+
+<p>Сегодня я покажу вам как можно установить сервисы google на  Genymotion.</p>
+
+<p><img src="https://lh6.googleusercontent.com/-NkJERQqJ39I/U0zNoDuoEWI/AAAAAAAAAJg/rcUOfP_WTrU/w696-h412-no/genymotion-google.jpg" alt="" /></p>
+
+<!-- more -->
+
+
+
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/KaiTBI565B0 "></iframe></div>
+
+
+<ol>
+<li>Скачать следующие архивы:</li>
+<li><a href="http://goo.gl/J7AYfU">ARM Translation Installer v1.1</a></li>
+<li><a href="http://goo.gl/y7D0Xm">Google Apps for Android 4.4</a></li>
+<li><a href="http://goo.gl/sXbWBQ">Google Apps for Android 4.3</a></li>
+<li><a href="http://goo.gl/uYd8mz">Google Apps for Android 4.2</a></li>
+<li><a href="http://goo.gl/v0vMUP">Google Apps for Android 4.1</a></li>
+<li>Запускаем ваш Genymotion и открываем главный екран</li>
+<li>Дальше перетягиваем <strong>Genymotion-ARM-Translation.zip</strong> в Genymotion.
+Должно показатся &ldquo;<strong>File transfer in progress</strong>&rdquo;, если что то спросит нажимаем &ndash; &lsquo;<strong>OK</strong>&rsquo;</li>
+<li>Рекомендую перегрузить ваш Genymotion</li>
+<li>Сново открываем ваш рабочий стол в Genymotion и перетягиваем <strong>gapps-*-signed.zip</strong>(то имя которое вы используете) и нажимаем &lsquo;<strong>OK</strong>&rsquo;</li>
+<li>Сново перегружаем ваш эмулятор и заходим в Play Market</li>
+<li>Подключаем ваш Google аккаунт</li>
+</ol>
+
+
+<h3>Для чего нужен Genymotion?</h3>
+
+<p>Ответ вы можете найти <a href="http://android-helper.com.ua/genymotion-review/">тут</a></p>
+
+<p>Если у вас есть вопросы пишите в комментариях. И не забывайте подписываться на новости блога.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Результаты конкурса. Получи книгу - "Программирование под Android"]]></title>
     <link href="http://android-helper.com.ua//concurs-winner/"/>
-    <updated>2014-04-01T09:53:11+07:00</updated>
+    <updated>2014-04-01T05:53:11+03:00</updated>
     <id>http://android-helper.com.ua//concurs-winner</id>
     <content type="html"><![CDATA[<p>Привет уважаемые подписчики.</p>
 
@@ -55,7 +99,7 @@
   <entry>
     <title type="html"><![CDATA[Android Studio обновления 0.5.3]]></title>
     <link href="http://android-helper.com.ua//android-studio-5-dot-0-3/"/>
-    <updated>2014-03-28T09:34:19+07:00</updated>
+    <updated>2014-03-28T04:34:19+02:00</updated>
     <id>http://android-helper.com.ua//android-studio-5-dot-0-3</id>
     <content type="html"><![CDATA[<p>Привет друзья.</p>
 
@@ -99,7 +143,7 @@
   <entry>
     <title type="html"><![CDATA[Монетизация мобильных приложений]]></title>
     <link href="http://android-helper.com.ua//android-money/"/>
-    <updated>2014-03-11T01:38:05+07:00</updated>
+    <updated>2014-03-10T20:38:05+02:00</updated>
     <id>http://android-helper.com.ua//android-money</id>
     <content type="html"><![CDATA[<p>Привет друзья.</p>
 
@@ -152,7 +196,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Android Studio - 0.5.0 Release]]></title>
     <link href="http://android-helper.com.ua//android-studio-05/"/>
-    <updated>2014-03-07T14:54:44+07:00</updated>
+    <updated>2014-03-07T09:54:44+02:00</updated>
     <id>http://android-helper.com.ua//android-studio-05</id>
     <content type="html"><![CDATA[<p>Друзья всем привет.</p>
 
@@ -203,7 +247,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Реклама в Android]]></title>
     <link href="http://android-helper.com.ua//android-advertisement/"/>
-    <updated>2014-03-05T15:35:00+07:00</updated>
+    <updated>2014-03-05T15:35:00+02:00</updated>
     <id>http://android-helper.com.ua//android-advertisement</id>
     <content type="html"><![CDATA[<p>Привет друзья.</p>
 
@@ -260,7 +304,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Вебинар! Как заработать на своем приложении?]]></title>
     <link href="http://android-helper.com.ua//android-success-webinar-post/"/>
-    <updated>2014-02-28T18:49:29+07:00</updated>
+    <updated>2014-02-28T13:49:29+02:00</updated>
     <id>http://android-helper.com.ua//android-success-webinar-post</id>
     <content type="html"><![CDATA[<p>Смотрим вебинар и задаем вопросы!</p>
 
@@ -346,7 +390,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Как заработать на своем приложении?]]></title>
     <link href="http://android-helper.com.ua//android-success/"/>
-    <updated>2014-02-27T19:48:16+07:00</updated>
+    <updated>2014-02-27T14:48:16+02:00</updated>
     <id>http://android-helper.com.ua//android-success</id>
     <content type="html"><![CDATA[<p>Всем привет!</p>
 
@@ -421,7 +465,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Делаем дизайн для ваших приложений!]]></title>
     <link href="http://android-helper.com.ua//android-application-design/"/>
-    <updated>2014-02-25T20:42:57+07:00</updated>
+    <updated>2014-02-25T15:42:57+02:00</updated>
     <id>http://android-helper.com.ua//android-application-design</id>
     <content type="html"><![CDATA[<p>Привет друзья!</p>
 
@@ -501,7 +545,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Украина - теперь тебя не победить!]]></title>
     <link href="http://android-helper.com.ua//ukraine/"/>
-    <updated>2014-02-22T03:34:35+07:00</updated>
+    <updated>2014-02-21T22:34:35+02:00</updated>
     <id>http://android-helper.com.ua//ukraine</id>
     <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/Y1zNt2OrZwRYgsuabxIU4FYxiSp2kDd8rTayHAk6IBo=w559-h207-p-no" alt="Ukraine" /></p>
 
@@ -530,7 +574,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[АнтиГАИ - то, что нужно в дороге!]]></title>
     <link href="http://android-helper.com.ua//anti-police/"/>
-    <updated>2014-02-18T20:19:15+07:00</updated>
+    <updated>2014-02-18T15:19:15+02:00</updated>
     <id>http://android-helper.com.ua//anti-police</id>
     <content type="html"><![CDATA[<p>Привет друзья.</p>
 
@@ -636,7 +680,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Установка мелодии на звонок]]></title>
     <link href="http://android-helper.com.ua//set-ringtone/"/>
-    <updated>2014-02-10T01:31:56+07:00</updated>
+    <updated>2014-02-09T20:31:56+02:00</updated>
     <id>http://android-helper.com.ua//set-ringtone</id>
     <content type="html"><![CDATA[<p>Привет друзья.</p>
 
@@ -661,7 +705,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Android Studio - работа в режиме Offline]]></title>
     <link href="http://android-helper.com.ua//android-studio-offline/"/>
-    <updated>2014-02-03T17:44:20+07:00</updated>
+    <updated>2014-02-03T12:44:20+02:00</updated>
     <id>http://android-helper.com.ua//android-studio-offline</id>
     <content type="html"><![CDATA[<p>Всем привет!</p>
 
@@ -709,7 +753,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[C Новым годом!]]></title>
     <link href="http://android-helper.com.ua//happy_new_year/"/>
-    <updated>2014-01-01T00:13:20+07:00</updated>
+    <updated>2013-12-31T19:13:20+02:00</updated>
     <id>http://android-helper.com.ua//happy_new_year</id>
     <content type="html"><![CDATA[<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/YMtKTooAyvk "></iframe></div>
 
@@ -719,7 +763,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Skype - годовой преимум аккаунт бесплатно!]]></title>
     <link href="http://android-helper.com.ua//skype-premium/"/>
-    <updated>2013-12-22T22:15:28+07:00</updated>
+    <updated>2013-12-22T17:15:28+02:00</updated>
     <id>http://android-helper.com.ua//skype-premium</id>
     <content type="html"><![CDATA[<p>Друзья всем привет.</p>
 
@@ -805,7 +849,7 @@ VK.Widgets.Comments("vk_comments", {limit: 5, width: "400", attach: "*"});
   <entry>
     <title type="html"><![CDATA[Custom Font - свои шрифты в Android]]></title>
     <link href="http://android-helper.com.ua//custom-font/"/>
-    <updated>2013-11-21T19:47:23+07:00</updated>
+    <updated>2013-11-21T14:47:23+02:00</updated>
     <id>http://android-helper.com.ua//custom-font</id>
     <content type="html"><![CDATA[<p>Друзья всем привет.</p>
 
@@ -936,7 +980,7 @@ setFont(keyboardArea, keys);
   <entry>
     <title type="html"><![CDATA[Genymotion Root - Как получить права рут на емуляторе]]></title>
     <link href="http://android-helper.com.ua//ganymotion-root/"/>
-    <updated>2013-11-16T23:03:39+07:00</updated>
+    <updated>2013-11-16T18:03:39+02:00</updated>
     <id>http://android-helper.com.ua//ganymotion-root</id>
     <content type="html"><![CDATA[<h3>Как зарутить ganymotion?</h3>
 
@@ -998,7 +1042,7 @@ adb shell chmod 6755 /system/xbin/su
   <entry>
     <title type="html"><![CDATA[Отчет по коучингу]]></title>
     <link href="http://android-helper.com.ua//coaching_report/"/>
-    <updated>2013-11-04T21:32:41+07:00</updated>
+    <updated>2013-11-04T16:32:41+02:00</updated>
     <id>http://android-helper.com.ua//coaching_report</id>
     <content type="html"><![CDATA[<p>Друзья всем привет.</p>
 
@@ -1042,7 +1086,7 @@ adb shell chmod 6755 /system/xbin/su
   <entry>
     <title type="html"><![CDATA[Магические Intents - как ими пользоваться]]></title>
     <link href="http://android-helper.com.ua//intents/"/>
-    <updated>2013-08-20T15:37:00+07:00</updated>
+    <updated>2013-08-20T11:37:00+03:00</updated>
     <id>http://android-helper.com.ua//intents</id>
     <content type="html"><![CDATA[<p>Добрый день друзья.
 Сегодня наша статья будет полезна не только гуру android программирования, но и тем кто только стал на этот не легкий тернистый путь.</p>
@@ -1205,7 +1249,7 @@ startActivity(intent);
   <entry>
     <title type="html"><![CDATA[Общий аккаунт]]></title>
     <link href="http://android-helper.com.ua//base_account/"/>
-    <updated>2013-07-21T01:56:25+07:00</updated>
+    <updated>2013-07-20T21:56:25+03:00</updated>
     <id>http://android-helper.com.ua//base_account</id>
     <content type="html"><![CDATA[<h3>Уважаемый читатель.</h3>
 
@@ -1234,78 +1278,6 @@ startActivity(intent);
 <p>Рейтинг будет составлен на количестве повторений.</p>
 
 <p>Спасибо за помощь.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Genymotion - обзор возможностей]]></title>
-    <link href="http://android-helper.com.ua//genymotion-review/"/>
-    <updated>2013-07-18T14:33:20+07:00</updated>
-    <id>http://android-helper.com.ua//genymotion-review</id>
-    <content type="html"><![CDATA[<h3>Genymotion</h3>
-
-<p>Вероятно название <strong>Genymotion</strong> вам ни о чем не говорит. Но уверяю вас это не надолго. Как только вы его испробуете из памяти уже не сотрете. В nutshell, Genymotion это полностью готовый модуль заменяющий стандартный эмулятор Android (который стал бесполезным из-за недостаточной производительности на последних последних версиях Android) который можно скачать на официальном сайте <a href="http://www.genymotion.com/">genymotion.com</a>. Решение основано на <strong>Virtual Box</strong> соответственно является виртуальным а не эмулируемым устройством.</p>
-
-<p><img src="https://lh3.googleusercontent.com/-wk22pXuAJXA/UeeXbDsp0LI/AAAAAAAAIyI/8TFeBRdx5Yk/w871-h191-no/genymotion.png" alt="Genymotion" /></p>
-
-<p>Genymotion</p>
-
-<!-- more -->
-
-
-<p>Я не являюсь экспертом ни в виртуализации ни в эмуляции, но похоже, что эмуляция уже не актуальна. На теперешнее время <strong>iOS</strong> предлагает симулятор (приложения компилируются под целевую архитектуру) и последние <strong>Windows Phone SDK</strong> укомплектовано Windows Phone эмулятором который по сути является виртуальной машиной. Мне кажется, что виртуализация лучший вариант для решения проблем производительности, как следствие эмуляции, и «различий бинарников» от которых страдает симуляция.</p>
-
-<p>Если вы уже испробовали Genymotion, вы знаете об основных отличиях стандартного эмулятора от реального устройства и Genymotion: скорость! с очень быстрый и превращает процесс разработки под Android в удовольствие. Genymotion освобождает от необходимости постоянно отрываться от рабочей станции к реальному девайсу для тестирования. Благодаря этой софтине все происходит на вашей машине. Для того, чтобы продемонстрировать, насколько быстр Genymotion, я запустил небольшой проект с несколькими тестами на двух устройствах (Nexus 4) и экземпляр Genymotion работающем на моем MacBook. Результаты говорят сами за себя, тесты на Genymotion прошли по крайней мере в 10 раз быстрее, чем на Nexus 4:</p>
-
-<p><img src="https://lh3.googleusercontent.com/-Vp3Bq5WCeT0/UeeXbFc9pqI/AAAAAAAAIyM/eb6bNTx0d1U/w902-h361-no/tests.png" alt="Tests" /></p>
-
-<p>Tests</p>
-
-<p>Впервые я попробовал Genymotion кода он еще был известным по имени AndroVM. На тот момент этот продукт имел большой потенциал, но был сыроват и сложен в настройке, что перекрывало все пути к средам разработки под Android. Последняя версия софта которую продемонстрировал Genymobile (компания которая стоит за Genymotion) вытолкнула Genymotion на новый уровень. После нового неплохого демо от команды Genymotion на Droidcon France, я решил еще раз попробовать часок его потестить и пришел к выводу что его рационально использовать в ежедневной разработке. Теперь свой личный девайс использую либо лишь для последней фазы тестирования, либо как обычный телефон. Скорость основное преимущество Genymotion, но есть еще:</p>
-
-<ul>
-<li></li>
-</ul>
-
-
-<p>протестированные и доверительные ROM’ы: Команда очень старается чтобы обеспечить CTS-compliant своих ROM’ов. Недавно они заявили что прошли 99.4% AOSP CTS. Можно ожидать что в ближайшее будет обеспечена полная совместимость.</p>
-
-<ul>
-<li></li>
-</ul>
-
-
-<p>аппаратное управление: Вы можете эмулировать много различных фич, например управление GPS сенсором. Вам всего лишь нужно указать на маркером на карте точку и он подхватит соответствующие координаты. <img src="https://lh4.googleusercontent.com/-nTA9xWhMFUo/UeeXbZS7H3I/AAAAAAAAIyE/J1ZUuSD7Fv0/w838-h549-no/gps_control_center.png" alt="GPS test" /></p>
-
-<ul>
-<li></li>
-</ul>
-
-
-<p>поддержка сервиса <strong>Google Play</strong>: Некоторые ROM’ы были укомплектованы приложениями от Google, у вас будет доступ к тем самым фичам что и у настоящего апарата. Соответственно, вы можете устанавливать и тестировать те же фреймворки, такие как <strong>Google Play Services</strong>. Это позволит вам тестировать приложения даже если они используют <strong>Google Maps Android API v2</strong> или последнее локационное API (через провайдер локации).</p>
-
-<ul>
-<li></li>
-</ul>
-
-
-<p>полная интеграция с <strong>Android Studio &amp; Eclipse</strong>: Genymotion представляет простой UI для начала/создания нового виртуального устройства в мгновении. Также можете использовать плагины.</p>
-
-<ul>
-<li></li>
-</ul>
-
-
-<p>независимость от среды: доступен под Windows, Mac OS X or Linux</p>
-
-<ul>
-<li></li>
-</ul>
-
-
-<p>поддержка консоли: Genymotion предоставляет возможность написать модификации скрипта для состояний сенсора.</p>
-
-<p>Давайте уточним, наличие быстрой виртуальной машины никак не значит что вы не должны тестировать на реальных устройствах. Это хорошая возможность быстро на кидать и отшлифовать прототип. Как не крути, лучшим способом удостоверится, что все работает плавно на реальных устройствах на них и провеять. У Genymotion все еще есть некоторые незначительные баг/недостающие фичи (это все еще Бета). Но его скорость, простота интеграции в среду разработки делают его мощным инструментом в арсенале разработчика.</p>
 ]]></content>
   </entry>
   
