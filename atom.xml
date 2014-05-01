@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-04-17T17:00:55+03:00</updated>
+  <updated>2014-05-01T22:23:30+03:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Дизайн для Android приложений]]></title>
+    <link href="http://android-helper.com.ua//design-android/"/>
+    <updated>2014-05-01T22:16:54+03:00</updated>
+    <id>http://android-helper.com.ua//design-android</id>
+    <content type="html"><![CDATA[<p>Друзья всем привет.</p>
+
+<p>Много у меня было вопросов, после тренинга о <a href="http://android-helper.com.ua/android-application-design/">созданию дизайнов</a>, о том как переносить дизайн который сделал дизайнер, на ваше устройство.</p>
+
+<p><img src="https://lh3.googleusercontent.com/-ychXd4tZ4bY/U2KepPSp5JI/AAAAAAAAMdU/q0kX__Yoiag/w791-h593-no/photoshop-to-android.jpg" alt="" /></p>
+
+<!-- more -->
+
+
+<p>Прошу к просмотру.</p>
+
+<iframe width="640" height="360" src="http://android-helper.com.ua///www.youtube.com/embed/videoseries?list=PLLiGWUxLn-_TemowWq2BOUh2vOmxpiVR-" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Понравилось? Ставь лайк и пости в соц. сети.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Как установить сервисы Google на Genymotion]]></title>
@@ -1244,41 +1267,6 @@ startActivity(intent);
 </code></pre>
 
 <p>Ну вот и все, расскажи своим друзьям. Нажимай лайки и пиши свои комментарии.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Общий аккаунт]]></title>
-    <link href="http://android-helper.com.ua//base_account/"/>
-    <updated>2013-07-20T21:56:25+03:00</updated>
-    <id>http://android-helper.com.ua//base_account</id>
-    <content type="html"><![CDATA[<h3>Уважаемый читатель.</h3>
-
-<p>Обращаюсь к тебе, как к основному источнику моих идей и предложений.</p>
-
-<p>Недавно мы организовали общий аккаунт (доступный только нашим подписчикам).</p>
-
-<p>Думаю многим будет интересно, что же там такое есть в этом аккаунте.<!-- more --></p>
-
-<h3>Общий аккаунт</h3>
-
-<p>Большинство наших подписчиков и особенно тех людей которые проходят вебинар &ndash; “Android на 100%”, жалуются, что в PlayMarket есть программы которые стоят денег. Некоторые из них, не малых.</p>
-
-<p>Так вот, мы подумали и решили, почему же не сделать один аккаунт и пополнять его купленными программами. Да-да вы не ошиблись, мы реально покупаем программы для этого аккаунта. Также мы подготовили небольшой список того, что уже куплено или планируется к покупке. <a href="http://android-helper.com.ua/premiumaccaount/">Список</a></p>
-
-<h3>Как получить доступ?</h3>
-
-<p>Все очень просто, заходите <a href="http://andrii.stakhov.justclick.ru/order/premium_account/">сюда</a>, вводите этот номер: <strong>AcPrAH200</strong>. А дальше мы вам присылаем инструкции.</p>
-
-<h3>ВАЖНО!</h3>
-
-<p>Но важно, то что нам нужна ваша помощь. Вы спросите скорее всего в чем. Так вот. Мы хотим покупать только те программы которые нужны нашим подписчикам. А не те, что считаем нужными. Так как общий аккаунт для вас, то и персонализация будет уместна.</p>
-
-<p>Заполните пожайлуста вопросник ниже, с именами и ссылками на те программы которые вы хотели бы получить.</p>
-
-<p>Рейтинг будет составлен на количестве повторений.</p>
-
-<p>Спасибо за помощь.</p>
 ]]></content>
   </entry>
   
