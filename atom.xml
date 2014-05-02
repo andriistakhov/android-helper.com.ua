@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-05-02T11:11:33+03:00</updated>
+  <updated>2014-05-02T11:13:44+03:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -45,11 +45,8 @@
 <p>Который можно получить подписавшись на события</p>
 
 <pre><code>private int preLast;
-</code></pre>
-
-<p>  // Initialization stuff.</p>
-
-<pre><code>yourListView.setOnScrollListener(this);
+// Подписываемся на событие
+yourListView.setOnScrollListener(this);
 </code></pre>
 
 <p>А вот и сама реализация метода:</p>
