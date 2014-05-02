@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-05-02T00:06:43+03:00</updated>
+  <updated>2014-05-02T11:11:33+03:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -12,6 +12,76 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Listview-scroll]]></title>
+    <link href="http://android-helper.com.ua//listview-scroll/"/>
+    <updated>2014-05-02T11:09:39+03:00</updated>
+    <id>http://android-helper.com.ua//listview-scroll</id>
+    <content type="html"><![CDATA[<p>Привет друзья.</p>
+
+<p>Во время разработки авто-подгрузки данных с интернета для listview.</p>
+
+<p>Мне нужно было:</p>
+
+<ol>
+<li>Обработать событие прокрутки</li>
+<li>Найти последнюю позицию</li>
+</ol>
+
+
+<!-- more -->
+
+
+<p>Долго не думая я загуглился и нашел хороший ответ.</p>
+
+<p>Думаю для вас он тоже будет полезен.</p>
+
+<p>Для перехвата прокрутки использую метод:</p>
+
+<pre><code>onScroll
+</code></pre>
+
+<p>Который можно получить подписавшись на события</p>
+
+<pre><code>private int preLast;
+</code></pre>
+
+<p>  // Initialization stuff.</p>
+
+<pre><code>yourListView.setOnScrollListener(this);
+</code></pre>
+
+<p>А вот и сама реализация метода:</p>
+
+<pre><code>@Override
+public void onScroll(AbsListView lw, final int firstVisibleItem,
+             final int visibleItemCount, final int totalItemCount) {
+
+switch(lw.getId()) {
+    case android.R.id.list:     
+
+        // Make your calculation stuff here. You have all your
+        // needed info from the parameters of this function.
+
+        // Sample calculation to determine if the last 
+        // item is fully visible.
+         final int lastItem = firstVisibleItem + visibleItemCount;
+       if(lastItem == totalItemCount) {
+          if(preLast!=lastItem){ //to avoid multiple calls for last item
+            Log.d("Last", "Last");
+            preLast = lastItem;
+          }
+       }
+}
+}
+</code></pre>
+
+<p>Думаю теперь вам будет намного легче работать с listview и понимать все его тонкости.</p>
+
+<p>Пишите ваши вопросы. Возможно именно на ваш вопрос мы ответим в следующей статье.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Дизайн для Android приложений]]></title>
@@ -1106,169 +1176,6 @@ adb shell chmod 6755 /system/xbin/su
 <p>Василий</p>
 
 <blockquote><p><em>Ну что же, вот и прошёл месяц обучения. Для себя узнал много нового, и даже некоторые моменты, вроде бы ранее понятные, стали ещё более понятными, но уже на новом уровне. Спасибо преподавателю! Я записался на 2-й месяц обучения, и надеюсь что в таком ключе будем работать и дальше. По материалу 1-го месяца вопросов особо не было, но глядя на программу второго месяца понимаю, что вопросы обязательно появятся :)</em></p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Магические Intents - как ими пользоваться]]></title>
-    <link href="http://android-helper.com.ua//intents/"/>
-    <updated>2013-08-20T11:37:00+03:00</updated>
-    <id>http://android-helper.com.ua//intents</id>
-    <content type="html"><![CDATA[<p>Добрый день друзья.
-Сегодня наша статья будет полезна не только гуру android программирования, но и тем кто только стал на этот не легкий тернистый путь.</p>
-
-<p>Сегодня мы поговорим о том как с помощь Intent намерений можно выполнять самые различные операции.</p>
-
-<p>Ну что поехали?</p>
-
-<!-- more -->
-
-
-<p><strong>Открыть браузер</strong></p>
-
-<pre><code>Uri uri = Uri.parse("http://www.google.com");
-Intent it  = new Intent(Intent.ACTION_VIEW,uri);
-startActivity(it);
-</code></pre>
-
-<p><strong>Открыть карту с координатами</strong></p>
-
-<pre><code>Uri uri = Uri.parse("geo:38.899533,-77.036476");
-Intent it = new Intent(Intent.Action_VIEW,uri);
-startActivity(it); 
-</code></pre>
-
-<p><strong>Показать путь</strong></p>
-
-<pre><code>Uri uri = Uri.parse("http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en");
-Intent it = new Intent(Intent.ACTION_VIEW,URI);
-startActivity(it);
-</code></pre>
-
-<p><strong>Позвонить с программы</strong></p>
-
-<pre><code>Uri uri = Uri.parse("tel:xxxxxx");
-Intent it = new Intent(Intent.ACTION_DIAL, uri);  
-startActivity(it);  
-
-Uri uri = Uri.parse("tel.xxxxxx");
-Intent it =new Intent(Intent.ACTION_CALL,uri);
-</code></pre>
-
-<p>Не забудьте добавить разрешение в манифесте.</p>
-
-<pre><code>&lt;uses-permission id="android.permission.CALL_PHONE" /&gt;
-</code></pre>
-
-<p><strong>Отправка сообщения с помощью встроенной программы</strong></p>
-
-<pre><code>Intent it = new Intent(Intent.ACTION_VIEW);   
-it.putExtra("sms_body", "The SMS text");   
-it.setType("vnd.android-dir/mms-sms");   
-startActivity(it);  
-</code></pre>
-
-<p><strong>Отправка сообщения на номер телефона</strong></p>
-
-<pre><code>Uri uri = Uri.parse("smsto:0800000123");   
-Intent it = new Intent(Intent.ACTION_SENDTO, uri);   
-it.putExtra("sms_body", "The SMS text");   
-startActivity(it);  
-</code></pre>
-
-<p><strong>Отправка MMS</strong></p>
-
-<pre><code>Uri uri = Uri.parse("content://media/external/images/media/23");   
-Intent it = new Intent(Intent.ACTION_SEND);   
-it.putExtra("sms_body", "some text");   
-it.putExtra(Intent.EXTRA_STREAM, uri);   
-it.setType("image/png");   
-startActivity(it); 
-</code></pre>
-
-<p><strong>Отправка почты</strong></p>
-
-<pre><code>Uri uri = Uri.parse("mailto:xxx@abc.com");
-Intent it = new Intent(Intent.ACTION_SENDTO, uri);
-startActivity(it);
-
-Intent it = new Intent(Intent.ACTION_SEND);   
-it.putExtra(Intent.EXTRA_EMAIL, "me@abc.com");   
-it.putExtra(Intent.EXTRA_TEXT, "The email body text");   
-it.setType("text/plain");   
-startActivity(Intent.createChooser(it, "Choose Email Client"));  
-
-Intent it=new Intent(Intent.ACTION_SEND);     
-String[] tos={"me@abc.com"};     
-String[] ccs={"you@abc.com"};     
-it.putExtra(Intent.EXTRA_EMAIL, tos);     
-it.putExtra(Intent.EXTRA_CC, ccs);     
-it.putExtra(Intent.EXTRA_TEXT, "The email body text");     
-it.putExtra(Intent.EXTRA_SUBJECT, "The email subject text");     
-it.setType("message/rfc822");     
-startActivity(Intent.createChooser(it, "Choose Email Client"));   
-</code></pre>
-
-<p><strong>Добавление файлов</strong></p>
-
-<pre><code>Intent it = new Intent(Intent.ACTION_SEND);   
-it.putExtra(Intent.EXTRA_SUBJECT, "The email subject text");   
-it.putExtra(Intent.EXTRA_STREAM, "file:///sdcard/mysong.mp3");   
-sendIntent.setType("audio/mp3");   
-startActivity(Intent.createChooser(it, "Choose Email Client"));
-</code></pre>
-
-<p><strong>Проигрывание музыки</strong></p>
-
-<pre><code>Intent it = new Intent(Intent.ACTION_VIEW);
-Uri uri = Uri.parse("file:///sdcard/song.mp3");
-it.setDataAndType(uri, "audio/mp3");
-startActivity(it);
-
-Uri uri = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, "1");   
-Intent it = new Intent(Intent.ACTION_VIEW, uri);   
-startActivity(it);  
-</code></pre>
-
-<p><strong>Удаление программы</strong></p>
-
-<pre><code>Uri uri = Uri.fromParts("package", strPackageName, null);   
-Intent it = new Intent(Intent.ACTION_DELETE, uri);   
-startActivity(it);
-
-Uri uninstallUri = Uri.fromParts("package", "xxx", null);
-returnIt = new Intent(Intent.ACTION_DELETE, uninstallUri);
-</code></pre>
-
-<p><strong>Установка программы</strong></p>
-
-<pre><code>Uri installUri = Uri.fromParts("package", "xxx", null);
-returnIt = new Intent(Intent.ACTION_PACKAGE_ADDED, installUri);
-</code></pre>
-
-<p><strong>Поиск на маркете</strong></p>
-
-<pre><code>Uri uri = Uri.parse("market://search?q=pname:pkg_name");  
-Intent it = new Intent(Intent.ACTION_VIEW, uri);  
-startActivity(it);  
-</code></pre>
-
-<p><strong>Показать детали программы</strong></p>
-
-<pre><code>Uri uri = Uri.parse("market://details?id=app_id");  
-Intent it = new Intent(Intent.ACTION_VIEW, uri);  
-startActivity(it);  
-</code></pre>
-
-<p><strong>Поиск в Google</strong></p>
-
-<pre><code>Intent intent = new Intent();
-intent.setAction(Intent.ACTION_WEB_SEARCH);
-intent.putExtra(SearchManager.QUERY,"searchString")
-startActivity(intent);
-</code></pre>
-
-<p>Ну вот и все, расскажи своим друзьям. Нажимай лайки и пиши свои комментарии.</p>
 ]]></content>
   </entry>
   
