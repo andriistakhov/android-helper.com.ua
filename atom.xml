@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-05-02T11:13:44+03:00</updated>
+  <updated>2014-05-03T21:12:02+03:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Как продавать приложения в GooglePlay из Украины?]]></title>
+    <link href="http://android-helper.com.ua//googleplay-for-ukraine/"/>
+    <updated>2014-05-03T21:04:24+03:00</updated>
+    <id>http://android-helper.com.ua//googleplay-for-ukraine</id>
+    <content type="html"><![CDATA[<p>Друзья всем привет.</p>
+
+<p>Я спешу вам сообщить, что совсем не давно, а именно 30 апреля.</p>
+
+<p>Компания Google, добавила Украину в свою систему продаж google wallet. А также еще несколько стран: Греция, Люксембург, Румыния, Саудовская Аравия, Словакия, Турция, <strong>Украина</strong>, Вьетнам.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-AL7FsKUaSQI/U2Uwk9mDd8I/AAAAAAAAMfc/dS8nUxQx6xQ/w904-h281-no/1caf065def0a6f5ab8b53814fc880148.png" alt="" /></p>
+
+<!-- more -->
+
+
+<p>По этой <a href="https://support.google.com/googleplay/android-developer/table/3539140?hl=ru&amp;ref_topic=3452890">ссылке</a> вы можете проверить, есть ли ваша страна в списке Google.</p>
+
+<p><img src="https://lh6.googleusercontent.com/-JPJvpNNG4Jc/U2UwkXrcoFI/AAAAAAAAMfU/HqDOlAGfkpk/w758-h116-no/17b87c0b5c23ea81cfd1cf2fe232ef73.png" alt="" /></p>
+
+<p>Валюта разработчика (валюта по умолчанию) — гривна.</p>
+
+<p>Выплаты, как и для граждан РФ, осуществляются банковским переводом, порог выплат стандартный $100</p>
+
+<p><a href="support.google.com/googleplay/android-developer/answer/2700656?hl=ru">support.google.com/googleplay/android-developer/answer/2700656?hl=ru</a></p>
+
+<p>Так, что ура товарищи. Жду ваши комментарии!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Listview-scroll]]></title>
@@ -1129,50 +1159,6 @@ adb shell chmod 6755 /system/xbin/su
 <li>Рассказывайте друзьям</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Отчет по коучингу]]></title>
-    <link href="http://android-helper.com.ua//coaching_report/"/>
-    <updated>2013-11-04T16:32:41+02:00</updated>
-    <id>http://android-helper.com.ua//coaching_report</id>
-    <content type="html"><![CDATA[<p>Друзья всем привет.</p>
-
-<p>Смотрю, что целый месяц мы ничего не писали для вас. Прошу меня извинить!</p>
-
-<p>Этот месяц был полностью посвящен коуч группе. Что это такое возможно спросите вы?</p>
-
-<!-- more -->
-
-
-<p>Месяц назад был проведен вебинар, по заработку на android программах. Из этого вебинара подали заявки на участие 9 человек. Все они сейчас проходят обучение и буду в скором времени возвращать свои инвестиции.</p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/0xGKIHkRF8Y "></iframe></div>
-
-
-<p>Что было сделано за этот месяц:</p>
-
-<ol>
-<li><p> Мы начали с самого начала</p></li>
-<li><p> Поработали с визуальным оформлением</p></li>
-<li><p> Выложили приложение на маркет <a href="https://play.google.com/store/apps/developer?id=Android%20Studio%20Development%20Group&amp;hl=ru">см. список</a></p></li>
-</ol>
-
-
-<p>А вот, то что нам написали наши учасники:</p>
-
-<p>Григорий (Винница)</p>
-
-<blockquote><p><em>Месяц прошел быстро, но насыщено. Было очень интересно, прояснил для себя многие не совсем понятные моменты и самое главное удалось опубликовать свое первое приложение на маркете. Это очень мотивирует продолжать дальше. Не сомневаюсь что дальше будет еще интересней.</em></p></blockquote>
-
-<p>Александр</p>
-
-<blockquote><p><em>Да, первый месяц пролетел быстро ) Для себя в этом месяце открыл новые грани Андроида, узнал интересные нюансы. Продолжаем в том же духе. Дальше будет интересней )</em></p></blockquote>
-
-<p>Василий</p>
-
-<blockquote><p><em>Ну что же, вот и прошёл месяц обучения. Для себя узнал много нового, и даже некоторые моменты, вроде бы ранее понятные, стали ещё более понятными, но уже на новом уровне. Спасибо преподавателю! Я записался на 2-й месяц обучения, и надеюсь что в таком ключе будем работать и дальше. По материалу 1-го месяца вопросов особо не было, но глядя на программу второго месяца понимаю, что вопросы обязательно появятся :)</em></p></blockquote>
 ]]></content>
   </entry>
   
