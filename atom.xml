@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-06-25T18:00:39+03:00</updated>
+  <updated>2014-06-25T19:18:01+03:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -42,6 +42,16 @@
 <p>Второе видео!</p>
 
 <div class="embed-video-container"><iframe src="http://www.youtube.com/embed/9l_XwKmL6mY "></iframe></div>
+
+
+<p>Ну и еще!</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Bc9prpRp4cA "></iframe></div>
+
+
+
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/R3eWfWpfNUk "></iframe></div>
 
 
 <p>Если у вас есть предложения о записях, пишите я буду добавлять!</p>
