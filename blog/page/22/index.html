@@ -9,7 +9,7 @@
   <meta name="author" content="Andrii Stakhov">
 
   
-  <meta name="description" content="Добрый день. Сегодня речь пойдет о Service, IntentService и Foreground. Попробуем сегодня разобрать, что это такое и как оно работает. Я решил не &hellip;">
+  <meta name="description" content="При разработке приложения порой бывает необходимо выполнять какие-то действия в будущем. Например, вы хотите создать будильник или периодически &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/alarm/">Программируем буильник или использование AlarmManager в Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-10T17:34:19+03:00" pubdate data-updated="true">Sep 10<span>th</span>, 2012</time>
+        
+           | <a href="/alarm/#disqus_thread"
+             data-disqus-identifier="http://android-helper.com.ua//alarm/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>При разработке приложения порой бывает необходимо выполнять какие-то действия в будущем. Например, вы хотите создать будильник или периодически отправлять данные на свой сайт в строго определенное время. Для решения подобных задач в Android используется класс<strong>AlarmManager</strong>, который позволяет выполнять код в требуемый момент времени, даже если ваше приложение не запущено. То-есть AlarmManager &ndash; аналог corn в Linux или планировщика задач Windows. Вы говорите, что такой-то кусок кода должен выполниться тогда-то и AlarmManager обеспечивает запуск кода. В англоязычный литературе таймер, который выполняет код в требуемый момент времени обозначается термином<strong>alarm</strong>. Давайте в рамках данной статьи называть этот таймер<strong>будильником</strong>, чтобы отделить это понятие от таймера.</p>
+
+<p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/alarm/">Читать больше &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -527,54 +571,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/design/">Проектирование интерфейсов</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-15T12:00:12+03:00" pubdate data-updated="true">Aug 15<span>th</span>, 2012</time>
-        
-           | <a href="/design/#disqus_thread"
-             data-disqus-identifier="http://android-helper.com.ua//design/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Добрый день друзья.</p>
-
-<p>Многие разработчики сталкиваются с проблемой проектирования пользовательского интерфейса.</p>
-
-<p>Все ищут идеи у других программ, которые скачивают с <a href="https://play.google.com/store">Google Play</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/design/">Читать больше &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/23/">&larr; Older</a>
@@ -708,6 +704,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/google-io-2014/">Google I/O 2014</a>
+      </li>
+    
+      <li class="post">
         <a href="/googleplay-for-ukraine/">Как продавать приложения в GooglePlay из Украины?</a>
       </li>
     
@@ -721,10 +721,6 @@
     
       <li class="post">
         <a href="/google-in-genymotion/">Как установить сервисы Google на Genymotion</a>
-      </li>
-    
-      <li class="post">
-        <a href="/concurs-winner/">Результаты конкурса. Получи книгу - &#8220;Программирование под Android&#8221;</a>
       </li>
     
   </ul>

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>PagerTabStrip - замена Tabs или новые возможности Android - Android helper</title>
+  <title>Google I/O 2014 - Android helper</title>
   <meta name="author" content="Andrii Stakhov">
 
   
-  <meta name="description" content="Всем привет. Как много мы с вами видим разного рода красивых дизайнов, где с помощью пальца, можно менять не только экран но и Tabs. Более подробно &hellip;">
+  <meta name="description" content="Привет друзья. Сегодня очень важное событие для всех android разработчиков. Сегодня презентация Google I/O. Думаю многие из вас знакомы с этой &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://android-helper.com.ua//pagertabstrip">
+  <link rel="canonical" href="http://android-helper.com.ua//google-io-2014">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Android helper" type="application/atom+xml">
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">PagerTabStrip - замена Tabs или новые возможности Android</h1>
+      <h1 class="entry-title">Google I/O 2014</h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   
 
 
-<time datetime="2012-11-19T00:23:51+02:00" pubdate data-updated="true">Nov 19<span>th</span>, 2012</time>
+<time datetime="2014-06-25T17:47:37+03:00" pubdate data-updated="true">Jun 25<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://android-helper.com.ua/">Comments</a>
@@ -105,274 +105,33 @@
   </header>
 
 
-<div class="entry-content"><p>Всем привет.</p>
+<div class="entry-content"><p>Привет друзья.</p>
 
-<p>Как много мы с вами видим разного рода красивых дизайнов, где с помощью пальца, можно менять не только экран но и Tabs.</p>
+<p>Сегодня очень важное событие для всех android разработчиков.</p>
 
-<p>Более подробно мы с вами остановимся на реализации данной задачи.</p>
+<p>Сегодня презентация Google I/O.</p>
 
-<p>  <!-- more --></p>
+<p><img src="https://lh3.googleusercontent.com/-xDGT6wES6cw/U6rjcMQjHrI/AAAAAAAAAKQ/LGuxEdaM2Pw/w500-h274-no/io.jpg" alt="" /></p>
 
-<p>Как вы поняли из названия статьи, мы будем использовать <strong>PagerTabStrip</strong></p>
+<p>Думаю многие из вас знакомы с этой конференцией.
+Но я на этой странице решил собрать весь материал который будет доступен на русском языке.</p>
 
-<p>Решил долго ничего не придумывать и записал видео как это сделать:</p>
+<p>Ну что приятного просмотра.</p>
 
-<p>Теперь сам код:</p>
+<!-- more -->
 
-<p><strong>activity_main.xml</strong></p>
 
-<pre><code>&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<p>Первое видео!</p>
 
-    xmlns:tools="http://schemas.android.com/tools"
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/ENIZHy9Yj5Y "></iframe></div>
 
-    android:layout_width="fill_parent"
 
-    android:layout_height="fill_parent"
+<p>Второе видео!</p>
 
-    android:orientation="vertical" &gt;
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/9l_XwKmL6mY "></iframe></div>
 
 
-
-    &lt;android.support.v4.view.ViewPager
-
-        android:id="@+id/viewpager"
-
-        android:layout_width="fill_parent"
-
-        android:layout_height="fill_parent" &gt;
-
-
-
-        &lt;android.support.v4.view.PagerTabStrip
-
-            android:id="@+id/pagerTabStrip"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_gravity="top"
-
-            android:background="#a22c2e" /&gt;
-
-    &lt;/android.support.v4.view.ViewPager&gt;
-
-
-
-&lt;/RelativeLayout&gt;
-</code></pre>
-
-<p><strong>fragment_default.xml</strong></p>
-
-<pre><code>&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-android:layout_width="fill_parent"
-
-android:layout_height="fill_parent" &gt;
-
-
-
-&lt;TextView
-
-    android:id="@+id/text"
-
-    android:layout_width="wrap_content"
-
-    android:layout_height="wrap_content"
-
-    android:layout_gravity="center"
-
-    android:text="Test" /&gt;
-
-
-
-&lt;/FrameLayout&gt;
-</code></pre>
-
-<p><strong>MainActivity</strong></p>
-
-<pre><code>public class MainActivity extends FragmentActivity {
-
-
-
-    private ViewPager mViewPager;
-
-
-
-    @Override
-
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
-
-
-
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-
-        PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
-
-        // pagerTabStrip.setTextColor(color.white);
-
-        // pagerTabStrip.setTabIndicatorColor(color.holo_red_dark);
-
-
-
-        TitleAdapter titleAdapter = new TitleAdapter(getSupportFragmentManager());
-
-        mViewPager.setAdapter(titleAdapter);
-
-        mViewPager.setCurrentItem(0);
-
-    }
-
-
-
-    @Override
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-
-        return true;
-
-    }
-
-}
-</code></pre>
-
-<p><strong>TitleAdapter</strong></p>
-
-<pre><code>public class TitleAdapter extends FragmentPagerAdapter {
-
-private final String titles[] = new String[] { "View1", "View2", "View3" };
-
-private final Fragment frags[] = new Fragment[titles.length];
-
-
-
-public TitleAdapter(FragmentManager fm) {
-
-    super(fm);
-
-    frags[0] = new FragmentView1();
-
-    frags[1] = new FragmentView2();
-
-    frags[2] = new FragmentView3();
-
-}
-
-
-
-@Override
-
-public CharSequence getPageTitle(int position) {
-
-    Log.v("TitleAdapter - getPageTitle=", titles[position]);
-
-    return titles[position];
-
-}
-
-
-
-@Override
-
-public Fragment getItem(int position) {
-
-    Log.v("TitleAdapter - getItem=", String.valueOf(position));
-
-    return frags[position];
-
-}
-
-
-
-@Override
-
-public int getCount() {
-
-    return frags.length;
-
-}
-
-}
-</code></pre>
-
-<p><strong>FragmentView1</strong></p>
-
-<pre><code>public class FragmentView1 extends Fragment {
-
-@Override
-
-public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-    View myView = inflater.inflate(R.layout.fragment_default, container, false);
-
-    TextView text = (TextView) myView.findViewById(R.id.text);
-
-    text.setText("Fragment View 1\n - Пример для android-helper.com.ua");
-
-    return myView;
-
-}
-</code></pre>
-
-<p>}</p>
-
-<p><strong>FragmentView2</strong></p>
-
-<pre><code>public class FragmentView2 extends Fragment {
-
-@Override
-
-public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-    View myView = inflater.inflate(R.layout.fragment_default, container, false);
-
-    TextView text = (TextView) myView.findViewById(R.id.text);
-
-    text.setText("Fragment View 2\n - Пример для android-helper.com.ua");
-
-    return myView;
-
-}
-
-
-
-}
-</code></pre>
-
-<p><strong>FragmentView3</strong></p>
-
-<pre><code>public class FragmentView2 extends Fragment {
-
-@Override
-
-public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-    View myView = inflater.inflate(R.layout.fragment_default, container, false);
-
-    TextView text = (TextView) myView.findViewById(R.id.text);
-
-    text.setText("Fragment View 3\n - Пример для android-helper.com.ua");
-
-    return myView;
-
-}
-
-
-
-}
-</code></pre>
-
-<p>Полный проект вы можете скачать на <a href="http://android-helper.com.ua/codes/">странице с кодами</a>.</p>
-
-<p>Надеюсь вам понравилась статья.</p>
-
-<p>Пишите ваши комментарии и подписывайтесь на обновления.</p>
+<p>Если у вас есть предложения о записях, пишите я буду добавлять!</p>
 </div>
 
 
@@ -381,7 +140,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">andrew</span></span>
+<span class="byline author vcard">Posted by <span class="fn">Andrii Stakhov</span></span>
 
       
 
@@ -395,21 +154,15 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
   
 
 
-<time datetime="2012-11-19T00:23:51+02:00" pubdate data-updated="true">Nov 19<span>th</span>, 2012</time>
+<time datetime="2014-06-25T17:47:37+03:00" pubdate data-updated="true">Jun 25<span>th</span>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/categories/android-dlia-nachinaiushchikh/'>Android для начинающих</a>, <a class='category' href='/categories/android-dlia-profiessionalov/'>Android для профессионалов</a>, <a class='category' href='/categories/proghrammirovaniie/'>Программирование</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//pagertabstrip/" data-via="helperandroid" data-counturl="http://android-helper.com.ua//pagertabstrip/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-helper.com.ua//google-io-2014/" data-via="helperandroid" data-counturl="http://android-helper.com.ua//google-io-2014/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -428,10 +181,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/google-ingless/" title="Previous Post: Google запустила глобальную мобильную онлайн игру Ingress">&laquo; Google запустила глобальную мобильную онлайн игру Ingress</a>
+        <a class="basic-alignment left" href="/googleplay-for-ukraine/" title="Previous Post: Как продавать приложения в GooglePlay из Украины?">&laquo; Как продавать приложения в GooglePlay из Украины?</a>
       
-      
-        <a class="basic-alignment right" href="/actionbar3/" title="Next Post: ActionBar. Динамическое размещение элементов">ActionBar. Динамическое размещение элементов &raquo;</a>
       
     </p>
   </footer>
@@ -640,8 +391,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://android-helper.com.ua//pagertabstrip/';
-        var disqus_url = 'http://android-helper.com.ua//pagertabstrip/';
+        var disqus_identifier = 'http://android-helper.com.ua//google-io-2014/';
+        var disqus_url = 'http://android-helper.com.ua//google-io-2014/';
         var disqus_script = 'embed.js';
       
     (function () {

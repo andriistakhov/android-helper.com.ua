@@ -4,7 +4,7 @@
   <title><![CDATA[Android helper]]></title>
   <link href="http://android-helper.com.ua//atom.xml" rel="self"/>
   <link href="http://android-helper.com.ua//"/>
-  <updated>2014-05-03T21:12:02+03:00</updated>
+  <updated>2014-06-25T18:00:39+03:00</updated>
   <id>http://android-helper.com.ua//</id>
   <author>
     <name><![CDATA[Andrii Stakhov]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Google I/O 2014]]></title>
+    <link href="http://android-helper.com.ua//google-io-2014/"/>
+    <updated>2014-06-25T17:47:37+03:00</updated>
+    <id>http://android-helper.com.ua//google-io-2014</id>
+    <content type="html"><![CDATA[<p>Привет друзья.</p>
+
+<p>Сегодня очень важное событие для всех android разработчиков.</p>
+
+<p>Сегодня презентация Google I/O.</p>
+
+<p><img src="https://lh3.googleusercontent.com/-xDGT6wES6cw/U6rjcMQjHrI/AAAAAAAAAKQ/LGuxEdaM2Pw/w500-h274-no/io.jpg" alt="" /></p>
+
+<p>Думаю многие из вас знакомы с этой конференцией.
+Но я на этой странице решил собрать весь материал который будет доступен на русском языке.</p>
+
+<p>Ну что приятного просмотра.</p>
+
+<!-- more -->
+
+
+<p>Первое видео!</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/ENIZHy9Yj5Y "></iframe></div>
+
+
+<p>Второе видео!</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/9l_XwKmL6mY "></iframe></div>
+
+
+<p>Если у вас есть предложения о записях, пишите я буду добавлять!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Как продавать приложения в GooglePlay из Украины?]]></title>
@@ -1097,68 +1132,6 @@ setFont(keyboardArea, keys);
 <p>У кого есть какие то наработки или идеи, пишите в комментариях. Мы обязательно добавим статью на блог!</p>
 
 <p>Жду ваших комментариев!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Genymotion Root - Как получить права рут на емуляторе]]></title>
-    <link href="http://android-helper.com.ua//ganymotion-root/"/>
-    <updated>2013-11-16T18:03:39+02:00</updated>
-    <id>http://android-helper.com.ua//ganymotion-root</id>
-    <content type="html"><![CDATA[<h3>Как зарутить ganymotion?</h3>
-
-<p>Всем привет.</p>
-
-<p>Один из участников моего коучинга, задал мне <a href="http://forum.android-helper.com.ua/viewtopic.php?f=15&amp;t=9">вопрос на форуме</a>. Один из ответов был использовать Ganymotion в его разработке. На что он ответил, что не может добраться к базе данных.</p>
-
-<p>Я реально проверил это. И знаете, что оно так и есть. Было принято решение получить доступ к базе любой ценой. И это свершилось.</p>
-
-<p>Сегодня я хотел бы поделится своим опытом &ndash; <strong>&ldquo;Как получить доступ к базе данных в Ganymotion?&rdquo;</strong></p>
-
-<p>Готовы? Тогда вперед.</p>
-
-<!-- more -->
-
-
-<h4>Подготовка</h4>
-
-<ol>
-<li><a href="http://android-helper.com.ua/android-studio-genymotion/">Установка Ganymotion</a></li>
-<li>Выбираем из списка нужный емулятор</li>
-<li><a href="https://drive.google.com/file/d/0B-p1r5SNN4adTGgyajV6ckNtV00/edit?usp=sharing">Скачиваем root файл</a>.</li>
-<li>Открываем <strong>terminal</strong> &ndash; Mac (<strong>cmd</strong> &ndash; Windows)</li>
-</ol>
-
-
-<h4>Root</h4>
-
-<p>Заходим в папку где у вас скачан файл (см. выше)</p>
-
-<p>И в terminal пишем следующее!</p>
-
-<pre><code>adb devices
-adb root
-adb connect &lt;IP вашего устройства см. adb devices вместе с портом&gt;
-adb remount
-adb push su /system/xbin/
-adb push su /system/bin
-adb shell chmod 6755 /system/bin/su
-adb shell chmod 6755 /system/xbin/su
-</code></pre>
-
-<p>Все ваш емулятор теперь имеет права root.</p>
-
-<h4>Видео урок</h4>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/rsBGF9_Un8o "></iframe></div>
-
-
-<ol>
-<li>Ставьте лайк</li>
-<li>Пишите комментарии</li>
-<li>Рассказывайте друзьям</li>
-</ol>
-
 ]]></content>
   </entry>
   
